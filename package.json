@@ -1,0 +1,17 @@
+{
+  "name": "ncloud",
+  "version": "0.0.1",
+  "main": "./lib/index.js",
+  "author": "Gyubeom Choi <mosfet1kg@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mosfet1kg/ncloud.git"
+  },
+  "dependencies": {
+    "axios": "^0.16.1",
+    "crypto-js": "^3.1.9-1",
+    "validator": "^7.0.0"
+  },
+  "keywords": [ "ncloud" ],
+  "license": "MIT"
+}
