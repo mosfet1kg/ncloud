@@ -12,7 +12,7 @@ $ yarn install
 ```
 
 # Usage
-```
+```javascript
 const Ncloud = require('ncloud');
 
 
@@ -22,7 +22,7 @@ const client = new Ncloud({
 });
 
 
-client.geolocation.getLocation('143.248.142.77', function( error, reply ){
+client.openapi.geolocation.getLocation('143.248.142.77', function( error, reply ){
   if(error){
     console.log( error );
   }else{
