@@ -72,7 +72,6 @@ client.compute.product.getServerImageProductList( function( error, reply ){
     }
 })
 
-
 client.compute.product.getServerProductList( {serverImageProductCode: 'SPSW0LINUX000031'}, function( error, reply ){
     if( error ){
         console.log( error );
