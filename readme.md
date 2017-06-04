@@ -1,4 +1,4 @@
-The NAVER Cloud Library for Node.js <br/> 
+The NAVER Cloud Library for Node.js https://www.npmjs.com/package/ncloud<br/> 
 Currently, this package supports geolocation only....
 
 # Author 
@@ -6,9 +6,9 @@ Gyubeom Choi <mosfet1kg@gmail.com>
 
 # Installing Dependencies
 ```
-$ npm install
+$ npm install ncloud
 or
-$ yarn install
+$ yarn add ncloud
 ```
 
 # Usage
