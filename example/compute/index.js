@@ -29,5 +29,29 @@ var Ncloud = require('../../lib/');
             //     ]
             // }
         }
-    })
+    });
+
+    client.compute.product.getServerProductList( {serverImageProductCode: 'SPSW0LINUX000031'}, function( error, reply ){
+        if( error ){
+            console.log( error );
+        }else{
+            console.log( reply.getServerProductListResponse.productList[0].product );
+
+            // reply example
+            // [ { productCode: 'SPSVRSTAND000056',
+            //     productName: 'vCPU 1EA, Memory 1GB, Disk 50GB',
+            //     productType: { code: 'MICRO', codeName: 'Micro Server' },
+            //     productDescription: 'vCPU 1EA, Memory 1GB, Disk 50GB',
+            //     infraResourceType: { code: 'SVR', codeName: 'Server' },
+            //     cpuCount: 1,
+            //     memorySize: 1073741824,
+            //     baseBlockStorageSize: 53687091200,
+            //     osInformation: '',
+            //     diskType: { code: 'NET', codeName: 'Network Storage' },
+            //     addBlockStroageSize: 0 },
+            //     /***/
+            // }]
+
+        }
+    });
 })();

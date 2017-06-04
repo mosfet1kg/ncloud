@@ -6,7 +6,7 @@ var Ncloud = require('../../lib/');
         oauth_consumer_secret:'%YOUR_CONSUMER_SECRET%'
     });
 
-    client.openapi.geolocation.getLocation('143.248.142.77', function( error, reply ){
+    client.openapi.geolocation.getLocation({ ip:'143.248.142.77' }, function( error, reply ){
         if(error){
             console.log( error );
         }else{
