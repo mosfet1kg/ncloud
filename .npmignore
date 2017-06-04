@@ -3,3 +3,5 @@
 .idea
 .example
 .doc
+mytest.js
+**/**/mytest.js
