@@ -13,10 +13,10 @@ $ yarn add ncloud
 
 # Usage
 ```javascript
-const Ncloud = require('ncloud');
+var Ncloud = require('ncloud');
 
 
-const client = new Ncloud({
+var client = new Ncloud({
   oauth_consumer_key:'%YOUR_CONSUMER_KEY%',
   oauth_consumer_secret:'%YOUR_CONSUMER_SECRET%'
 });
