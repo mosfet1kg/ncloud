@@ -13,12 +13,13 @@ $ yarn add ncloud
 ```
 
 # Usage
+see following descriptions.
 # Geolocation
 ## getLocation
 ### arguments
 | Name | Data Type | Required | Description                | Default |
 |------|-----------|----------|----------------------------|---------|
-| ip   | `string`  | required | An IP to find the location |         |
+| ip   | `string`  | <b>required</b> | An IP to find the its location |         |
 | enc  | `string`  | optional | Encoding Method (either `utf8` or `euckr`) | `utf8`  |
 | ext  | `string`  | optional | Flag for additional info (either `t` or `f`) | `f`   |
 
