@@ -72,8 +72,8 @@ client.openapi.geolocation.getLocation({ ip: '143.248.142.77', ext: 't'}, functi
 | Name | Data Type | Required | Description                | Default |
 |------|-----------|----------|----------------------------|---------|
 | exclusionProductCode | `string` | optional | A product code to exclude from results |   |
-| productCode | `string` | optional | Only when one result containing a product code is needed  |   |
-| platformTypeCodeList | `array` | optional |  Only when results containing product codes are needed. Refer to following table to find the `platformTypeCodeList` you want.
+| productCode | `string` | optional | Only when one result containing a `productCode` is needed  |   |
+| platformTypeCodeList | `array` | optional |  Only when results containing specific product types are needed. Refer to following table to find the `platformTypeCodeList` you want.
 
 #### platformTypeCodeList
 | platform   | platformTypeCodeList |
