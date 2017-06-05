@@ -15,6 +15,8 @@ $ yarn add ncloud
 # Usage
 
 ### Geolocation
+#### Actions
+##### getLocation
 ```javascript
 var Ncloud = require('ncloud');
 
@@ -23,7 +25,7 @@ var client = new Ncloud({
   oauth_consumer_secret:'%YOUR_CONSUMER_SECRET%'
 });
 
-client.openapi.geolocation.getLocation({ ip: '143.248.142.77', ext: 't' }, function( error, reply ){
+client.openapi.geolocation.getLocation({ ip: '143.248.142.77'}, function( error, reply ){
     if(error){
         console.log( error );
     }else{
@@ -35,11 +37,34 @@ client.openapi.geolocation.getLocation({ ip: '143.248.142.77', ext: 't' }, funct
         //     geoLocation: { country: 'KR', code: '3020054000', r1: '대전광역시', r2: '유성구' } }
     }
 });
+
+client.openapi.geolocation.getLocation({ ip: '143.248.142.77', ext: 't'}, function( error, reply ){
+    if(error){
+        console.log( error );
+    }else{
+        console.log( reply );
+
+        // expected Result =>
+        // { returnCode: 0,
+        //   requestId: 'b27dcce8-13b9-4186-85be-8e773dc28f2e',
+        //   geoLocation: 
+        //    { country: 'KR',
+        //      code: '3020054000',
+        //      r1: '대전광역시',
+        //      r2: '유성구',
+        //      r3: '구성동',
+        //      lat: 36.370724,
+        //      long: 127.3661,
+        //      net: 'Korea Advanced Institute of Science and Technology' } }
+
+    }
+});
 ```
 
 
 ### Compute
-#### getServerImageProductList
+#### Actions
+##### getServerImageProductList
 ```javascript
 var Ncloud = require('../../lib/');
 
@@ -148,7 +173,7 @@ client.compute.product.getServerImageProductList({ "exclusionProductCode": "SPSW
 });
 ```
 
-#### getServerProductList
+##### getServerProductList
 ```javascript
 var Ncloud = require('../../lib/');
    
