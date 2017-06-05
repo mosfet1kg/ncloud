@@ -13,10 +13,10 @@ $ yarn add ncloud
 ```
 
 # Usage
-see following descriptions.
+See following descriptions.
 # Geolocation
 ## getLocation
-### arguments
+### Arguments
 | Name | Data Type | Required | Description                | Default |
 |------|-----------|----------|----------------------------|---------|
 | ip   | `string`  | <b>required</b> | An IP to find the its location |         |
@@ -24,7 +24,7 @@ see following descriptions.
 | ext  | `string`  | optional | Flag for additional info (either `t` or `f`) | `f`   |
 
 
-#### examples
+#### Examples
 ```javascript
 var Ncloud = require('ncloud');
 
@@ -69,7 +69,7 @@ client.openapi.geolocation.getLocation({ ip: '143.248.142.77', ext: 't'}, functi
 
 # Compute
 ## getServerImageProductList
-### arguments
+### Arguments
 | Name | Data Type | Required | Description                | Default |
 |------|-----------|----------|----------------------------|---------|
 | exclusionProductCode | `string` | optional | A product code to exclude from results |   |
@@ -86,7 +86,7 @@ client.openapi.geolocation.getLocation({ ip: '143.248.142.77', ext: 't'}, functi
 | Ubuntu Desktop 64Bit | `UBD64`    |
 | Ubuntu Server 64Bit  | `UBS64`    |
 
-### examples
+### Examples
 ```javascript
 var Ncloud = require('ncloud');
 
