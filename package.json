@@ -10,8 +10,11 @@
   "dependencies": {
     "axios": "^0.16.1",
     "crypto-js": "^3.1.9-1",
+    "ip": "^1.1.5",
     "validator": "^7.0.0"
   },
-  "keywords": [ "ncloud" ],
+  "keywords": [
+    "ncloud"
+  ],
   "license": "MIT"
 }
