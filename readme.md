@@ -13,9 +13,9 @@ $ yarn add ncloud
 ```
 
 # Usage
-## Geolocation
-####getLocation
-#### arguments
+# Geolocation
+## getLocation
+### arguments
 | Name | Data Type | Required | Description                | Default |
 |------|-----------|----------|----------------------------|---------|
 | ip   | `string`  | required | An IP to find the location |         |
@@ -23,7 +23,7 @@ $ yarn add ncloud
 | ext  | `string`  | optional | Flag for additional info (either `t` or `f`) | `f`   |
 
 
-##### examples
+#### examples
 ```javascript
 var Ncloud = require('ncloud');
 
@@ -66,16 +66,16 @@ client.openapi.geolocation.getLocation({ ip: '143.248.142.77', ext: 't'}, functi
 ```
 
 
-## Compute
-### getServerImageProductList
-#### arguments
+# Compute
+## getServerImageProductList
+### arguments
 | Name | Data Type | Required | Description                | Default |
 |------|-----------|----------|----------------------------|---------|
 | exclusionProductCode | `string` | optional | A product code to exclude from results |   |
 | productCode | `string` | optional | Only when one result containing a product code is needed  |   |
 | platformTypeCodeList | `array` | optional |  Only when results containing product codes are needed. Refer to following table to find the `platformTypeCodeList` you want.
 
-##### platformTypeCodeList
+#### platformTypeCodeList
 | platform   | platformTypeCodeList |
 |------------|----------------------|
 | Linux 32bit |  `LNX32`            |
@@ -85,7 +85,7 @@ client.openapi.geolocation.getLocation({ ip: '143.248.142.77', ext: 't'}, functi
 | Ubuntu Desktop 64Bit | `UBD64`    |
 | Ubuntu Server 64Bit  | `UBS64`    |
 
-#### examples
+### examples
 ```javascript
 var Ncloud = require('ncloud');
 
@@ -188,7 +188,7 @@ client.compute.product.getServerImageProductList({ "exclusionProductCode": "SPSW
 });
 ```
 
-#### getServerProductList
+### getServerProductList
 ```javascript
 var Ncloud = require('ncloud');
    
