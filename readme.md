@@ -14,9 +14,9 @@ $ yarn add ncloud
 
 # Usage
 
-### Geolocation
-#### Actions
-##### getLocation
+## Geolocation
+### Actions
+#### getLocation
 ```javascript
 var Ncloud = require('ncloud');
 
@@ -30,7 +30,6 @@ client.openapi.geolocation.getLocation({ ip: '143.248.142.77'}, function( error,
         console.log( error );
     }else{
         console.log( reply );
-
         // expected Result =>
         // {   returnCode: 0,
         //     requestId: '067eef5e-a1aa-4e13-8704-7ee2d13ae3e6',
@@ -43,7 +42,6 @@ client.openapi.geolocation.getLocation({ ip: '143.248.142.77', ext: 't'}, functi
         console.log( error );
     }else{
         console.log( reply );
-
         // expected Result =>
         // { returnCode: 0,
         //   requestId: 'b27dcce8-13b9-4186-85be-8e773dc28f2e',
@@ -56,17 +54,16 @@ client.openapi.geolocation.getLocation({ ip: '143.248.142.77', ext: 't'}, functi
         //      lat: 36.370724,
         //      long: 127.3661,
         //      net: 'Korea Advanced Institute of Science and Technology' } }
-
     }
 });
 ```
 
 
-### Compute
-#### Actions
-##### getServerImageProductList
+## Compute
+### Actions
+#### getServerImageProductList
 ```javascript
-var Ncloud = require('../../lib/');
+var Ncloud = require('ncloud');
 
 var client = new Ncloud({
     oauth_consumer_key:'%YOUR_CONSUMER_KEY%',
@@ -78,7 +75,6 @@ client.compute.product.getServerImageProductList({"exclusionProductCode": "SPSW0
         console.log( error );
     }else{
         console.log( reply.getServerImageProductListResponse.productList[0].product );
-
      // reply example
      //  /** The results without the productCode `SPSW0WINNT000045` **/
      // [ { productCode: 'SPSW0LINUX000043',
@@ -102,7 +98,6 @@ client.compute.product.getServerImageProductList({"productCode": "SPSW0WINNT0000
         console.log( error );
     }else{
         console.log( reply.getServerImageProductListResponse.productList[0].product );
-
        // reply example
        // /** The result containing the info about productCode `SPSW0WINNT000043`  
        // { productCode: 'SPSW0WINNT000043',
@@ -125,7 +120,6 @@ client.compute.product.getServerImageProductList({ platformTypeCodeList: ['LNX64
         console.log( error );
     }else{
         console.log( reply.getServerImageProductListResponse.productList[0].product );
-
         // reply example
         // /** The results containing Linux 64Bits and Win 64bits platforms
         // [ { productCode: 'SPSW0LINUX000043',
@@ -141,7 +135,6 @@ client.compute.product.getServerImageProductList({ platformTypeCodeList: ['LNX64
         //     addBlockStroageSize: 0 },
         //     /** **/   
         // } ]        
-
     }
 });
 
@@ -152,7 +145,6 @@ client.compute.product.getServerImageProductList({ "exclusionProductCode": "SPSW
         console.log( error );
     }else{
         console.log( reply.getServerImageProductListResponse.productList[0].product );
-
         // reply example
         // /** The productCode `SPSW0WINNT000045` is left off from the result of Linux64bits and Win64bits **/
         // [
@@ -168,14 +160,13 @@ client.compute.product.getServerImageProductList({ "exclusionProductCode": "SPSW
         //    platformType: { code: 'WND64', codeName: 'Windows 64 Bit' },
         //    osInformation: 'Windows Server 2012 R2 with MSSQL 2016 Standard (64-bit)',
         //    addBlockStroageSize: 0 } ]       
-
     }
 });
 ```
 
-##### getServerProductList
+#### getServerProductList
 ```javascript
-var Ncloud = require('../../lib/');
+var Ncloud = require('ncloud');
    
 var client = new Ncloud({
    oauth_consumer_key:'%YOUR_CONSUMER_KEY%',
@@ -187,7 +178,6 @@ client.compute.product.getServerProductList( {serverImageProductCode: 'SPSW0LINU
         console.log( error );
     }else{
         console.log( reply.getServerProductListResponse.productList[0].product );
-
         // reply example
         // [ { productCode: 'SPSVRSTAND000056',
         //     productName: 'vCPU 1EA, Memory 1GB, Disk 50GB',
@@ -202,7 +192,6 @@ client.compute.product.getServerProductList( {serverImageProductCode: 'SPSW0LINU
         //     addBlockStroageSize: 0 },
         //     /***/
         // }]
-
     }
 });
 ```
