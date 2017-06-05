@@ -17,6 +17,15 @@ $ yarn add ncloud
 ## Geolocation
 ### Actions
 #### getLocation
+##### arguments
+| Name | Data Type | Required | Description                | Default |
+|------|-----------|----------|----------------------------|---------|
+| ip   | `string`  | required | An IP to find the location |         |
+| enc  | `string`  | optional | Encoding Method (either `utf8` or `euckr`) | `utf8`  |
+| ext  | `string`  | optional | Flag for additional info (either `t` or `f`) | `f`   |
+
+
+##### example
 ```javascript
 var Ncloud = require('ncloud');
 
