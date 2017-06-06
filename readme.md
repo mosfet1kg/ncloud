@@ -89,8 +89,8 @@ The notation for `productCode` also shows the difference between these functions
 ### Arguments
 | Name | Data Type | Required | Description                | Default |
 |------|-----------|----------|----------------------------|---------|
-| exclusionProductCode | `string` | optional | A product code to exclude from results |   |
-| productCode | `string` | optional | Only when one result containing a `productCode` is needed  |   |
+| exclusionProductCode | `string` | optional | A code for VM server Image to exclude from results |   |
+| productCode | `string` | optional | Only when one result containing a input code for VM Server Image is needed  |   |
 | platformTypeCodeList | `array` | optional |  Only when results containing specific product types are needed. Refer to following table to find the `platformTypeCodeList` you want. |   |
 
 #### platformTypeCodeList
@@ -104,42 +104,44 @@ The notation for `productCode` also shows the difference between these functions
 | Ubuntu Server 64Bit  | `UBS64`    |
 
 ### Examples
-**Requests : Receive the whole list of VM Images without the type has `exclusionProductCode`.**  
+**Request the whole list of VM Images without the type has `exclusionProductCode`.**  
 
-| arguments            | type     |
-|----------------------|----------|
-| exclusionProductCode | `string` |
+| arguments            | type     | description   |
+|----------------------|----------|---------------|
+| exclusionProductCode | `string` | VM Image Code |
 
 ```javascript
 client.compute.product.getServerImageProductList({"exclusionProductCode": "{{The code for VM Image Type}}" }, function(){/** your own code **/});
 ```  
+---
+**Request one VM Image info containing `productCode`.**
 
-**Requests: Receive one VM Image info containing `productCode`.**
-
-| arguments            | type     |
-|----------------------|----------|
-| productCode          | `string` |
+| arguments            | type     | description   |
+|----------------------|----------|---------------|
+| productCode          | `string` | VM Image Code |
 ```javascript
 client.compute.product.getServerImageProductList({"productCode": "{{The code for VM Image Type}}" }, function(){/** your own code **/});
 ```  
-**Requests: Receive the whole list of VM Images which match `platformTypeCodeList`.**
+---
+**Request the whole list of VM Images which match `platformTypeCodeList`.**
 
-| arguments            | type     |
-|----------------------|----------|
-| platformTypeCodeList | `array`  |
+| arguments            | type     | description   |
+|----------------------|----------|---------------|
+| platformTypeCodeList | `array`  | VM Image Code |
 ```javascript
 client.compute.product.getServerImageProductList({"platformTypeCodeList": ["{{The code for Platform Type}}"] }, function(){/** your own code **/});
 ```
-**Requests: Receive the whole list of VM Images which match `platformTypeCodeList` except `exclusionProductCode`.**  
+---
+**Request the whole list of VM Images which match `platformTypeCodeList` except `exclusionProductCode`.**  
 
-| arguments            | type     |
-|----------------------|----------|
-| exclusionProductCode | `string` |
-| platformTypeCodeList | `array`  |
+| arguments            | type     | description     |
+|----------------------|----------|-----------------|
+| exclusionProductCode | `string` | VM Image Code   |
+| platformTypeCodeList | `array`  | VM Image Code(s)|
 ```javascript
 client.compute.product.getServerImageProductList({"exclusionProductCode": "{{The code for VM Image Type}}", "platformTypeCodeList": ["{{The code for Platform Type}}"] }, function(){/** your own code **/});
 ```
-
+---
 ### Code
 ```javascript
 var Ncloud = require('ncloud');
@@ -243,7 +245,49 @@ client.compute.product.getServerImageProductList({ "exclusionProductCode": "SPSW
 });
 ```
 
-### getServerProductList
+## getServerProductList
+### Arguments
+
+| Name | Data Type | Required | Description                | Default |
+|------|-----------|----------|----------------------------|---------|
+| exclusionProductCode | `string` | optional | A code for **VM Type** to exclude from results |   |
+| productCode | `string` | optional | Only when one result containing a input code for **VM Type** is needed  |   |
+| serverImageProductCode | `string` | **required** |   Only when one result containing a input code for **VM server Image** is needed |   |
+
+### Examples
+**Request available VM Types for the input VM Image Code`serverImageProductCode`.**  
+
+| arguments              | type     | description     |
+|------------------------|----------|-----------------|
+| serverImageProductCode | `string` | VM Image Code   |
+
+```javascript
+client.compute.product.getServerProductList( { serverImageProductCode: "{{VM Image Code}}" }, function( error, reply ){ /** Your Own Code **/} );
+```
+---
+**Request available VM Types for the input VM Image Code`serverImageProductCode` except the input VM Type Code`exclusionProductCode`.**
+
+| arguments              | type     | description     |
+|------------------------|----------|-----------------|
+| exclusionProductCode   | `string` | VM Type Code    |
+| serverImageProductCode | `string` | VM Image Code   |
+```javascript
+client.compute.product.getServerProductList( {  exclusionProductCode:"{{VM Type Code}}", serverImageProductCode: "{{VM Image Code}}" }, function( error, reply ){ /** Your Own Code **/} );
+```
+---
+**Request one VM Types for the input VM Type Code`productCode` among the whole list of VM Image Code`serverImageProductCode`**  
+
+| arguments              | type     | description     |
+|------------------------|----------|-----------------|
+| productCode            | `string` | VM Type Code    |
+| serverImageProductCode | `string` | VM Image Code   |
+```javascript
+client.compute.product.getServerProductList( {  productCode:"{{VM Type Code}}", serverImageProductCode: '{{VM Image Code}}' }, function( error, reply ){ /** Your Own Code **/});
+```
+
+---
+### Code
+
 ```javascript
 var Ncloud = require('ncloud');
 
@@ -258,6 +302,7 @@ client.compute.product.getServerProductList( {serverImageProductCode: 'SPSW0LINU
     }else{
         console.log( reply.getServerProductListResponse.productList[0].product );
         // reply example
+        //  /** available VM Types **/
         // [ { productCode: 'SPSVRSTAND000056',
         //     productName: 'vCPU 1EA, Memory 1GB, Disk 50GB',
         //     productType: { code: 'MICRO', codeName: 'Micro Server' },
