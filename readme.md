@@ -104,7 +104,7 @@ The notation for `productCode` also shows the difference between these functions
 | Ubuntu Server 64Bit  | `UBS64`    |
 
 ### Examples
-**Request the whole list of VM Images without the type has `exclusionProductCode`.**  
+**Request the whole list of VM Images without the type has a VM Image Code`exclusionProductCode`.**  
 
 | arguments            | type     | description   |
 |----------------------|----------|---------------|
@@ -114,7 +114,7 @@ The notation for `productCode` also shows the difference between these functions
 client.compute.product.getServerImageProductList({"exclusionProductCode": "{{The code for VM Image Type}}" }, function(){/** your own code **/});
 ```  
 ---
-**Request one VM Image info containing `productCode`.**
+**Request one VM Image info containing a VM Image Code`productCode`.**
 
 | arguments            | type     | description   |
 |----------------------|----------|---------------|
@@ -123,16 +123,16 @@ client.compute.product.getServerImageProductList({"exclusionProductCode": "{{The
 client.compute.product.getServerImageProductList({"productCode": "{{The code for VM Image Type}}" }, function(){/** your own code **/});
 ```  
 ---
-**Request the whole list of VM Images which match `platformTypeCodeList`.**
+**Request the whole list of VM Images which match VM Image Code(s)`platformTypeCodeList`.**
 
 | arguments            | type     | description   |
 |----------------------|----------|---------------|
-| platformTypeCodeList | `array`  | VM Image Code |
+| platformTypeCodeList | `array`  | VM Image Code(s)|
 ```javascript
 client.compute.product.getServerImageProductList({"platformTypeCodeList": ["{{The code for Platform Type}}"] }, function(){/** your own code **/});
 ```
 ---
-**Request the whole list of VM Images which match `platformTypeCodeList` except `exclusionProductCode`.**  
+**Request the whole list of VM Images which match VM Image Code(s)`platformTypeCodeList` except a VM Image Code`exclusionProductCode`.**  
 
 | arguments            | type     | description     |
 |----------------------|----------|-----------------|
