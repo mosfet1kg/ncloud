@@ -71,139 +71,28 @@ client.openapi.geolocation.getLocation({ ip: '143.248.142.77', ext: 't'}, functi
 
 
 # Compute : Product
-<b>** Please be aware that the meaning of product code can be different depending on functions. ** </b>  
-&nbsp;&nbsp;Although functions belonging to product return a json response containing `productCode` key, returning `productCode` value from `getServerImageProductList` means the code for VM server image type.<br/>
-The other from `getServerProductList` means the code for VM server type regarding the number of CPU, memory capacity, hardware capacity and etc. <br/>
-The notation for `productCode` also shows the difference between these functions. For example, the prefix `SPSVRSTAND` is only used for specifying VM server type.<br/>
-&nbsp;&nbsp;The following is an example of which prefix is used for VM server type and VM Image Type.
-
-| prefix      | `productCode`     | `productName`                       |  description     | returning from              |
-|-------------|-------------------|-------------------------------------|------------------|-----------------------------|
-| SPSW0WINNT  | SPSW0WINNT000043  |  mssql(2016std)-win-2012-64-R2      |  VM Image Type   | `getServerImageProductList` |
-| SPSW0LINUX  | SPSW0LINUX000043  |  centos-5.11-64                     |  VM Image Type   | `getServerImageProductList` |
-| SPSVRSTAND  | SPSVRSTAND000047  |  vCPU 12EA, Memory 32GB, Disk 800GB |  VM Server Type  | `getServerProductList`      |
-| SPSVRSTAND  | SPSVRSTAND000029  |  vCPU 8EA, Memory 16GB, Disk 400GB  |  VM Server Type  | `getServerProductList`      |
-
 
 ## getServerImageProductList
+You can use this method to get the whole list of VM Image Types.
 ### Arguments
-| Name | Data Type | Required | Description                | Default |
-|------|-----------|----------|----------------------------|---------|
-| exclusionProductCode | `string` | optional | A code for VM server Image to exclude from results |   |
-| productCode | `string` | optional | Only when one result containing a input code for VM Server Image is needed  |   |
-| platformTypeCodeList | `array` | optional |  Only when results containing specific product types are needed. Refer to following table to find the `platformTypeCodeList` you want. |   |
-
-#### platformTypeCodeList
-| platform   | platformTypeCodeList |
-|------------|----------------------|
-| Linux 32bit |  `LNX32`            |
-| Linux 64bit |  `LNX64`            |
-| Win 32Bit   |  `WND32`            |
-| Win 64Bit   |  `WND64`            |
-| Ubuntu Desktop 64Bit | `UBD64`    |
-| Ubuntu Server 64Bit  | `UBS64`    |
-
+ No Input Arguments
 ### Examples
-**Request the whole list of VM Images without the type has a VM Image Code`exclusionProductCode`.**  
-
-| arguments            | type     | description   |
-|----------------------|----------|---------------|
-| exclusionProductCode | `string` | VM Image Code |
-
-```javascript
-client.compute.product.getServerImageProductList({"exclusionProductCode": "{{The code for VM Image Type}}" }, function(){/** your own code **/});
-```  
----
-**Request one VM Image info containing a VM Image Code`productCode`.**
-
-| arguments            | type     | description   |
-|----------------------|----------|---------------|
-| productCode          | `string` | VM Image Code |
-```javascript
-client.compute.product.getServerImageProductList({"productCode": "{{The code for VM Image Type}}" }, function(){/** your own code **/});
-```  
----
-**Request the whole list of VM Images which match VM Image Code(s)`platformTypeCodeList`.**
-
-| arguments            | type     | description   |
-|----------------------|----------|---------------|
-| platformTypeCodeList | `array`  | VM Image Code(s)|
-```javascript
-client.compute.product.getServerImageProductList({"platformTypeCodeList": ["{{The code for Platform Type}}"] }, function(){/** your own code **/});
-```
----
-**Request the whole list of VM Images which match VM Image Code(s)`platformTypeCodeList` except a VM Image Code`exclusionProductCode`.**  
-
-| arguments            | type     | description     |
-|----------------------|----------|-----------------|
-| exclusionProductCode | `string` | VM Image Code   |
-| platformTypeCodeList | `array`  | VM Image Code(s)|
-```javascript
-client.compute.product.getServerImageProductList({"exclusionProductCode": "{{The code for VM Image Type}}", "platformTypeCodeList": ["{{The code for Platform Type}}"] }, function(){/** your own code **/});
-```
----
-### Code
 ```javascript
 var Ncloud = require('ncloud');
 
 var client = new Ncloud({
-    oauth_consumer_key:'%YOUR_CONSUMER_KEY%',
-    oauth_consumer_secret:'%YOUR_CONSUMER_SECRET%'
+   oauth_consumer_key:'%YOUR_CONSUMER_KEY%',
+   oauth_consumer_secret:'%YOUR_CONSUMER_SECRET%'
 });
 
-client.compute.product.getServerImageProductList({"exclusionProductCode": "SPSW0WINNT000045" }, function( error, reply ){
+client.compute.product.getServerImageProductList( function( error, response ){
     if( error ){
         console.log( error );
-    }else{
-        console.log( reply.getServerImageProductListResponse.productList[0].product );
-     // reply example
-     //  /** The results without the productCode `SPSW0WINNT000045` **/
-     // [ { productCode: 'SPSW0LINUX000043',   // VM Image Type
-     //     productName: 'centos-5.11-64',
-     //     productType: { code: 'LINUX', codeName: 'Linux' },
-     //     productDescription: 'CentOS 5.11(64bit)',
-     //     infraResourceType: { code: 'SW', codeName: 'Software' },
-     //     cpuCount: 0,
-     //     memorySize: 0,
-     //     baseBlockStorageSize: 0,
-     //     platformType: { code: 'LNX64', codeName: 'Linux 64 Bit' },
-     //     osInformation: 'CentOS 5.11 (64-bit)',
-     //     addBlockStroageSize: 0 },
-     //      /**  **/
-    //  }]
-    }
-});
+    }else {
+        console.log(response);
 
-client.compute.product.getServerImageProductList({"productCode": "SPSW0WINNT000043" }, function( error, reply ){
-    if( error ){
-        console.log( error );
-    }else{
-        console.log( reply.getServerImageProductListResponse.productList[0].product );
-       // reply example
-       // /** The result containing the info about productCode `SPSW0WINNT000043`
-       // { productCode: 'SPSW0WINNT000043',   // VM Image Type
-       //   productName: 'mssql(2016std)-win-2012-64-R2',
-       //   productType: { code: 'WINNT', codeName: 'Windows NT' },
-       //   productDescription: 'Windows 2012 Server R2 with MSSQL 2016 Standard',
-       //   infraResourceType: { code: 'SW', codeName: 'Software' },
-       //   cpuCount: 0,
-       //   memorySize: 0,
-       //   baseBlockStorageSize: 0,
-       //   platformType: { code: 'WND64', codeName: 'Windows 64 Bit' },
-       //   osInformation: 'Windows Server 2012 R2 with MSSQL 2016 Standard (64-bit)',
-       //   addBlockStroageSize: 0
-       // }
-    }
-});
-
-client.compute.product.getServerImageProductList({ platformTypeCodeList: ['LNX64','WND64']}, function( error, reply ){
-    if( error ){
-        console.log( error );
-    }else{
-        console.log( reply.getServerImageProductListResponse.productList[0].product );
-        // reply example
-        // /** The results containing Linux 64Bits and Win 64bits platforms
-        // [ { productCode: 'SPSW0LINUX000043',   // VM Image Type
+        // response example =>
+        // [ { vmImageTypeCode: 'SPSW0LINUX000043',
         //     productName: 'centos-5.11-64',
         //     productType: { code: 'LINUX', codeName: 'Linux' },
         //     productDescription: 'CentOS 5.11(64bit)',
@@ -214,80 +103,22 @@ client.compute.product.getServerImageProductList({ platformTypeCodeList: ['LNX64
         //     platformType: { code: 'LNX64', codeName: 'Linux 64 Bit' },
         //     osInformation: 'CentOS 5.11 (64-bit)',
         //     addBlockStroageSize: 0 },
-        //     /** **/
-        // } ]
-    }
-});
-
-
-// Composing Variables is also possible
-client.compute.product.getServerImageProductList({ "exclusionProductCode": "SPSW0WINNT000045", platformTypeCodeList: ['LNX64','WND64']}, function( error, reply ){
-    if( error ){
-        console.log( error );
-    }else{
-        console.log( reply.getServerImageProductListResponse.productList[0].product );
-        // reply example
-        // /** The productCode `SPSW0WINNT000045` is left off from the result of Linux64bits and Win64bits **/
-        // [
-        //   /**  **/
-        // ,{ productCode: 'SPSW0WINNT000043',   // VM Image Type
-        //    productName: 'mssql(2016std)-win-2012-64-R2',
-        //    productType: { code: 'WINNT', codeName: 'Windows NT' },
-        //    productDescription: 'Windows 2012 Server R2 with MSSQL 2016 Standard',
-        //    infraResourceType: { code: 'SW', codeName: 'Software' },
-        //    cpuCount: 0,
-        //    memorySize: 0,
-        //    baseBlockStorageSize: 0,
-        //    platformType: { code: 'WND64', codeName: 'Windows 64 Bit' },
-        //    osInformation: 'Windows Server 2012 R2 with MSSQL 2016 Standard (64-bit)',
-        //    addBlockStroageSize: 0 } ]
+        //          /** more items **/
+        // ]
     }
 });
 ```
+
 
 ## getServerProductList
+You can use this method to request the whole list for VM Flavor types which are compatible with a VM Image Type`vmImageTypeCode`.
 ### Arguments
 
-| Name | Data Type | Required | Description                | Default |
-|------|-----------|----------|----------------------------|---------|
-| exclusionProductCode | `string` | optional | A code for **VM Type** to exclude from results |   |
-| productCode | `string` | optional | Only when one result containing a input code for **VM Type** is needed  |   |
-| serverImageProductCode | `string` | **required** |   Only when one result containing a input code for **VM server Image** is needed |   |
+| Input parameter   | type       | Required    | description |
+|-------------------|------------|-------------|-------------|
+| `vmImageTypeCode` | `string`   | **required**|  The VM Image Type Code for searching the whole compatible list of VM Flavor Type. Flavors are templates used to define VM configurations such as the the number of cores, storage capacity and etc. `vmImageTypeCode` can be obtained from `getServerImageProductList`|
 
 ### Examples
-**Request available VM Types for the input VM Image Code`serverImageProductCode`.**  
-
-| arguments              | type     | description     |
-|------------------------|----------|-----------------|
-| serverImageProductCode | `string` | VM Image Code   |
-
-```javascript
-client.compute.product.getServerProductList( { serverImageProductCode: "{{VM Image Code}}" }, function( error, reply ){ /** Your Own Code **/} );
-```
----
-**Request available VM Types for the input VM Image Code`serverImageProductCode` except the input VM Type Code`exclusionProductCode`.**
-
-| arguments              | type     | description     |
-|------------------------|----------|-----------------|
-| exclusionProductCode   | `string` | VM Type Code    |
-| serverImageProductCode | `string` | VM Image Code   |
-```javascript
-client.compute.product.getServerProductList( {  exclusionProductCode:"{{VM Type Code}}", serverImageProductCode: "{{VM Image Code}}" }, function( error, reply ){ /** Your Own Code **/} );
-```
----
-**Request one VM Types for the input VM Type Code`productCode` among the whole list of VM Image Code`serverImageProductCode`**  
-
-| arguments              | type     | description     |
-|------------------------|----------|-----------------|
-| productCode            | `string` | VM Type Code    |
-| serverImageProductCode | `string` | VM Image Code   |
-```javascript
-client.compute.product.getServerProductList( {  productCode:"{{VM Type Code}}", serverImageProductCode: '{{VM Image Code}}' }, function( error, reply ){ /** Your Own Code **/});
-```
-
----
-### Code
-
 ```javascript
 var Ncloud = require('ncloud');
 
@@ -296,14 +127,13 @@ var client = new Ncloud({
    oauth_consumer_secret:'%YOUR_CONSUMER_SECRET%'
 });
 
-client.compute.product.getServerProductList( {serverImageProductCode: 'SPSW0LINUX000031'}, function( error, reply ){
+client.compute.product.getServerProductList( { vmImageTypeCode: 'SPSW0LINUX000031' }, function( error, response ){
     if( error ){
         console.log( error );
     }else{
-        console.log( reply.getServerProductListResponse.productList[0].product );
-        // reply example
-        //  /** available VM Types **/
-        // [ { productCode: 'SPSVRSTAND000056',
+        console.log( response );
+        // response example =>
+        // [ { vmFlavorTypeCode: 'SPSVRSTAND000056',
         //     productName: 'vCPU 1EA, Memory 1GB, Disk 50GB',
         //     productType: { code: 'MICRO', codeName: 'Micro Server' },
         //     productDescription: 'vCPU 1EA, Memory 1GB, Disk 50GB',
@@ -314,7 +144,7 @@ client.compute.product.getServerProductList( {serverImageProductCode: 'SPSW0LINU
         //     osInformation: '',
         //     diskType: { code: 'NET', codeName: 'Network Storage' },
         //     addBlockStroageSize: 0 },
-        //     /***/
+        //              /** more items**/
         // }]
     }
 });

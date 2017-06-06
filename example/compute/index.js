@@ -6,39 +6,36 @@ var Ncloud = require('../../lib/');
         oauth_consumer_secret:'%YOUR_CONSUMER_SECRET%'
     });
 
-    client.compute.product.getServerImageProductList( function( error, reply ){
+    client.compute.product.getServerImageProductList( function( error, response ){
         if( error ){
             console.log( error );
-        }else{
-            console.log( reply.getServerImageProductListResponse.productList[0].product );
+        }else {
+            console.log(response);
 
-            // reply example
-            // { product:
-            //     [ { productCode: 'SPSW0LINUX000043',
-            //         productName: 'centos-5.11-64',
-            //         productType: [Object],
-            //         productDescription: 'CentOS 5.11(64bit)',
-            //         infraResourceType: [Object],
-            //         cpuCount: 0,
-            //         memorySize: 0,
-            //         baseBlockStorageSize: 0,
-            //         platformType: [Object],
-            //         osInformation: 'CentOS 5.11 (64-bit)',
-            //         addBlockStroageSize: 0 },
-            //         /***/
-            //     ]
-            // }
+            // response example =>
+            // [ { vmImageTypeCode: 'SPSW0LINUX000043',
+            //     productName: 'centos-5.11-64',
+            //     productType: { code: 'LINUX', codeName: 'Linux' },
+            //     productDescription: 'CentOS 5.11(64bit)',
+            //     infraResourceType: { code: 'SW', codeName: 'Software' },
+            //     cpuCount: 0,
+            //     memorySize: 0,
+            //     baseBlockStorageSize: 0,
+            //     platformType: { code: 'LNX64', codeName: 'Linux 64 Bit' },
+            //     osInformation: 'CentOS 5.11 (64-bit)',
+            //     addBlockStroageSize: 0 },
+            //          /** more items **/
+            // ]
         }
     });
 
-    client.compute.product.getServerProductList( {serverImageProductCode: 'SPSW0LINUX000031'}, function( error, reply ){
+    client.compute.product.getServerProductList( { vmImageTypeCode: 'SPSW0LINUX000031' }, function( error, response ){
         if( error ){
             console.log( error );
         }else{
-            console.log( reply.getServerProductListResponse.productList[0].product );
-
-            // reply example
-            // [ { productCode: 'SPSVRSTAND000056',
+            console.log( response );
+            // response example =>
+            // [ { vmFlavorTypeCode: 'SPSVRSTAND000056',
             //     productName: 'vCPU 1EA, Memory 1GB, Disk 50GB',
             //     productType: { code: 'MICRO', codeName: 'Micro Server' },
             //     productDescription: 'vCPU 1EA, Memory 1GB, Disk 50GB',
@@ -49,9 +46,8 @@ var Ncloud = require('../../lib/');
             //     osInformation: '',
             //     diskType: { code: 'NET', codeName: 'Network Storage' },
             //     addBlockStroageSize: 0 },
-            //     /***/
+            //              /** more items**/
             // }]
-
         }
     });
 })();
