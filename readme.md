@@ -104,11 +104,22 @@ The notation for `productCode` also shows the difference between these functions
 | Ubuntu Server 64Bit  | `UBS64`    |
 
 ### Examples
-* client.compute.product.getServerImageProductList({"exclusionProductCode": "{{The code for VM Image Type}}" }, function(){/** your own code **/});<br/>
-* client.compute.product.getServerImageProductList({"productCode": "{{The code for VM Image Type}}" }, function(){/** your own code **/});<br/>
-* client.compute.product.getServerImageProductList({"platformTypeCodeList": ["{{The code for Platform Type}}"] }, function(){/** your own code **/});<br/>
-* client.compute.product.getServerImageProductList({"exclusionProductCode": "{{The code for VM Image Type}}", "platformTypeCodeList": ["{{The code for Platform Type}}"] }, function(){/** your own code **/});<br/>
-
+- Requests : Receive the whole list of VM Images without the type has `exclusionProductCode`.
+```javascript
+client.compute.product.getServerImageProductList({"exclusionProductCode": "{{The code for VM Image Type}}" }, function(){/** your own code **/});
+```
+- Requests: Receive one VM Image info containing `productCode`.
+```javascript
+client.compute.product.getServerImageProductList({"productCode": "{{The code for VM Image Type}}" }, function(){/** your own code **/});
+```
+- Requests: Receive the whole list of VM Images which match `platformTypeCodeList`.
+```javascript
+client.compute.product.getServerImageProductList({"platformTypeCodeList": ["{{The code for Platform Type}}"] }, function(){/** your own code **/});
+```
+- Requests: Receive the whole list of VM Images which match `platformTypeCodeList` except `exclusionProductCode`.
+```javascript
+client.compute.product.getServerImageProductList({"exclusionProductCode": "{{The code for VM Image Type}}", "platformTypeCodeList": ["{{The code for Platform Type}}"] }, function(){/** your own code **/});
+```
 ### Code
 ```javascript
 var Ncloud = require('ncloud');
