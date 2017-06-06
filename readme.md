@@ -1,11 +1,11 @@
 ncloud
 =======
-[![NPM](https://nodei.co/npm/ncloud.png?compact=true)](https://nodei.co/npm/ncloud/) <br/>
-The NAVER Cloud Platform(https://www.ncloud.com/) Library for Node.js <br/>
-https://www.npmjs.com/package/ncloud<br/> 
+[![NPM](https://nodei.co/npm/ncloud.png?compact=true)](https://nodei.co/npm/ncloud/)  
+The NAVER Cloud Platform(https://www.ncloud.com/) Library for Node.js  
+https://www.npmjs.com/package/ncloud  
 Currently, this package supports geolocation only....
 
-# Author 
+# Author
 Gyubeom Choi <mosfet1kg@gmail.com>
 
 # Installing Dependencies
@@ -56,7 +56,7 @@ client.openapi.geolocation.getLocation({ ip: '143.248.142.77', ext: 't'}, functi
         // expected Result =>
         // { returnCode: 0,
         //   requestId: 'b27dcce8-13b9-4186-85be-8e773dc28f2e',
-        //   geoLocation: 
+        //   geoLocation:
         //    { country: 'KR',
         //      code: '3020054000',
         //      r1: '대전광역시',
@@ -71,10 +71,10 @@ client.openapi.geolocation.getLocation({ ip: '143.248.142.77', ext: 't'}, functi
 
 
 # Compute : Product
-<b>** Please be aware that the meaning of product code can be different depending on functions. ** </b><br/>
+<b>** Please be aware that the meaning of product code can be different depending on functions. ** </b>  
 &nbsp;&nbsp;Although functions belonging to product return a json response containing `productCode` key, returning `productCode` value from `getServerImageProductList` means the code for VM server image type.<br/>
 The other from `getServerProductList` means the code for VM server type regarding the number of CPU, memory capacity, hardware capacity and etc. <br/>
-The notation for `productCode` also shows the difference between these functions. For example, the prefix `SPSVRSTAND` is only used for specifying VM server type.<br/> 
+The notation for `productCode` also shows the difference between these functions. For example, the prefix `SPSVRSTAND` is only used for specifying VM server type.<br/>
 &nbsp;&nbsp;The following is an example of which prefix is used for VM server type and VM Image Type.
 
 | prefix      | `productCode`     | `productName`                       |  description     | returning from              |
@@ -91,7 +91,7 @@ The notation for `productCode` also shows the difference between these functions
 |------|-----------|----------|----------------------------|---------|
 | exclusionProductCode | `string` | optional | A product code to exclude from results |   |
 | productCode | `string` | optional | Only when one result containing a `productCode` is needed  |   |
-| platformTypeCodeList | `array` | optional |  Only when results containing specific product types are needed. Refer to following table to find the `platformTypeCodeList` you want.
+| platformTypeCodeList | `array` | optional |  Only when results containing specific product types are needed. Refer to following table to find the `platformTypeCodeList` you want. |   |
 
 #### platformTypeCodeList
 | platform   | platformTypeCodeList |
@@ -104,22 +104,42 @@ The notation for `productCode` also shows the difference between these functions
 | Ubuntu Server 64Bit  | `UBS64`    |
 
 ### Examples
-- Requests : Receive the whole list of VM Images without the type has `exclusionProductCode`.
+**Requests : Receive the whole list of VM Images without the type has `exclusionProductCode`.**  
+
+| arguments            | type     |
+|----------------------|----------|
+| exclusionProductCode | `string` |
+
 ```javascript
 client.compute.product.getServerImageProductList({"exclusionProductCode": "{{The code for VM Image Type}}" }, function(){/** your own code **/});
-```
-- Requests: Receive one VM Image info containing `productCode`.
+```  
+
+**Requests: Receive one VM Image info containing `productCode`.**
+
+| arguments            | type     |
+|----------------------|----------|
+| productCode          | `string` |
 ```javascript
 client.compute.product.getServerImageProductList({"productCode": "{{The code for VM Image Type}}" }, function(){/** your own code **/});
-```
-- Requests: Receive the whole list of VM Images which match `platformTypeCodeList`.
+```  
+**Requests: Receive the whole list of VM Images which match `platformTypeCodeList`.**
+
+| arguments            | type     |
+|----------------------|----------|
+| platformTypeCodeList | `array`  |
 ```javascript
 client.compute.product.getServerImageProductList({"platformTypeCodeList": ["{{The code for Platform Type}}"] }, function(){/** your own code **/});
 ```
-- Requests: Receive the whole list of VM Images which match `platformTypeCodeList` except `exclusionProductCode`.
+**Requests: Receive the whole list of VM Images which match `platformTypeCodeList` except `exclusionProductCode`.**  
+
+| arguments            | type     |
+|----------------------|----------|
+| exclusionProductCode | `string` |
+| platformTypeCodeList | `array`  |
 ```javascript
 client.compute.product.getServerImageProductList({"exclusionProductCode": "{{The code for VM Image Type}}", "platformTypeCodeList": ["{{The code for Platform Type}}"] }, function(){/** your own code **/});
 ```
+
 ### Code
 ```javascript
 var Ncloud = require('ncloud');
@@ -158,7 +178,7 @@ client.compute.product.getServerImageProductList({"productCode": "SPSW0WINNT0000
     }else{
         console.log( reply.getServerImageProductListResponse.productList[0].product );
        // reply example
-       // /** The result containing the info about productCode `SPSW0WINNT000043`  
+       // /** The result containing the info about productCode `SPSW0WINNT000043`
        // { productCode: 'SPSW0WINNT000043',   // VM Image Type
        //   productName: 'mssql(2016std)-win-2012-64-R2',
        //   productType: { code: 'WINNT', codeName: 'Windows NT' },
@@ -169,7 +189,7 @@ client.compute.product.getServerImageProductList({"productCode": "SPSW0WINNT0000
        //   baseBlockStorageSize: 0,
        //   platformType: { code: 'WND64', codeName: 'Windows 64 Bit' },
        //   osInformation: 'Windows Server 2012 R2 with MSSQL 2016 Standard (64-bit)',
-       //   addBlockStroageSize: 0 
+       //   addBlockStroageSize: 0
        // }
     }
 });
@@ -192,8 +212,8 @@ client.compute.product.getServerImageProductList({ platformTypeCodeList: ['LNX64
         //     platformType: { code: 'LNX64', codeName: 'Linux 64 Bit' },
         //     osInformation: 'CentOS 5.11 (64-bit)',
         //     addBlockStroageSize: 0 },
-        //     /** **/   
-        // } ]        
+        //     /** **/
+        // } ]
     }
 });
 
@@ -218,7 +238,7 @@ client.compute.product.getServerImageProductList({ "exclusionProductCode": "SPSW
         //    baseBlockStorageSize: 0,
         //    platformType: { code: 'WND64', codeName: 'Windows 64 Bit' },
         //    osInformation: 'Windows Server 2012 R2 with MSSQL 2016 Standard (64-bit)',
-        //    addBlockStroageSize: 0 } ]       
+        //    addBlockStroageSize: 0 } ]
     }
 });
 ```
@@ -226,12 +246,12 @@ client.compute.product.getServerImageProductList({ "exclusionProductCode": "SPSW
 ### getServerProductList
 ```javascript
 var Ncloud = require('ncloud');
-   
+
 var client = new Ncloud({
    oauth_consumer_key:'%YOUR_CONSUMER_KEY%',
    oauth_consumer_secret:'%YOUR_CONSUMER_SECRET%'
 });
-   
+
 client.compute.product.getServerProductList( {serverImageProductCode: 'SPSW0LINUX000031'}, function( error, reply ){
     if( error ){
         console.log( error );
