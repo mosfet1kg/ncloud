@@ -77,10 +77,10 @@ The other from `getServerProductList` means the code for VM server type regardin
 The notation for `productCode` also shows the difference between these functions. <br/>
 The prefix `SPSVRSTAND` is used for specifying VM server type. The following is an example of which prefix is used for VM server type and VM Image Type.
 
-| prefix      | `productCode`     | `productName`                       |  description | returning from             |
-|-------------|-------------------|-------------------------------------|-----------------------------|
-| SPSW0WINNT  | SPSW0WINNT000043  |  mssql(2016std)-win-2012-64-R2      |  VM Image Type  | `getServerImageProductList` |
-| SPSW0LINUX  | SPSW0LINUX000043  |  centos-5.11-64                     |  VM Image Type  | `getServerImageProductList` |
+| prefix      | `productCode`     | `productName`                       |  description     | returning from              |
+|-------------|-------------------|-------------------------------------|------------------|-----------------------------|
+| SPSW0WINNT  | SPSW0WINNT000043  |  mssql(2016std)-win-2012-64-R2      |  VM Image Type   | `getServerImageProductList` |
+| SPSW0LINUX  | SPSW0LINUX000043  |  centos-5.11-64                     |  VM Image Type   | `getServerImageProductList` |
 | SPSVRSTAND  | SPSVRSTAND000047  |  vCPU 12EA, Memory 32GB, Disk 800GB |  VM Server Type  | `getServerProductList`      |
 | SPSVRSTAND  | SPSVRSTAND000029  |  vCPU 8EA, Memory 16GB, Disk 400GB  |  VM Server Type  | `getServerProductList`      |
 
