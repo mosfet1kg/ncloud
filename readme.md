@@ -71,11 +71,11 @@ client.openapi.geolocation.getLocation({ ip: '143.248.142.77', ext: 't'}, functi
 
 
 # Compute : Product
-Please be aware that the meaning of product code can be different depending on functions. <br/>
-Although functions belonging to product return a json response containing `productCode` key, returning `productCode` value from `getServerImageProductList` means the code for VM server image type.<br/>
+<b>** Please be aware that the meaning of product code can be different depending on functions. ** </b><br/>
+&nbsp;&nbsp;Although functions belonging to product return a json response containing `productCode` key, returning `productCode` value from `getServerImageProductList` means the code for VM server image type.<br/>
 The other from `getServerProductList` means the code for VM server type regarding the number of CPU, memory capacity, hardware capacity and etc. <br/>
-The notation for `productCode` also shows the difference between these functions. <br/>
-The prefix `SPSVRSTAND` is used for specifying VM server type. The following is an example of which prefix is used for VM server type and VM Image Type.
+The notation for `productCode` also shows the difference between these functions. For example, the prefix `SPSVRSTAND` is only used for specifying VM server type.<br/> 
+&nbsp;&nbsp;The following is an example of which prefix is used for VM server type and VM Image Type.
 
 | prefix      | `productCode`     | `productName`                       |  description     | returning from              |
 |-------------|-------------------|-------------------------------------|------------------|-----------------------------|
@@ -104,9 +104,10 @@ The prefix `SPSVRSTAND` is used for specifying VM server type. The following is 
 | Ubuntu Server 64Bit  | `UBS64`    |
 
 ### Examples
-* client.compute.product.getServerImageProductList({"exclusionProductCode": {{serverImageProductCode}} }, function(){/****/});<br/>
-
-
+* client.compute.product.getServerImageProductList({"exclusionProductCode": "{{The code for VM Image Type}}" }, function(){/** your own code **/});<br/>
+* client.compute.product.getServerImageProductList({"productCode": "{{The code for VM Image Type}}" }, function(){/** your own code **/});<br/>
+* client.compute.product.getServerImageProductList({"platformTypeCodeList": ["{{The code for Platform Type}}"] }, function(){/** your own code **/});<br/>
+* client.compute.product.getServerImageProductList({"exclusionProductCode": "{{The code for VM Image Type}}", "platformTypeCodeList": ["{{The code for Platform Type}}"] }, function(){/** your own code **/});<br/>
 
 ### Code
 ```javascript
