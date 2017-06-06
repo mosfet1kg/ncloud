@@ -17,7 +17,7 @@ $ yarn add ncloud
 
 # Usage
 See following descriptions.
-# Geolocation
+# OpenAPI : Geolocation
 ## getLocation
 ### Arguments
 | Name | Data Type | Required | Description                | Default |
@@ -70,7 +70,21 @@ client.openapi.geolocation.getLocation({ ip: '143.248.142.77', ext: 't'}, functi
 ```
 
 
-# Compute
+# Compute : Product
+Please be aware that the meaning of product code can be different depending on functions. <br/>
+Although functions belonging to product return a json response containing `productCode` key, returning `productCode` value from `getServerImageProductList` means the code for VM server image type.<br/>
+The other from `getServerProductList` means the code for VM server type regarding the number of CPU, memory capacity, hardware capacity and etc. <br/>
+The notation for `productCode` also shows the difference between these functions. <br/>
+The prefix `SPSVRSTAND` is used for specifying VM server type. The following is an example of which prefix is used for VM server type and VM Image Type.
+
+| prefix      | `productCode`     | `productName`                       |  description | returning from             |
+|-------------|-------------------|-------------------------------------|-----------------------------|
+| SPSW0WINNT  | SPSW0WINNT000043  |  mssql(2016std)-win-2012-64-R2      |  VM Image Type  | `getServerImageProductList` |
+| SPSW0LINUX  | SPSW0LINUX000043  |  centos-5.11-64                     |  VM Image Type  | `getServerImageProductList` |
+| SPSVRSTAND  | SPSVRSTAND000047  |  vCPU 12EA, Memory 32GB, Disk 800GB |  VM Server Type  | `getServerProductList`      |
+| SPSVRSTAND  | SPSVRSTAND000029  |  vCPU 8EA, Memory 16GB, Disk 400GB  |  VM Server Type  | `getServerProductList`      |
+
+
 ## getServerImageProductList
 ### Arguments
 | Name | Data Type | Required | Description                | Default |
@@ -90,6 +104,11 @@ client.openapi.geolocation.getLocation({ ip: '143.248.142.77', ext: 't'}, functi
 | Ubuntu Server 64Bit  | `UBS64`    |
 
 ### Examples
+* client.compute.product.getServerImageProductList({"exclusionProductCode": {{serverImageProductCode}} }, function(){/****/});<br/>
+
+
+
+### Code
 ```javascript
 var Ncloud = require('ncloud');
 
@@ -105,7 +124,7 @@ client.compute.product.getServerImageProductList({"exclusionProductCode": "SPSW0
         console.log( reply.getServerImageProductListResponse.productList[0].product );
      // reply example
      //  /** The results without the productCode `SPSW0WINNT000045` **/
-     // [ { productCode: 'SPSW0LINUX000043',
+     // [ { productCode: 'SPSW0LINUX000043',   // VM Image Type
      //     productName: 'centos-5.11-64',
      //     productType: { code: 'LINUX', codeName: 'Linux' },
      //     productDescription: 'CentOS 5.11(64bit)',
@@ -128,7 +147,7 @@ client.compute.product.getServerImageProductList({"productCode": "SPSW0WINNT0000
         console.log( reply.getServerImageProductListResponse.productList[0].product );
        // reply example
        // /** The result containing the info about productCode `SPSW0WINNT000043`  
-       // { productCode: 'SPSW0WINNT000043',
+       // { productCode: 'SPSW0WINNT000043',   // VM Image Type
        //   productName: 'mssql(2016std)-win-2012-64-R2',
        //   productType: { code: 'WINNT', codeName: 'Windows NT' },
        //   productDescription: 'Windows 2012 Server R2 with MSSQL 2016 Standard',
@@ -150,7 +169,7 @@ client.compute.product.getServerImageProductList({ platformTypeCodeList: ['LNX64
         console.log( reply.getServerImageProductListResponse.productList[0].product );
         // reply example
         // /** The results containing Linux 64Bits and Win 64bits platforms
-        // [ { productCode: 'SPSW0LINUX000043',
+        // [ { productCode: 'SPSW0LINUX000043',   // VM Image Type
         //     productName: 'centos-5.11-64',
         //     productType: { code: 'LINUX', codeName: 'Linux' },
         //     productDescription: 'CentOS 5.11(64bit)',
@@ -177,7 +196,7 @@ client.compute.product.getServerImageProductList({ "exclusionProductCode": "SPSW
         // /** The productCode `SPSW0WINNT000045` is left off from the result of Linux64bits and Win64bits **/
         // [
         //   /**  **/
-        // ,{ productCode: 'SPSW0WINNT000043',
+        // ,{ productCode: 'SPSW0WINNT000043',   // VM Image Type
         //    productName: 'mssql(2016std)-win-2012-64-R2',
         //    productType: { code: 'WINNT', codeName: 'Windows NT' },
         //    productDescription: 'Windows 2012 Server R2 with MSSQL 2016 Standard',
