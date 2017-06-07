@@ -6,14 +6,14 @@ var Ncloud = require('../../lib/');
         oauth_consumer_secret:'%YOUR_CONSUMER_SECRET%'
     });
 
-    client.compute.product.getServerImageProductList( function( error, response ){
+    client.compute.product.findImages( function( error, response ){
         if( error ){
             console.log( error );
         }else {
             console.log(response);
 
             // response example =>
-            // [ { vmImageTypeCode: 'SPSW0LINUX000043',
+            // [ { vmImageCode: 'SPSW0LINUX000043',
             //     productName: 'centos-5.11-64',
             //     productType: { code: 'LINUX', codeName: 'Linux' },
             //     productDescription: 'CentOS 5.11(64bit)',
@@ -29,13 +29,13 @@ var Ncloud = require('../../lib/');
         }
     });
 
-    client.compute.product.getServerProductList( { vmImageTypeCode: 'SPSW0LINUX000031' }, function( error, response ){
+    client.compute.product.findFlavorsByImgCd( { vmImageCode: 'SPSW0LINUX000031' }, function( error, response ){
         if( error ){
             console.log( error );
         }else{
             console.log( response );
             // response example =>
-            // [ { vmFlavorTypeCode: 'SPSVRSTAND000056',
+            // [ { vmFlavorCode: 'SPSVRSTAND000056',
             //     productName: 'vCPU 1EA, Memory 1GB, Disk 50GB',
             //     productType: { code: 'MICRO', codeName: 'Micro Server' },
             //     productDescription: 'vCPU 1EA, Memory 1GB, Disk 50GB',
