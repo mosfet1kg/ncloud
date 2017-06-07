@@ -118,7 +118,7 @@ You can use this method to request the whole list for VM Flavor types which are 
 
 | Input parameter   | type       | Required    | description |
 |-------------------|------------|-------------|-------------|
-| `vmImageCode` | `string`   | **required**|  The VM Image Type Code for searching the whole compatible list of VM Flavor Type. Flavors are templates used to define VM configurations such as the the number of cores, storage capacity and etc. `vmImageTypeCode` can be obtained from `getServerImageProductList`|
+| `vmImageCode` | `string`   | **required**|  The VM Image Type Code for searching the whole compatible list of VM Flavor Type. Flavors are templates used to define VM configurations such as the the number of cores, storage capacity and etc. `vmImageCode` can be obtained from `findImages`|
 
 ### Examples  
 ```javascript
