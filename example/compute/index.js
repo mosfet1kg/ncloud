@@ -6,7 +6,7 @@ var Ncloud = require('../../lib/');
         oauth_consumer_secret:'%YOUR_CONSUMER_SECRET%'
     });
 
-    client.compute.product.findImages( function( error, response ){
+    client.compute.findImages( function( error, response ){
         if( error ){
             console.log( error );
         }else {
@@ -29,7 +29,7 @@ var Ncloud = require('../../lib/');
         }
     });
 
-    client.compute.product.findFlavorsByImgCd( { vmImageCode: 'SPSW0LINUX000031' }, function( error, response ){
+    client.compute.findFlavorsByImgCd( { vmImageCode: 'SPSW0LINUX000031' }, function( error, response ){
         if( error ){
             console.log( error );
         }else{
