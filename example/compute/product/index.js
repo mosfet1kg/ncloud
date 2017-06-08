@@ -1,4 +1,4 @@
-var Ncloud = require('../../lib/');
+var Ncloud = require('../../../lib/');
 
 (function(){
     var client = new Ncloud({

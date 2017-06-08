@@ -11,7 +11,6 @@ var Ncloud = require('../../lib/');
             console.log( error );
         }else{
             console.log( reply );
-
             // expected Result =>
             // {   returnCode: 0,
             //     requestId: '067eef5e-a1aa-4e13-8704-7ee2d13ae3e6',
