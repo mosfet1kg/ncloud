@@ -111,7 +111,8 @@ client.compute.findImages( function( error, response ){
 
 
 ## getServerProductList, alias `findFlavorsByImgCd`  
-You can use this method to request the whole list for VM Flavor types which are compatible with a VM Image Type`vmImageTypeCode`.  
+You can use this method to request the whole list for VM Flavor types which are compatible 
+with a VM Image Type`vmImageCode`.  
 
 ### Arguments  
 
