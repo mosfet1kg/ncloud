@@ -42,9 +42,8 @@ client.openapi.geolocation.findLocation({ ip: '143.248.142.77'}, function( error
     }else{
         console.log( reply );
         // expected Result =>
-        // {   returnCode: 0,
-        //     requestId: '067eef5e-a1aa-4e13-8704-7ee2d13ae3e6',
-        //     geoLocation: { country: 'KR', code: '3020054000', r1: '대전광역시', r2: '유성구' } }
+        // { country: 'KR', code: '3020054000', r1: '대전광역시', r2: '유성구' }
+
     }
 });
 
@@ -54,17 +53,15 @@ client.openapi.geolocation.findLocation({ ip: '143.248.142.77', ext: 't'}, funct
     }else{
         console.log( reply );
         // expected Result =>
-        // { returnCode: 0,
-        //   requestId: 'b27dcce8-13b9-4186-85be-8e773dc28f2e',
-        //   geoLocation:
-        //    { country: 'KR',
-        //      code: '3020054000',
-        //      r1: '대전광역시',
-        //      r2: '유성구',
-        //      r3: '구성동',
-        //      lat: 36.370724,
-        //      long: 127.3661,
-        //      net: 'Korea Advanced Institute of Science and Technology' } }
+        // { country: 'KR',
+        //   code: '3020054000',
+        //   r1: '대전광역시',
+        //   r2: '유성구',
+        //   r3: '구성동',
+        //   lat: 36.370724,
+        //   long: 127.3661,
+        //   net: 'Korea Advanced Institute of Science and Technology' }
+
     }
 });
 ```  
