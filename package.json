@@ -1,11 +1,12 @@
 {
   "name": "ncloud",
-  "version": "0.0.14",
+  "version": "0.1.0",
   "description": "The NAVER Cloud Platform(https://www.ncloud.com/) Library for Node.js",
-//  "engineStrict": true,
-//  "engines": {
-//    "node": ">= 6.9.0"
-//  },
+  "engineStrict": true,
+  "engines": {
+    "node": ">= 6.9.0"
+  },
+  "main": "./lib/index.js",
   "devDependencies": {
     "@types/jest": "~19.2.3",
     "@types/node": "~6.0.73",
@@ -40,7 +41,6 @@
     "ncp",
     "NAVER Cloud Platform"
   ],
-  "main": "./lib/index.js",
   "dependencies": {
     "axios": "^0.16.2",
     "crypto-js": "^3.1.9-1",

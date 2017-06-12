@@ -1,7 +1,7 @@
-var Ncloud = require('../../../lib/');
+var ncloud = require('../../../lib/');
 
 (function(){
-    var client = new ncloud.createClient({
+    var client = ncloud.createClient({
         oauth_consumer_key:'%YOUR_CONSUMER_KEY%',
         oauth_consumer_secret:'%YOUR_CONSUMER_SECRET%'
     });
