@@ -1,7 +1,7 @@
 var Ncloud = require('../../../lib/');
 
 (function(){
-    var client = new Ncloud({
+    var client = new ncloud.createClient({
         oauth_consumer_key:'%YOUR_CONSUMER_KEY%',
         oauth_consumer_secret:'%YOUR_CONSUMER_SECRET%'
     });
@@ -29,7 +29,7 @@ var Ncloud = require('../../../lib/');
         }
     });
 
-    client.compute.findFlavorsByImgCd( { vmImageCode: 'SPSW0LINUX000031' }, function( error, response ){
+    client.compute.findFlavors( { vmImageCode: 'SPSW0LINUX000031' }, function( error, response ){
         if( error ){
             console.log( error );
         }else{

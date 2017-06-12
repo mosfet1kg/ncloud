@@ -3,5 +3,16 @@
 .idea
 .example
 .doc
+tsconfig.json
+tsconfig.release.json
+tslint.json
+preprocessor.js
+jest.config.js
+.editorconfig
+mytest.js
+src
+__tests__
 mytest.js
 **/**/mytest.js
+example
+doc
