@@ -18,7 +18,7 @@ $ yarn add ncloud
 # Usage
 See following descriptions.
 # OpenAPI : Geolocation
-## getLocation
+## getLocation, alias `findLocation`
 ### Arguments
 | Name | Data Type | Required | Description                | Default |
 |------|-----------|----------|----------------------------|---------|
@@ -110,7 +110,7 @@ client.compute.findImages( function( error, response ){
 ```
 
 
-## getServerProductList, alias `findFlavorsByImgCd`  
+## getServerProductList, alias `findFlavors`  
 You can use this method to request the whole list for VM Flavor types which are compatible 
 with a VM Image Type`vmImageCode`.  
 
@@ -161,9 +161,9 @@ client.compute.findFlavors( { vmImageCode: 'SPSW0LINUX000031' }, function( error
  
 ### Examples  
 ```javascript
-var Ncloud = require('ncloud');
+var ncloud = require('ncloud');
 
-var client = new Ncloud({
+var client = ncloud.createClient({
    oauth_consumer_key:'%YOUR_CONSUMER_KEY%',
    oauth_consumer_secret:'%YOUR_CONSUMER_SECRET%'
 });
