@@ -138,7 +138,8 @@ client.compute.findFlavors( { vmImageCode: 'SPSW0LINUX000031' }, function( error
 # Compute : Zone  
 ## getZoneList, alias `findZones` 
 Returns lists all possible zones available in the callback `f(err, zones)`.   
-You can use a `zoneNo` to create VM instance in that zone if needed.
+You can use a `zoneNo` for an option to create VM instance in that zone if needed.     
+Refer to `createServer` method. 
 
 ### Arguments  
  No Input Arguments

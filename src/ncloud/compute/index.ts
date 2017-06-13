@@ -9,13 +9,15 @@ import * as product from './product';
 import * as zone    from './zone';
 import * as loginKey from './loginKey';
 import * as serverInstance from './serverInstance';
+import * as accessControlGroup from './accessControlGroup';
 
 export interface InterfaceCompute
   extends
     product.InterfaceProduct,
     zone.InterfaceZone,
     loginKey.InterfaceLoginKey,
-    serverInstance.InterfaceServerInstance
+    serverInstance.InterfaceServerInstance,
+    accessControlGroup.InterfaceAccessControlGroup
 { }
 
 export class Compute implements InterfaceCompute {
@@ -40,6 +42,10 @@ export class Compute implements InterfaceCompute {
     loginKey.findLoginKeys.bind(this).apply( this, arguments );
   }
   //TODO: addLoginKeys
+
+  findAccessControlGroup( callback: InterfaceCallback ){
+    accessControlGroup.findAccessControlGroup.bind(this).apply( this, arguments );
+  }
 
   findServers( callback:InterfaceCallback ){
     serverInstance.findServers.bind(this).apply( this, arguments );
