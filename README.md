@@ -15,6 +15,14 @@ or
 $ yarn add ncloud
 ```
 
+# Creating Instance
+```javascript
+var client = ncloud.createClient({
+    oauth_consumer_key:'%YOUR_CONSUMER_KEY%',
+    oauth_consumer_secret:'%YOUR_CONSUMER_SECRET%'
+});
+```
+
 # Usage
 See following descriptions.
 # OpenAPI : Geolocation
@@ -29,13 +37,6 @@ See following descriptions.
 
 #### Examples
 ```javascript
-var ncloud = require('ncloud');
-
-var client = ncloud.createClient({
-   oauth_consumer_key:'%YOUR_CONSUMER_KEY%',
-   oauth_consumer_secret:'%YOUR_CONSUMER_SECRET%'
-});
-
 client.openapi.geolocation.findLocation({ ip: '143.248.142.77'}, function( error, reply ){
     if(error){
         console.log( error );
@@ -46,7 +47,8 @@ client.openapi.geolocation.findLocation({ ip: '143.248.142.77'}, function( error
 
     }
 });
-
+```
+```javascript
 client.openapi.geolocation.findLocation({ ip: '143.248.142.77', ext: 't'}, function( error, reply ){
     if(error){
         console.log( error );
@@ -61,27 +63,19 @@ client.openapi.geolocation.findLocation({ ip: '143.248.142.77', ext: 't'}, funct
         //   lat: 36.370724,
         //   long: 127.3661,
         //   net: 'Korea Advanced Institute of Science and Technology' }
-
     }
 });
 ```  
 
 # Compute : Product  
 ## getServerImageProductList, alias `findImages` 
-You can use this method to get the whole list of VM Image Types.
+Returns the whole list of VM Image Types.
 
 ### Arguments  
  No Input Arguments
  
 ### Examples  
 ```javascript
-var ncloud = require('ncloud');
-
-var client = ncloud.createClient({
-   oauth_consumer_key:'%YOUR_CONSUMER_KEY%',
-   oauth_consumer_secret:'%YOUR_CONSUMER_SECRET%'
-});
-
 client.compute.findImages( function( error, response ){
     if( error ){
         console.log( error );
@@ -108,8 +102,7 @@ client.compute.findImages( function( error, response ){
 
 
 ## getServerProductList, alias `findFlavors`  
-You can use this method to request the whole list for VM Flavor types which are compatible 
-with a VM Image Type`vmImageCode`.  
+Returns the whole list for VM Flavor types which are compatible with a VM Image Type`vmImageCode`.  
 
 ### Arguments  
 
@@ -119,13 +112,6 @@ with a VM Image Type`vmImageCode`.
 
 ### Examples  
 ```javascript
-var ncloud = require('ncloud');
-
-var client = ncloud.createClient({
-   oauth_consumer_key:'%YOUR_CONSUMER_KEY%',
-   oauth_consumer_secret:'%YOUR_CONSUMER_SECRET%'
-});
-
 client.compute.findFlavors( { vmImageCode: 'SPSW0LINUX000031' }, function( error, response ){
     if( error ){
         console.log( error );
@@ -159,13 +145,6 @@ You can use a `zoneNo` to create VM instance in that zone if needed.
  
 ### Examples  
 ```javascript
-var ncloud = require('ncloud');
-
-var client = ncloud.createClient({
-   oauth_consumer_key:'%YOUR_CONSUMER_KEY%',
-   oauth_consumer_secret:'%YOUR_CONSUMER_SECRET%'
-});
-
 client.compute.findZones( function( error, response ){
      if( error ){
          console.log( error );
@@ -176,5 +155,55 @@ client.compute.findZones( function( error, response ){
      }
  });
 ```
+
+# Compute : LoginKey  
+## getLoginKeyList, alias `findLoginKeys` 
+...
+### Arguments  
+ No Input Arguments
+ 
+### Examples  
+```javascript
+  client.compute.findLoginKeys( function( error, response ){
+    if( error ){
+      console.log( error );
+    }else {
+      console.log(response);
+      // response example =>
+      // [ { loginKey:
+      //   { fingerprint: /** finger print value **/,
+      //     keyName: 'ncp',
+      //     createDate: '2017-05-24T00:00:24+0900' } } ]
+    }
+  });
+```
+
+# Compute : ServerInstance  
+## getServerInstanceList, alias `findServers` 
+...
+### Arguments  
+ No Input Arguments
+ 
+### Examples  
+```javascript
+client.compute.findServers( function( error, response ){
+    if( error ){
+      console.log( error );
+    }else {
+      console.log(response);
+      // response example =>
+      // [ { serverInstanceNo: 362133,
+      //   serverName: '/** instance name **/',
+      //   serverDescription: '',
+      //   cpuCount: 2,
+      //   memorySize: 4294967296,
+      //   baseBlockStorageSize: 53687091200,
+      //   platformType: { code: 'LNX64', codeName: 'Linux 64 Bit' },
+      //   loginKeyName: 'ncp',
+      //     /*** more items  **/
+    }
+});
+```
+
 
 Other functions are being prepared.
