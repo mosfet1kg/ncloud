@@ -7,8 +7,16 @@ import {
 
 import * as product from './product';
 import * as zone    from './zone';
+import * as loginKey from './loginKey';
+import * as serverInstance from './serverInstance';
 
-export interface InterfaceCompute extends product.InterfaceProduct, zone.InterfaceZone { }
+export interface InterfaceCompute
+  extends
+    product.InterfaceProduct,
+    zone.InterfaceZone,
+    loginKey.InterfaceLoginKey,
+    serverInstance.InterfaceServerInstance
+{ }
 
 export class Compute implements InterfaceCompute {
   private oauth: Oauth;
@@ -27,6 +35,15 @@ export class Compute implements InterfaceCompute {
 
   findZones( callback: InterfaceCallback ){
     zone.findZones.bind(this).apply( this, arguments ); }
+
+  findLoginKeys( callback: InterfaceCallback ){
+    loginKey.findLoginKeys.bind(this).apply( this, arguments );
+  }
+  //TODO: addLoginKeys
+
+  findServers( callback:InterfaceCallback ){
+    serverInstance.findServers.bind(this).apply( this, arguments );
+  }
 
 }
 
