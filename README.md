@@ -115,7 +115,7 @@ with a VM Image Type`vmImageCode`.
 
 | Input parameter   | type       | Required    | description |
 |-------------------|------------|-------------|-------------|
-| `vmImageCode` | `string`   | **required**|  The VM Image Type Code for searching the whole compatible list of VM Flavor Type. Flavors are templates used to define VM configurations such as the the number of cores, storage capacity and etc. `vmImageCode` can be obtained from `findImages`|
+| `vmImageCode` | `string`   | **required**|  The VM Image Type Code is used for searching the whole compatible list of VM Flavor Type. Flavors are templates used to define VM configurations such as the the number of cores, storage capacity and etc. `vmImageCode` can be obtained from `findImages`|
 
 ### Examples  
 ```javascript
@@ -151,7 +151,8 @@ client.compute.findFlavors( { vmImageCode: 'SPSW0LINUX000031' }, function( error
 
 # Compute : Zone  
 ## getZoneList, alias `findZones` 
-...
+Returns lists all possible zones available in the callback `f(err, zones)`.   
+You can use a `zoneNo` to create VM instance in that zone if needed.
 
 ### Arguments  
  No Input Arguments
