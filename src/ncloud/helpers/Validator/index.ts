@@ -1,9 +1,28 @@
+import {
+  InterfaceCallback
+} from '../../';
+
 import * as validator from 'validator';
 import * as ip from 'ip';
 
-export class Validator {
+export interface InterfaceConstraint {
+  name: string;
+  type: string;
+  restrict: string;
+  maxLength?: number;
+  minLength?: number;
+}
 
-  public invalidParameterChecker ( args_object, paramSet, callback ){
+export interface InterfaceValidator {
+  invalidParameterChecker( args: object, paramSet: object, callback:InterfaceCallback ): boolean;
+  requiredParamChecker( args: object, paramSet: object, callback:InterfaceCallback ): boolean;
+  isInvalidIP( targetIP: string, callback:InterfaceCallback ): boolean;
+  isBeyondLimit( arg:object, paramSet: object, callback:InterfaceCallback): boolean;
+}
+
+export class Validator implements InterfaceValidator {
+
+  public invalidParameterChecker ( args_object, paramSet, callback ): boolean{
     const param = paramSet.param;
 
     const invalidParam = Object.keys(args_object).map( function(el){
@@ -25,7 +44,7 @@ export class Validator {
     }
   }; // public invalidParameterChecker
 
-  public requiredParamChecker ( args_object, param_set, callback ){
+  public requiredParamChecker ( args_object, param_set, callback ): boolean{
     const param_required_array = param_set.required || [];
     const param_array = param_set.param;
 
@@ -44,7 +63,7 @@ export class Validator {
     return false;
   };
 
-  public isInvalidIP( ipTarget: string, callback ){
+  public isInvalidIP( ipTarget: string, callback ): boolean{
     if( !validator.isIP( ipTarget ) ){
       callback( new Error('Invalid IP'));
       return true;
@@ -56,6 +75,27 @@ export class Validator {
     }
 
     return false;
+  }
+
+  public isBeyondLimit( args:object, paramSet, callback: InterfaceCallback ): boolean{
+    const constraints = paramSet.constraint;
+    let result = false;
+
+    constraints.some( constraint=>{
+      if( constraint.type === 'string' ){
+        result = (constraint.minLength <= args[ constraint.name ].length
+        && args[ constraint.name ].length <= constraint.maxLength);
+
+        if( !result ){
+          callback( new Error(`The length of \'${ constraint.name }\' must be greater
+         than ${constraint.minLength} and less than ${ constraint.maxLength}`), null);
+        }
+
+        return result;
+      }
+    });
+
+    return result;
   }
 
   private isRequiredParamExist(args_object, param_required_array){

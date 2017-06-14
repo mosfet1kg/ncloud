@@ -8,8 +8,13 @@ import axios from 'axios';
 import * as url from 'url';
 import paramSet from './paramSet';
 
+export interface InterfaceCreateLoginKeyInput {
+  keyName: string;
+}
+
 export interface InterfaceLoginKey {
   findLoginKeys( callback: InterfaceCallback ): void;
+  createLoginKey( arg: InterfaceCreateLoginKeyInput, callback: InterfaceCallback ): void;
 }
 
 export function findLoginKeys( callback: InterfaceCallback ): void {
@@ -34,8 +39,43 @@ export function findLoginKeys( callback: InterfaceCallback ): void {
       callback( null, response.data.getLoginKeyListResponse.loginKeyList );
     }
   })
-    .catch( function(error){
-      callback( error.response.data, null );
-    })
+  .catch( function(error){
+    callback( error.response.data, null );
+  })
 
+}
+
+export function createLoginKey( arg: InterfaceCreateLoginKeyInput, callback: InterfaceCallback ){
+
+  this.validator.isBeyondLimit( arg, paramSet['createLoginKey'], (err, result)=>{
+
+    console.log( err, result);
+  });
+
+
+  callback(null, true);
+  // const self = this;
+
+
+
+  // const requestInfo: InterfaceRequestInfo = {
+  //   requestMethod: 'GET',
+  //   requestUrl: self.requestUrl,
+  //   requestAction: 'createLoginKey',
+  // };
+
+
+
+  // const queryString: string = self.oauth.getQueryString( {}, paramSet['createLoginKey'], requestInfo );
+  //
+  // axios.get(
+  //   url.resolve( requestInfo.requestUrl, `?${queryString}` )
+  // ).then( function(response){
+  //
+  //   console.log( response );
+  //
+  // })
+  // .catch( function(error){
+  //   callback( error.response.data, null );
+  // })
 }

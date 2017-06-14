@@ -41,7 +41,9 @@ export class Compute implements InterfaceCompute {
   findLoginKeys( callback: InterfaceCallback ){
     loginKey.findLoginKeys.bind(this).apply( this, arguments );
   }
-  //TODO: addLoginKeys
+  createLoginKey( arg: loginKey.InterfaceCreateLoginKeyInput, callback: InterfaceCallback ){
+    loginKey.createLoginKey.bind(this).apply( this, arguments );
+  }
 
   findAccessControlGroup( callback: InterfaceCallback ){
     accessControlGroup.findAccessControlGroup.bind(this).apply( this, arguments );
