@@ -47,14 +47,35 @@ export function findLoginKeys( callback: InterfaceCallback ): void {
 
 export function createLoginKey( arg: InterfaceCreateLoginKeyInput, callback: InterfaceCallback ){
 
-  this.validator.isBeyondLimit( arg, paramSet['createLoginKey'], (err, result)=>{
 
-    console.log( err, result);
-  });
+  const requestInfo: InterfaceRequestInfo = {
+    requestMethod: 'GET',
+    requestUrl: this.requestUrl,
+    requestAction: 'createLoginKey',
+  };
 
+  if ( this.validator.invalidParameterChecker( arg, paramSet[ 'createLoginKey' ], callback ) ||
+    this.validator.requiredParamChecker( arg, paramSet[ 'createLoginKey' ], callback  )  ||
+    this.validator.isBeyondLimit( arg, paramSet['createLoginKey'], callback )
+  ) return;
 
-  callback(null, true);
-  // const self = this;
+  const queryString: string = this.oauth
+    .getQueryString( arg, paramSet['createLoginKey'], requestInfo );
+
+  axios.get(
+    url.resolve( requestInfo.requestUrl, `?${queryString}` ),
+  ).then(response => {
+
+    if( response.data.createLoginKeyResponse.returnCode !== 0 ){
+      callback( new Error( response.data.createLoginKeyResponse.returnMessage ), null );
+    } else {
+      callback( null , { privateKey: response.data.createLoginKeyResponse.privateKey } );
+    }
+  })
+    .catch( error => {
+      console.log( error.response.data );
+      callback( error.response.data, null );
+    });
 
 
 

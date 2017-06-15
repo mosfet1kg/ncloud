@@ -79,12 +79,11 @@ export class Validator implements InterfaceValidator {
 
   public isBeyondLimit( args:object, paramSet, callback: InterfaceCallback ): boolean{
     const constraints = paramSet.constraint;
-    let result = false;
 
-    constraints.some( constraint=>{
+    let result = constraints.some( constraint=>{
       if( constraint.type === 'string' ){
-        result = (constraint.minLength <= args[ constraint.name ].length
-        && args[ constraint.name ].length <= constraint.maxLength);
+        result = ((constraint.minLength <= args[ constraint.name ].length
+        && args[ constraint.name ].length <= constraint.maxLength));
 
         if( !result ){
           callback( new Error(`The length of \'${ constraint.name }\' must be greater
@@ -95,7 +94,7 @@ export class Validator implements InterfaceValidator {
       }
     });
 
-    return result;
+    return !result;
   }
 
   private isRequiredParamExist(args_object, param_required_array){
