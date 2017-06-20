@@ -10,7 +10,7 @@ var ncloud = require('../../../lib/');
     if( error ){
       console.log( error );
     }else {
-      // console.log(response);
+      console.log(response);
 
       // response example =>
       // [ { vmImageCode: 'SPSW0LINUX000043',
