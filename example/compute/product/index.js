@@ -13,7 +13,7 @@ var ncloud = require('../../../lib/');
       console.log(response);
 
       // response example =>
-      // [ { vmImageCode: 'SPSW0LINUX000043',
+      // [ { vmImageId: 'SPSW0LINUX000043',
       //     productName: 'centos-5.11-64',
       //     productType: { code: 'LINUX', codeName: 'Linux' },
       //     productDescription: 'CentOS 5.11(64bit)',
@@ -35,7 +35,7 @@ var ncloud = require('../../../lib/');
     }else{
       console.log( response );
       // response example =>
-      // [ { vmFlavorCode: 'SPSVRSTAND000056',
+      // [ { vmFlavorId: 'SPSVRSTAND000056',
       //     productName: 'vCPU 1EA, Memory 1GB, Disk 50GB',
       //     productType: { code: 'MICRO', codeName: 'Micro Server' },
       //     productDescription: 'vCPU 1EA, Memory 1GB, Disk 50GB',
