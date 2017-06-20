@@ -6,11 +6,11 @@ var ncloud = require('../../../lib/');
     oauth_consumer_secret:'%YOUR_CONSUMER_SECRET%'
   });
 
-  client.compute.findImages( function( error, response ){
+  client.compute.findPublicImages( function( error, response ){
     if( error ){
       console.log( error );
     }else {
-      console.log(response);
+      // console.log(response);
 
       // response example =>
       // [ { vmImageCode: 'SPSW0LINUX000043',
@@ -29,7 +29,7 @@ var ncloud = require('../../../lib/');
     }
   });
 
-  client.compute.findFlavors( { vmImageCode: 'SPSW0LINUX000031' }, function( error, response ){
+  client.compute.findFlavors( { vmImageId: 'SPSW0LINUX000031' }, function( error, response ){
     if( error ){
       console.log( error );
     }else{

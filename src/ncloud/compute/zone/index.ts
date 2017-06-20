@@ -34,7 +34,7 @@ export function findZones( callback: InterfaceCallback ): void {
     }
   })
   .catch( function(error){
-    callback( error.response.data, null );
+    callback( error, null );
   })
 
 }

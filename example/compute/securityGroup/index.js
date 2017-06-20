@@ -6,7 +6,7 @@ var ncloud = require('../../../lib/');
         oauth_consumer_secret:'%YOUR_CONSUMER_SECRET%'
     });
 
-  client.compute.findAccessControlGroup( function( error, response ){
+  client.compute.findSecurityGroups( function( error, response ){
     if( error ){
       console.log( error );
     }else {

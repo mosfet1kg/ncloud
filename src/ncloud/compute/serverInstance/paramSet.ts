@@ -4,7 +4,7 @@ export default {
     //         param: ['exclusionProductCode|maxItems:2','productCode|maxItems:20','serverImageProductCode|maxItems:20'],
     // param : ['exclusionProductCode', 'productCode', 'platformTypeCodeList|maxItems:5']
     param: [],required:[],
-    request_alias: [], response_alias: []
+    request_alias: [], response_alias: [{ src: "accessControlGroupList", dst: "securityGroups" }]
   }
 };
 

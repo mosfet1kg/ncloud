@@ -1,4 +1,5 @@
 import {
+  alias,
   InterfaceRequestInfo,
   InterfaceCallback,
   // alias,
@@ -8,11 +9,11 @@ import axios from 'axios';
 import * as url from 'url';
 import paramSet from './paramSet';
 
-export interface InterfaceAccessControlGroup {
-  findAccessControlGroup( callback: InterfaceCallback ): void;
+export interface InterfaceSecurityGroup {
+  findSecurityGroups(callback: InterfaceCallback ): void;
 }
 
-export function findAccessControlGroup( callback: InterfaceCallback ): void {
+export function findSecurityGroups(callback: InterfaceCallback ): void {
 
   const self = this;
 
@@ -28,14 +29,16 @@ export function findAccessControlGroup( callback: InterfaceCallback ): void {
     url.resolve( requestInfo.requestUrl, `?${queryString}`)
   ).then( function(response){
 
+    console.log( response );
     if( response.data.getAccessControlGroupListResponse.returnCode !== 0){
       callback( new Error( response.data.getAccessControlGroupListResponse.returnMessage ), null );
     }else{
-      callback( null, response.data.getAccessControlGroupListResponse.accessControlGroupList[0].accessControlGroup );
+      callback( null, alias( response.data.getAccessControlGroupListResponse.accessControlGroupList[0].accessControlGroup,
+      paramSet[ 'findACG'].response_alias ) );
     }
   })
     .catch( function(error){
-      callback( error.response.data, null );
+      callback( error, null );
     })
 
 }

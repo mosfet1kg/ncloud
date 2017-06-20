@@ -59,7 +59,7 @@ export class GeoLocation implements InterfaceGeoLocation {
       }
     })
     .catch( error => {
-      callback( error.response.data, null );
+      callback( error, null );
     });
   }
 }

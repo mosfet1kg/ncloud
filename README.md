@@ -68,7 +68,7 @@ client.openapi.geolocation.findLocation({ ip: '143.248.142.77', ext: 't'}, funct
 ```  
 
 # Compute : Product  
-## getServerImageProductList, alias `findImages` 
+## getServerImageProductList, alias `findPublicImages` 
 Returns the whole list of VM Image Types.
 
 ### Arguments  
@@ -76,14 +76,14 @@ Returns the whole list of VM Image Types.
  
 ### Examples  
 ```javascript
-client.compute.findImages( function( error, response ){
+client.compute.findPublicImages( function( error, response ){
     if( error ){
         console.log( error );
     }else {
         console.log(response);
 
         // response example =>
-        // [ { vmImageCode: 'SPSW0LINUX000043',
+        // [ { vmImageId: 'SPSW0LINUX000043',
         //     productName: 'centos-5.11-64',
         //     productType: { code: 'LINUX', codeName: 'Linux' },
         //     productDescription: 'CentOS 5.11(64bit)',
@@ -102,23 +102,23 @@ client.compute.findImages( function( error, response ){
 
 
 ## getServerProductList, alias `findFlavors`  
-Returns the whole list for VM Flavor types which are compatible with a VM Image Type`vmImageCode`.  
+Returns the whole list for VM Flavor types which are compatible with a VM Image Type`vmImageId`.  
 
 ### Arguments  
 
 | Input parameter   | type       | Required    | description |
 |-------------------|------------|-------------|-------------|
-| `vmImageCode` | `string`   | **required**|  The VM Image Type Code is used for searching the whole compatible list of VM Flavor Type. Flavors are templates used to define VM configurations such as the the number of cores, storage capacity and etc. `vmImageCode` can be obtained from `findImages`|
+| `vmImageId` | `string`   | **required**|  The VM Image Type Id is used for searching the whole compatible list of VM Flavor Type. Flavors are templates used to define VM configurations such as the the number of cores, storage capacity and etc. `vmImageId` can be obtained from `findPublicImages`|
 
 ### Examples  
 ```javascript
-client.compute.findFlavors( { vmImageCode: 'SPSW0LINUX000031' }, function( error, response ){
+client.compute.findFlavors( { vmImageId: 'SPSW0LINUX000031' }, function( error, response ){
     if( error ){
         console.log( error );
     }else{
         console.log( response );
         // response example =>
-        // [ { vmFlavorCode: 'SPSVRSTAND000056',
+        // [ { vmFlavorId: 'SPSVRSTAND000056',
         //     productName: 'vCPU 1EA, Memory 1GB, Disk 50GB',
         //     productType: { code: 'MICRO', codeName: 'Micro Server' },
         //     productDescription: 'vCPU 1EA, Memory 1GB, Disk 50GB',

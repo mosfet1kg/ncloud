@@ -4,7 +4,11 @@ export default {
     //         param: ['exclusionProductCode|maxItems:2','productCode|maxItems:20','serverImageProductCode|maxItems:20'],
     // param : ['exclusionProductCode', 'productCode', 'platformTypeCodeList|maxItems:5']
     param: [],required:[],
-    request_alias: [], response_alias: []
+    request_alias: [], response_alias: [
+      {src:"accessControlGroupConfigurationNo", dst:"securityGroupConfigurationNo"},
+      {src:"accessControlGroupName", dst:"securityGroupName"},
+      {src:"accessControlGroupDescription", dst:"securityGroupDescription"}
+    ]
   }
 };
 

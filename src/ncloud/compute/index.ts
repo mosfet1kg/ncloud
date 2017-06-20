@@ -17,7 +17,7 @@ export interface InterfaceCompute
     zone.InterfaceZone,
     loginKey.InterfaceLoginKey,
     serverInstance.InterfaceServerInstance,
-    accessControlGroup.InterfaceAccessControlGroup
+    accessControlGroup.InterfaceSecurityGroup
 { }
 
 export class Compute implements InterfaceCompute {
@@ -31,7 +31,8 @@ export class Compute implements InterfaceCompute {
     this.requestUrl = 'https://api.ncloud.com/server/';
   };
 
-  findImages ( callback: InterfaceCallback ) { product.findImages.bind(this).apply( this, arguments ); }
+  findPublicImages ( callback: InterfaceCallback ) { product.findPublicImages.bind(this).apply( this, arguments ); }
+  findPrivateImages( callback: InterfaceCallback ) { product.findPrivateImages.bind(this).apply( this, arguments ); }
   findFlavors( args:product.InterfaceFindFlavorsInput, callback: InterfaceCallback ) {
     product.findFlavors.bind(this).apply( this, arguments); }
 
@@ -45,8 +46,8 @@ export class Compute implements InterfaceCompute {
     loginKey.createLoginKey.bind(this).apply( this, arguments );
   }
 
-  findAccessControlGroup( callback: InterfaceCallback ){
-    accessControlGroup.findAccessControlGroup.bind(this).apply( this, arguments );
+  findSecurityGroups( callback: InterfaceCallback ){
+    accessControlGroup.findSecurityGroups.bind(this).apply( this, arguments );
   }
 
   findServers( callback:InterfaceCallback ){

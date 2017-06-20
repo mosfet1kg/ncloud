@@ -22,6 +22,6 @@ export class Ncloud implements InterfaceClient {
 
 }
 
-export function createClient( oauthKey: InterfaceOauthKey ) {
+export function createClient( oauthKey: InterfaceOauthKey ): InterfaceClient {
   return new Ncloud( oauthKey );
 }

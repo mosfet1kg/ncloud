@@ -40,7 +40,7 @@ export function findLoginKeys( callback: InterfaceCallback ): void {
     }
   })
   .catch( function(error){
-    callback( error.response.data, null );
+    callback( error, null );
   })
 
 }
@@ -73,8 +73,8 @@ export function createLoginKey( arg: InterfaceCreateLoginKeyInput, callback: Int
     }
   })
     .catch( error => {
-      console.log( error.response.data );
-      callback( error.response.data, null );
+      console.log( error );
+      callback( error, null );
     });
 
 
@@ -97,6 +97,6 @@ export function createLoginKey( arg: InterfaceCreateLoginKeyInput, callback: Int
   //
   // })
   // .catch( function(error){
-  //   callback( error.response.data, null );
+  //   callback( error, null );
   // })
 }

@@ -9,15 +9,16 @@ import * as url from 'url';
 import paramSet from './paramSet';
 
 export interface InterfaceProduct {
-  findImages( callback: InterfaceCallback ): void;
+  findPublicImages( callback: InterfaceCallback ): void;
+  findPrivateImages( callback: InterfaceCallback ): void;
   findFlavors( args: InterfaceFindFlavorsInput, callback: InterfaceCallback ): void;
 }
 
 export interface InterfaceFindFlavorsInput {
-  vmImageCode: string;
+  vmImageId: string;
 }
 
-export function findImages( callback: InterfaceCallback ): void {
+export function findPublicImages( callback: InterfaceCallback ): void {
 
   const self = this;
 
@@ -27,7 +28,7 @@ export function findImages( callback: InterfaceCallback ): void {
   requestAction: 'getServerImageProductList',
   };
 
-  const queryString: string = self.oauth.getQueryString( {}, paramSet['findImages'], requestInfo );
+  const queryString: string = self.oauth.getQueryString( {}, paramSet['findPublicImages'], requestInfo );
 
   axios.get(
     url.resolve( requestInfo.requestUrl, `?${queryString}`)
@@ -37,15 +38,45 @@ export function findImages( callback: InterfaceCallback ): void {
       callback( new Error( response.data.getServerImageProductListResponse.returnMessage), null );
     }else{
       callback( null, alias( response.data.getServerImageProductListResponse.productList[0].product,
-        paramSet[ 'findImages' ].response_alias )
+        paramSet[ 'findPublicImages' ].response_alias )
       );
     }
   })
   .catch( function(error){
-    callback( error.response.data, null );
+    callback( error, null );
   })
+}
+
+export function findPrivateImages( callback: InterfaceCallback ): void {
+
+  const self = this;
+
+  const requestInfo: InterfaceRequestInfo = {
+    requestMethod: 'GET',
+    requestUrl: self.requestUrl,
+    requestAction: 'getMemberServerImageList',
+  };
+
+  const queryString: string = self.oauth.getQueryString( {}, paramSet['findPrivateImages'], requestInfo );
+
+  axios.get(
+    url.resolve( requestInfo.requestUrl, `?${queryString}`)
+  ).then( function(response){
+
+    if( response.data.getMemberServerImageListResponse.returnCode !== 0){
+      callback( new Error(response.data.getMemberServerImageListResponse.returnMessage ), null);
+    } else {
+      callback( null, response.data.getMemberServerImageListResponse.memberServerImageList );
+    }
+
+  })
+    .catch( function(error){
+      callback( error, null );
+    })
 
 }
+
+
 
 export function findFlavors( args: InterfaceFindFlavorsInput, callback: InterfaceCallback ): void {
 
@@ -76,7 +107,7 @@ export function findFlavors( args: InterfaceFindFlavorsInput, callback: Interfac
     }
   })
   .catch( function(error){
-    callback( error.response.data, null );
+    callback( error, null );
   })
 
 }
