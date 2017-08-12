@@ -1,6 +1,6 @@
 {
   "name": "ncloud",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "The NAVER Cloud Platform(https://www.ncloud.com/) Library for Node.js",
   "engineStrict": true,
   "engines": {
@@ -28,7 +28,8 @@
     "pretest": "npm run lint",
     "test": "npm run test-only",
     "test-only": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "deploy": "npm publish"
   },
   "author": "Gyubeom Choi <mosfet1kg@gmail.com>",
   "license": "MIT",
