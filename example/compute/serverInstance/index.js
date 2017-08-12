@@ -12,7 +12,9 @@ var ncloud = require('../../../lib/');
     }else {
       console.log(response);
       // response example =>
-      // [ { serverInstanceNo: 362133,
+      // [ {
+      //   securityGroups: [ [Object] ],
+      //   serverInstanceNo: 362133,
       //   serverName: '/** instance name **/',
       //   serverDescription: '',
       //   cpuCount: 2,

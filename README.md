@@ -17,7 +17,17 @@ $ yarn add ncloud
 
 # Creating Instance
 ```javascript
+var ncloud = require('ncloud');
 var client = ncloud.createClient({
+    oauth_consumer_key:'%YOUR_CONSUMER_KEY%',
+    oauth_consumer_secret:'%YOUR_CONSUMER_SECRET%'
+});
+```
+or
+```javascript
+import * as ncloud from 'ncloud';
+
+const client = ncloud.createClient({
     oauth_consumer_key:'%YOUR_CONSUMER_KEY%',
     oauth_consumer_secret:'%YOUR_CONSUMER_SECRET%'
 });
