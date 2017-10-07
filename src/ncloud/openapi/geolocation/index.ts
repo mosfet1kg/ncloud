@@ -11,14 +11,14 @@ import paramSet from './paramSet';
 import * as url from 'url';
 
 export interface InterfaceGeoLocation {
-  findLocation(req: InterfaceUserGeoLocationInput, callback: InterfaceCallback ): void;
+  findLocation(req, callback ): void;
 }
 
-export interface InterfaceUserGeoLocationInput {
-  ip: string;
-  ext?: string;
-  enc?: string;
-}
+// export interface InterfaceUserGeoLocationInput {
+//   ip: string;
+//   ext?: string;
+//   enc?: string;
+// }
 export class GeoLocation implements InterfaceGeoLocation {
   private oauth: Oauth;
   private requestUrl: string;
@@ -32,7 +32,7 @@ export class GeoLocation implements InterfaceGeoLocation {
     this.requestUrl = 'https://api.ncloud.com/geolocation/';
   }
 
-  public findLocation(args: InterfaceUserGeoLocationInput, callback: InterfaceCallback ): void {
+  public findLocation(args: { ip: string; ext?: string, enc?: string }, callback: InterfaceCallback ): void {
 
     const requestInfo: InterfaceRequestInfo = {
       requestMethod: 'GET',
