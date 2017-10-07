@@ -19,7 +19,6 @@ export interface InterfaceUserGeoLocationInput {
   ext?: string;
   enc?: string;
 }
-
 export class GeoLocation implements InterfaceGeoLocation {
   private oauth: Oauth;
   private requestUrl: string;

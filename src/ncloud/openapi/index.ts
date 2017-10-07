@@ -9,7 +9,6 @@ export interface InterfaceOpenApi {
 }
 
 export class OpenApi implements InterfaceOpenApi {
-
   public geolocation: InterfaceGeoLocation;
 
   constructor ( oauthKey: InterfaceOauthKey  ) {
