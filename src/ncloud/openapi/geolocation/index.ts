@@ -10,15 +10,15 @@ import axios from 'axios';
 import paramSet from './paramSet';
 import * as url from 'url';
 
+export interface InterfaceUserGeoLocationInput {
+  ip: string;
+  ext?: string;
+  enc?: string;
+}
 export interface InterfaceGeoLocation {
-  findLocation(req, callback ): void;
+  findLocation(req: { ip: string, ext?: string, enc?: string }, callback ): void;
 }
 
-// export interface InterfaceUserGeoLocationInput {
-//   ip: string;
-//   ext?: string;
-//   enc?: string;
-// }
 export class GeoLocation implements InterfaceGeoLocation {
   private oauth: Oauth;
   private requestUrl: string;
@@ -32,8 +32,7 @@ export class GeoLocation implements InterfaceGeoLocation {
     this.requestUrl = 'https://api.ncloud.com/geolocation/';
   }
 
-  public findLocation(args: { ip: string; ext?: string, enc?: string }, callback: InterfaceCallback ): void {
-
+  public findLocation(args: InterfaceUserGeoLocationInput, callback: InterfaceCallback ): void {
     const requestInfo: InterfaceRequestInfo = {
       requestMethod: 'GET',
       requestUrl: this.requestUrl,
