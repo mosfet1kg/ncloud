@@ -8,14 +8,13 @@ import axios from 'axios';
 import * as url from 'url';
 import paramSet from './paramSet';
 
+export interface InterfaceFindFlavorsInput {
+  vmImageId: string;
+}
 export interface InterfaceProduct {
   findPublicImages( callback: InterfaceCallback ): void;
   findPrivateImages( callback: InterfaceCallback ): void;
-  findFlavors( args: InterfaceFindFlavorsInput, callback: InterfaceCallback ): void;
-}
-
-export interface InterfaceFindFlavorsInput {
-  vmImageId: string;
+  findFlavors( args: /**InterfaceFindFlavorsInput**/{ vmImageId: string }, callback: InterfaceCallback ): void;
 }
 
 export function findPublicImages( callback: InterfaceCallback ): void {

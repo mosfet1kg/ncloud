@@ -16,7 +16,7 @@ export interface InterfaceUserGeoLocationInput {
   enc?: string;
 }
 export interface InterfaceGeoLocation {
-  findLocation(req: { ip: string, ext?: string, enc?: string }, callback ): void;
+  findLocation(req: /**InterfaceUserGeoLocationInput**/{ ip: string, ext?: string, enc?: string } , callback ): void;
 }
 
 export class GeoLocation implements InterfaceGeoLocation {

@@ -11,10 +11,9 @@ import paramSet from './paramSet';
 export interface InterfaceCreateLoginKeyInput {
   keyName: string;
 }
-
 export interface InterfaceLoginKey {
   findLoginKeys( callback: InterfaceCallback ): void;
-  createLoginKey( arg: InterfaceCreateLoginKeyInput, callback: InterfaceCallback ): void;
+  createLoginKey( arg: /** InterfaceCreateLoginKeyInput **/{ keyName: string }, callback: InterfaceCallback ): void;
 }
 
 export function findLoginKeys( callback: InterfaceCallback ): void {
@@ -46,8 +45,6 @@ export function findLoginKeys( callback: InterfaceCallback ): void {
 }
 
 export function createLoginKey( arg: InterfaceCreateLoginKeyInput, callback: InterfaceCallback ){
-
-
   const requestInfo: InterfaceRequestInfo = {
     requestMethod: 'GET',
     requestUrl: this.requestUrl,
