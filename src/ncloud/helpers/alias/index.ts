@@ -16,7 +16,7 @@ function replace_with_alias_set( args_object, alias_set_object: { src: string, d
 
   alias_set_object.forEach( el=>{
     const idx = indexOf( keys, el.src );
-    keys[ idx ] = el.dst;
+    if( idx >=0 ) keys[ idx ] = el.dst;
   });
 
   return zipObject( keys, values );
