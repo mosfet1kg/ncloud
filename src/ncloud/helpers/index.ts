@@ -1,3 +1,4 @@
 export * from './Oauth';
 export * from './alias';
-export * from './Validator';
+import * as Validator from './Validator';
+export { Validator }

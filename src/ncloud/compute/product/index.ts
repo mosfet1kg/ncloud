@@ -18,7 +18,6 @@ export interface InterfaceProduct {
 }
 
 export function findPublicImages( callback: InterfaceCallback ): void {
-
   const self = this;
 
   const requestInfo: InterfaceRequestInfo = {
@@ -72,13 +71,9 @@ export function findPrivateImages( callback: InterfaceCallback ): void {
     .catch( function(error){
       callback( error, null );
     })
-
 }
 
-
-
 export function findFlavors( args: InterfaceFindFlavorsInput, callback: InterfaceCallback ): void {
-
   const self = this;
   const requestInfo: InterfaceRequestInfo = {
     requestMethod: 'GET',
@@ -106,7 +101,7 @@ export function findFlavors( args: InterfaceFindFlavorsInput, callback: Interfac
     }
   })
   .catch( function(error){
-    callback( error, null );
+    callback( new Error(`Error: returnCode: ${ error.response.data.returnCode}, returnMessage: ${ error.response.data.returnMessage }`), null );
   })
 
 }

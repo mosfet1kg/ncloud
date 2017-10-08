@@ -12,7 +12,6 @@ export interface InterfaceZone {
 }
 
 export function findZones( callback: InterfaceCallback ): void {
-
   const self = this;
 
   const requestInfo: InterfaceRequestInfo = {
@@ -34,7 +33,7 @@ export function findZones( callback: InterfaceCallback ): void {
     }
   })
   .catch( function(error){
-    callback( error, null );
+    callback( new Error(`Error: returnCode: ${ error.response.data.returnCode}, returnMessage: ${ error.response.data.returnMessage }`), null );
   })
 
 }

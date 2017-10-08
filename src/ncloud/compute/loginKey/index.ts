@@ -1,7 +1,6 @@
 import {
   InterfaceRequestInfo,
   InterfaceCallback,
-  // alias,
 } from '../../';
 
 import axios from 'axios';
@@ -51,11 +50,6 @@ export function createLoginKey( arg: InterfaceCreateLoginKeyInput, callback: Int
     requestAction: 'createLoginKey',
   };
 
-  if ( this.validator.invalidParameterChecker( arg, paramSet[ 'createLoginKey' ], callback ) ||
-    this.validator.requiredParamChecker( arg, paramSet[ 'createLoginKey' ], callback  )  ||
-    this.validator.isBeyondLimit( arg, paramSet['createLoginKey'], callback )
-  ) return;
-
   const queryString: string = this.oauth
     .getQueryString( arg, paramSet['createLoginKey'], requestInfo );
 
@@ -70,8 +64,7 @@ export function createLoginKey( arg: InterfaceCreateLoginKeyInput, callback: Int
     }
   })
     .catch( error => {
-      console.log( error );
-      callback( error, null );
+      callback( new Error(`Error: returnCode: ${ error.response.data.returnCode}, returnMessage: ${ error.response.data.returnMessage }`), null );
     });
 
 

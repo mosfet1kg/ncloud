@@ -13,7 +13,6 @@ export interface InterfaceServerInstance {
 }
 
 export function findServers( callback: InterfaceCallback ): void {
-
   const self = this;
 
   const requestInfo: InterfaceRequestInfo = {
@@ -35,7 +34,7 @@ export function findServers( callback: InterfaceCallback ): void {
     }
   })
     .catch( function(error){
-      callback( error, null );
+      callback( new Error(`Error: returnCode: ${ error.response.data.returnCode}, returnMessage: ${ error.response.data.returnMessage }`), null );
     })
 
 }

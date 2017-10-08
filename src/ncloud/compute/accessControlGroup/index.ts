@@ -29,7 +29,6 @@ export function findSecurityGroups(callback: InterfaceCallback ): void {
     url.resolve( requestInfo.requestUrl, `?${queryString}`)
   ).then( function(response){
 
-    console.log( response );
     if( response.data.getAccessControlGroupListResponse.returnCode !== 0){
       callback( new Error( response.data.getAccessControlGroupListResponse.returnMessage ), null );
     }else{
@@ -38,7 +37,7 @@ export function findSecurityGroups(callback: InterfaceCallback ): void {
     }
   })
     .catch( function(error){
-      callback( error, null );
+      callback( new Error(`Error: returnCode: ${ error.response.data.returnCode}, returnMessage: ${ error.response.data.returnMessage }`), null );
     })
 
 }
