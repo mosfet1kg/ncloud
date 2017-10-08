@@ -81,10 +81,6 @@ export function findFlavors( args: InterfaceFindFlavorsInput, callback: Interfac
     requestAction: 'getServerProductList',
   };
 
-  if( this.validator.invalidParameterChecker( args, paramSet[ 'findFlavors' ], callback ) ||
-      this.validator.requiredParamChecker( args, paramSet[ 'findFlavors' ], callback )
-  ) return;
-
   args = alias( args, paramSet[ 'findFlavors' ].request_alias );
   const queryString: string = self.oauth.getQueryString( args, paramSet['findFlavors'], requestInfo );
 
