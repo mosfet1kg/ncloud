@@ -3,6 +3,9 @@ import {
   InterfaceRequestInfo,
   InterfaceCallback,
   Validator,
+  ValidIpOnly,
+  ValidParametersOnly,
+  MustIncludeRequiredParameters,
   Oauth,
 } from '../../';
 
@@ -32,6 +35,9 @@ export class GeoLocation implements InterfaceGeoLocation {
     this.requestUrl = 'https://api.ncloud.com/geolocation/';
   }
 
+  @MustIncludeRequiredParameters(paramSet['findLocation'])
+  @ValidParametersOnly(paramSet['findLocation'])
+  @ValidIpOnly
   public findLocation(args: InterfaceUserGeoLocationInput, callback: InterfaceCallback ): void {
     const requestInfo: InterfaceRequestInfo = {
       requestMethod: 'GET',
@@ -39,9 +45,8 @@ export class GeoLocation implements InterfaceGeoLocation {
       requestAction: 'getLocation',
     };
 
-    if ( this.validator.invalidParameterChecker( args, paramSet[ 'findLocation' ], callback ) ||
-      this.validator.requiredParamChecker( args, paramSet[ 'findLocation' ], callback  )  ||
-      this.validator.isInvalidIP( args.ip, callback )
+    if (
+      this.validator.requiredParamChecker( args, paramSet[ 'findLocation' ], callback  )
     ) return;
 
     const queryString: string = this.oauth
@@ -56,8 +61,8 @@ export class GeoLocation implements InterfaceGeoLocation {
         callback( null, response.data.geoLocation );
       }
     })
-    .catch( error => {
-      callback( error, null );
-    });
+      .catch( error => {
+        callback( new Error(`Error: returnCode: ${ error.response.data.returnCode}, returnMessage: ${ error.response.data.returnMessage }`), null );
+      });
   }
 }

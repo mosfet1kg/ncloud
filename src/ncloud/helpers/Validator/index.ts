@@ -4,15 +4,16 @@ import {
 
 import * as validator from 'validator';
 import * as ip from 'ip';
+import * as validatorService from './service';
 
-export interface InterfaceConstraint {
-  name: string;
-  type: string;
-  restrict: string;
-  maxLength?: number;
-  minLength?: number;
-}
 
+// export interface InterfaceConstraint {
+//   name: string;
+//   type: string;
+//   restrict: string;
+//   maxLength?: number;
+//   minLength?: number;
+// }
 export interface InterfaceValidator {
   invalidParameterChecker( args: object, paramSet: object, callback:InterfaceCallback ): boolean;
   requiredParamChecker( args: object, paramSet: object, callback:InterfaceCallback ): boolean;
@@ -125,3 +126,110 @@ export class Validator implements InterfaceValidator {
       .join(',');
   }
 }
+
+export function ValidIpOnly( target, key, descriptor ) {
+  if( descriptor === undefined ) {
+    descriptor = Object.getOwnPropertyDescriptor( target, key );
+  }
+
+  function isValidIp ( targetIp ) {
+    if( !validator.isIP( targetIp ) ){
+      throw new Error('Error: Invalid IP');
+    }
+
+    if( ip.isPrivate( targetIp) ){
+      throw new Error('Error: Private IP Cannot be used for generating request');
+    }
+  }
+
+  const originalMethod = descriptor.value;
+
+  descriptor.value = function( args: { ip: string }, callback ) {
+    try {
+      isValidIp( args.ip );
+      return originalMethod.apply( this, arguments );
+    } catch( e ) {
+      return callback( e );
+    }
+  };
+
+  return descriptor;
+}
+
+export function ValidParametersOnly( paramSet ) {
+  return function( target, key, descriptor ) {
+    if( descriptor === undefined ) {
+      descriptor = Object.getOwnPropertyDescriptor( target, key );
+    }
+
+    function isValidParam ( args, paramSet ) {
+      const param = paramSet.param;
+
+      const invalidParam = Object.keys( args ).map( function(el){
+        return (<any>param).map( function(el){
+          if( el.indexOf('|') > 0 ){
+            return el.split('|')[0];
+          }else
+            return el;
+        }).includes( el ) === false ? el : null;
+      }).filter( function(el){
+        return el !== null;
+      }).join(',');
+
+      if( invalidParam.length >0 ){
+        throw new Error('Error: Invalid Parameters : ' + invalidParam);
+      }
+    }
+
+    const originalMethod = descriptor.value;
+
+    descriptor.value = function( args, callback ) {
+      try {
+        isValidParam( args, paramSet );
+        return originalMethod.apply( this, arguments );
+      } catch (e) {
+        return callback( e );
+      }
+    }; // end descriptor.value
+
+    return descriptor;
+  }
+}
+
+export function MustIncludeRequiredParameters( paramSet ) {
+  return function( target, key, descriptor ) {
+    if( descriptor === undefined ) {
+      descriptor = Object.getOwnPropertyDescriptor( target, key );
+    }
+
+    function requiredParamChecker ( args, paramSet ) {
+      const param_required_array = paramSet.required || [];
+      const param_array = paramSet.param;
+
+      const not_exist_required_param = validatorService.isRequiredParamExist(args, param_required_array);
+      if( not_exist_required_param.length >0 ) {
+        throw new Error('Error: The following parameters should be defined : ' + not_exist_required_param);
+      }
+
+      const out_bound_parameters = validatorService.isParamOutOfBound( args, param_array );
+      if( out_bound_parameters.length >0 ){
+        throw new Error('Error: The following parameters should be inbound : ' + out_bound_parameters);
+      }
+    }
+
+    const originalMethod = descriptor.value;
+
+    descriptor.value = function( args, callback ) {
+      try {
+        requiredParamChecker( args, paramSet );
+        return originalMethod.apply( this, arguments );
+      } catch (e) {
+        return callback( e );
+      }
+    }; // end descriptor.value
+
+    return descriptor;
+  }
+}
+
+

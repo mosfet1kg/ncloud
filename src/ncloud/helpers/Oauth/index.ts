@@ -1,7 +1,17 @@
 import * as CryptoJS from 'crypto-js';
 
-export class Oauth {
+export interface InterfaceOauthKey {
+  oauth_consumer_key: string;
+  oauth_consumer_secret: string;
+}
 
+export interface InterfaceRequestInfo {
+  requestMethod: string;
+  requestUrl: string;
+  requestAction: string;
+}
+
+export class Oauth {
   private authKey: InterfaceOauthKey;
 
   constructor ( authKey: InterfaceOauthKey ) {
@@ -11,11 +21,11 @@ export class Oauth {
   public getQueryString( args, paramSet, requestInfo: InterfaceRequestInfo ): string {
 
     const paramOrder = paramSet.order;
-    const paramTemp = (<any>Object).assign({}, args);
+    const paramTemp = {...args};
 
     paramTemp.action = requestInfo.requestAction;
     paramTemp.oauth_consumer_key = this.authKey.oauth_consumer_key;
-    paramTemp.oauth_nonce = this.generateNonce(15)();
+    paramTemp.oauth_nonce = Oauth.generateNonce(15)();
     paramTemp.oauth_signature_method = 'HMAC-SHA1';
     paramTemp.oauth_timestamp = Math.floor( Date.now() / 1000 );
     paramTemp.oauth_version = '1.0';
@@ -43,15 +53,15 @@ export class Oauth {
       return prev + curr + '=' + sortedSet[curr] + '&';
     }, '' ).slice(0, -1);
 
-    const baseString = this.getBaseString( requestInfo, queryString );
-    const authSignature = this.getAuthSignature( baseString );
+    const baseString = Oauth.getBaseString( requestInfo, queryString );
+    const authSignature = Oauth.getAuthSignature( baseString, this.authKey );
 
     queryString +=  '&oauth_signature=' + encodeURIComponent( authSignature );
 
     return queryString;
   };
 
-  private generateNonce(length) {
+  static generateNonce(length) {
     let last: number  = null;
     let repeat: number = 0;
 
@@ -74,22 +84,11 @@ export class Oauth {
     };
   };
 
-  private getBaseString ( request: InterfaceRequestInfo,  queryString: string ): string {
+  static getBaseString ( request: InterfaceRequestInfo,  queryString: string ): string {
     return `${request.requestMethod}&${encodeURIComponent( request.requestUrl )}&${encodeURIComponent( queryString )}`;
   }
 
-  private getAuthSignature ( baseString: string ): string {
-    return CryptoJS.HmacSHA1( baseString, this.authKey.oauth_consumer_secret + '&' ).toString(CryptoJS.enc.Base64);
+  static getAuthSignature ( baseString: string, authKey: InterfaceOauthKey ): string {
+    return CryptoJS.HmacSHA1( baseString, authKey.oauth_consumer_secret + '&' ).toString(CryptoJS.enc.Base64);
   }
-}
-
-export interface InterfaceOauthKey {
-  oauth_consumer_key: string;
-  oauth_consumer_secret: string;
-}
-
-export interface InterfaceRequestInfo {
-  requestMethod: string;
-  requestUrl: string;
-  requestAction: string;
 }

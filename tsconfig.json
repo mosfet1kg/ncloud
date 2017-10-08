@@ -13,6 +13,7 @@
     "noUnusedParameters": false,
     "noImplicitThis": false,
     "alwaysStrict": true,
+    "experimentalDecorators": true,
     "outDir":"lib"
 //    "rootDir": "src",
 //    "sourceMap": true
