@@ -86,7 +86,7 @@ client.compute.createPrivateImage({serverInstanceNo:492964}, function (err,respo
     //   originalVmImageId: 'SPSW0LINUX000046',
     //     originalOsInformation: 'CentOS 7.3 (64-bit)',
     //   originalVmImageName: 'centos-7.3-64',
-    //   privateImageStatus: 'creating',
+    //   privateImageStatusName: 'creating',
     //   privateImageStatus: { code: 'INIT', codeName: 'NSI INIT state' },
     //   privateImageOperation: { code: 'CREAT', codeName: 'NSI CREAT OP' },
     //   privateImagePlatformType: { code: 'LNX64', codeName: 'Linux 64 Bit' },
