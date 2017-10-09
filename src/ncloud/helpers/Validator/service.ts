@@ -82,8 +82,7 @@ export function isValidLength( args, paramSet ) {
         && args[ constraint.name ].length <= constraint.maxLength));
 
       if( !result ){
-        throw new Error(`The length of \'${ constraint.name }\' must be greater
-         than ${constraint.minLength} and less than ${ constraint.maxLength}`) ;
+        throw new Error(`The length of \'${ constraint.name }\' must be greater than ${constraint.minLength} and less than ${ constraint.maxLength}`) ;
       } // end if
 
     } // end if

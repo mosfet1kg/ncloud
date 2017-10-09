@@ -69,6 +69,10 @@ export class Compute implements InterfaceCompute {
 
   /** memberServerImage **/
   findPrivateImages( callback: InterfaceCallback ) { memberServerImage.findPrivateImages.bind(this).apply( this, arguments ); }
+
+  @MustIncludeRequiredParameters(getParams('createPrivateImage'))
+  @ValidParametersOnly(getParams('createPrivateImage'))
+  @ValidLengthOnly(getParams('createPrivateImage'))
   createPrivateImage( args, callback: InterfaceCallback ) { memberServerImage.createPrivateImage.bind(this).apply(this, arguments); }
 }
 
