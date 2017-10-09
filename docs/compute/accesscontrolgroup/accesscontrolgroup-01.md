@@ -1,7 +1,8 @@
 # Compute : AccessControlGroup  
 ## `findAccessControlGroup`, action `getAccessControlGroupList` 
 Lists all access control groups that are available to use on your ncloud account.  
-Callback returns `f(err, acgList)` where `acgList` is an `Array`.
+Callback returns `f(err, acgList)` where `acgList` is an `Array`.  
+`acg` stands for `accessControlGroup`.
 
 ### Arguments  
  No Input Arguments
