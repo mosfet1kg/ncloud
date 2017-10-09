@@ -92,3 +92,6 @@ client.openapi.geolocation.findLocation({ ip: '143.248.142.77', ext: 't'}, funct
 ```  
 
 Other functions are being prepared.
+
+# Others 
+`ncloud` supports type definitions. It is readily available in typescript.  
