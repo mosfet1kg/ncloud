@@ -16,6 +16,7 @@ $ yarn add ncloud
 ```
 
 # Creating Instance
+**ES5**
 ```javascript
 var ncloud = require('ncloud');
 var client = ncloud.createClient({
@@ -23,7 +24,7 @@ var client = ncloud.createClient({
     oauth_consumer_secret:'%YOUR_CONSUMER_SECRET%'
 });
 ```
-or
+**ES6 or above**
 ```javascript
 import * as ncloud from 'ncloud';
 
@@ -40,7 +41,7 @@ Refer to the following link
 # Usage Example
 See following descriptions.
 # OpenAPI : Geolocation
-## getLocation, alias `findLocation`
+## `findLocation`, action `getLocation`
 ### Arguments
 | Name | Data Type | Required | Description                | Default |
 |------|-----------|----------|----------------------------|---------|
