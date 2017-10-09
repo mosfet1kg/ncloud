@@ -24,7 +24,7 @@ client.compute.findPrivateImages( function( error, response ){
       //   originalVmImageId: 'SPSW0LINUX000046',
       //   originalOsInformation: 'CentOS 7.3 (64-bit)',
       //   originalServerImageName: 'centos-7.3-64',
-      //   privateImageStatus: 'created',
+      //   privateImageStatusName: 'created',
       //   privateImageStatus: { code: 'CREAT', codeName: 'NSI CREATED state' },
       //   privateImageOperation: { code: 'NULL', codeName: 'NSI NULLOP' },
       //   privateImagePlatformType: { code: 'LNX64', codeName: 'Linux 64 Bit' },
