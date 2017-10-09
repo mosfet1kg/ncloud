@@ -70,7 +70,7 @@ client.compute.findFlavors( { vmImageId: 'SPSW0LINUX000031' }, function( error, 
 ---
 
 ## `findPrivateImages`, action `getMemberServerImageList` 
-Returns the whole list for VM Flavor types which are compatible with a VM Image Type`vmImageId`.  
+Lists all private Images that are available to use on your ncloud account.  
 
 ### Arguments  
  No Input Arguments
