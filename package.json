@@ -30,7 +30,9 @@
     "test-only": "jest --coverage",
     "test:watch": "jest --watch",
     "predeploy": "npm run build",
-    "deploy": "npm publish"
+    "deploy": "npm publish",
+    "gitbookBuild": "cd docs && gitbook build",
+    "gitbookServe": "cd docs && gitbook serve"
   },
   "author": "Gyubeom Choi <mosfet1kg@gmail.com>",
   "license": "MIT",

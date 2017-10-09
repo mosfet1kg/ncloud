@@ -2,7 +2,7 @@
 .git*
 .idea
 .example
-.doc
+.docs
 tsconfig.json
 tsconfig.release.json
 tslint.json
@@ -15,4 +15,4 @@ __tests__
 mytest.js
 **/**/mytest.js
 example
-doc
+docs
