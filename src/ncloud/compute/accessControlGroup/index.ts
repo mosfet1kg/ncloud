@@ -14,16 +14,13 @@ export interface InterfaceSecurityGroup {
 }
 
 export function findAccessControlGroup(callback: InterfaceCallback ): void {
-
-  const self = this;
-
   const requestInfo: InterfaceRequestInfo = {
     requestMethod: 'GET',
-    requestUrl: self.requestUrl,
+    requestUrl: this.requestUrl,
     requestAction: 'getAccessControlGroupList',
   };
 
-  const queryString: string = self.oauth.getQueryString( {}, paramSet['findACG'], requestInfo );
+  const queryString: string = this.oauth.getQueryString( {}, paramSet['findACG'], requestInfo );
 
   axios.get(
     url.resolve( requestInfo.requestUrl, `?${queryString}`)

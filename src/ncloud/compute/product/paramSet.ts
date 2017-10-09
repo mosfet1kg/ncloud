@@ -28,24 +28,5 @@ export default {
       { src:'productDescription', dst: 'vmFlavorDescription' },
     ]
   },
-  findPrivateImages: {
-    order :[ 'action','oauth_consumer_key', 'oauth_nonce', 'oauth_signature_method', 'oauth_timestamp', 'oauth_version','responseFormatType'],
-    // param: ['exclusionProductCode|maxItems:2','productCode|maxItems:20','serverImageProductCode|maxItems:20'],
-    // param: ['exclusionProductCode','productCode','serverImageProductCode'],
-    param: [],required:[],
-    request_alias: [], response_alias: [
-      { src: 'memberServerImageNo', dst: 'privateImageNo'},
-      { src: 'memberServerImageName', dst: 'privateImageName'},
-      { src: 'memberServerImageDescription', dst: 'privateImageDescription'},
-      { src: 'originalServerProductCode', dst: 'originalVmFlavorId'},
-      { src: 'originalServerImageProductCode', dst: 'originalVmImageId'},
-      { src: 'memberServerImageStatusName', dst: 'privateImageStatusName'},
-      { src: 'memberServerImageStatus', dst: 'privateImageStatus'},
-      { src: 'memberServerImageOperation', dst: 'privateImageOperation'},
-      { src: 'memberServerImagePlatformType', dst: 'privateImagePlatformType'},
-      { src: 'memberServerImageBlockStorageTotalRows', dst: 'privateImageBlockStorageTotalRows'},
-      { src: 'memberServerImageBlockStorageTotalSize', dst: 'privateImageBlockStorageTotalSize'},
-    ]
-  }
 };
 

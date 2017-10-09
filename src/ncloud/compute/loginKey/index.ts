@@ -8,25 +8,19 @@ import axios from 'axios';
 import * as url from 'url';
 import paramSet from './paramSet';
 
-export interface InterfaceCreateLoginKeyInput {
-  keyName: string;
-}
 export interface InterfaceLoginKey {
   findLoginKeys( callback: InterfaceCallback ): void;
-  createLoginKey( arg: /** InterfaceCreateLoginKeyInput **/{ keyName: string }, callback: InterfaceCallback ): void;
+  createLoginKey( arg: { keyName: string }, callback: InterfaceCallback ): void;
 }
 
 export function findLoginKeys( callback: InterfaceCallback ): void {
-
-  const self = this;
-
   const requestInfo: InterfaceRequestInfo = {
     requestMethod: 'GET',
-    requestUrl: self.requestUrl,
+    requestUrl: this.requestUrl,
     requestAction: 'getLoginKeyList',
   };
 
-  const queryString: string = self.oauth.getQueryString( {}, paramSet['findLoginKeys'], requestInfo );
+  const queryString: string = this.oauth.getQueryString( {}, paramSet['findLoginKeys'], requestInfo );
 
   axios.get(
     url.resolve( requestInfo.requestUrl, `?${queryString}`)
@@ -42,7 +36,7 @@ export function findLoginKeys( callback: InterfaceCallback ): void {
 
 }
 
-export function createLoginKey( arg: InterfaceCreateLoginKeyInput, callback: InterfaceCallback ){
+export function createLoginKey( arg, callback: InterfaceCallback ){
   const requestInfo: InterfaceRequestInfo = {
     requestMethod: 'GET',
     requestUrl: this.requestUrl,
@@ -64,26 +58,4 @@ export function createLoginKey( arg: InterfaceCreateLoginKeyInput, callback: Int
   })
     .catch( err=>errorHandling(err, callback));
 
-
-
-  // const requestInfo: InterfaceRequestInfo = {
-  //   requestMethod: 'GET',
-  //   requestUrl: self.requestUrl,
-  //   requestAction: 'createLoginKey',
-  // };
-
-
-
-  // const queryString: string = self.oauth.getQueryString( {}, paramSet['createLoginKey'], requestInfo );
-  //
-  // axios.get(
-  //   url.resolve( requestInfo.requestUrl, `?${queryString}` )
-  // ).then( function(response){
-  //
-  //   console.log( response );
-  //
-  // })
-  // .catch( function(error){
-  //   callback( error, null );
-  // })
 }

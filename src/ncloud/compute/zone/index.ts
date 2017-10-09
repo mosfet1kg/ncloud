@@ -13,15 +13,13 @@ export interface InterfaceZone {
 }
 
 export function findZones( callback: InterfaceCallback ): void {
-  const self = this;
-
   const requestInfo: InterfaceRequestInfo = {
   requestMethod: 'GET',
-  requestUrl: self.requestUrl,
+  requestUrl: this.requestUrl,
   requestAction: 'getZoneList',
   };
 
-  const queryString: string = self.oauth.getQueryString( {}, paramSet['findZones'], requestInfo );
+  const queryString: string = this.oauth.getQueryString( {}, paramSet['findZones'], requestInfo );
 
   axios.get(
     url.resolve( requestInfo.requestUrl, `?${queryString}`)

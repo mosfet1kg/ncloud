@@ -10,6 +10,7 @@ import * as zone    from './zone';
 import * as loginKey from './loginKey';
 import * as serverInstance from './serverInstance';
 import * as accessControlGroup from './accessControlGroup';
+import * as memberServerImage from './memberServerImage';
 
 const { ValidParametersOnly, MustIncludeRequiredParameters, ValidLengthOnly } = Validator;
 
@@ -19,7 +20,8 @@ export interface InterfaceCompute
     zone.InterfaceZone,
     loginKey.InterfaceLoginKey,
     serverInstance.InterfaceServerInstance,
-    accessControlGroup.InterfaceSecurityGroup
+    accessControlGroup.InterfaceSecurityGroup,
+    memberServerImage.InterfaceMemberServerImage
 { }
 
 export class Compute implements InterfaceCompute {
@@ -31,17 +33,19 @@ export class Compute implements InterfaceCompute {
     this.requestUrl = 'https://api.ncloud.com/server/';
   };
 
+  /** product **/
   findPublicImages ( callback: InterfaceCallback ) { product.findPublicImages.bind(this).apply( this, arguments ); }
-  findPrivateImages( callback: InterfaceCallback ) { product.findPrivateImages.bind(this).apply( this, arguments ); }
 
   @MustIncludeRequiredParameters(getParams('findFlavors'))
   @ValidParametersOnly(getParams('findFlavors'))
-  findFlavors( args:product.InterfaceFindFlavorsInput, callback: InterfaceCallback ) {
+  findFlavors( args, callback: InterfaceCallback ) {
     product.findFlavors.bind(this).apply( this, arguments); }
 
+  /** zone **/
   findZones( callback: InterfaceCallback ){
     zone.findZones.bind(this).apply( this, arguments ); }
 
+  /** loginKey **/
   findLoginKeys( callback: InterfaceCallback ){
     loginKey.findLoginKeys.bind(this).apply( this, arguments );
   }
@@ -49,17 +53,23 @@ export class Compute implements InterfaceCompute {
   @MustIncludeRequiredParameters(getParams('createLoginKey'))
   @ValidParametersOnly(getParams('createLoginKey'))
   @ValidLengthOnly(getParams('createLoginKey'))
-  createLoginKey( arg: loginKey.InterfaceCreateLoginKeyInput, callback: InterfaceCallback ){
+  createLoginKey( arg, callback: InterfaceCallback ){
     loginKey.createLoginKey.bind(this).apply( this, arguments );
   }
 
+  /** serverInstance **/
+  findServers( callback:InterfaceCallback ){
+    serverInstance.findServers.bind(this).apply( this, arguments );
+  }
+
+  /** accessControlGroup **/
   findAccessControlGroup( callback: InterfaceCallback ){
     accessControlGroup.findAccessControlGroup.bind(this).apply( this, arguments );
   }
 
-  findServers( callback:InterfaceCallback ){
-    serverInstance.findServers.bind(this).apply( this, arguments );
-  }
+  /** memberServerImage **/
+  findPrivateImages( callback: InterfaceCallback ) { memberServerImage.findPrivateImages.bind(this).apply( this, arguments ); }
+  createPrivateImage( args, callback: InterfaceCallback ) { memberServerImage.createPrivateImage.bind(this).apply(this, arguments); }
 }
 
 function getParams( fnKey ) {

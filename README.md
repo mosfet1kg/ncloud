@@ -36,13 +36,15 @@ const client = ncloud.createClient({
 
 # Documentation  
 Refer to the following link  
-[npm Ncloud Documentation Link](https://mosfet1kg.github.io/ncloud/docs/)
+[Npm Ncloud Documentation Link](https://mosfet1kg.github.io/ncloud/docs/)
 
 
 # Release Note
-
+v0.1.11
+  - Add `createPrivateImage` method(action `createMemberServerImage`) 
+  
 v0.1.10
- - Add `findPrivateImages` Method(action `getMemberServerImageList`) 
+  - Add `findPrivateImages` method(action `getMemberServerImageList`) 
 
 
 # Usage Example

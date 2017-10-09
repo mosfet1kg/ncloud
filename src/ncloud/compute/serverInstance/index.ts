@@ -14,15 +14,13 @@ export interface InterfaceServerInstance {
 }
 
 export function findServers( callback: InterfaceCallback ): void {
-  const self = this;
-
   const requestInfo: InterfaceRequestInfo = {
     requestMethod: 'GET',
-    requestUrl: self.requestUrl,
+    requestUrl: this.requestUrl,
     requestAction: 'getServerInstanceList',
   };
 
-  const queryString: string = self.oauth.getQueryString( {}, paramSet['findServers'], requestInfo );
+  const queryString: string = this.oauth.getQueryString( {}, paramSet['findServers'], requestInfo );
 
   axios.get(
     url.resolve( requestInfo.requestUrl, `?${queryString}`)

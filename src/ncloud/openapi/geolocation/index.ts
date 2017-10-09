@@ -12,13 +12,8 @@ import * as url from 'url';
 
 const { ValidIpOnly, ValidParametersOnly, MustIncludeRequiredParameters } = Validator;
 
-export interface InterfaceUserGeoLocationInput {
-  ip: string;
-  ext?: string;
-  enc?: string;
-}
 export interface InterfaceGeoLocation {
-  findLocation(req: /**InterfaceUserGeoLocationInput**/{ ip: string, ext?: string, enc?: string } , callback ): void;
+  findLocation(req: { ip: string, ext?: string, enc?: string } , callback ): void;
 }
 
 export class GeoLocation implements InterfaceGeoLocation {
@@ -35,7 +30,7 @@ export class GeoLocation implements InterfaceGeoLocation {
   @MustIncludeRequiredParameters(paramSet['findLocation'])
   @ValidParametersOnly(paramSet['findLocation'])
   @ValidIpOnly
-  public findLocation(args: InterfaceUserGeoLocationInput, callback: InterfaceCallback ): void {
+  public findLocation(args, callback: InterfaceCallback ): void {
     const requestInfo: InterfaceRequestInfo = {
       requestMethod: 'GET',
       requestUrl: this.requestUrl,
