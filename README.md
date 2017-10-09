@@ -38,6 +38,13 @@ const client = ncloud.createClient({
 Refer to the following link  
 [npm Ncloud Documentation Link](https://mosfet1kg.github.io/ncloud/docs/)
 
+
+# Release Note
+
+v0.1.10
+ - Add `findPrivateImages` Method(action `getMemberServerImageList`) 
+
+
 # Usage Example
 See following descriptions.
 # OpenAPI : Geolocation

@@ -31,6 +31,7 @@ client.compute.findPublicImages( function( error, response ){
 });
 ```
 
+---
 
 ## `findFlavors`, action `getServerProductList` 
 Returns the whole list for VM Flavor types which are compatible with a VM Image Type`vmImageId`.  
@@ -62,6 +63,64 @@ client.compute.findFlavors( { vmImageId: 'SPSW0LINUX000031' }, function( error, 
         //     addBlockStroageSize: 0 },
         //              /** more items**/
         // }]
+    }
+});
+```
+
+---
+
+## `findPrivateImages`, action `getMemberServerImageList` 
+Returns the whole list for VM Flavor types which are compatible with a VM Image Type`vmImageId`.  
+
+### Arguments  
+ No Input Arguments
+ 
+### Examples  
+```javascript
+client.compute.findPrivateImages( function( error, response ){
+    if( error ){
+      console.log( error );
+    }else {
+      console.log( response );
+      // [ 
+      // { privateImageNo: /**privateImageNo**/,
+      //   privateImageName: 'ext-test-image',
+      //   privateImageDescription: 'Auto Scailing Test용',
+      //   originalServerInstanceNo: 492964,
+      //   originalVmFlavorId: 'SPSVRSSD00000003',
+      //   originalServerName: 'ext-test',
+      //   originalBaseBlockStorageDiskType: { code: 'NET', codeName: 'Network Storage' },
+      //   originalVmImageId: 'SPSW0LINUX000046',
+      //   originalOsInformation: 'CentOS 7.3 (64-bit)',
+      //   originalServerImageName: 'centos-7.3-64',
+      //   privateImageStatusName: 'created',
+      //   privateImageStatus: { code: 'CREAT', codeName: 'NSI CREATED state' },
+      //   privateImageOperation: { code: 'NULL', codeName: 'NSI NULLOP' },
+      //   privateImagePlatformType: { code: 'LNX64', codeName: 'Linux 64 Bit' },
+      //   createDate: '2017-09-29T11:39:17+0900',
+      //   region: { regionNo: 1, regionCode: 'KR', regionName: 'Korea' },
+      //   zone: { zoneNo: 2, zoneName: 'KR-1', zoneDescription: '가산 NANG zone' },
+      //   privateImageBlockStorageTotalRows: 1,
+      //   privateImageBlockStorageTotalSize: 53687091200 },
+      // { privateImageNo: /**privateImageNo**/,
+      //   privateImageName: 'myTest',
+      //   privateImageDescription: 'myDesc',
+      //   originalServerInstanceNo: 492964,
+      //   originalVmFlavorId: 'SPSVRSSD00000003',
+      //   originalServerName: 'ext-test',
+      //   originalBaseBlockStorageDiskType: { code: 'NET', codeName: 'Network Storage' },
+      //   originalVmImageId: 'SPSW0LINUX000046',
+      //   originalOsInformation: 'CentOS 7.3 (64-bit)',
+      //   originalServerImageName: 'centos-7.3-64',
+      //   privateImageStatusName: 'created',
+      //   privateImageStatus: { code: 'CREAT', codeName: 'NSI CREATED state' },
+      //   privateImageOperation: { code: 'NULL', codeName: 'NSI NULLOP' },
+      //   privateImagePlatformType: { code: 'LNX64', codeName: 'Linux 64 Bit' },
+      //   createDate: '2017-10-09T16:34:04+0900',
+      //   region: { regionNo: 1, regionCode: 'KR', regionName: 'Korea' },
+      //   zone: { zoneNo: 2, zoneName: 'KR-1', zoneDescription: '가산 NANG zone' },
+      //   privateImageBlockStorageTotalRows: 1,
+      //   privateImageBlockStorageTotalSize: 53687091200 } ]
     }
 });
 ```

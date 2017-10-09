@@ -7,6 +7,7 @@ import {
 
 import axios from 'axios';
 import * as url from 'url';
+import { isArray } from 'lodash';
 import paramSet from './paramSet';
 
 export interface InterfaceFindFlavorsInput {
@@ -63,7 +64,14 @@ export function findPrivateImages( callback: InterfaceCallback ): void {
     if( response.data.getMemberServerImageListResponse.returnCode !== 0){
       callback( new Error(response.data.getMemberServerImageListResponse.returnMessage ), null);
     } else {
-      callback( null, response.data.getMemberServerImageListResponse.memberServerImageList );
+      let { memberServerImage: privateImageList=[] } = response.data.getMemberServerImageListResponse.memberServerImageList[0];
+      if ( !isArray( privateImageList )  ) {
+        privateImageList = [ privateImageList ];
+      }
+
+      privateImageList = alias( privateImageList, paramSet['findPrivateImages'].response_alias );
+
+      callback( null, privateImageList );
     }
 
   })
