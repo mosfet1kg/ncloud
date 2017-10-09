@@ -38,7 +38,7 @@ Returns the whole list for VM Flavor types which are compatible with a VM Image 
 
 ### Arguments  
 
-| Input parameter   | type       | Required    | description |
+| Input parameter   | Type       | Required    | Description |
 |-------------------|------------|-------------|-------------|
 | `vmImageId` | `string`   | **required**|  The VM Image Type Id is used for searching the whole compatible list of VM Flavor Type. Flavors are templates used to define VM configurations such as the the number of cores, storage capacity and etc. `vmImageId` can be obtained from `findPublicImages`|
 

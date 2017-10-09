@@ -63,7 +63,7 @@ Creates an Image based on a server.
 
 ### Arguments  
 
-| Input parameter    | type       | Required     | description |
+| Input parameter    | Type       | Required     | Description |
 |--------------------|------------|--------------|-------------|
 | `serverInstanceNo` | `string`   | **required** | Unique Id of an operating server that can be got from `findServers` method(action `getServerInstanceList`).   |             
 | `privateImageName` | `string`   | optional     | name for the resulting image. |  
@@ -71,7 +71,7 @@ Creates an Image based on a server.
  
 ### Examples  
 ```javascript
-client.compute.createPrivateImage({serverInstanceNo:492964}, function (err,response ) {
+client.compute.createPrivateImage({serverInstanceNo:492964}, function ( err,response ) {
     if ( err ) {
       return console.log( err.message );
     }
@@ -98,7 +98,7 @@ client.compute.createPrivateImage({serverInstanceNo:492964}, function (err,respo
 })
 ```
 ```javascript
-client.compute.createPrivateImage({serverInstanceNo:492964, privateImageName:"helloWorld", privateImageDesc: "myFirstPrivateImage"}, function (err,response ) {
+client.compute.createPrivateImage({serverInstanceNo:492964, privateImageName:"helloWorld", privateImageDesc: "myFirstPrivateImage"}, function ( err,response ) {
     if ( err ) {
       return console.log( err.message );
     }

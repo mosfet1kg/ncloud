@@ -4,7 +4,7 @@
 See following descriptions.
 
 ### Arguments
-| Name | Data Type | Required | Description                | Default |
+| Name | Type | Required | Description                | Default |
 |------|-----------|----------|----------------------------|---------|
 | ip   | `string`  | <b>required</b> | An IP to find the its location |         |
 | enc  | `string`  | optional | Encoding Method (either `utf8` or `euckr`) | `utf8`  |
