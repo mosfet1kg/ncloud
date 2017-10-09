@@ -1,6 +1,6 @@
 # Compute : LoginKey  
 ## `findLoginKeys`, action `getLoginKeyList` 
-Get all of login keys you have enrolled.
+Get all of login keys you have registered.
 
 ### Arguments  
  No Input Arguments
