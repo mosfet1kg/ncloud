@@ -1,7 +1,8 @@
 # OpenAPI : Geolocation
-## Usage
-See following descriptions.
+
 ## `findLocation`, action `getLocation` 
+See following descriptions.
+
 ### Arguments
 | Name | Data Type | Required | Description                | Default |
 |------|-----------|----------|----------------------------|---------|
