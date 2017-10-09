@@ -2,6 +2,7 @@ import {
   InterfaceRequestInfo,
   InterfaceCallback,
   alias,
+  errorHandling
 } from '../../';
 
 import axios from 'axios';
@@ -40,9 +41,7 @@ export function findPublicImages( callback: InterfaceCallback ): void {
       );
     }
   })
-  .catch( function(error){
-    callback( error, null );
-  })
+    .catch( err=>errorHandling(err, callback));
 }
 
 export function findPrivateImages( callback: InterfaceCallback ): void {
@@ -68,9 +67,7 @@ export function findPrivateImages( callback: InterfaceCallback ): void {
     }
 
   })
-    .catch( function(error){
-      callback( error, null );
-    })
+    .catch( err=>errorHandling(err, callback));
 }
 
 export function findFlavors( args: InterfaceFindFlavorsInput, callback: InterfaceCallback ): void {
@@ -96,8 +93,6 @@ export function findFlavors( args: InterfaceFindFlavorsInput, callback: Interfac
       );
     }
   })
-  .catch( function(error){
-    callback( new Error(`Error: returnCode: ${ error.response.data.returnCode}, returnMessage: ${ error.response.data.returnMessage }`), null );
-  })
+    .catch( err=>errorHandling(err, callback));
 
 }

@@ -2,7 +2,7 @@ import {
   alias,
   InterfaceRequestInfo,
   InterfaceCallback,
-  // alias,
+  errorHandling
 } from '../../';
 
 import axios from 'axios';
@@ -10,10 +10,10 @@ import * as url from 'url';
 import paramSet from './paramSet';
 
 export interface InterfaceSecurityGroup {
-  findSecurityGroups(callback: InterfaceCallback ): void;
+  findAccessControlGroup(callback: InterfaceCallback ): void;
 }
 
-export function findSecurityGroups(callback: InterfaceCallback ): void {
+export function findAccessControlGroup(callback: InterfaceCallback ): void {
 
   const self = this;
 
@@ -36,8 +36,5 @@ export function findSecurityGroups(callback: InterfaceCallback ): void {
       paramSet[ 'findACG'].response_alias ) );
     }
   })
-    .catch( function(error){
-      callback( new Error(`Error: returnCode: ${ error.response.data.returnCode}, returnMessage: ${ error.response.data.returnMessage }`), null );
-    })
-
+    .catch( err=>errorHandling(err, callback));
 }

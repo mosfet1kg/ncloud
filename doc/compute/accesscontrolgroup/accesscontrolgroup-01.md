@@ -1,12 +1,14 @@
-var ncloud = require('../../../lib/');
+# Compute : AccessControlGroup  
+## `findAccessControlGroup`, action `getAccessControlGroupList` 
+Lists all access control groups that are available to use on your ncloud account.  
+Callback returns `f(err, acgList)` where `acgList` is an `Array`.
 
-(function(){
-    var client = ncloud.createClient({
-        oauth_consumer_key:'%YOUR_CONSUMER_KEY%',
-        oauth_consumer_secret:'%YOUR_CONSUMER_SECRET%'
-    });
-
-  client.compute.findSecurityGroups( function( error, response ){
+### Arguments  
+ No Input Arguments
+ 
+### Examples  
+```javascript
+client.compute.findAccessControlGroup( function( error, response ){
     if( error ){
       console.log( error );
     }else {
@@ -23,6 +25,5 @@ var ncloud = require('../../../lib/');
       //     isDefault: true,
       //     createDate: '2017-04-14T10:13:10+0900' } ]
     }
-  });
-
-})();
+});
+```

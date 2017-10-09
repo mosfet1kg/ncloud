@@ -2,6 +2,7 @@ import {
   InterfaceRequestInfo,
   InterfaceCallback,
   alias,
+  errorHandling
 } from '../../';
 
 import axios from 'axios';
@@ -33,10 +34,7 @@ export function findServers( callback: InterfaceCallback ): void {
       callback( null, alias( response.data.getServerInstanceListResponse.serverInstanceList[0].serverInstance, paramSet['findServers'].response_alias) );
     }
   })
-    .catch( function(error){
-      callback( new Error(`Error: returnCode: ${ error.response.data.returnCode}, returnMessage: ${ error.response.data.returnMessage }`), null );
-    })
-
+    .catch( err=>errorHandling(err, callback));
 }
 
 export interface InterfaceCreateServerInput {

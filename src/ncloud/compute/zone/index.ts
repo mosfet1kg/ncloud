@@ -1,6 +1,7 @@
 import {
   InterfaceRequestInfo,
   InterfaceCallback,
+  errorHandling
 } from '../../';
 
 import axios from 'axios';
@@ -32,8 +33,6 @@ export function findZones( callback: InterfaceCallback ): void {
       callback( null, response.data.getZoneListResponse.zoneList );
     }
   })
-  .catch( function(error){
-    callback( new Error(`Error: returnCode: ${ error.response.data.returnCode}, returnMessage: ${ error.response.data.returnMessage }`), null );
-  })
+    .catch( err=>errorHandling(err, callback));
 
 }

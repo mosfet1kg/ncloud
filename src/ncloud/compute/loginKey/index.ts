@@ -1,6 +1,7 @@
 import {
   InterfaceRequestInfo,
   InterfaceCallback,
+  errorHandling
 } from '../../';
 
 import axios from 'axios';
@@ -37,9 +38,7 @@ export function findLoginKeys( callback: InterfaceCallback ): void {
       callback( null, response.data.getLoginKeyListResponse.loginKeyList );
     }
   })
-  .catch( function(error){
-    callback( error, null );
-  })
+    .catch( err=>errorHandling(err, callback));
 
 }
 
@@ -63,9 +62,7 @@ export function createLoginKey( arg: InterfaceCreateLoginKeyInput, callback: Int
       callback( null , { privateKey: response.data.createLoginKeyResponse.privateKey } );
     }
   })
-    .catch( error => {
-      callback( new Error(`Error: returnCode: ${ error.response.data.returnCode}, returnMessage: ${ error.response.data.returnMessage }`), null );
-    });
+    .catch( err=>errorHandling(err, callback));
 
 
 

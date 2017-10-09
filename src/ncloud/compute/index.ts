@@ -53,8 +53,8 @@ export class Compute implements InterfaceCompute {
     loginKey.createLoginKey.bind(this).apply( this, arguments );
   }
 
-  findSecurityGroups( callback: InterfaceCallback ){
-    accessControlGroup.findSecurityGroups.bind(this).apply( this, arguments );
+  findAccessControlGroup( callback: InterfaceCallback ){
+    accessControlGroup.findAccessControlGroup.bind(this).apply( this, arguments );
   }
 
   findServers( callback:InterfaceCallback ){

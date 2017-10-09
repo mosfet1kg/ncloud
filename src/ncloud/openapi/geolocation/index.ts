@@ -4,6 +4,7 @@ import {
   InterfaceCallback,
   Validator,
   Oauth,
+  errorHandling
 } from '../../';
 import axios from 'axios';
 import paramSet from './paramSet';
@@ -53,8 +54,6 @@ export class GeoLocation implements InterfaceGeoLocation {
         callback( null, response.data.geoLocation );
       }
     })
-      .catch( error => {
-        callback( new Error(`Error: returnCode: ${ error.response.data.returnCode}, returnMessage: ${ error.response.data.returnMessage }`), null );
-      });
+      .catch( err=>errorHandling(err, callback));
   }
 }
