@@ -32,7 +32,7 @@
     "test:watch": "jest --watch",
     "predeploy": "npm run build",
     "deploy": "npm publish",
-    "gitbookBuild": "cd docs && gitbook build",
+    "gitbookBuild": "cd docs && rimraf docs && gitbook build && mv ./_book ./docs",
     "gitbookServe": "cd docs && gitbook serve"
   },
   "author": "Gyubeom Choi <mosfet1kg@gmail.com>",
