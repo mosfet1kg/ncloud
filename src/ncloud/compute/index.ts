@@ -68,6 +68,12 @@ export class Compute implements InterfaceCompute {
     serverInstance.findServers.bind(this).apply( this, arguments );
   }
 
+  @ValidParametersOnly(getParams(__dirname))
+  @ValidConstraintsOnly(getParams(__dirname))
+  createServer( args, callback: InterfaceCallback ) {
+    serverInstance.createServer.bind(this).apply( this, arguments );
+  }
+
   /** accessControlGroup **/
   findAccessControlGroup( callback: InterfaceCallback ){
     accessControlGroup.findAccessControlGroup.bind(this).apply( this, arguments );

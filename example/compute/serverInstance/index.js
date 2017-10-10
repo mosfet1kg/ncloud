@@ -26,4 +26,22 @@ var ncloud = require('../../../lib/');
     }
   });
 
+  client.compute.createServer({
+    vmImageId: 'SPSW0LINUX000043',
+    vmFlavorId: 'SPSVRSSD00000010',
+    // privateImageNo : 3762
+    serverName: 'helloworld11',
+    serverDesc: "test",
+    loginKeyName : 'test005',
+    feeSystemTypeCode: 'MTRAT',  // FXSUM
+    zoneNo: 2,
+    accessControlGroupConfigurationNoList: [4656,5260,5277,22026,22656],
+    userData: '#!/bin/bash \n echo hello world'
+  }, function(err, res) {
+    if( err ) {
+      return console.log( err.message );
+    }
+
+    console.log( res );
+  })
 })();

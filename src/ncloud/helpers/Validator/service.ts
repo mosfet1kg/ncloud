@@ -1,6 +1,6 @@
 import * as validator from 'validator';
 import * as ip from 'ip';
-import { isUndefined } from 'lodash';
+import { isUndefined, indexOf } from 'lodash';
 
 export function isRequiredParamExist(args_object, param_required_array){
   return param_required_array.reduce( function( prev, curr){
@@ -78,6 +78,10 @@ export function isValidConstraints( args, paramSet ) {
   const constraints = paramSet.constraint;
 
   constraints.forEach( constraint=>{
+    if ( !isUndefined(constraint.required) && constraint.required === false && isUndefined( args[ constraint.name ]) ) {
+      return;
+    }
+
     if( constraint.type === 'string' && constraint.restrict === 'length' ){
       const testResultMinLength = isUndefined(constraint.minLength) ? true : (constraint.minLength <= args[ constraint.name ].length);
       const testResultMaxLength = isUndefined( constraint.maxLength) ? true : (constraint.maxLength >= args[ constraint.name ].length);
@@ -85,7 +89,7 @@ export function isValidConstraints( args, paramSet ) {
       if( !( testResultMinLength && testResultMaxLength ) ){
         throw new Error(
           [
-            `The length of \'${ constraint.name }\' must be `,
+            `Error: The length of \'${ constraint.name }\' must be `,
             [ isUndefined(constraint.minLength)? '' : `greater than or equals to ${ constraint.minLength }`,
               isUndefined(constraint.maxLength)? '' : `less than or equals to ${ constraint.maxLength }`
             ].filter(el=>el.length>0).join(" and ")
@@ -100,11 +104,21 @@ export function isValidConstraints( args, paramSet ) {
       if( !( testResultMaxItems && testResultMinItems ) ) {
         throw new Error(
           [ `The length of \'${ constraint.name }\' must be `,
-            [ `${ isUndefined(constraint.minItems)? "" : `greater than or equals to ${ constraint.minItems } `}`,
-              `${ isUndefined(constraint.maxItems)? "" : `less than or equals to ${ constraint.maxItems } `}`
+            [ `${ isUndefined(constraint.minItems)? "" : `greater than or equals to ${ constraint.minItems }`}`,
+              `${ isUndefined(constraint.maxItems)? "" : `less than or equals to ${ constraint.maxItems }`}`
             ].filter(el=>el.length>0).join(" and ")
           ].join("")
         )
+      }
+    } else if ( constraint.type === 'array' && constraint.restrict === 'onlyOneExist' ) {
+      const keys = Object.keys( args );
+      const num = constraint.names.reduce((prev, name)=>{
+        if ( indexOf( keys, name ) >=0 ) { prev++ }
+        return prev;
+      }, 0);
+
+      if ( num === 0 || num > 1 ) {
+        throw new Error(`Error: There must be only one of ${ constraint.names.join(', ')} `);
       }
 
     }// end if

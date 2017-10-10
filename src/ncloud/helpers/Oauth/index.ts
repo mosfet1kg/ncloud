@@ -29,11 +29,7 @@ export class Oauth {
     paramTemp.oauth_signature_method = 'HMAC-SHA1';
     paramTemp.oauth_timestamp = Math.floor( Date.now() / 1000 );
     paramTemp.oauth_version = '1.0';
-
-    // param_set['platformTypeCodeList.1']="LNX64";
     paramTemp.responseFormatType = 'json';
-
-    // param_set["serverImageProductCode"] = "SPSW0LINUX000031";
 
     const sortedSet: object = paramOrder.reduce( ( prev, key ) => {
       if ( (<any>Object).keys( paramTemp ).includes( key ) ) {
