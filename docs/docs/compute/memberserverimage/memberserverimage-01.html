@@ -423,6 +423,79 @@
     <span class="hljs-comment">//     privateImageBlockStorageTotalSize: 0 }</span>
 })
 </code></pre>
+<hr>
+<h2 id="destroyprivateimages-action-deletememberserverimages"><code>destroyPrivateImages</code>, action <code>deleteMemberServerImages</code></h2>
+<p>Destroys the specified image and returns a confirmation.</p>
+<h3 id="arguments">Arguments</h3>
+<table>
+<thead>
+<tr>
+<th>Input parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>privateImageNoList</code></td>
+<td><code>string[]</code></td>
+<td><strong>required</strong></td>
+<td>Unique Id of a private image that can be got from <code>findPrivateImages</code> method(action <code>getMemberServerImageList</code>).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="examples">Examples</h3>
+<pre><code class="lang-javascript">client.compute.destroyPrivateImages({ privateImageNoList: [ <span class="hljs-number">3799</span>, <span class="hljs-number">3800</span> ]}, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, res</span>) </span>{
+    <span class="hljs-keyword">if</span> ( err ) {
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log( err.message );
+    }
+
+    <span class="hljs-built_in">console</span>.log( res );
+    <span class="hljs-comment">// expected Result =&gt;</span>
+    <span class="hljs-comment">// [ {</span>
+    <span class="hljs-comment">//     privateImageNo: 3800,</span>
+    <span class="hljs-comment">//     privateImageName: &apos;test3&apos;,</span>
+    <span class="hljs-comment">//     privateImageDescription: &apos;&apos;,</span>
+    <span class="hljs-comment">//     originalServerInstanceNo: 491049,</span>
+    <span class="hljs-comment">//     originalVmFlavorId: &apos;SPSVRSSD00000003&apos;,</span>
+    <span class="hljs-comment">//     originalServerName: &apos;test-ten&apos;,</span>
+    <span class="hljs-comment">//     originalBaseBlockStorageDiskType: { code: &apos;NET&apos;, codeName: &apos;Network Storage&apos; },</span>
+    <span class="hljs-comment">//     originalVmImageId: &apos;SPSW0LINUX000065&apos;,</span>
+    <span class="hljs-comment">//     originalOsInformation: &apos;Ubuntu Server 16.04 with Tensorflow (64-bit)&apos;,</span>
+    <span class="hljs-comment">//     originalVmImageName: &apos;tensorflow-ubuntu-16.04-64-server&apos;,</span>
+    <span class="hljs-comment">//     privateImageStatusName: &apos;terminating&apos;,</span>
+    <span class="hljs-comment">//     privateImageStatus: { code: &apos;CREAT&apos;, codeName: &apos;NSI CREATED state&apos; },</span>
+    <span class="hljs-comment">//     privateImageOperation: { code: &apos;TERMT&apos;, codeName: &apos;NSI TERMINATE OP&apos; },</span>
+    <span class="hljs-comment">//     privateImagePlatformType: { code: &apos;UBS64&apos;, codeName: &apos;Ubuntu Server 64 Bit&apos; },</span>
+    <span class="hljs-comment">//     createDate: &apos;2017-10-10T21:39:31+0900&apos;,</span>
+    <span class="hljs-comment">//     region: { regionNo: 1, regionCode: &apos;KR&apos;, regionName: &apos;Korea&apos; },</span>
+    <span class="hljs-comment">//     zone: { zoneNo: 2, zoneName: &apos;KR-1&apos;, zoneDescription: &apos;&#xAC00;&#xC0B0; NANG zone&apos; },</span>
+    <span class="hljs-comment">//     privateImageBlockStorageTotalRows: 1,</span>
+    <span class="hljs-comment">//     privateImageBlockStorageTotalSize: 53687091200 },</span>
+    <span class="hljs-comment">//   {</span>
+    <span class="hljs-comment">//     privateImageNo: 3799,</span>
+    <span class="hljs-comment">//     privateImageName: &apos;test2&apos;,</span>
+    <span class="hljs-comment">//     privateImageDescription: &apos;&apos;,</span>
+    <span class="hljs-comment">//     originalServerInstanceNo: 491604,</span>
+    <span class="hljs-comment">//     originalVmFlavorId: &apos;SPSVRSSD00000003&apos;,</span>
+    <span class="hljs-comment">//     originalServerName: &apos;sqltest&apos;,</span>
+    <span class="hljs-comment">//     originalBaseBlockStorageDiskType: { code: &apos;NET&apos;, codeName: &apos;Network Storage&apos; },</span>
+    <span class="hljs-comment">//     originalVmImageId: &apos;SPSW0WINNT000034&apos;,</span>
+    <span class="hljs-comment">//     originalOsInformation: &apos;Windows Server 2008 R2 with MSSQL 2008 Standard (64-bit)&apos;,</span>
+    <span class="hljs-comment">//     originalVmImageName: &apos;mssql(2008std)-win-2008-64-R2&apos;,</span>
+    <span class="hljs-comment">//     privateImageStatusName: &apos;terminating&apos;,</span>
+    <span class="hljs-comment">//     privateImageStatus: { code: &apos;CREAT&apos;, codeName: &apos;NSI CREATED state&apos; },</span>
+    <span class="hljs-comment">//     privateImageOperation: { code: &apos;TERMT&apos;, codeName: &apos;NSI TERMINATE OP&apos; },</span>
+    <span class="hljs-comment">//     privateImagePlatformType: { code: &apos;WND64&apos;, codeName: &apos;Windows 64 Bit&apos; },</span>
+    <span class="hljs-comment">//     createDate: &apos;2017-10-10T21:39:24+0900&apos;,</span>
+    <span class="hljs-comment">//     region: { regionNo: 1, regionCode: &apos;KR&apos;, regionName: &apos;Korea&apos; },</span>
+    <span class="hljs-comment">//     zone: { zoneNo: 2, zoneName: &apos;KR-1&apos;, zoneDescription: &apos;&#xAC00;&#xC0B0; NANG zone&apos; },</span>
+    <span class="hljs-comment">//     privateImageBlockStorageTotalRows: 1,</span>
+    <span class="hljs-comment">//     privateImageBlockStorageTotalSize: 53687091200 }</span>
+    <span class="hljs-comment">//     ]</span>
+})
+</code></pre>
 
                                 
                                 </section>
@@ -466,7 +539,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"memberServerImage","level":"1.2.5","depth":2,"next":{"title":"zone","level":"1.2.6","depth":2,"path":"compute/zone/zone-01.md","ref":"./compute/zone/zone-01.md","articles":[]},"previous":{"title":"serverInstance","level":"1.2.4","depth":2,"path":"compute/serverinstance/serverinstance-01.md","ref":"./compute/serverinstance/serverinstance-01.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"compute/memberserverimage/memberserverimage-01.md","mtime":"2017-10-09T17:43:10.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-10-09T17:44:37.615Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"memberServerImage","level":"1.2.5","depth":2,"next":{"title":"zone","level":"1.2.6","depth":2,"path":"compute/zone/zone-01.md","ref":"./compute/zone/zone-01.md","articles":[]},"previous":{"title":"serverInstance","level":"1.2.4","depth":2,"path":"compute/serverinstance/serverinstance-01.md","ref":"./compute/serverinstance/serverinstance-01.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"compute/memberserverimage/memberserverimage-01.md","mtime":"2017-10-10T13:51:37.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-10-10T13:51:49.836Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
