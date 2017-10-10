@@ -1,18 +1,24 @@
 import {
   InterfaceOauthKey,
   InterfaceCallback,
+  mergeParams,
   Oauth,
   Validator
 } from '../';
-import * as computeService from './service';
 import * as product from './product';
 import * as zone    from './zone';
 import * as loginKey from './loginKey';
 import * as serverInstance from './serverInstance';
 import * as accessControlGroup from './accessControlGroup';
 import * as memberServerImage from './memberServerImage';
+import { isNull } from 'lodash';
+const { ValidParametersOnly, MustIncludeRequiredParameters, ValidConstraintsOnly } = Validator;
+let params = null;
 
-const { ValidParametersOnly, MustIncludeRequiredParameters, ValidLengthOnly } = Validator;
+function getParams( dir ) {
+  if ( isNull(params) ) { params =  mergeParams( dir ); }
+  return params;
+}
 
 export interface InterfaceCompute
   extends
@@ -36,8 +42,8 @@ export class Compute implements InterfaceCompute {
   /** product **/
   findPublicImages ( callback: InterfaceCallback ) { product.findPublicImages.bind(this).apply( this, arguments ); }
 
-  @MustIncludeRequiredParameters(getParams('findFlavors'))
-  @ValidParametersOnly(getParams('findFlavors'))
+  @MustIncludeRequiredParameters(getParams(__dirname))
+  @ValidParametersOnly(getParams(__dirname))
   findFlavors( args, callback: InterfaceCallback ) {
     product.findFlavors.bind(this).apply( this, arguments); }
 
@@ -50,9 +56,9 @@ export class Compute implements InterfaceCompute {
     loginKey.findLoginKeys.bind(this).apply( this, arguments );
   }
 
-  @MustIncludeRequiredParameters(getParams('createLoginKey'))
-  @ValidParametersOnly(getParams('createLoginKey'))
-  @ValidLengthOnly(getParams('createLoginKey'))
+  @MustIncludeRequiredParameters(getParams(__dirname))
+  @ValidParametersOnly(getParams(__dirname))
+  @ValidConstraintsOnly(getParams(__dirname))
   createLoginKey( arg, callback: InterfaceCallback ){
     loginKey.createLoginKey.bind(this).apply( this, arguments );
   }
@@ -70,12 +76,13 @@ export class Compute implements InterfaceCompute {
   /** memberServerImage **/
   findPrivateImages( callback: InterfaceCallback ) { memberServerImage.findPrivateImages.bind(this).apply( this, arguments ); }
 
-  @MustIncludeRequiredParameters(getParams('createPrivateImage'))
-  @ValidParametersOnly(getParams('createPrivateImage'))
-  @ValidLengthOnly(getParams('createPrivateImage'))
+  @MustIncludeRequiredParameters(getParams(__dirname))
+  @ValidParametersOnly(getParams(__dirname))
+  @ValidConstraintsOnly(getParams(__dirname))
   createPrivateImage( args, callback: InterfaceCallback ) { memberServerImage.createPrivateImage.bind(this).apply(this, arguments); }
-}
 
-function getParams( fnKey ) {
-  return computeService.mergeParams( __dirname )[ fnKey ];
+  @MustIncludeRequiredParameters(getParams(__dirname))
+  @ValidParametersOnly(getParams(__dirname))
+  @ValidConstraintsOnly(getParams(__dirname))
+  destroyPrivateImages( args, callback: InterfaceCallback ) { memberServerImage.destroyPrivateImages.bind(this).apply(this,arguments); }
 }

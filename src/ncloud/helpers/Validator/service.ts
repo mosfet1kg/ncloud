@@ -1,5 +1,6 @@
 import * as validator from 'validator';
 import * as ip from 'ip';
+import { isUndefined } from 'lodash';
 
 export function isRequiredParamExist(args_object, param_required_array){
   return param_required_array.reduce( function( prev, curr){
@@ -73,18 +74,39 @@ export function isValidIp ( targetIp ) {
   }
 }
 
-export function isValidLength( args, paramSet ) {
+export function isValidConstraints( args, paramSet ) {
   const constraints = paramSet.constraint;
 
   constraints.forEach( constraint=>{
     if( constraint.type === 'string' && constraint.restrict === 'length' ){
-      const result = ((constraint.minLength <= args[ constraint.name ].length
-        && args[ constraint.name ].length <= constraint.maxLength));
+      const testResultMinLength = isUndefined(constraint.minLength) ? true : (constraint.minLength <= args[ constraint.name ].length);
+      const testResultMaxLength = isUndefined( constraint.maxLength) ? true : (constraint.maxLength >= args[ constraint.name ].length);
 
-      if( !result ){
-        throw new Error(`The length of \'${ constraint.name }\' must be greater than ${constraint.minLength} and less than ${ constraint.maxLength}`) ;
+      if( !( testResultMinLength && testResultMaxLength ) ){
+        throw new Error(
+          [
+            `The length of \'${ constraint.name }\' must be `,
+            [ isUndefined(constraint.minLength)? '' : `greater than or equals to ${ constraint.minLength }`,
+              isUndefined(constraint.maxLength)? '' : `less than or equals to ${ constraint.maxLength }`
+            ].filter(el=>el.length>0).join(" and ")
+          ].join("")
+        ) ;
       } // end if
 
-    } // end if
+    } else if ( constraint.type === 'array' && constraint.restrict === 'numItems' ) {
+      const testResultMinItems = isUndefined( constraint.minItems ) ? true : ( args[ constraint.name ].length >= constraint.minItems );
+      const testResultMaxItems = isUndefined( constraint.maxItems ) ? true : ( args[ constraint.name ].length <= constraint.maxItems );
+
+      if( !( testResultMaxItems && testResultMinItems ) ) {
+        throw new Error(
+          [ `The length of \'${ constraint.name }\' must be `,
+            [ `${ isUndefined(constraint.minItems)? "" : `greater than or equals to ${ constraint.minItems } `}`,
+              `${ isUndefined(constraint.maxItems)? "" : `less than or equals to ${ constraint.maxItems } `}`
+            ].filter(el=>el.length>0).join(" and ")
+          ].join("")
+        )
+      }
+
+    }// end if
   }); // end forEach
 }

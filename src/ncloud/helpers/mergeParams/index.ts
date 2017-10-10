@@ -22,4 +22,3 @@ export function mergeParams( dir ) {
     return prev;
   }, {})
 }
-

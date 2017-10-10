@@ -19,10 +19,16 @@ export function ValidIpOnly( target, key, descriptor ) {
   return descriptor;
 }
 
-export function ValidParametersOnly( paramSet ) {
+export function ValidParametersOnly( paramSet, paramKey=null ) {
   return function( target, key, descriptor ) {
     if( descriptor === undefined ) {
       descriptor = Object.getOwnPropertyDescriptor( target, key );
+    }
+
+    if ( !!paramKey ) {
+      paramSet = paramSet[paramKey];
+    } else {
+      paramSet = paramSet[ key ];
     }
 
     const originalMethod = descriptor.value;
@@ -40,11 +46,18 @@ export function ValidParametersOnly( paramSet ) {
   } // end return function
 }
 
-export function MustIncludeRequiredParameters( paramSet ) {
+export function MustIncludeRequiredParameters( paramSet, paramKey=null  ) {
   return function( target, key, descriptor ) {
     if( descriptor === undefined ) {
       descriptor = Object.getOwnPropertyDescriptor( target, key );
     }
+
+    if ( !!paramKey ) {
+      paramSet = paramSet[paramKey];
+    } else {
+      paramSet = paramSet[ key ];
+    }
+
     const originalMethod = descriptor.value;
 
     descriptor.value = function( args, callback ) {
@@ -60,17 +73,23 @@ export function MustIncludeRequiredParameters( paramSet ) {
   } // end return function
 }
 
-export function ValidLengthOnly( paramSet ) {
+export function ValidConstraintsOnly( paramSet, paramKey=null ) {
   return function( target, key, descriptor ) {
     if( descriptor === undefined ) {
       descriptor = Object.getOwnPropertyDescriptor( target, key );
+    }
+
+    if ( !!paramKey ) {
+      paramSet = paramSet[paramKey];
+    } else {
+      paramSet = paramSet[ key ];
     }
 
     const originalMethod = descriptor.value;
 
     descriptor.value = function( args, callback ) {
       try {
-        validatorService.isValidLength( args, paramSet );
+        validatorService.isValidConstraints( args, paramSet );
         return originalMethod.apply( this, arguments );
       } catch (e) {
         return callback( e );

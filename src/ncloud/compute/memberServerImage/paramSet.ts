@@ -42,6 +42,30 @@ export default {
       { src: 'originalServerImageProductCode', dst: 'originalVmImageId'},
       { src: 'originalServerProductCode', dst: 'originalVmFlavorId'},
     ]
+  },
+  destroyPrivateImages: {
+    order: ['action','memberServerImageNoList','oauth_consumer_key','oauth_nonce','oauth_signature_method','oauth_timestamp','oauth_version','responseFormatType'],
+    param: ['privateImageNoList'],required:['privateImageNoList'],
+    constraint: [
+      { name: 'privateImageNoList', type: 'array', restrict:"numItems", minItems: 1 }
+    ],
+    request_alias: [
+      { src: "privateImageNoList", dst: "memberServerImageNoList" }
+    ],
+    response_alias: [
+      { src: 'memberServerImageBlockStorageTotalRows', dst: 'privateImageBlockStorageTotalRows'},
+      { src: 'memberServerImageBlockStorageTotalSize', dst: 'privateImageBlockStorageTotalSize'},
+      { src: 'memberServerImageDescription', dst: 'privateImageDescription'},
+      { src: 'memberServerImageName', dst: 'privateImageName'},
+      { src: 'memberServerImageNo', dst: 'privateImageNo'},
+      { src: 'memberServerImageOperation', dst: 'privateImageOperation'},
+      { src: 'memberServerImagePlatformType', dst: 'privateImagePlatformType'},
+      { src: 'memberServerImageStatus', dst: 'privateImageStatus'},
+      { src: 'memberServerImageStatusName', dst: 'privateImageStatusName'},
+      { src: 'originalServerImageName', dst: 'originalVmImageName'},
+      { src: 'originalServerImageProductCode', dst: 'originalVmImageId'},
+      { src: 'originalServerProductCode', dst: 'originalVmFlavorId'},
+    ]
   }
 };
 

@@ -124,3 +124,67 @@ client.compute.createPrivateImage({serverInstanceNo:492964, privateImageName:"he
     //     privateImageBlockStorageTotalSize: 0 }
 })
 ```
+
+---
+
+## `destroyPrivateImages`, action `deleteMemberServerImages` 
+Destroys the specified image and returns a confirmation.
+
+### Arguments  
+
+| Input parameter    | Type       | Required     | Description |
+|--------------------|------------|--------------|-------------|
+| `privateImageNoList` | `string[]`   | **required** | Unique Id of a private image that can be got from `findPrivateImages` method(action `getMemberServerImageList`).   |             
+ 
+### Examples  
+```javascript
+client.compute.destroyPrivateImages({ privateImageNoList: [ 3799, 3800 ]}, function(err, res) {
+    if ( err ) {
+      return console.log( err.message );
+    }
+    
+    console.log( res );
+    // expected Result =>
+    // [ {
+    //     privateImageNo: 3800,
+    //     privateImageName: 'test3',
+    //     privateImageDescription: '',
+    //     originalServerInstanceNo: 491049,
+    //     originalVmFlavorId: 'SPSVRSSD00000003',
+    //     originalServerName: 'test-ten',
+    //     originalBaseBlockStorageDiskType: { code: 'NET', codeName: 'Network Storage' },
+    //     originalVmImageId: 'SPSW0LINUX000065',
+    //     originalOsInformation: 'Ubuntu Server 16.04 with Tensorflow (64-bit)',
+    //     originalVmImageName: 'tensorflow-ubuntu-16.04-64-server',
+    //     privateImageStatusName: 'terminating',
+    //     privateImageStatus: { code: 'CREAT', codeName: 'NSI CREATED state' },
+    //     privateImageOperation: { code: 'TERMT', codeName: 'NSI TERMINATE OP' },
+    //     privateImagePlatformType: { code: 'UBS64', codeName: 'Ubuntu Server 64 Bit' },
+    //     createDate: '2017-10-10T21:39:31+0900',
+    //     region: { regionNo: 1, regionCode: 'KR', regionName: 'Korea' },
+    //     zone: { zoneNo: 2, zoneName: 'KR-1', zoneDescription: '가산 NANG zone' },
+    //     privateImageBlockStorageTotalRows: 1,
+    //     privateImageBlockStorageTotalSize: 53687091200 },
+    //   {
+    //     privateImageNo: 3799,
+    //     privateImageName: 'test2',
+    //     privateImageDescription: '',
+    //     originalServerInstanceNo: 491604,
+    //     originalVmFlavorId: 'SPSVRSSD00000003',
+    //     originalServerName: 'sqltest',
+    //     originalBaseBlockStorageDiskType: { code: 'NET', codeName: 'Network Storage' },
+    //     originalVmImageId: 'SPSW0WINNT000034',
+    //     originalOsInformation: 'Windows Server 2008 R2 with MSSQL 2008 Standard (64-bit)',
+    //     originalVmImageName: 'mssql(2008std)-win-2008-64-R2',
+    //     privateImageStatusName: 'terminating',
+    //     privateImageStatus: { code: 'CREAT', codeName: 'NSI CREATED state' },
+    //     privateImageOperation: { code: 'TERMT', codeName: 'NSI TERMINATE OP' },
+    //     privateImagePlatformType: { code: 'WND64', codeName: 'Windows 64 Bit' },
+    //     createDate: '2017-10-10T21:39:24+0900',
+    //     region: { regionNo: 1, regionCode: 'KR', regionName: 'Korea' },
+    //     zone: { zoneNo: 2, zoneName: 'KR-1', zoneDescription: '가산 NANG zone' },
+    //     privateImageBlockStorageTotalRows: 1,
+    //     privateImageBlockStorageTotalSize: 53687091200 }
+    //     ]
+})
+```

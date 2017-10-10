@@ -27,8 +27,8 @@ export class GeoLocation implements InterfaceGeoLocation {
     this.requestUrl = 'https://api.ncloud.com/geolocation/';
   }
 
-  @MustIncludeRequiredParameters(paramSet['findLocation'])
-  @ValidParametersOnly(paramSet['findLocation'])
+  @MustIncludeRequiredParameters(paramSet)
+  @ValidParametersOnly(paramSet)
   @ValidIpOnly
   public findLocation(args, callback: InterfaceCallback ): void {
     const requestInfo: InterfaceRequestInfo = {
