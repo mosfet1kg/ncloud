@@ -294,16 +294,67 @@
       <span class="hljs-built_in">console</span>.log( error );
     }<span class="hljs-keyword">else</span> {
       <span class="hljs-built_in">console</span>.log(response);
-      <span class="hljs-comment">// response example =&gt;</span>
-      <span class="hljs-comment">// [ { serverInstanceNo: 362133,</span>
-      <span class="hljs-comment">//   serverName: &apos;/** instance name **/&apos;,</span>
-      <span class="hljs-comment">//   serverDescription: &apos;&apos;,</span>
-      <span class="hljs-comment">//   cpuCount: 2,</span>
-      <span class="hljs-comment">//   memorySize: 4294967296,</span>
-      <span class="hljs-comment">//   baseBlockStorageSize: 53687091200,</span>
-      <span class="hljs-comment">//   platformType: { code: &apos;LNX64&apos;, codeName: &apos;Linux 64 Bit&apos; },</span>
-      <span class="hljs-comment">//   loginKeyName: &apos;ncp&apos;,</span>
-      <span class="hljs-comment">//     /*** more items  **/</span>
+       <span class="hljs-comment">// response example =&gt;</span>
+       <span class="hljs-comment">//[</span>
+       <span class="hljs-comment">// {</span>
+       <span class="hljs-comment">//   &quot;serverInstanceNo&quot;: 487088,</span>
+       <span class="hljs-comment">//   &quot;serverName&quot;: &quot;no-host&quot;,</span>
+       <span class="hljs-comment">//   &quot;serverDescription&quot;: &quot;&quot;,</span>
+       <span class="hljs-comment">//   &quot;cpuCount&quot;: 2,</span>
+       <span class="hljs-comment">//   &quot;memorySize&quot;: 4294967296,</span>
+       <span class="hljs-comment">//   &quot;baseBlockStorageSize&quot;: 53687091200,</span>
+       <span class="hljs-comment">//   &quot;platformType&quot;: {</span>
+       <span class="hljs-comment">//   &quot;code&quot;: &quot;LNX64&quot;,</span>
+       <span class="hljs-comment">//     &quot;codeName&quot;: &quot;Linux 64 Bit&quot;</span>
+       <span class="hljs-comment">// },</span>
+       <span class="hljs-comment">//   &quot;loginKeyName&quot;: &quot;open&quot;,</span>
+       <span class="hljs-comment">//   &quot;isFeeChargingMonitoring&quot;: false,</span>
+       <span class="hljs-comment">//   &quot;publicIp&quot;: &quot;&quot;,</span>
+       <span class="hljs-comment">//   &quot;privateIp&quot;: &quot;10.34.18.182&quot;,</span>
+       <span class="hljs-comment">//   &quot;serverImageName&quot;: &quot;centos-6.6-64&quot;,</span>
+       <span class="hljs-comment">//   &quot;serverInstanceStatus&quot;: {</span>
+       <span class="hljs-comment">//   &quot;code&quot;: &quot;RUN&quot;,</span>
+       <span class="hljs-comment">//     &quot;codeName&quot;: &quot;Server run state&quot;</span>
+       <span class="hljs-comment">// },</span>
+       <span class="hljs-comment">//   &quot;serverInstanceOperation&quot;: {</span>
+       <span class="hljs-comment">//   &quot;code&quot;: &quot;NULL&quot;,</span>
+       <span class="hljs-comment">//     &quot;codeName&quot;: &quot;Server NULL OP&quot;</span>
+       <span class="hljs-comment">// },</span>
+       <span class="hljs-comment">//   &quot;serverInstanceStatusName&quot;: &quot;running&quot;,</span>
+       <span class="hljs-comment">//   &quot;createDate&quot;: &quot;2017-09-21T21:54:27+0900&quot;,</span>
+       <span class="hljs-comment">//   &quot;uptime&quot;: &quot;2017-09-21T21:57:04+0900&quot;,</span>
+       <span class="hljs-comment">//   &quot;vmImageId&quot;: &quot;SPSW0LINUX000044&quot;,</span>
+       <span class="hljs-comment">//   &quot;vmFlavorId&quot;: &quot;SPSVRSSD00000003&quot;,</span>
+       <span class="hljs-comment">//   &quot;isProtectServerTermination&quot;: false,</span>
+       <span class="hljs-comment">//   &quot;portForwardingPublicIp&quot;: &quot;220.230.112.133&quot;,</span>
+       <span class="hljs-comment">//   &quot;zone&quot;: {</span>
+       <span class="hljs-comment">//   &quot;zoneNo&quot;: 2,</span>
+       <span class="hljs-comment">//     &quot;zoneName&quot;: &quot;KR-1&quot;,</span>
+       <span class="hljs-comment">//     &quot;zoneDescription&quot;: &quot;&#xAC00;&#xC0B0; NANG zone&quot;</span>
+       <span class="hljs-comment">// },</span>
+       <span class="hljs-comment">//   &quot;region&quot;: {</span>
+       <span class="hljs-comment">//   &quot;regionNo&quot;: 1,</span>
+       <span class="hljs-comment">//     &quot;regionCode&quot;: &quot;KR&quot;,</span>
+       <span class="hljs-comment">//     &quot;regionName&quot;: &quot;Korea&quot;</span>
+       <span class="hljs-comment">// },</span>
+       <span class="hljs-comment">//   &quot;baseBlockStorageDiskType&quot;: {</span>
+       <span class="hljs-comment">//   &quot;code&quot;: &quot;NET&quot;,</span>
+       <span class="hljs-comment">//     &quot;codeName&quot;: &quot;Network Storage&quot;</span>
+       <span class="hljs-comment">// },</span>
+       <span class="hljs-comment">//   &quot;userData&quot;: &quot;&quot;,</span>
+       <span class="hljs-comment">//   &quot;accessControlGroupList&quot;: [</span>
+       <span class="hljs-comment">//   {</span>
+       <span class="hljs-comment">//     &quot;accessControlGroup&quot;: {</span>
+       <span class="hljs-comment">//       &quot;accessControlGroupConfigurationNo&quot;: 4656,</span>
+       <span class="hljs-comment">//       &quot;accessControlGroupName&quot;: &quot;ncloud-default-acg&quot;,</span>
+       <span class="hljs-comment">//       &quot;accessControlGroupDescription&quot;: &quot;Default AccessControlGroup&quot;,</span>
+       <span class="hljs-comment">//       &quot;isDefault&quot;: true,</span>
+       <span class="hljs-comment">//       &quot;createDate&quot;: &quot;2017-02-17T11:56:27+0900&quot;</span>
+       <span class="hljs-comment">//     }</span>
+       <span class="hljs-comment">//   }</span>
+       <span class="hljs-comment">// ]</span>
+       <span class="hljs-comment">// }</span>
+       <span class="hljs-comment">//     /*** more items  **/</span>
     }
 });
 </code></pre>
@@ -350,7 +401,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"serverInstance","level":"1.2.4","depth":2,"next":{"title":"memberServerImage","level":"1.2.5","depth":2,"path":"compute/memberserverimage/memberserverimage-01.md","ref":"./compute/memberserverimage/memberserverimage-01.md","articles":[]},"previous":{"title":"product","level":"1.2.3","depth":2,"path":"compute/product/product-01.md","ref":"./compute/product/product-01.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"compute/serverinstance/serverinstance-01.md","mtime":"2017-10-10T06:09:56.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-10-11T13:45:13.462Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"serverInstance","level":"1.2.4","depth":2,"next":{"title":"memberServerImage","level":"1.2.5","depth":2,"path":"compute/memberserverimage/memberserverimage-01.md","ref":"./compute/memberserverimage/memberserverimage-01.md","articles":[]},"previous":{"title":"product","level":"1.2.3","depth":2,"path":"compute/product/product-01.md","ref":"./compute/product/product-01.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"compute/serverinstance/serverinstance-01.md","mtime":"2017-10-11T14:31:37.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-10-11T14:32:22.771Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

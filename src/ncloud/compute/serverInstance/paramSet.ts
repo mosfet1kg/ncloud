@@ -3,7 +3,10 @@ export default {
     order : ['action', 'oauth_consumer_key', 'oauth_nonce', 'oauth_signature_method', 'oauth_timestamp', 'oauth_version', 'responseFormatType' ],
     param: [],required:[],
     request_alias: [],
-    response_alias: []
+    response_alias: [
+      {'src':'serverImageProductCode', 'dst':'vmImageId' },
+      {'src':'serverProductCode', 'dst': 'vmFlavorId' }
+    ]
   },
   createServer : {
     order : ['accessControlGroupConfigurationNoList','action','feeSystemTypeCode','loginKeyName', 'memberServerImageNo', 'oauth_consumer_key', 'oauth_nonce', 'oauth_signature_method', 'oauth_timestamp', 'oauth_version', 'responseFormatType', 'serverDescription', 'serverImageProductCode','serverName', 'serverProductCode', 'userData','zoneNo', ],
