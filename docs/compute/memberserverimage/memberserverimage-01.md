@@ -67,7 +67,7 @@ Creates an Image based on a server.
 |--------------------|------------|--------------|-------------|
 | `serverInstanceNo` | `string`   | **required** | Unique Id of an operating server that can be got from `findServers` method(action `getServerInstanceList`).   |             
 | `privateImageName` | `string`   | optional     | name for the resulting image. |  
-| `privateImageDesc` | `string`   | optional     | description for the resulting image. |  
+| `privateImageDescription` | `string`   | optional     | description for the resulting image. |  
  
 ### Examples  
 ```javascript
@@ -98,7 +98,7 @@ client.compute.createPrivateImage({serverInstanceNo:492964}, function ( err,resp
 })
 ```
 ```javascript
-client.compute.createPrivateImage({serverInstanceNo:492964, privateImageName:"helloWorld", privateImageDesc: "myFirstPrivateImage"}, function ( err,response ) {
+client.compute.createPrivateImage({serverInstanceNo:492964, privateImageName:"helloWorld", privateImageDescription: "myFirstPrivateImage"}, function ( err,response ) {
     if ( err ) {
       return console.log( err.message );
     }
