@@ -16,7 +16,7 @@ export interface InterfaceServerInstance {
                   vmFlavorId?: string;
                   privateImageNo?: string | number;
                   serverName?: string;
-                  serverDesc?: string;
+                  serverDescription?: string;
                   loginKeyName?: string;
                   // internetLineTypeCode?: string;
                   feeSystemTypeCode?: string;
@@ -61,7 +61,7 @@ export function createServer( args, callback: InterfaceCallback ) {
 
   args = alias( args, paramSet[ 'createServer' ].request_alias );
   const queryString: string = this.oauth.getQueryString( args, paramSet['createServer'], requestInfo );
-  console.log( queryString );
+
   axios.get(
     url.resolve( requestInfo.requestUrl, `?${queryString}`)
   ).then( function(response){

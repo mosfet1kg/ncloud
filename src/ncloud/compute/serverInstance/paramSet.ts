@@ -12,14 +12,13 @@ export default {
       { name: 'accessControlGroupConfigurationNoList', type: 'array', restrict:"numItems", minItems: 1, maxItems:5, required: false },
       { name: 'userData', type: 'string', restrict: 'length', minLength: 1, maxLength: 21847, required: false }
     ],
-    param: ['vmImageId','vmFlavorId','privateImageNo','serverName','serverDesc','loginKeyName','feeSystemTypeCode',
+    param: ['vmImageId','vmFlavorId','privateImageNo','serverName','serverDescription','loginKeyName','feeSystemTypeCode',
       'zoneNo','accessControlGroupConfigurationNoList','userData'],
     required:[],
     request_alias: [
       {'src':'vmImageId', 'dst': 'serverImageProductCode'},
       {'src':'vmFlavorId', 'dst': 'serverProductCode'},
       {'src':'privateImageNo', 'dst': 'memberServerImageNo'},
-      {'src':'serverDesc', 'dst': 'serverDescription'}
     ],
     response_alias: [
       {'src':'serverImageProductCode', 'dst':'vmImageId' },

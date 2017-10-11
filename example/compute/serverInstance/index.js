@@ -31,7 +31,7 @@ var ncloud = require('../../../lib/');
     vmFlavorId: 'SPSVRSSD00000010',
     // privateImageNo : 3762
     serverName: 'helloworld11',
-    serverDesc: "test",
+    serverDescription: "test",
     loginKeyName : 'test005',
     feeSystemTypeCode: 'MTRAT',  // FXSUM
     zoneNo: 2,

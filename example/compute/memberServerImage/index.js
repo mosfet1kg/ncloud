@@ -81,7 +81,7 @@ var ncloud = require('../../../lib/');
   });
 
 
-  client.compute.createPrivateImage({serverInstanceNo:492964, privateImageName:"helloWorld", privateImageDesc: "myFirstPrivateImage"}, function (err,response ) {
+  client.compute.createPrivateImage({serverInstanceNo:492964, privateImageName:"helloWorld", privateImageDescription: "myFirstPrivateImage"}, function (err,response ) {
     if ( err ) {
       return console.log( err.message );
     }

@@ -12,7 +12,7 @@ import paramSet from './paramSet';
 
 export interface InterfaceMemberServerImage {
   findPrivateImages( callback: InterfaceCallback ): void;
-  createPrivateImage( args: { privateImageName?: string, privateImageDesc?: string, serverInstanceNo: string | number }, callback: InterfaceCallback ): void;
+  createPrivateImage( args: { privateImageName?: string, privateImageDescription?: string, serverInstanceNo: string | number }, callback: InterfaceCallback ): void;
   destroyPrivateImages( args: { privateImageNoList: string[] | number[] }, callback: InterfaceCallback ): void;
 }
 

@@ -18,14 +18,14 @@ export default {
   },
   createPrivateImage: {
     order: ['action','memberServerImageDescription','memberServerImageName','oauth_consumer_key','oauth_nonce','oauth_signature_method','oauth_timestamp','oauth_version','responseFormatType','serverInstanceNo'],
-    param: ['privateImageName','privateImageDesc','serverInstanceNo'],required:['serverInstanceNo'],
+    param: ['privateImageName','privateImageDescription','serverInstanceNo'],required:['serverInstanceNo'],
     constraint: [
       { name: 'privateImageName', type: 'string', restrict:"length", minLength: 3, maxLength: 30 },
-      { name: 'privateImageDesc', type: 'string', restrict:"length", minLength: 10, maxLength: 1000 },
+      { name: 'privateImageDescription', type: 'string', restrict:"length", minLength: 10, maxLength: 1000 },
     ],
     request_alias: [
       { src: 'privateImageName', dst: 'memberServerImageName'},
-      { src: 'privateImageDesc', dst: 'memberServerImageDescription'}
+      { src: 'privateImageDescription', dst: 'memberServerImageDescription'}
     ],
     response_alias: [
       // { src: 'memberServerImageList', dst: 'privateImages'},
