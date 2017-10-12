@@ -248,11 +248,8 @@ Retunrs the server in the callback `f(err, server)`;
     serverName: 'helloworld46',
     serverDescription: "test",
     loginKeyName : 'testgb',
-    feeSystemTypeCode: 'MTRAT',  // FXSUM
-    zoneNo: '2',
     accessControlGroupConfigurationNoList: [4656],
-    // userData: "#!/bin/bash \n yum update -y && yum install -y vim \n mkdir ~/helloWorld"
-    userData: fs.readFileSync('./testFile.sh', 'utf8')//'#!/bin/bash \n\n echo test > ~/test'   //'#!/bin/bash \n\n echo helloworld > ~/helloworld \n touch ~/test'   // touch ~/helloWorld'  // Tilde  // yum update -y && yum upgrade -y
+    userData: fs.readFileSync('./testFile.sh', 'utf8')
   }, function(err, res) {
     if( err ) {
       return console.log( err.message );
