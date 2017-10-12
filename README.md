@@ -42,6 +42,7 @@ Refer to the following link
 # Release Note
 v0.1.16
   - Add `createServer` method(action `createServerInstances`)
+  
 v0.1.12
   - Add `destroyPrivateImages` method(action `deleteMemberServerImages`)
    
