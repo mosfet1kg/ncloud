@@ -1,6 +1,5 @@
 export default {
   findServers: {
-    order : ['action', 'oauth_consumer_key', 'oauth_nonce', 'oauth_signature_method', 'oauth_timestamp', 'oauth_version', 'responseFormatType' ],
     param: [],required:[],
     request_alias: [],
     response_alias: [
@@ -9,7 +8,6 @@ export default {
     ]
   },
   createServer : {
-    order : ['accessControlGroupConfigurationNoList','action','feeSystemTypeCode','loginKeyName', 'memberServerImageNo', 'oauth_consumer_key', 'oauth_nonce', 'oauth_signature_method', 'oauth_timestamp', 'oauth_version', 'responseFormatType', 'serverDescription', 'serverImageProductCode','serverName', 'serverProductCode', 'userData','zoneNo', ],
     constraint: [
       { names: ['vmImageId','privateImageNo'], type: 'array', restrict:"onlyOneExist" },
       { name: 'accessControlGroupConfigurationNoList', type: 'array', restrict:"numItems", minItems: 1, maxItems:5, required: false },

@@ -38,7 +38,7 @@ export class GeoLocation implements InterfaceGeoLocation {
     };
 
     const queryString: string = this.oauth
-      .getQueryString( args, paramSet['findLocation'], requestInfo );
+      .getQueryString( args, requestInfo );
 
     axios.get(
       url.resolve( requestInfo.requestUrl, `?${queryString}` ),

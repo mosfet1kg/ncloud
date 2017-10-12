@@ -358,6 +358,274 @@
     }
 });
 </code></pre>
+<hr>
+<h1 id="compute--serverinstance">Compute : ServerInstance</h1>
+<h2 id="createserver-action-createserverinstances"><code>createServer</code>, action <code>createServerInstances</code></h2>
+<p>Creates a server with the options specified.
+Retunrs the server in the callback <code>f(err, server)</code>;</p>
+<h3 id="arguments">Arguments</h3>
+<p> <strong>Tip</strong>: Choose either <code>vmImageId</code> or <code>privateImageNo</code> for VM configuration. </p>
+<table>
+<thead>
+<tr>
+<th>Input parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vmImageId</code></td>
+<td><code>string</code></td>
+<td>conditional</td>
+<td>Unique Id of a public image that can be got from <code>findPublicImages</code> method(action <code>getServerImageProductList</code>). <strong>If <code>privateImageNo</code> is used, this argument is not available.</strong></td>
+</tr>
+<tr>
+<td><code>privateImageNo</code></td>
+<td><code>string</code></td>
+<td>conditional</td>
+<td>Unique No of a private image that you have built. It can be got from <code>findPrivateImages</code> method(action <code>getMemberServerImageList</code>). <strong>If <code>vmImageId</code> is used, this argument is not available.</strong></td>
+</tr>
+<tr>
+<td><code>vmFlavorId</code></td>
+<td><code>string</code></td>
+<td>optional</td>
+<td>an Id for one of VM hardware templates. It can be got from <code>findFlavors</code> method(action <code>getServerProductList</code>).</td>
+</tr>
+<tr>
+<td><code>serverName</code></td>
+<td><code>string</code></td>
+<td>optional</td>
+<td>name for the resulting server.</td>
+</tr>
+<tr>
+<td><code>serverDescription</code></td>
+<td><code>string</code></td>
+<td>optional</td>
+<td>description for the resulting server.</td>
+</tr>
+<tr>
+<td><code>loginKeyName</code></td>
+<td><code>string</code></td>
+<td>optional</td>
+<td>The name of loginKey that is used for public key encryption. List of loginKeys can be got from <code>findLoginKeys</code> method(action <code>getLoginKeyList</code>).</td>
+</tr>
+<tr>
+<td><code>feeSystemTypeCode</code></td>
+<td><code>string</code></td>
+<td>optional</td>
+<td>either <code>MTRAT</code> or <code>FXSUM</code>(default <code>MTRAT</code>)</td>
+</tr>
+<tr>
+<td><code>zoneNo</code></td>
+<td><code>number</code></td>
+<td>optional</td>
+<td>zone number to determine which zone the resulting VM will be located in. List of zones can be got from <code>findZones</code> method(action <code>getZoneList</code>).</td>
+</tr>
+<tr>
+<td><code>accessControlGroupConfigurationNoList</code></td>
+<td><code>number[]</code></td>
+<td>optional</td>
+<td>The number list for predefined firewall configurations. That can be got from &apos;findAccessControlGroup&apos; method(<code>getAccessControlGroupList</code> action). <strong>Length of list can be up to 5.</strong></td>
+</tr>
+<tr>
+<td><code>userData</code></td>
+<td><code>string</code></td>
+<td>optional</td>
+<td>When first startup, VM executes <code>userData</code>. <br><strong>Linux</strong>: Python, Perl, Shell and etc are available.  At the beginning of script, there must be executable environment such as <code>#!/usr/bin/env python</code>, <code>#!/bin/perl</code> and <code>#!/bin/bash</code>.  <br><strong>Windows</strong>: Visual Basic script is available only. <br> <strong>[Script should be written in English]</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="use-case-1---create-vm-from-a-public-image">Use Case 1 - Create VM from a public image</h3>
+<pre><code class="lang-javascript">  client.compute.createServer({
+    vmImageId: <span class="hljs-string">&apos;SPSW0LINUX000046&apos;</span>,
+    vmFlavorId: <span class="hljs-string">&apos;SPSVRSSD00000010&apos;</span>,
+    serverName: <span class="hljs-string">&apos;helloworld40&apos;</span>,
+    serverDescription: <span class="hljs-string">&quot;test&quot;</span>,
+    loginKeyName : <span class="hljs-string">&apos;testgb&apos;</span>,
+    accessControlGroupConfigurationNoList: [<span class="hljs-number">4656</span>],
+  }, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, res</span>) </span>{
+    <span class="hljs-keyword">if</span>( err ) {
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log( err.message );
+    }
+
+    <span class="hljs-built_in">console</span>.log( res );
+    <span class="hljs-comment">// result example =&gt;</span>
+    <span class="hljs-comment">// { serverInstanceNo: 499172,</span>
+    <span class="hljs-comment">//   serverName: &apos;helloworld40&apos;,</span>
+    <span class="hljs-comment">//   serverDescription: &apos;test&apos;,</span>
+    <span class="hljs-comment">//   cpuCount: 2,</span>
+    <span class="hljs-comment">//   memorySize: 8589934592,</span>
+    <span class="hljs-comment">//   baseBlockStorageSize: 53687091200,</span>
+    <span class="hljs-comment">//   platformType: { code: &apos;LNX64&apos;, codeName: &apos;Linux 64 Bit&apos; },</span>
+    <span class="hljs-comment">//   loginKeyName: &apos;testgb&apos;,</span>
+    <span class="hljs-comment">//     isFeeChargingMonitoring: false,</span>
+    <span class="hljs-comment">//   publicIp: &apos;&apos;,</span>
+    <span class="hljs-comment">//   privateIp: /**vm private ip**/,</span>
+    <span class="hljs-comment">//   serverImageName: &apos;centos-7.3-64&apos;,</span>
+    <span class="hljs-comment">//   serverInstanceStatus: { code: &apos;INIT&apos;, codeName: &apos;Server init state&apos; },</span>
+    <span class="hljs-comment">//   serverInstanceOperation: { code: &apos;NULL&apos;, codeName: &apos;Server NULL OP&apos; },</span>
+    <span class="hljs-comment">//   serverInstanceStatusName: &apos;init&apos;,</span>
+    <span class="hljs-comment">//     createDate: &apos;2017-10-13T02:25:36+0900&apos;,</span>
+    <span class="hljs-comment">//   uptime: &apos;2017-10-13T02:25:36+0900&apos;,</span>
+    <span class="hljs-comment">//   vmImageId: &apos;SPSW0LINUX000046&apos;,</span>
+    <span class="hljs-comment">//   vmFlavorId: &apos;SPSVRSSD00000010&apos;,</span>
+    <span class="hljs-comment">//   isProtectServerTermination: false,</span>
+    <span class="hljs-comment">//   portForwardingPublicIp: /**public ip for port forwarding**/,</span>
+    <span class="hljs-comment">//   zone: { zoneNo: 2, zoneName: &apos;KR-1&apos;, zoneDescription: &apos;&#xAC00;&#xC0B0; NANG zone&apos; },</span>
+    <span class="hljs-comment">//   region: { regionNo: 1, regionCode: &apos;KR&apos;, regionName: &apos;Korea&apos; },</span>
+    <span class="hljs-comment">//   baseBlockStorageDiskType: { code: &apos;NET&apos;, codeName: &apos;Network Storage&apos; },</span>
+    <span class="hljs-comment">//   userData: &apos;&apos;,</span>
+    <span class="hljs-comment">//     accessControlGroupList: [ &apos;&apos; ] }</span>
+  })
+</code></pre>
+<h3 id="use-case-2---create-vm-from-a-private-image">Use Case 2 - Create VM from a private image</h3>
+<pre><code class="lang-javascript">  client.compute.createServer({
+    privateImageNo : <span class="hljs-number">3803</span>,
+    vmFlavorId: <span class="hljs-string">&apos;SPSVRSSD00000010&apos;</span>,
+    serverName: <span class="hljs-string">&apos;helloworld41&apos;</span>,
+    serverDescription: <span class="hljs-string">&quot;test&quot;</span>,
+    loginKeyName : <span class="hljs-string">&apos;testgb&apos;</span>,
+    accessControlGroupConfigurationNoList: [<span class="hljs-number">4656</span>],
+    <span class="hljs-comment">// userData: file//&apos;#!/bin/bash \n\n echo test &gt; ~/test&apos;   //&apos;#!/bin/bash \n\n echo helloworld &gt; ~/helloworld \n touch ~/test&apos;   // touch ~/helloWorld&apos;  // Tilde  // yum update -y &amp;&amp; yum upgrade -y</span>
+  }, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, res</span>) </span>{
+    <span class="hljs-keyword">if</span>( err ) {
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log( err.message );
+    }
+
+    <span class="hljs-built_in">console</span>.log( res );
+  <span class="hljs-comment">// result example =&gt;</span>
+  <span class="hljs-comment">// { serverInstanceNo: 499184,</span>
+  <span class="hljs-comment">//   serverName: &apos;helloworld44&apos;,</span>
+  <span class="hljs-comment">//   serverDescription: &apos;test&apos;,</span>
+  <span class="hljs-comment">//   cpuCount: 2,</span>
+  <span class="hljs-comment">//   memorySize: 8589934592,</span>
+  <span class="hljs-comment">//   baseBlockStorageSize: 53687091200,</span>
+  <span class="hljs-comment">//   platformType: { code: &apos;UBS64&apos;, codeName: &apos;Ubuntu Server 64 Bit&apos; },</span>
+  <span class="hljs-comment">//   loginKeyName: &apos;testgb&apos;,</span>
+  <span class="hljs-comment">//     isFeeChargingMonitoring: false,</span>
+  <span class="hljs-comment">//   publicIp: &apos;&apos;,</span>
+  <span class="hljs-comment">//   privateIp: /**private ip**/,</span>
+  <span class="hljs-comment">//   serverImageName: &apos;tensorflow-ubuntu-16.04-64-server&apos;,</span>
+  <span class="hljs-comment">//   serverInstanceStatus: { code: &apos;INIT&apos;, codeName: &apos;Server init state&apos; },</span>
+  <span class="hljs-comment">//   serverInstanceOperation: { code: &apos;NULL&apos;, codeName: &apos;Server NULL OP&apos; },</span>
+  <span class="hljs-comment">//   serverInstanceStatusName: &apos;init&apos;,</span>
+  <span class="hljs-comment">//     createDate: &apos;2017-10-13T02:35:11+0900&apos;,</span>
+  <span class="hljs-comment">//   uptime: &apos;2017-10-13T02:35:11+0900&apos;,</span>
+  <span class="hljs-comment">//   vmImageId: &apos;SPSW0LINUX000065&apos;,</span>
+  <span class="hljs-comment">//   vmFlavorId: &apos;SPSVRSSD00000010&apos;,</span>
+  <span class="hljs-comment">//   isProtectServerTermination: false,</span>
+  <span class="hljs-comment">//   portForwardingPublicIp: /**public ip for port forwarding**/,</span>
+  <span class="hljs-comment">//   zone: { zoneNo: 2, zoneName: &apos;KR-1&apos;, zoneDescription: &apos;&#xAC00;&#xC0B0; NANG zone&apos; },</span>
+  <span class="hljs-comment">//   region: { regionNo: 1, regionCode: &apos;KR&apos;, regionName: &apos;Korea&apos; },</span>
+  <span class="hljs-comment">//   baseBlockStorageDiskType: { code: &apos;NET&apos;, codeName: &apos;Network Storage&apos; },</span>
+  <span class="hljs-comment">//   userData: &apos;&apos;,</span>
+  <span class="hljs-comment">//     accessControlGroupList: [ &apos;&apos; ] }</span>
+  })
+</code></pre>
+<h3 id="use-case-3---create-vm-with-userdata-script">Use Case 3 - Create VM with <code>userData</code> script</h3>
+<pre><code class="lang-javascript">  client.compute.createServer({
+    vmImageId: <span class="hljs-string">&apos;SPSW0LINUX000046&apos;</span>,
+    vmFlavorId: <span class="hljs-string">&apos;SPSVRSSD00000010&apos;</span>,
+    serverName: <span class="hljs-string">&apos;helloworld45&apos;</span>,
+    serverDescription: <span class="hljs-string">&quot;test&quot;</span>,
+    loginKeyName : <span class="hljs-string">&apos;testgb&apos;</span>,
+    accessControlGroupConfigurationNoList: [<span class="hljs-number">4656</span>],
+    userData: <span class="hljs-string">&quot;#!/bin/bash \n yum update -y &amp;&amp; yum install -y vim \n mkdir ~/helloWorld&quot;</span>
+  }, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, res</span>) </span>{
+    <span class="hljs-keyword">if</span>( err ) {
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log( err.message );
+    }
+
+    <span class="hljs-built_in">console</span>.log( res );
+    <span class="hljs-comment">// result example =&gt;</span>
+    <span class="hljs-comment">// { serverInstanceNo: 499187,</span>
+    <span class="hljs-comment">//   serverName: &apos;helloworld45&apos;,</span>
+    <span class="hljs-comment">//   serverDescription: &apos;test&apos;,</span>
+    <span class="hljs-comment">//   cpuCount: 2,</span>
+    <span class="hljs-comment">//   memorySize: 8589934592,</span>
+    <span class="hljs-comment">//   baseBlockStorageSize: 53687091200,</span>
+    <span class="hljs-comment">//   platformType: { code: &apos;LNX64&apos;, codeName: &apos;Linux 64 Bit&apos; },</span>
+    <span class="hljs-comment">//   loginKeyName: &apos;testgb&apos;,</span>
+    <span class="hljs-comment">//     isFeeChargingMonitoring: false,</span>
+    <span class="hljs-comment">//   publicIp: &apos;&apos;,</span>
+    <span class="hljs-comment">//   privateIp:  /**private ip**/,</span>
+    <span class="hljs-comment">//   serverImageName: &apos;centos-7.3-64&apos;,</span>
+    <span class="hljs-comment">//   serverInstanceStatus: { code: &apos;INIT&apos;, codeName: &apos;Server init state&apos; },</span>
+    <span class="hljs-comment">//   serverInstanceOperation: { code: &apos;NULL&apos;, codeName: &apos;Server NULL OP&apos; },</span>
+    <span class="hljs-comment">//   serverInstanceStatusName: &apos;init&apos;,</span>
+    <span class="hljs-comment">//     createDate: &apos;2017-10-13T02:40:02+0900&apos;,</span>
+    <span class="hljs-comment">//   uptime: &apos;2017-10-13T02:40:02+0900&apos;,</span>
+    <span class="hljs-comment">//   vmImageId: &apos;SPSW0LINUX000046&apos;,</span>
+    <span class="hljs-comment">//   vmFlavorId: &apos;SPSVRSSD00000010&apos;,</span>
+    <span class="hljs-comment">//   isProtectServerTermination: false,</span>
+    <span class="hljs-comment">//   portForwardingPublicIp: /**public ip for port forwarding**/,</span>
+    <span class="hljs-comment">//   zone: { zoneNo: 2, zoneName: &apos;KR-1&apos;, zoneDescription: &apos;&#xAC00;&#xC0B0; NANG zone&apos; },</span>
+    <span class="hljs-comment">//   region: { regionNo: 1, regionCode: &apos;KR&apos;, regionName: &apos;Korea&apos; },</span>
+    <span class="hljs-comment">//   baseBlockStorageDiskType: { code: &apos;NET&apos;, codeName: &apos;Network Storage&apos; },</span>
+    <span class="hljs-comment">//   userData: &apos;#!/bin/bash \n yum update -y &amp;&amp; yum install -y vim \n mkdir ~/helloWorld&apos;,</span>
+    <span class="hljs-comment">//     accessControlGroupList: [ &apos;&apos; ] }</span>
+  })
+</code></pre>
+<h3 id="use-case-4---create-vm-with-userdata-script-from-a-file">Use Case 4 - Create VM with <code>userData</code> script from a file</h3>
+<ul>
+<li><p>source code</p>
+<pre><code class="lang-javascript">client.compute.createServer({
+  vmImageId: <span class="hljs-string">&apos;SPSW0LINUX000046&apos;</span>,
+  vmFlavorId: <span class="hljs-string">&apos;SPSVRSSD00000010&apos;</span>,
+  serverName: <span class="hljs-string">&apos;helloworld46&apos;</span>,
+  serverDescription: <span class="hljs-string">&quot;test&quot;</span>,
+  loginKeyName : <span class="hljs-string">&apos;testgb&apos;</span>,
+  feeSystemTypeCode: <span class="hljs-string">&apos;MTRAT&apos;</span>,  <span class="hljs-comment">// FXSUM</span>
+  zoneNo: <span class="hljs-string">&apos;2&apos;</span>,
+  accessControlGroupConfigurationNoList: [<span class="hljs-number">4656</span>],
+  <span class="hljs-comment">// userData: &quot;#!/bin/bash \n yum update -y &amp;&amp; yum install -y vim \n mkdir ~/helloWorld&quot;</span>
+  userData: fs.readFileSync(<span class="hljs-string">&apos;./testFile.sh&apos;</span>, <span class="hljs-string">&apos;utf8&apos;</span>)<span class="hljs-comment">//&apos;#!/bin/bash \n\n echo test &gt; ~/test&apos;   //&apos;#!/bin/bash \n\n echo helloworld &gt; ~/helloworld \n touch ~/test&apos;   // touch ~/helloWorld&apos;  // Tilde  // yum update -y &amp;&amp; yum upgrade -y</span>
+}, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, res</span>) </span>{
+  <span class="hljs-keyword">if</span>( err ) {
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log( err.message );
+  }
+
+  <span class="hljs-built_in">console</span>.log( res );
+  <span class="hljs-comment">// result example =&gt;</span>
+  <span class="hljs-comment">// { serverInstanceNo: 499190,</span>
+  <span class="hljs-comment">//   serverName: &apos;helloworld46&apos;,</span>
+  <span class="hljs-comment">//   serverDescription: &apos;test&apos;,</span>
+  <span class="hljs-comment">//   cpuCount: 2,</span>
+  <span class="hljs-comment">//   memorySize: 8589934592,</span>
+  <span class="hljs-comment">//   baseBlockStorageSize: 53687091200,</span>
+  <span class="hljs-comment">//   platformType: { code: &apos;LNX64&apos;, codeName: &apos;Linux 64 Bit&apos; },</span>
+  <span class="hljs-comment">//   loginKeyName: &apos;testgb&apos;,</span>
+  <span class="hljs-comment">//     isFeeChargingMonitoring: false,</span>
+  <span class="hljs-comment">//   publicIp: &apos;&apos;,</span>
+  <span class="hljs-comment">//   privateIp:  /**private ip**/,</span>
+  <span class="hljs-comment">//   serverImageName: &apos;centos-7.3-64&apos;,</span>
+  <span class="hljs-comment">//   serverInstanceStatus: { code: &apos;INIT&apos;, codeName: &apos;Server init state&apos; },</span>
+  <span class="hljs-comment">//   serverInstanceOperation: { code: &apos;NULL&apos;, codeName: &apos;Server NULL OP&apos; },</span>
+  <span class="hljs-comment">//   serverInstanceStatusName: &apos;init&apos;,</span>
+  <span class="hljs-comment">//     createDate: &apos;2017-10-13T02:43:19+0900&apos;,</span>
+  <span class="hljs-comment">//   uptime: &apos;2017-10-13T02:43:19+0900&apos;,</span>
+  <span class="hljs-comment">//   vmImageId: &apos;SPSW0LINUX000046&apos;,</span>
+  <span class="hljs-comment">//   vmFlavorId: &apos;SPSVRSSD00000010&apos;,</span>
+  <span class="hljs-comment">//   isProtectServerTermination: false,</span>
+  <span class="hljs-comment">//   portForwardingPublicIp: /**public ip for port forwarding**/,</span>
+  <span class="hljs-comment">//   zone: { zoneNo: 2, zoneName: &apos;KR-1&apos;, zoneDescription: &apos;&#xAC00;&#xC0B0; NANG zone&apos; },</span>
+  <span class="hljs-comment">//   region: { regionNo: 1, regionCode: &apos;KR&apos;, regionName: &apos;Korea&apos; },</span>
+  <span class="hljs-comment">//   baseBlockStorageDiskType: { code: &apos;NET&apos;, codeName: &apos;Network Storage&apos; },</span>
+  <span class="hljs-comment">//   userData: &apos;#!/bin/bash\n\ntouch ~/helloworld\nmkdir ~/test\n&apos;,</span>
+  <span class="hljs-comment">//     accessControlGroupList: [ &apos;&apos; ] }</span>
+})
+</code></pre>
+</li>
+<li><p>testFile.sh
+```sh</p>
+<h1 id="binbash">!/bin/bash</h1>
+</li>
+</ul>
+<p>touch ~/helloworld
+mkdir ~/test
+```</p>
 
                                 
                                 </section>
@@ -401,7 +669,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"serverInstance","level":"1.2.4","depth":2,"next":{"title":"memberServerImage","level":"1.2.5","depth":2,"path":"compute/memberserverimage/memberserverimage-01.md","ref":"./compute/memberserverimage/memberserverimage-01.md","articles":[]},"previous":{"title":"product","level":"1.2.3","depth":2,"path":"compute/product/product-01.md","ref":"./compute/product/product-01.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"compute/serverinstance/serverinstance-01.md","mtime":"2017-10-11T14:31:37.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-10-11T14:32:22.771Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"serverInstance","level":"1.2.4","depth":2,"next":{"title":"memberServerImage","level":"1.2.5","depth":2,"path":"compute/memberserverimage/memberserverimage-01.md","ref":"./compute/memberserverimage/memberserverimage-01.md","articles":[]},"previous":{"title":"product","level":"1.2.3","depth":2,"path":"compute/product/product-01.md","ref":"./compute/product/product-01.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"compute/serverinstance/serverinstance-01.md","mtime":"2017-10-12T17:44:45.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-10-12T17:46:45.537Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

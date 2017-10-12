@@ -1,6 +1,6 @@
 {
   "name": "ncloud",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "description": "The NAVER Cloud Platform(https://www.ncloud.com/) Library for Node.js",
   "engineStrict": true,
   "engines": {
@@ -10,14 +10,14 @@
   "devDependencies": {
     "@types/jest": "~19.2.3",
     "@types/node": "~6.0.73",
+    "gitbook-cli": "^2.3.2",
     "jest": "~20.0.0",
     "rimraf": "~2.6.1",
     "tslib": "^1.7.1",
     "tslint": "~4.5.1",
     "tslint-config-airbnb": "^5.1.2",
     "tslint-microsoft-contrib": "~4.0.1",
-    "typescript": "^2.5.3",
-    "gitbook-cli": "^2.3.2"
+    "typescript": "^2.5.3"
   },
   "scripts": {
     "clean": "rimraf coverage build tmp lib",

@@ -27,16 +27,15 @@ var ncloud = require('../../../lib/');
   });
 
   client.compute.createServer({
-    vmImageId: 'SPSW0LINUX000043',
+    vmImageId: 'SPSW0LINUX000046',
     vmFlavorId: 'SPSVRSSD00000010',
-    // privateImageNo : 3762
-    serverName: 'helloworld11',
+    serverName: 'helloworld46',
     serverDescription: "test",
-    loginKeyName : 'test005',
+    loginKeyName : 'testgb',
     feeSystemTypeCode: 'MTRAT',  // FXSUM
-    zoneNo: 2,
-    accessControlGroupConfigurationNoList: [4656,5260,5277,22026,22656],
-    userData: '#!/bin/bash \n echo hello world'
+    zoneNo: '2',
+    accessControlGroupConfigurationNoList: [4656],
+    userData: fs.readFileSync('./testFile.sh', 'utf8')
   }, function(err, res) {
     if( err ) {
       return console.log( err.message );

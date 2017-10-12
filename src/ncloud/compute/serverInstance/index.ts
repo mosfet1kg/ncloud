@@ -33,7 +33,7 @@ export function findServers( callback: InterfaceCallback ): void {
     requestAction: 'getServerInstanceList',
   };
 
-  const queryString: string = this.oauth.getQueryString( {}, paramSet['findServers'], requestInfo );
+  const queryString: string = this.oauth.getQueryString( {}, requestInfo );
 
   axios.get(
     url.resolve( requestInfo.requestUrl, `?${queryString}`)
@@ -56,11 +56,11 @@ export function createServer( args, callback: InterfaceCallback ) {
   };
 
   if ( args.userData ) {
-    args.userData = new Buffer( args.userData ).toString('base64').replace(/=/g,"");
+    args.userData = new Buffer( args.userData ).toString('base64');
   }
 
   args = alias( args, paramSet[ 'createServer' ].request_alias );
-  const queryString: string = this.oauth.getQueryString( args, paramSet['createServer'], requestInfo );
+  const queryString: string = this.oauth.getQueryString( args, requestInfo );
 
   axios.get(
     url.resolve( requestInfo.requestUrl, `?${queryString}`)

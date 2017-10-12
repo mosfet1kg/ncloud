@@ -1,6 +1,5 @@
 export default {
   findPrivateImages: {
-    order :[ 'action','oauth_consumer_key', 'oauth_nonce', 'oauth_signature_method', 'oauth_timestamp', 'oauth_version','responseFormatType'],
     param: [],required:[],
     request_alias: [], response_alias: [
       { src: 'memberServerImageNo', dst: 'privateImageNo'},
@@ -17,7 +16,6 @@ export default {
     ]
   },
   createPrivateImage: {
-    order: ['action','memberServerImageDescription','memberServerImageName','oauth_consumer_key','oauth_nonce','oauth_signature_method','oauth_timestamp','oauth_version','responseFormatType','serverInstanceNo'],
     param: ['privateImageName','privateImageDescription','serverInstanceNo'],required:['serverInstanceNo'],
     constraint: [
       { name: 'privateImageName', type: 'string', restrict:"length", minLength: 3, maxLength: 30 },
@@ -44,7 +42,6 @@ export default {
     ]
   },
   destroyPrivateImages: {
-    order: ['action','memberServerImageNoList','oauth_consumer_key','oauth_nonce','oauth_signature_method','oauth_timestamp','oauth_version','responseFormatType'],
     param: ['privateImageNoList'],required:['privateImageNoList'],
     constraint: [
       { name: 'privateImageNoList', type: 'array', restrict:"numItems", minItems: 1 }

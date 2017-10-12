@@ -20,7 +20,7 @@ export function findLoginKeys( callback: InterfaceCallback ): void {
     requestAction: 'getLoginKeyList',
   };
 
-  const queryString: string = this.oauth.getQueryString( {}, paramSet['findLoginKeys'], requestInfo );
+  const queryString: string = this.oauth.getQueryString( {}, requestInfo );
 
   axios.get(
     url.resolve( requestInfo.requestUrl, `?${queryString}`)

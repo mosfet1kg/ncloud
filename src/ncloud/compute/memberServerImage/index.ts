@@ -23,7 +23,7 @@ export function findPrivateImages( callback: InterfaceCallback ): void {
     requestAction: 'getMemberServerImageList'
   };
 
-  const queryString: string = this.oauth.getQueryString( {}, paramSet[ 'findPrivateImages' ], requestInfo );
+  const queryString: string = this.oauth.getQueryString( {}, requestInfo );
 
   axios.get(
     url.resolve( requestInfo.requestUrl, `?${queryString}`)
@@ -54,7 +54,7 @@ export function createPrivateImage( args, callback: InterfaceCallback ): void {
   };
 
   args = alias( args, paramSet[ 'createPrivateImage' ].request_alias );
-  const queryString: string = this.oauth.getQueryString( args, paramSet[ 'createPrivateImage' ], requestInfo );
+  const queryString: string = this.oauth.getQueryString( args, requestInfo );
 
   axios.get(
     url.resolve( requestInfo.requestUrl, `?${queryString}`)
@@ -81,7 +81,7 @@ export function destroyPrivateImages( args, callback: InterfaceCallback ): void 
 
   args = alias( args, paramSet[ 'destroyPrivateImages' ].request_alias );
 
-  const queryString: string = this.oauth.getQueryString( args, paramSet[ 'destroyPrivateImages' ], requestInfo );
+  const queryString: string = this.oauth.getQueryString( args, requestInfo );
 
   axios.get(
     url.resolve( requestInfo.requestUrl, `?${queryString}`)

@@ -21,7 +21,7 @@ export function findPublicImages( callback: InterfaceCallback ): void {
     requestAction: 'getServerImageProductList',
   };
 
-  const queryString: string = this.oauth.getQueryString( {}, paramSet['findPublicImages'], requestInfo );
+  const queryString: string = this.oauth.getQueryString( {}, requestInfo );
 
   axios.get(
     url.resolve( requestInfo.requestUrl, `?${queryString}`)
@@ -46,7 +46,7 @@ export function findFlavors( args, callback: InterfaceCallback ): void {
   };
 
   args = alias( args, paramSet[ 'findFlavors' ].request_alias );
-  const queryString: string = this.oauth.getQueryString( args, paramSet['findFlavors'], requestInfo );
+  const queryString: string = this.oauth.getQueryString( args, requestInfo );
 
   axios.get(
     url.resolve( requestInfo.requestUrl, `?${queryString}`)

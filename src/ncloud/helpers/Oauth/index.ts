@@ -18,9 +18,7 @@ export class Oauth {
     this.authKey = authKey;
   }
 
-  public getQueryString( args, paramSet, requestInfo: InterfaceRequestInfo ): string {
-
-    const paramOrder = paramSet.order;
+  public getQueryString( args, requestInfo: InterfaceRequestInfo ): string {
     const paramTemp = {...args};
 
     paramTemp.action = requestInfo.requestAction;
@@ -31,22 +29,16 @@ export class Oauth {
     paramTemp.oauth_version = '1.0';
     paramTemp.responseFormatType = 'json';
 
-    const sortedSet: object = paramOrder.reduce( ( prev, key ) => {
-      if ( (<any>Object).keys( paramTemp ).includes( key ) ) {
-
-        if ( Array.isArray( paramTemp[key]) ) {
-          for ( let i: number = 1; i <= paramTemp[key].length ; i++) {
-            prev[ key + '.' + i ] = paramTemp[key][i - 1];
-          }
-        } else {
-          prev[ key ] = paramTemp[ key ];
-        } // end if
-      }
+    const sortedSet: object = Object.keys( paramTemp ).sort().reduce((prev, key)=>{
+      prev = {
+        ...prev,
+        [ key ] : paramTemp[key]
+      };
       return prev;
     }, {});
 
     let queryString: string =  Object.keys(sortedSet).reduce( (prev, curr) => {
-      return prev + curr + '=' + sortedSet[curr] + '&';
+      return prev + curr + '=' + encodeURIComponent(sortedSet[curr]) + '&';
     }, '' ).slice(0, -1);
 
     const baseString = Oauth.getBaseString( requestInfo, queryString );

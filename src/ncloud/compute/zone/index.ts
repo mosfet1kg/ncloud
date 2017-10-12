@@ -6,7 +6,7 @@ import {
 
 import axios from 'axios';
 import * as url from 'url';
-import paramSet from './paramSet';
+// import paramSet from './paramSet';
 
 export interface InterfaceZone {
   findZones( callback: InterfaceCallback ): void;
@@ -19,7 +19,7 @@ export function findZones( callback: InterfaceCallback ): void {
   requestAction: 'getZoneList',
   };
 
-  const queryString: string = this.oauth.getQueryString( {}, paramSet['findZones'], requestInfo );
+  const queryString: string = this.oauth.getQueryString( {}, requestInfo );
 
   axios.get(
     url.resolve( requestInfo.requestUrl, `?${queryString}`)

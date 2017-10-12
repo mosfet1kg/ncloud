@@ -20,7 +20,7 @@ export function findAccessControlGroup(callback: InterfaceCallback ): void {
     requestAction: 'getAccessControlGroupList',
   };
 
-  const queryString: string = this.oauth.getQueryString( {}, paramSet['findACG'], requestInfo );
+  const queryString: string = this.oauth.getQueryString( {}, requestInfo );
 
   axios.get(
     url.resolve( requestInfo.requestUrl, `?${queryString}`)
