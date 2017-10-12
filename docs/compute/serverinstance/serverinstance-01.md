@@ -98,7 +98,7 @@ Retunrs the server in the callback `f(err, server)`;
  | `loginKeyName` | `string` | optional | The name of loginKey that is used for public key encryption. List of loginKeys can be got from `findLoginKeys` method(action `getLoginKeyList`). |
  | `feeSystemTypeCode` | `string` | optional | either `MTRAT` or `FXSUM`(default `MTRAT`) |
  | `zoneNo` | `number` | optional | zone number to determine which zone the resulting VM will be located in. List of zones can be got from `findZones` method(action `getZoneList`).  | 
- | `accessControlGroupConfigurationNoList` | `number[]` | optional  | The number list for predefined firewall configurations. That can be got from 'findAccessControlGroup' method(`getAccessControlGroupList` action). **Length of list can be up to 5.** |
+ | `accessControlGroup`<br/>`ConfigurationNoList` | `number[]` | optional  | The number list for predefined firewall configurations. That can be got from 'findAccessControlGroup' method(`getAccessControlGroupList` action). **Length of list can be up to 5.** |
  | `userData` | `string` | optional | When first startup, VM executes `userData`. <br/>**Linux**: Python, Perl, Shell and etc are available.  At the beginning of script, there must be executable environment such as `#!/usr/bin/env python`, `#!/bin/perl` and `#!/bin/bash`.  <br/>**Windows**: Visual Basic script is available only. <br/> **\[Script should be written in English\]**   |      
   
   
