@@ -58,7 +58,28 @@ export default {
       {'src':'serverImageProductCode', 'dst':'vmImageId' },
       {'src':'serverProductCode', 'dst': 'vmFlavorId' }
     ]
-
+  },
+  startServer: {
+    param: [ 'serverInstanceNo' ],
+    required: [ 'serverInstanceNo' ],
+    request_alias: [
+      {'src': 'serverInstanceNo', 'dst': 'serverInstanceNoList.1'}
+    ],
+    response_alias: [
+      {'src':'serverImageProductCode', 'dst':'vmImageId' },
+      {'src':'serverProductCode', 'dst': 'vmFlavorId' }
+    ]
+  },
+  stopServer: {
+    param: [ 'serverInstanceNo' ],
+    required: [ 'serverInstanceNo' ],
+    request_alias: [
+      {'src': 'serverInstanceNo', 'dst': 'serverInstanceNoList.1'}
+    ],
+    response_alias: [
+      {'src':'serverImageProductCode', 'dst':'vmImageId' },
+      {'src':'serverProductCode', 'dst': 'vmFlavorId' }
+    ]
   }
 };
 

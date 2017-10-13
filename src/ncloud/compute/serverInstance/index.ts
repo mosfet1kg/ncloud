@@ -27,6 +27,8 @@ export interface InterfaceServerInstance {
   destroyServer( args: { serverInstanceNo: string | number }, callback: InterfaceCallback )
   rebuildServer( args: { serverInstanceNo: string | number, vmFlavorId: string }, callback: InterfaceCallback )
   rebootServer(  args: { serverInstanceNo: string | number }, callback: InterfaceCallback )
+  startServer(   args: { serverInstanceNo: string | number }, callback: InterfaceCallback )
+  stopServer(    args: { serverInstanceNo: string | number }, callback: InterfaceCallback )
 }
 
 export function findServers( callback: InterfaceCallback ): void {
@@ -152,9 +154,49 @@ export function rebootServer( args, callback: InterfaceCallback ) {
 }
 
 export function startServer( args, callback: InterfaceCallback ) {
+  const requestInfo: InterfaceRequestInfo = {
+    requestMethod: 'GET',
+    requestUrl: this.requestUrl,
+    requestAction: 'startServerInstances',
+  };
 
+  args = alias( args, paramSet[ 'startServer' ].request_alias );
+  const queryString: string = this.oauth.getQueryString( args, requestInfo );
+
+  axios.get(
+    url.resolve( requestInfo.requestUrl, `?${queryString}`)
+  ).then( function(response){
+
+    if( response.data.startServerInstancesResponse.returnCode !== 0){
+      callback( new Error(response.data.startServerInstancesResponse.returnMessage ), null );
+    }else{
+      const result = response.data.startServerInstancesResponse.serverInstanceList[0].serverInstance;
+      callback( null, alias( result, paramSet['startServer'].response_alias ) );
+    }
+  })
+    .catch( err=>errorHandling(err, callback));
 }
 
 export function stopServer( args, callback: InterfaceCallback ) {
+  const requestInfo: InterfaceRequestInfo = {
+    requestMethod: 'GET',
+    requestUrl: this.requestUrl,
+    requestAction: 'stopServerInstances',
+  };
 
+  args = alias( args, paramSet[ 'stopServer' ].request_alias );
+  const queryString: string = this.oauth.getQueryString( args, requestInfo );
+
+  axios.get(
+    url.resolve( requestInfo.requestUrl, `?${queryString}`)
+  ).then( function(response){
+
+    if( response.data.stopServerInstancesResponse.returnCode !== 0){
+      callback( new Error(response.data.stopServerInstancesResponse.returnMessage ), null );
+    }else{
+      const result = response.data.stopServerInstancesResponse.serverInstanceList[0].serverInstance;
+      callback( null, alias( result, paramSet['stopServer'].response_alias ) );
+    }
+  })
+    .catch( err=>errorHandling(err, callback));
 }
