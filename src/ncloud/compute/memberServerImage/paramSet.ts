@@ -17,7 +17,7 @@ export default {
   },
   createPrivateImage: {
     param: ['privateImageName','privateImageDescription','serverInstanceNo'],required:['serverInstanceNo'],
-    constraint: [
+    constraints: [
       { name: 'privateImageName', type: 'string', restrict:"length", minLength: 3, maxLength: 30 },
       { name: 'privateImageDescription', type: 'string', restrict:"length", minLength: 10, maxLength: 1000 },
     ],
@@ -41,13 +41,10 @@ export default {
       { src: 'originalServerProductCode', dst: 'originalVmFlavorId'},
     ]
   },
-  destroyPrivateImages: {
-    param: ['privateImageNoList'],required:['privateImageNoList'],
-    constraint: [
-      { name: 'privateImageNoList', type: 'array', restrict:"numItems", minItems: 1 }
-    ],
+  destroyPrivateImage: {
+    param: ['privateImageNo'],required:['privateImageNo'],
     request_alias: [
-      { src: "privateImageNoList", dst: "memberServerImageNoList" }
+      { src: "privateImageNo", dst: "memberServerImageNoList.1" }
     ],
     response_alias: [
       { src: 'memberServerImageBlockStorageTotalRows', dst: 'privateImageBlockStorageTotalRows'},

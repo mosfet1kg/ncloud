@@ -74,6 +74,24 @@ export class Compute implements InterfaceCompute {
     serverInstance.createServer.bind(this).apply( this, arguments );
   }
 
+  @ValidParametersOnly(getParams(__dirname))
+  @ValidConstraintsOnly(getParams(__dirname))
+  destroyServer( args, callback: InterfaceCallback ) {
+    serverInstance.destroyServer.bind(this).apply( this, arguments );
+  }
+
+  @ValidParametersOnly(getParams(__dirname))
+  @ValidConstraintsOnly(getParams(__dirname))
+  rebuildServer( args, callback: InterfaceCallback ) {
+    serverInstance.rebuildServer.bind(this).apply( this, arguments );
+  }
+
+  @ValidParametersOnly(getParams(__dirname))
+  @ValidConstraintsOnly(getParams(__dirname))
+  rebootServer( args, callback: InterfaceCallback ) {
+    serverInstance.rebootServer.bind(this).apply( this, arguments );
+  }
+
   /** accessControlGroup **/
   findAccessControlGroup( callback: InterfaceCallback ){
     accessControlGroup.findAccessControlGroup.bind(this).apply( this, arguments );
@@ -90,5 +108,5 @@ export class Compute implements InterfaceCompute {
   @MustIncludeRequiredParameters(getParams(__dirname))
   @ValidParametersOnly(getParams(__dirname))
   @ValidConstraintsOnly(getParams(__dirname))
-  destroyPrivateImages( args, callback: InterfaceCallback ) { memberServerImage.destroyPrivateImages.bind(this).apply(this,arguments); }
+  destroyPrivateImage( args, callback: InterfaceCallback ) { memberServerImage.destroyPrivateImage.bind(this).apply(this,arguments); }
 }

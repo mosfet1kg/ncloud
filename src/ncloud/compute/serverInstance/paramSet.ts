@@ -8,7 +8,7 @@ export default {
     ]
   },
   createServer : {
-    constraint: [
+    constraints: [
       { names: ['vmImageId','privateImageNo'], type: 'array', restrict:"onlyOneExist" },
       { name: 'accessControlGroupConfigurationNoList', type: 'array', restrict:"numItems", minItems: 1, maxItems:5, required: false },
       { name: 'userData', type: 'string', restrict: 'length', minLength: 1, maxLength: 21847, required: false }
@@ -25,6 +25,40 @@ export default {
       {'src':'serverImageProductCode', 'dst':'vmImageId' },
       {'src':'serverProductCode', 'dst': 'vmFlavorId' }
     ]
+  },
+  destroyServer: {
+    param: [ 'serverInstanceNo' ],
+    required: [ 'serverInstanceNo' ],
+    request_alias: [
+      {'src': 'serverInstanceNo', 'dst': "serverInstanceNoList.1"}
+    ],
+    response_alias: [
+      {'src':'serverImageProductCode', 'dst':'vmImageId' },
+      {'src':'serverProductCode', 'dst': 'vmFlavorId' }
+    ]
+  },
+  rebuildServer: {
+    param: [ 'serverInstanceNo', 'vmFlavorId' ],
+    required: [ 'serverInstanceNo', 'vmFlavorId' ],
+    request_alias: [
+      { 'src': 'vmFlavorId', 'dst': 'serverProductCode' }
+    ],
+    response_alias: [
+      {'src':'serverImageProductCode', 'dst':'vmImageId' },
+      {'src':'serverProductCode', 'dst': 'vmFlavorId' }
+    ]
+  },
+  rebootServer: {
+    param: [ 'serverInstanceNo' ],
+    required: [ 'serverInstanceNo' ],
+    request_alias: [
+      {'src': 'serverInstanceNo', 'dst': 'serverInstanceNoList.1'}
+    ],
+    response_alias: [
+      {'src':'serverImageProductCode', 'dst':'vmImageId' },
+      {'src':'serverProductCode', 'dst': 'vmFlavorId' }
+    ]
+
   }
 };
 

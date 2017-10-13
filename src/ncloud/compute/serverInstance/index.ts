@@ -24,6 +24,9 @@ export interface InterfaceServerInstance {
                   accessControlGroupConfigurationNoList?: string[] | number[];
                   userData?: string;},
                 callback: InterfaceCallback ): void;
+  destroyServer( args: { serverInstanceNo: string | number }, callback: InterfaceCallback )
+  rebuildServer( args: { serverInstanceNo: string | number, vmFlavorId: string }, callback: InterfaceCallback )
+  rebootServer(  args: { serverInstanceNo: string | number }, callback: InterfaceCallback )
 }
 
 export function findServers( callback: InterfaceCallback ): void {
@@ -74,4 +77,84 @@ export function createServer( args, callback: InterfaceCallback ) {
     }
   })
     .catch( err=>errorHandling(err, callback));
+}
+
+export function destroyServer( args, callback: InterfaceCallback ) {
+  const requestInfo: InterfaceRequestInfo = {
+    requestMethod: 'GET',
+    requestUrl: this.requestUrl,
+    requestAction: 'terminateServerInstances',
+  };
+
+  args = alias( args, paramSet[ 'destroyServer' ].request_alias );
+  const queryString: string = this.oauth.getQueryString( args, requestInfo );
+
+  axios.get(
+    url.resolve( requestInfo.requestUrl, `?${queryString}`)
+  ).then( function(response){
+
+    if( response.data.terminateServerInstancesResponse.returnCode !== 0){
+      callback( new Error(response.data.terminateServerInstancesResponse.returnMessage ), null );
+    }else{
+      const result = response.data.terminateServerInstancesResponse.serverInstanceList[0].serverInstance;
+      callback( null, alias( result, paramSet['destroyServer'].response_alias ) );
+    }
+  })
+    .catch( err=>errorHandling(err, callback));
+}
+
+export function rebuildServer( args, callback: InterfaceCallback ) {
+  const requestInfo: InterfaceRequestInfo = {
+    requestMethod: 'GET',
+    requestUrl: this.requestUrl,
+    requestAction: 'changeServerInstanceSpec',
+  };
+
+  args = alias( args, paramSet[ 'rebuildServer' ].request_alias );
+  const queryString: string = this.oauth.getQueryString( args, requestInfo );
+
+  axios.get(
+    url.resolve( requestInfo.requestUrl, `?${queryString}`)
+  ).then( function(response){
+
+    if( response.data.changeServerInstanceSpecResponse.returnCode !== 0){
+      callback( new Error(response.data.changeServerInstanceSpecResponse.returnMessage ), null );
+    }else{
+      const result = response.data.changeServerInstanceSpecResponse.serverInstanceList[0].serverInstance;
+      callback( null, alias( result, paramSet['rebuildServer'].response_alias ) );
+    }
+  })
+    .catch( err=>errorHandling(err, callback));
+}
+
+export function rebootServer( args, callback: InterfaceCallback ) {
+  const requestInfo: InterfaceRequestInfo = {
+    requestMethod: 'GET',
+    requestUrl: this.requestUrl,
+    requestAction: 'rebootServerInstances',
+  };
+
+  args = alias( args, paramSet[ 'rebootServer' ].request_alias );
+  const queryString: string = this.oauth.getQueryString( args, requestInfo );
+
+  axios.get(
+    url.resolve( requestInfo.requestUrl, `?${queryString}`)
+  ).then( function(response){
+
+    if( response.data.rebootServerInstancesResponse.returnCode !== 0){
+      callback( new Error(response.data.rebootServerInstancesResponse.returnMessage ), null );
+    }else{
+      const result = response.data.rebootServerInstancesResponse.serverInstanceList[0].serverInstance;
+      callback( null, alias( result, paramSet['rebootServer'].response_alias ) );
+    }
+  })
+    .catch( err=>errorHandling(err, callback));
+}
+
+export function startServer( args, callback: InterfaceCallback ) {
+
+}
+
+export function stopServer( args, callback: InterfaceCallback ) {
+
 }

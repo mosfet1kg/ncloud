@@ -13,7 +13,7 @@ import paramSet from './paramSet';
 export interface InterfaceMemberServerImage {
   findPrivateImages( callback: InterfaceCallback ): void;
   createPrivateImage( args: { privateImageName?: string, privateImageDescription?: string, serverInstanceNo: string | number }, callback: InterfaceCallback ): void;
-  destroyPrivateImages( args: { privateImageNoList: string[] | number[] }, callback: InterfaceCallback ): void;
+  destroyPrivateImage( args: { privateImageNo: string | number }, callback: InterfaceCallback ): void;
 }
 
 export function findPrivateImages( callback: InterfaceCallback ): void {
@@ -72,34 +72,27 @@ export function createPrivateImage( args, callback: InterfaceCallback ): void {
     .catch( err=>errorHandling(err, callback));
 }
 
-export function destroyPrivateImages( args, callback: InterfaceCallback ): void {
+export function destroyPrivateImage( args, callback: InterfaceCallback ): void {
   const requestInfo: InterfaceRequestInfo = {
     requestMethod: 'GET',
     requestUrl: this.requestUrl,
     requestAction: 'deleteMemberServerImages',
   };
 
-  args = alias( args, paramSet[ 'destroyPrivateImages' ].request_alias );
+  args = alias( args, paramSet[ 'destroyPrivateImage' ].request_alias );
 
   const queryString: string = this.oauth.getQueryString( args, requestInfo );
 
   axios.get(
     url.resolve( requestInfo.requestUrl, `?${queryString}`)
   ).then( function(response){
-    // res
-    // { deleteMemberServerImagesResponse:
-    // { requestId: 'a723573b-75a9-4c03-ba0b-3b5565b446fd',
-    //   returnCode: 0,
-    //   returnMessage: 'success',
-    //   totalRows: 2,
-    //   memberServerImageList: [ [Object] ] } }
 
     if( response.data.deleteMemberServerImagesResponse.returnCode !== 0){
       callback( new Error(response.data.deleteMemberServerImagesResponse.returnMessage ), null);
     } else {
       const result = response.data.deleteMemberServerImagesResponse.memberServerImageList[0].memberServerImage;
 
-      callback( null, alias( result, paramSet['destroyPrivateImages'].response_alias ) );
+      callback( null, alias( result, paramSet['destroyPrivateImage'].response_alias ) );
     }
 
   })

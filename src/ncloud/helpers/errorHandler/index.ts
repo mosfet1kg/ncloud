@@ -7,5 +7,7 @@ export function errorHandling( error: any, callback: InterfaceCallback ) {
     error.response.data = error.response.data.responseError;
   }
 
-  callback( new Error(`Error: returnCode: ${ error.response.data.returnCode}, returnMessage: ${ error.response.data.returnMessage }`), null );
+  const newError = new Error(`Error: returnCode: ${ error.response.data.returnCode }, returnMessage: ${ error.response.data.returnMessage }`);
+  newError["returnCode"] =  error.response.data.returnCode;
+  callback( newError, null );
 }

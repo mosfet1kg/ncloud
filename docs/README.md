@@ -44,7 +44,7 @@ const client = ncloud.createClient({
 | LoginKey           | getLoginKeyList           | [findLoginKeys](./compute/loginkey/loginkey-01.md#findloginkeys-action-getloginkeylist)          |
 | MemberServerImage  | getMemberServerImageList  | [findPrivateImages](./compute/memberserverimage/memberserverimage-01.md#findprivateimages-action-getmemberserverimagelist)      |
 | MemberServerImage  | createMemberServerImage   | [createPrivateImage](./compute/memberserverimage/memberserverimage-01.md#createprivateimage-action-creatememberserverimage)     |
-| MemberServerImage  | deleteMemberServerImages  | [destroyPrivateImages](./compute/memberserverimage/memberserverimage-01.md#destroyprivateimages-action-deletememberserverimages)   |
+| MemberServerImage  | deleteMemberServerImages  | [destroyPrivateImage](./compute/memberserverimage/memberserverimage-01.md#destroyprivateimages-action-deletememberserverimage)   |
 | Product            | getServerImageProductList | [findPublicImages](./compute/product/product-01.md#findpublicimages-action-getserverimageproductlist)       |
 | Product            | getServerProductList      | [findFlavors](./compute/product/product-01.md#findflavors-action-getserverproductlist)            |
 | ServerInstance     | getServerInstanceList     | [findServers](./compute/serverinstance/serverinstance-01.md#findservers-action-getserverinstancelist)            |

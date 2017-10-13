@@ -75,7 +75,7 @@ export function isValidIp ( targetIp ) {
 }
 
 export function isValidConstraints( args, paramSet ) {
-  const constraints = paramSet.constraint;
+  const { constraints=[] } = paramSet;
 
   constraints.forEach( constraint=>{
     if ( !isUndefined(constraint.required) && constraint.required === false && isUndefined( args[ constraint.name ]) ) {

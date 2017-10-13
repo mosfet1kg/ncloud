@@ -30,10 +30,14 @@ export class Oauth {
     paramTemp.responseFormatType = 'json';
 
     const sortedSet: object = Object.keys( paramTemp ).sort().reduce((prev, key)=>{
-      prev = {
-        ...prev,
-        [ key ] : paramTemp[key]
-      };
+      if ( Array.isArray( paramTemp[key]) ) {
+        for ( let i: number = 1; i <= paramTemp[key].length ; i++) {
+          prev[ key + '.' + i ] = paramTemp[key][i - 1];
+        }
+      } else {
+        prev[ key ] = paramTemp[ key ];
+      } // end if
+
       return prev;
     }, {});
 

@@ -5,7 +5,7 @@ export default {
   },
   createLoginKey: {
     param: ['keyName'],required:['keyName'],
-    constraint: [{ name: 'keyName', type: 'string', restrict:"length", maxLength: 30, minLength: 3 }],
+    constraints: [{ name: 'keyName', type: 'string', restrict:"length", maxLength: 30, minLength: 3 }],
     request_alias: [], response_alias: []
   }
 };
