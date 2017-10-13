@@ -1,14 +1,12 @@
 # Introduction
 
 ncloud
-=======
+======
+![](./assets/ncloudicon-01.png)   
 [![NPM](https://nodei.co/npm/ncloud.png?compact=true)](https://nodei.co/npm/ncloud/)  
 The NAVER Cloud Platform(https://www.ncloud.com/) Library for Node.js  
 https://www.npmjs.com/package/ncloud  
 **Currently, this package supports geolocation only.... The other functions are unstable...**
-
-# Author
-Gyubeom Choi <mosfet1kg@gmail.com>
 
 # Installing Dependencies
 ```
