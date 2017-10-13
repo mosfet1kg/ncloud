@@ -80,7 +80,6 @@ client.compute.findServers( function( error, response ){
 
 ---
 
-# Compute : ServerInstance  
 ## `createServer`, action `createServerInstances` 
 Creates a server with the options specified.
 Retunrs the server in the callback `f(err, server)`;
@@ -90,8 +89,8 @@ Retunrs the server in the callback `f(err, server)`;
  
  | Input parameter    | Type       | Required     | Description |
  |--------------------|------------|--------------|-------------|
- | `vmImageId` | `string`   | conditional | Unique Id of a public image that can be got from `findPublicImages` method(action `getServerImageProductList`). **If `privateImageNo` is used, this argument is not available.**   |
- | `privateImageNo` | `string` | conditional | Unique No of a private image that you have built. It can be got from `findPrivateImages` method(action `getMemberServerImageList`). **If `vmImageId` is used, this argument is not available.** | 
+ | `vmImageId` | `string`   | conditional | Unique Id of a public image that can be got from `findPublicImages` method(action `getServerImageProductList`). **If `privateImageNo` is used, this argument is not available and vice versa.**   |
+ | `privateImageNo` | `string` | conditional | Unique No of a private image that you have built. It can be got from `findPrivateImages` method(action `getMemberServerImageList`). **If `vmImageId` is used, this argument is not available and vice versa.** | 
  | `vmFlavorId` | `string` | optional | an Id for one of VM hardware templates. It can be got from `findFlavors` method(action `getServerProductList`).     |
  | `serverName` | `string` | optional | name for the resulting server. |
  | `serverDescription` | `string` | optional | description for the resulting server. |
@@ -108,7 +107,7 @@ Retunrs the server in the callback `f(err, server)`;
     vmImageId: 'SPSW0LINUX000046',
     vmFlavorId: 'SPSVRSSD00000010',
     serverName: 'helloworld40',
-    serverDescription: "test",
+    serverDescription: 'test',
     loginKeyName : 'testgb',
     accessControlGroupConfigurationNoList: [4656],
   }, function(err, res) {
@@ -153,7 +152,7 @@ Retunrs the server in the callback `f(err, server)`;
     privateImageNo : 3803,
     vmFlavorId: 'SPSVRSSD00000010',
     serverName: 'helloworld41',
-    serverDescription: "test",
+    serverDescription: 'test',
     loginKeyName : 'testgb',
     accessControlGroupConfigurationNoList: [4656],
     // userData: file//'#!/bin/bash \n\n echo test > ~/test'   //'#!/bin/bash \n\n echo helloworld > ~/helloworld \n touch ~/test'   // touch ~/helloWorld'  // Tilde  // yum update -y && yum upgrade -y
@@ -199,7 +198,7 @@ Retunrs the server in the callback `f(err, server)`;
     vmImageId: 'SPSW0LINUX000046',
     vmFlavorId: 'SPSVRSSD00000010',
     serverName: 'helloworld45',
-    serverDescription: "test",
+    serverDescription: 'test',
     loginKeyName : 'testgb',
     accessControlGroupConfigurationNoList: [4656],
     userData: "#!/bin/bash \n yum update -y && yum install -y vim \n mkdir ~/helloWorld"
@@ -246,7 +245,7 @@ Retunrs the server in the callback `f(err, server)`;
     vmImageId: 'SPSW0LINUX000046',
     vmFlavorId: 'SPSVRSSD00000010',
     serverName: 'helloworld46',
-    serverDescription: "test",
+    serverDescription: 'test',
     loginKeyName : 'testgb',
     accessControlGroupConfigurationNoList: [4656],
     userData: fs.readFileSync('./testFile.sh', 'utf8')

@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>serverInstance · GitBook</title>
+        <title>ServerInstance · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -121,7 +121,7 @@
                 <a href="../accesscontrolgroup/accesscontrolgroup-01.html">
             
                     
-                    accessControlGroup
+                    AccessControlGroup
             
                 </a>
             
@@ -134,7 +134,7 @@
                 <a href="../loginkey/loginkey-01.html">
             
                     
-                    loginKey
+                    LoginKey
             
                 </a>
             
@@ -147,7 +147,7 @@
                 <a href="../product/product-01.html">
             
                     
-                    product
+                    Product
             
                 </a>
             
@@ -160,7 +160,7 @@
                 <a href="serverinstance-01.html">
             
                     
-                    serverInstance
+                    ServerInstance
             
                 </a>
             
@@ -173,7 +173,7 @@
                 <a href="../memberserverimage/memberserverimage-01.html">
             
                     
-                    memberServerImage
+                    MemberServerImage
             
                 </a>
             
@@ -186,7 +186,7 @@
                 <a href="../zone/zone-01.html">
             
                     
-                    zone
+                    Zone
             
                 </a>
             
@@ -225,7 +225,7 @@
                 <a href="../../openapi/geolocation/geo-1.html">
             
                     
-                    geolocation
+                    Geolocation
             
                 </a>
             
@@ -268,7 +268,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >serverInstance</a>
+        <a href="../.." >ServerInstance</a>
     </h1>
 </div>
 
@@ -359,7 +359,6 @@
 });
 </code></pre>
 <hr>
-<h1 id="compute--serverinstance">Compute : ServerInstance</h1>
 <h2 id="createserver-action-createserverinstances"><code>createServer</code>, action <code>createServerInstances</code></h2>
 <p>Creates a server with the options specified.
 Retunrs the server in the callback <code>f(err, server)</code>;</p>
@@ -379,13 +378,13 @@ Retunrs the server in the callback <code>f(err, server)</code>;</p>
 <td><code>vmImageId</code></td>
 <td><code>string</code></td>
 <td>conditional</td>
-<td>Unique Id of a public image that can be got from <code>findPublicImages</code> method(action <code>getServerImageProductList</code>). <strong>If <code>privateImageNo</code> is used, this argument is not available.</strong></td>
+<td>Unique Id of a public image that can be got from <code>findPublicImages</code> method(action <code>getServerImageProductList</code>). <strong>If <code>privateImageNo</code> is used, this argument is not available and vice versa.</strong></td>
 </tr>
 <tr>
 <td><code>privateImageNo</code></td>
 <td><code>string</code></td>
 <td>conditional</td>
-<td>Unique No of a private image that you have built. It can be got from <code>findPrivateImages</code> method(action <code>getMemberServerImageList</code>). <strong>If <code>vmImageId</code> is used, this argument is not available.</strong></td>
+<td>Unique No of a private image that you have built. It can be got from <code>findPrivateImages</code> method(action <code>getMemberServerImageList</code>). <strong>If <code>vmImageId</code> is used, this argument is not available and vice versa.</strong></td>
 </tr>
 <tr>
 <td><code>vmFlavorId</code></td>
@@ -442,7 +441,7 @@ Retunrs the server in the callback <code>f(err, server)</code>;</p>
     vmImageId: <span class="hljs-string">&apos;SPSW0LINUX000046&apos;</span>,
     vmFlavorId: <span class="hljs-string">&apos;SPSVRSSD00000010&apos;</span>,
     serverName: <span class="hljs-string">&apos;helloworld40&apos;</span>,
-    serverDescription: <span class="hljs-string">&quot;test&quot;</span>,
+    serverDescription: <span class="hljs-string">&apos;test&apos;</span>,
     loginKeyName : <span class="hljs-string">&apos;testgb&apos;</span>,
     accessControlGroupConfigurationNoList: [<span class="hljs-number">4656</span>],
   }, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, res</span>) </span>{
@@ -485,7 +484,7 @@ Retunrs the server in the callback <code>f(err, server)</code>;</p>
     privateImageNo : <span class="hljs-number">3803</span>,
     vmFlavorId: <span class="hljs-string">&apos;SPSVRSSD00000010&apos;</span>,
     serverName: <span class="hljs-string">&apos;helloworld41&apos;</span>,
-    serverDescription: <span class="hljs-string">&quot;test&quot;</span>,
+    serverDescription: <span class="hljs-string">&apos;test&apos;</span>,
     loginKeyName : <span class="hljs-string">&apos;testgb&apos;</span>,
     accessControlGroupConfigurationNoList: [<span class="hljs-number">4656</span>],
     <span class="hljs-comment">// userData: file//&apos;#!/bin/bash \n\n echo test &gt; ~/test&apos;   //&apos;#!/bin/bash \n\n echo helloworld &gt; ~/helloworld \n touch ~/test&apos;   // touch ~/helloWorld&apos;  // Tilde  // yum update -y &amp;&amp; yum upgrade -y</span>
@@ -529,7 +528,7 @@ Retunrs the server in the callback <code>f(err, server)</code>;</p>
     vmImageId: <span class="hljs-string">&apos;SPSW0LINUX000046&apos;</span>,
     vmFlavorId: <span class="hljs-string">&apos;SPSVRSSD00000010&apos;</span>,
     serverName: <span class="hljs-string">&apos;helloworld45&apos;</span>,
-    serverDescription: <span class="hljs-string">&quot;test&quot;</span>,
+    serverDescription: <span class="hljs-string">&apos;test&apos;</span>,
     loginKeyName : <span class="hljs-string">&apos;testgb&apos;</span>,
     accessControlGroupConfigurationNoList: [<span class="hljs-number">4656</span>],
     userData: <span class="hljs-string">&quot;#!/bin/bash \n yum update -y &amp;&amp; yum install -y vim \n mkdir ~/helloWorld&quot;</span>
@@ -575,7 +574,7 @@ Retunrs the server in the callback <code>f(err, server)</code>;</p>
   vmImageId: <span class="hljs-string">&apos;SPSW0LINUX000046&apos;</span>,
   vmFlavorId: <span class="hljs-string">&apos;SPSVRSSD00000010&apos;</span>,
   serverName: <span class="hljs-string">&apos;helloworld46&apos;</span>,
-  serverDescription: <span class="hljs-string">&quot;test&quot;</span>,
+  serverDescription: <span class="hljs-string">&apos;test&apos;</span>,
   loginKeyName : <span class="hljs-string">&apos;testgb&apos;</span>,
   accessControlGroupConfigurationNoList: [<span class="hljs-number">4656</span>],
   userData: fs.readFileSync(<span class="hljs-string">&apos;./testFile.sh&apos;</span>, <span class="hljs-string">&apos;utf8&apos;</span>)
@@ -650,12 +649,12 @@ mkdir ~/<span class="hljs-built_in">test</span>
 
             
                 
-                <a href="../product/product-01.html" class="navigation navigation-prev " aria-label="Previous page: product">
+                <a href="../product/product-01.html" class="navigation navigation-prev " aria-label="Previous page: Product">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../memberserverimage/memberserverimage-01.html" class="navigation navigation-next " aria-label="Next page: memberServerImage">
+                <a href="../memberserverimage/memberserverimage-01.html" class="navigation navigation-next " aria-label="Next page: MemberServerImage">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -666,7 +665,7 @@ mkdir ~/<span class="hljs-built_in">test</span>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"serverInstance","level":"1.2.4","depth":2,"next":{"title":"memberServerImage","level":"1.2.5","depth":2,"path":"compute/memberserverimage/memberserverimage-01.md","ref":"./compute/memberserverimage/memberserverimage-01.md","articles":[]},"previous":{"title":"product","level":"1.2.3","depth":2,"path":"compute/product/product-01.md","ref":"./compute/product/product-01.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"compute/serverinstance/serverinstance-01.md","mtime":"2017-10-12T18:08:47.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-10-12T18:09:03.407Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ServerInstance","level":"1.2.4","depth":2,"next":{"title":"MemberServerImage","level":"1.2.5","depth":2,"path":"compute/memberserverimage/memberserverimage-01.md","ref":"./compute/memberserverimage/memberserverimage-01.md","articles":[]},"previous":{"title":"Product","level":"1.2.3","depth":2,"path":"compute/product/product-01.md","ref":"./compute/product/product-01.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"compute/serverinstance/serverinstance-01.md","mtime":"2017-10-13T13:17:48.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-10-13T13:21:10.811Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

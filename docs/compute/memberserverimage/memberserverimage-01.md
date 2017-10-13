@@ -1,4 +1,4 @@
-# Compute : memberServerImage  
+# Compute : MemberServerImage  
 
 ## `findPrivateImages`, action `getMemberServerImageList` 
 Lists all private Images that are available to use on your ncloud account.  

@@ -37,6 +37,30 @@ const client = ncloud.createClient({
 });
 ```
 
+# Quick Links
+### Compute
+
+| Category           | Action                    |      Method            |
+|--------------------|---------------------------|------------------------|
+| AccessControlGroup | getAccessControlGroupList | [findAccessControlGroup](./compute/accesscontrolgroup/accesscontrolgroup-01.md#findaccesscontrolgroup-action-getaccesscontrolgrouplist) |
+| LoginKey           | getLoginKeyList           | [findLoginKeys](./compute/loginkey/loginkey-01.md#findloginkeys-action-getloginkeylist)          |
+| MemberServerImage  | getMemberServerImageList  | [findPrivateImages](./compute/memberserverimage/memberserverimage-01.md#findprivateimages-action-getmemberserverimagelist)      |
+| MemberServerImage  | createMemberServerImage   | [createPrivateImage](./compute/memberserverimage/memberserverimage-01.md#createprivateimage-action-creatememberserverimage)     |
+| MemberServerImage  | deleteMemberServerImages  | [destroyPrivateImages](./compute/memberserverimage/memberserverimage-01.md#destroyprivateimages-action-deletememberserverimages)   |
+| Product            | getServerImageProductList | [findPublicImages](./compute/product/product-01.md#findpublicimages-action-getserverimageproductlist)       |
+| Product            | getServerProductList      | [findFlavors](./compute/product/product-01.md#findflavors-action-getserverproductlist)            |
+| ServerInstance     | getServerInstanceList     | [findServers](./compute/serverinstance/serverinstance-01.md#findservers-action-getserverinstancelist)            |
+| ServerInstance     | createServerInstances     | [createServer](./compute/serverinstance/serverinstance-01.md#createserver-action-createserverinstances)           |
+| Zone               | getZoneList               | [findZones](./compute/zone/zone-01.md#findzones-action-getzonelist)              |
+
+
+### OpenAPI
+
+| Category          | Action                     | Method                 |
+|-------------------|----------------------------|------------------------|
+| Geolocation       | getLocation                | [findLocation](./openapi/geolocation/geo-1.md#findlocation-action-getlocation)       |
+ 
+
 # Others 
 `ncloud` supports type definitions. It is readily available in typescript.  
 ![](./assets/ts-01.png)
