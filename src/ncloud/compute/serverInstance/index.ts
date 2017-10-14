@@ -8,6 +8,7 @@ import {
 import axios from 'axios';
 import * as url from 'url';
 import paramSet from './paramSet';
+import { isUndefined, isObject, isArray, isFunction, isNull } from 'lodash';
 
 export interface InterfaceServerInstance {
   findServers( callback: InterfaceCallback ): void;
@@ -24,11 +25,12 @@ export interface InterfaceServerInstance {
                   accessControlGroupConfigurationNoList?: string[] | number[];
                   userData?: string;},
                 callback: InterfaceCallback ): void;
-  destroyServer( args: { serverInstanceNo: string | number }, callback: InterfaceCallback )
-  rebuildServer( args: { serverInstanceNo: string | number, vmFlavorId: string }, callback: InterfaceCallback )
-  rebootServer(  args: { serverInstanceNo: string | number }, callback: InterfaceCallback )
-  startServer(   args: { serverInstanceNo: string | number }, callback: InterfaceCallback )
-  stopServer(    args: { serverInstanceNo: string | number }, callback: InterfaceCallback )
+  destroyServer(    args: { serverInstanceNo: string | number }, callback: InterfaceCallback ): void;
+  rebuildServer(    args: { serverInstanceNo: string | number, vmFlavorId: string }, callback: InterfaceCallback ): void;
+  rebootServer(     args: { serverInstanceNo: string | number }, callback: InterfaceCallback ): void;
+  startServer(      args: { serverInstanceNo: string | number }, callback: InterfaceCallback ): void;
+  stopServer(       args: { serverInstanceNo: string | number }, callback: InterfaceCallback ): void;
+  findRootPassword( args: { serverInstanceNo: string | number, privateKey: string }, callback: InterfaceCallback ): void;
 }
 
 export function findServers( callback: InterfaceCallback ): void {
@@ -199,4 +201,49 @@ export function stopServer( args, callback: InterfaceCallback ) {
     }
   })
     .catch( err=>errorHandling(err, callback));
+}
+
+export function findRootPassword( args, callback: InterfaceCallback ) {
+  const requestInfo: InterfaceRequestInfo = {
+    requestMethod: 'GET',
+    requestUrl: this.requestUrl,
+    requestAction: 'getRootPassword',
+  };
+
+  args.privateKey = args.privateKey + '\n';
+  const queryString: string = this.oauth.getQueryString( args, requestInfo );
+
+  axios.get(
+    url.resolve( requestInfo.requestUrl, `?${queryString}`)
+  ).then( function(response){
+
+    if ( !isUndefined( response.data['com.ncloud.api.server.model.RootPassword']) ) {
+      const rootPassword = response.data['com.ncloud.api.server.model.RootPassword']['rootPassword'];
+      return callback( null, { rootPassword });
+    }
+
+    const rootPassword = getRootPassword( response.data );
+    callback( null, { rootPassword });
+
+  })
+    .catch( err=>errorHandling(err, callback));
+}
+
+function getRootPassword( response ) {
+  let result = null;
+
+  if ( !isUndefined( response['rootPassword'] ) ) {
+    return response['rootPassword'];
+  }
+
+  for( let key of Object.keys(response)  ){
+    if ( isObject( response[key] ) && !isFunction( response[key] ) && !isArray( response[key] ) && Object.keys( response[key] ).length>0 ) {
+      result = getRootPassword( response[key] );
+      if ( !isNull( result ) ) {
+        break;
+      }
+    }
+  }
+
+  return result;
 }

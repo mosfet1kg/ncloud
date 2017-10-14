@@ -16,7 +16,8 @@ export default {
     ]
   },
   createPrivateImage: {
-    param: ['privateImageName','privateImageDescription','serverInstanceNo'],required:['serverInstanceNo'],
+    param: ['privateImageName','privateImageDescription','serverInstanceNo'],
+    required:['serverInstanceNo'],
     constraints: [
       { name: 'privateImageName', type: 'string', restrict:"length", minLength: 3, maxLength: 30 },
       { name: 'privateImageDescription', type: 'string', restrict:"length", minLength: 10, maxLength: 1000 },

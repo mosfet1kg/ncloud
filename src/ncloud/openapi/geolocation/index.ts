@@ -10,12 +10,14 @@ import axios from 'axios';
 import paramSet from './paramSet';
 import * as url from 'url';
 
-const { ValidIpOnly, ValidParametersOnly, MustIncludeRequiredParameters } = Validator;
+const { ValidIpOnly, ValidParametersOnlyClass, MustIncludeRequiredParametersClass } = Validator;
 
 export interface InterfaceGeoLocation {
   findLocation(req: { ip: string, ext?: string, enc?: string } , callback ): void;
 }
 
+@MustIncludeRequiredParametersClass(paramSet)
+@ValidParametersOnlyClass(paramSet)
 export class GeoLocation implements InterfaceGeoLocation {
   private oauth: Oauth;
   private requestUrl: string;
@@ -27,8 +29,6 @@ export class GeoLocation implements InterfaceGeoLocation {
     this.requestUrl = 'https://api.ncloud.com/geolocation/';
   }
 
-  @MustIncludeRequiredParameters(paramSet)
-  @ValidParametersOnly(paramSet)
   @ValidIpOnly
   public findLocation(args, callback: InterfaceCallback ): void {
     const requestInfo: InterfaceRequestInfo = {

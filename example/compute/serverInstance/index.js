@@ -42,5 +42,50 @@ var ncloud = require('../../../lib/');
     }
 
     console.log( res );
+  });
+
+  client.compute.destroyServer({ serverInstanceNo: 500577 }, function(err, res) {
+    if ( err ) {
+
+      return console.log( err.message );
+    }
+
+    console.log( res );
+  });
+
+  client.compute.rebuildServer( { serverInstanceNo: 500580, vmFlavorId: 'SPSVRSSD00000003' }, function (err, res) {
+    if ( err ) {
+      return console.log( err.message );
+    }
+
+    console.log( res );
+  });
+
+  client.compute.rebootServer({ serverInstanceNo: 500580 }, function (err, res) {
+    if ( err ) {
+      return console.log( err.message );
+    }
+
+    console.log( res );
+  });
+
+  client.compute.startServer({ serverInstanceNo: 500580 }, function (err, res) {
+    if ( err ) {
+      return console.log( err.message );
+    }
+
+    console.log( res );
+  });
+
+
+  client.compute.findRootPassword( { serverInstanceNo: 500601, privateKey: fs.readFileSync('./testgb.pem', 'utf8')}, function(err, res) {
+    if ( err ) {
+      return console.log( err.message );
+    }
+
+    console.log( res );
+    // result example =>
+    // { rootPassword: 'B7FEfi*aar' }
   })
+
 })();

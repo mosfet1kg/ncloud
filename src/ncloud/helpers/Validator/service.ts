@@ -46,7 +46,7 @@ export function requiredParamChecker ( args, paramSet ) {
 }
 
 export function isValidParam ( args, paramSet ) {
-  const param = paramSet.param;
+  const  { param=[] } = paramSet;
 
   const invalidParam = Object.keys( args ).map( function(el){
     return (<any>param).map( function(el){
@@ -74,17 +74,17 @@ export function isValidIp ( targetIp ) {
   }
 }
 
-export function isValidConstraints( args, paramSet ) {
-  const { constraints=[] } = paramSet;
+export function isValidConstraints( args, param ) {
+  const { constraints=[], required=[] } = param;
 
   constraints.forEach( constraint=>{
-    if ( !isUndefined(constraint.required) && constraint.required === false && isUndefined( args[ constraint.name ]) ) {
+    if ( isUndefined( args[ constraint.name ]) && indexOf( required, constraint.name ) < 0 ) {
       return;
     }
 
     if( constraint.type === 'string' && constraint.restrict === 'length' ){
       const testResultMinLength = isUndefined(constraint.minLength) ? true : (constraint.minLength <= args[ constraint.name ].length);
-      const testResultMaxLength = isUndefined( constraint.maxLength) ? true : (constraint.maxLength >= args[ constraint.name ].length);
+      const testResultMaxLength = isUndefined(constraint.maxLength) ? true : (constraint.maxLength >= args[ constraint.name ].length);
 
       if( !( testResultMinLength && testResultMaxLength ) ){
         throw new Error(

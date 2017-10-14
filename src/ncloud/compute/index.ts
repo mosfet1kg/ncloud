@@ -12,7 +12,7 @@ import * as serverInstance from './serverInstance';
 import * as accessControlGroup from './accessControlGroup';
 import * as memberServerImage from './memberServerImage';
 import { isNull } from 'lodash';
-const { ValidParametersOnly, MustIncludeRequiredParameters, ValidConstraintsOnly } = Validator;
+const { ValidParametersOnlyClass, MustIncludeRequiredParametersClass, ValidConstraintsOnlyClass } = Validator;
 let params = null;
 
 function getParams( dir ) {
@@ -30,6 +30,9 @@ export interface InterfaceCompute
     memberServerImage.InterfaceMemberServerImage
 { }
 
+@MustIncludeRequiredParametersClass(getParams(__dirname))
+@ValidParametersOnlyClass(getParams(__dirname))
+@ValidConstraintsOnlyClass(getParams(__dirname))
 export class Compute implements InterfaceCompute {
   private oauth: Oauth;
   private requestUrl: string;
@@ -40,13 +43,12 @@ export class Compute implements InterfaceCompute {
   };
 
   /** product **/
-  findPublicImages ( callback: InterfaceCallback ) { product.findPublicImages.bind(this).apply( this, arguments ); }
-
-  @MustIncludeRequiredParameters(getParams(__dirname))
-  @ValidParametersOnly(getParams(__dirname))
+  findPublicImages ( callback: InterfaceCallback ) {
+    product.findPublicImages.bind(this).apply( this, arguments );
+  }
   findFlavors( args, callback: InterfaceCallback ) {
-    product.findFlavors.bind(this).apply( this, arguments); }
-
+    product.findFlavors.bind(this).apply( this, arguments);
+  }
   /** zone **/
   findZones( callback: InterfaceCallback ){
     zone.findZones.bind(this).apply( this, arguments ); }
@@ -55,10 +57,6 @@ export class Compute implements InterfaceCompute {
   findLoginKeys( callback: InterfaceCallback ){
     loginKey.findLoginKeys.bind(this).apply( this, arguments );
   }
-
-  @MustIncludeRequiredParameters(getParams(__dirname))
-  @ValidParametersOnly(getParams(__dirname))
-  @ValidConstraintsOnly(getParams(__dirname))
   createLoginKey( arg, callback: InterfaceCallback ){
     loginKey.createLoginKey.bind(this).apply( this, arguments );
   }
@@ -67,41 +65,26 @@ export class Compute implements InterfaceCompute {
   findServers( callback:InterfaceCallback ){
     serverInstance.findServers.bind(this).apply( this, arguments );
   }
-
-  @ValidParametersOnly(getParams(__dirname))
-  @ValidConstraintsOnly(getParams(__dirname))
   createServer( args, callback: InterfaceCallback ) {
     serverInstance.createServer.bind(this).apply( this, arguments );
   }
-
-  @ValidParametersOnly(getParams(__dirname))
-  @ValidConstraintsOnly(getParams(__dirname))
   destroyServer( args, callback: InterfaceCallback ) {
     serverInstance.destroyServer.bind(this).apply( this, arguments );
   }
-
-  @ValidParametersOnly(getParams(__dirname))
-  @ValidConstraintsOnly(getParams(__dirname))
   rebuildServer( args, callback: InterfaceCallback ) {
     serverInstance.rebuildServer.bind(this).apply( this, arguments );
   }
-
-  @ValidParametersOnly(getParams(__dirname))
-  @ValidConstraintsOnly(getParams(__dirname))
   rebootServer( args, callback: InterfaceCallback ) {
     serverInstance.rebootServer.bind(this).apply( this, arguments );
   }
-
-  @ValidParametersOnly(getParams(__dirname))
-  @ValidConstraintsOnly(getParams(__dirname))
   startServer( args, callback: InterfaceCallback ) {
     serverInstance.startServer.bind(this).apply( this, arguments );
   }
-
-  @ValidParametersOnly(getParams(__dirname))
-  @ValidConstraintsOnly(getParams(__dirname))
   stopServer( args, callback: InterfaceCallback ) {
     serverInstance.stopServer.bind(this).apply( this, arguments );
+  }
+  findRootPassword( args, callback: InterfaceCallback ) {
+    serverInstance.findRootPassword.bind(this).apply( this, arguments );
   }
 
   /** accessControlGroup **/
@@ -110,15 +93,13 @@ export class Compute implements InterfaceCompute {
   }
 
   /** memberServerImage **/
-  findPrivateImages( callback: InterfaceCallback ) { memberServerImage.findPrivateImages.bind(this).apply( this, arguments ); }
-
-  @MustIncludeRequiredParameters(getParams(__dirname))
-  @ValidParametersOnly(getParams(__dirname))
-  @ValidConstraintsOnly(getParams(__dirname))
-  createPrivateImage( args, callback: InterfaceCallback ) { memberServerImage.createPrivateImage.bind(this).apply(this, arguments); }
-
-  @MustIncludeRequiredParameters(getParams(__dirname))
-  @ValidParametersOnly(getParams(__dirname))
-  @ValidConstraintsOnly(getParams(__dirname))
-  destroyPrivateImage( args, callback: InterfaceCallback ) { memberServerImage.destroyPrivateImage.bind(this).apply(this,arguments); }
+  findPrivateImages( callback: InterfaceCallback ) {
+    memberServerImage.findPrivateImages.bind(this).apply( this, arguments );
+  }
+  createPrivateImage( args, callback: InterfaceCallback ) {
+    memberServerImage.createPrivateImage.bind(this).apply(this, arguments);
+  }
+  destroyPrivateImage( args, callback: InterfaceCallback ) {
+    memberServerImage.destroyPrivateImage.bind(this).apply(this,arguments);
+  }
 }
