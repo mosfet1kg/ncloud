@@ -728,10 +728,10 @@ Returns the password for SSH login to access the specified server.
   
 ### Example
 ```javascript
- client.compute.findRootPassword({ serverInstanceNo: 500601, privateKey: fs.readFileSync('./testgb.pem', 'utf8')}, function(err, res) {
-  //   if ( err ) {
-  //     return console.log( err.message );
-  //   }
+client.compute.findRootPassword({ serverInstanceNo: 500601, privateKey: fs.readFileSync('./testgb.pem', 'utf8')}, function(err, res) {
+  if ( err ) {
+      return console.log( err.message );
+  }
   //
   //   console.log( res );
   //   // result example =>
