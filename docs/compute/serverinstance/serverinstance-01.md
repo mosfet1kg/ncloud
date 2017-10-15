@@ -549,7 +549,7 @@ client.compute.startServer({ serverInstanceNo: 500580 }, function (err, res) {
 ## `rebuildServer`, action `changeServerInstanceSpec` 
 Rebuilds the specified server with options
 This method only works for the stopped VMs.  
-After this method executed, you should call `startServer` method to make the VM working because it keeps its STOPPED status. 
+You may as well call `startServer` method to make the VM working because it keeps its STOPPED status after `rebuildServer` method executed. 
 
 ### Arguments  
  
