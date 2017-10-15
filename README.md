@@ -41,6 +41,15 @@ Refer to the following link
 
 
 # Release Note
+v0.1.17
+  - Add `rebootServer` method(action `rebootServerInstances`)
+  - Add `stopServer` method(action `stopServerInstances`)
+  - Add `startServer` method(action `startServerInstances`)
+  - Add `rebuildServer` method(action `changeServerInstanceSpec`)
+  - Add `destroyServer` method(action `terminateServerInstances`)
+  - Add `findRootPassword` method(action `getRootPassword`)  
+  - Add `createLoginKey` method(action `createLoginKey`)  
+        
 v0.1.16
   - Add `createServer` method(action `createServerInstances`)
   

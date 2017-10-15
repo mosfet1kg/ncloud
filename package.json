@@ -1,6 +1,6 @@
 {
   "name": "ncloud",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "description": "The NAVER Cloud Platform(https://www.ncloud.com/) Library for Node.js",
   "engineStrict": true,
   "engines": {
