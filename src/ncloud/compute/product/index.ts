@@ -2,7 +2,8 @@ import {
   InterfaceRequestInfo,
   InterfaceCallback,
   alias,
-  errorHandling
+  errorHandling,
+  responseFilter
 } from '../../';
 
 import axios from 'axios';
@@ -30,7 +31,9 @@ export function findPublicImages( callback: InterfaceCallback ): void {
     if( response.data.getServerImageProductListResponse.returnCode !== 0){
       callback( new Error( response.data.getServerImageProductListResponse.returnMessage), null );
     }else{
-      callback( null, alias( response.data.getServerImageProductListResponse.productList[0].product,
+      const vmImageList = responseFilter(response.data.getServerImageProductListResponse.productList[0], 'product');
+
+      callback( null, alias( vmImageList,
         paramSet[ 'findPublicImages' ].response_alias )
       );
     }
@@ -55,11 +58,12 @@ export function findFlavors( args, callback: InterfaceCallback ): void {
     if( response.data.getServerProductListResponse.returnCode  !== 0){
       callback( new Error( response.data.getServerProductListResponse.returnMessage ), null );
     }else{
-      callback( null, alias(response.data.getServerProductListResponse.productList[0].product,
+      const vmFlavorList = responseFilter(response.data.getServerProductListResponse.productList[0], 'product');
+
+      callback( null, alias( vmFlavorList,
         paramSet[ 'findFlavors' ].response_alias )
       );
     }
   })
     .catch( err=>errorHandling(err, callback));
-
 }

@@ -2,12 +2,12 @@ import {
   InterfaceRequestInfo,
   InterfaceCallback,
   alias,
-  errorHandling
+  errorHandling,
+  responseFilter
 } from '../../';
 
 import axios from 'axios';
 import * as url from 'url';
-import { isArray } from 'lodash';
 import paramSet from './paramSet';
 
 export interface InterfaceMemberServerImage {
@@ -32,10 +32,8 @@ export function findPrivateImages( callback: InterfaceCallback ): void {
     if( response.data.getMemberServerImageListResponse.returnCode !== 0){
       callback( new Error(response.data.getMemberServerImageListResponse.returnMessage ), null);
     } else {
-      let { memberServerImage: privateImageList=[] } = response.data.getMemberServerImageListResponse.memberServerImageList[0];
-      if ( !isArray( privateImageList )  ) {
-        privateImageList = [ privateImageList ];
-      }
+
+      let privateImageList = responseFilter(response.data.getMemberServerImageListResponse.memberServerImageList[0], 'memberServerImage');
 
       privateImageList = alias( privateImageList, paramSet[ 'findPrivateImages' ].response_alias );
 

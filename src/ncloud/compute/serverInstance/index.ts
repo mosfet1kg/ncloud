@@ -2,7 +2,8 @@ import {
   InterfaceRequestInfo,
   InterfaceCallback,
   alias,
-  errorHandling
+  errorHandling,
+  responseFilter
 } from '../../';
 
 import axios from 'axios';
@@ -49,7 +50,9 @@ export function findServers( callback: InterfaceCallback ): void {
     if( response.data.getServerInstanceListResponse.returnCode !== 0){
       callback( new Error(response.data.getServerInstanceListResponse.returnMessage ), null );
     }else{
-      callback( null, alias( response.data.getServerInstanceListResponse.serverInstanceList[0].serverInstance, paramSet['findServers'].response_alias) );
+      const serverInstanceList = responseFilter( response.data.getServerInstanceListResponse.serverInstanceList[0], 'serverInstance' );
+
+      callback( null, alias( serverInstanceList, paramSet['findServers'].response_alias) );
     }
   })
     .catch( err=>errorHandling(err, callback));

@@ -57,7 +57,7 @@ export class Compute implements InterfaceCompute {
   findLoginKeys( callback: InterfaceCallback ){
     loginKey.findLoginKeys.bind(this).apply( this, arguments );
   }
-  createLoginKey( arg, callback: InterfaceCallback ){
+  createLoginKey( args, callback: InterfaceCallback ){
     loginKey.createLoginKey.bind(this).apply( this, arguments );
   }
 

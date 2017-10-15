@@ -12,7 +12,7 @@ var ncloud = require('../../../lib/');
     }else {
       console.log( response );
       // response example =>
-      // [ { zone: { zoneNo: 2, zoneName: 'KR-1', zoneDescription: '가산 NANG zone' } } ]
+      // [ { zoneNo: 2, zoneName: 'KR-1', zoneDescription: '가산 NANG zone' } ]
     }
   });
 

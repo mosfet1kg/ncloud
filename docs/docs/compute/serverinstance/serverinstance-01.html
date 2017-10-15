@@ -288,7 +288,7 @@
 <p>Lists all servers that are available to use on your ncloud account.<br>Callback returns <code>f(err, servers)</code> where <code>servers</code> is an <code>Array</code>.</p>
 <h3 id="arguments">Arguments</h3>
 <p> No Input Arguments</p>
-<h3 id="examples">Examples</h3>
+<h3 id="example">Example</h3>
 <pre><code class="lang-javascript">client.compute.findServers( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> error, response </span>)</span>{
     <span class="hljs-keyword">if</span>( error ){
       <span class="hljs-built_in">console</span>.log( error );
@@ -361,7 +361,7 @@
 <hr>
 <h2 id="createserver-action-createserverinstances"><code>createServer</code>, action <code>createServerInstances</code></h2>
 <p>Creates a server with the options specified.
-Retunrs the server in the callback <code>f(err, server)</code>;</p>
+Returns the server in the callback <code>f(err, server)</code>;</p>
 <h3 id="arguments">Arguments</h3>
 <p> <strong>Tip</strong>: Choose either <code>vmImageId</code> or <code>privateImageNo</code> for VM configuration. </p>
 <table>
@@ -414,7 +414,7 @@ Retunrs the server in the callback <code>f(err, server)</code>;</p>
 <td><code>feeSystemTypeCode</code></td>
 <td><code>string</code></td>
 <td>optional</td>
-<td>either <code>MTRAT</code> or <code>FXSUM</code>(default <code>MTRAT</code>)</td>
+<td>either <code>MTRAT</code> or <code>FXSUM</code>(default <code>MTRAT</code>) <br> <code>MTRAT</code>: Pricing per instance-hour consumed for each instance. <br> <code>FXSUM</code>: Flat rate pricing</td>
 </tr>
 <tr>
 <td><code>zoneNo</code></td>
@@ -437,14 +437,14 @@ Retunrs the server in the callback <code>f(err, server)</code>;</p>
 </tbody>
 </table>
 <h3 id="use-case-1---create-vm-from-a-public-image">Use Case 1 - Create VM from a public image</h3>
-<pre><code class="lang-javascript">  client.compute.createServer({
+<pre><code class="lang-javascript">client.compute.createServer({
     vmImageId: <span class="hljs-string">&apos;SPSW0LINUX000046&apos;</span>,
     vmFlavorId: <span class="hljs-string">&apos;SPSVRSSD00000010&apos;</span>,
     serverName: <span class="hljs-string">&apos;helloworld40&apos;</span>,
     serverDescription: <span class="hljs-string">&apos;test&apos;</span>,
     loginKeyName : <span class="hljs-string">&apos;testgb&apos;</span>,
     accessControlGroupConfigurationNoList: [<span class="hljs-number">4656</span>],
-  }, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, res</span>) </span>{
+}, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, res</span>) </span>{
     <span class="hljs-keyword">if</span>( err ) {
       <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log( err.message );
     }
@@ -477,10 +477,10 @@ Retunrs the server in the callback <code>f(err, server)</code>;</p>
     <span class="hljs-comment">//   baseBlockStorageDiskType: { code: &apos;NET&apos;, codeName: &apos;Network Storage&apos; },</span>
     <span class="hljs-comment">//   userData: &apos;&apos;,</span>
     <span class="hljs-comment">//     accessControlGroupList: [ &apos;&apos; ] }</span>
-  })
+})
 </code></pre>
 <h3 id="use-case-2---create-vm-from-a-private-image">Use Case 2 - Create VM from a private image</h3>
-<pre><code class="lang-javascript">  client.compute.createServer({
+<pre><code class="lang-javascript">client.compute.createServer({
     privateImageNo : <span class="hljs-number">3803</span>,
     vmFlavorId: <span class="hljs-string">&apos;SPSVRSSD00000010&apos;</span>,
     serverName: <span class="hljs-string">&apos;helloworld41&apos;</span>,
@@ -488,43 +488,43 @@ Retunrs the server in the callback <code>f(err, server)</code>;</p>
     loginKeyName : <span class="hljs-string">&apos;testgb&apos;</span>,
     accessControlGroupConfigurationNoList: [<span class="hljs-number">4656</span>],
     <span class="hljs-comment">// userData: file//&apos;#!/bin/bash \n\n echo test &gt; ~/test&apos;   //&apos;#!/bin/bash \n\n echo helloworld &gt; ~/helloworld \n touch ~/test&apos;   // touch ~/helloWorld&apos;  // Tilde  // yum update -y &amp;&amp; yum upgrade -y</span>
-  }, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, res</span>) </span>{
+}, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, res</span>) </span>{
     <span class="hljs-keyword">if</span>( err ) {
       <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log( err.message );
     }
 
     <span class="hljs-built_in">console</span>.log( res );
-  <span class="hljs-comment">// result example =&gt;</span>
-  <span class="hljs-comment">// { serverInstanceNo: 499184,</span>
-  <span class="hljs-comment">//   serverName: &apos;helloworld44&apos;,</span>
-  <span class="hljs-comment">//   serverDescription: &apos;test&apos;,</span>
-  <span class="hljs-comment">//   cpuCount: 2,</span>
-  <span class="hljs-comment">//   memorySize: 8589934592,</span>
-  <span class="hljs-comment">//   baseBlockStorageSize: 53687091200,</span>
-  <span class="hljs-comment">//   platformType: { code: &apos;UBS64&apos;, codeName: &apos;Ubuntu Server 64 Bit&apos; },</span>
-  <span class="hljs-comment">//   loginKeyName: &apos;testgb&apos;,</span>
-  <span class="hljs-comment">//     isFeeChargingMonitoring: false,</span>
-  <span class="hljs-comment">//   publicIp: &apos;&apos;,</span>
-  <span class="hljs-comment">//   privateIp: /**private ip**/,</span>
-  <span class="hljs-comment">//   serverImageName: &apos;tensorflow-ubuntu-16.04-64-server&apos;,</span>
-  <span class="hljs-comment">//   serverInstanceStatus: { code: &apos;INIT&apos;, codeName: &apos;Server init state&apos; },</span>
-  <span class="hljs-comment">//   serverInstanceOperation: { code: &apos;NULL&apos;, codeName: &apos;Server NULL OP&apos; },</span>
-  <span class="hljs-comment">//   serverInstanceStatusName: &apos;init&apos;,</span>
-  <span class="hljs-comment">//     createDate: &apos;2017-10-13T02:35:11+0900&apos;,</span>
-  <span class="hljs-comment">//   uptime: &apos;2017-10-13T02:35:11+0900&apos;,</span>
-  <span class="hljs-comment">//   vmImageId: &apos;SPSW0LINUX000065&apos;,</span>
-  <span class="hljs-comment">//   vmFlavorId: &apos;SPSVRSSD00000010&apos;,</span>
-  <span class="hljs-comment">//   isProtectServerTermination: false,</span>
-  <span class="hljs-comment">//   portForwardingPublicIp: /**public ip for port forwarding**/,</span>
-  <span class="hljs-comment">//   zone: { zoneNo: 2, zoneName: &apos;KR-1&apos;, zoneDescription: &apos;&#xAC00;&#xC0B0; NANG zone&apos; },</span>
-  <span class="hljs-comment">//   region: { regionNo: 1, regionCode: &apos;KR&apos;, regionName: &apos;Korea&apos; },</span>
-  <span class="hljs-comment">//   baseBlockStorageDiskType: { code: &apos;NET&apos;, codeName: &apos;Network Storage&apos; },</span>
-  <span class="hljs-comment">//   userData: &apos;&apos;,</span>
-  <span class="hljs-comment">//     accessControlGroupList: [ &apos;&apos; ] }</span>
-  })
+    <span class="hljs-comment">// result example =&gt;</span>
+    <span class="hljs-comment">// { serverInstanceNo: 499184,</span>
+    <span class="hljs-comment">//   serverName: &apos;helloworld44&apos;,</span>
+    <span class="hljs-comment">//   serverDescription: &apos;test&apos;,</span>
+    <span class="hljs-comment">//   cpuCount: 2,</span>
+    <span class="hljs-comment">//   memorySize: 8589934592,</span>
+    <span class="hljs-comment">//   baseBlockStorageSize: 53687091200,</span>
+    <span class="hljs-comment">//   platformType: { code: &apos;UBS64&apos;, codeName: &apos;Ubuntu Server 64 Bit&apos; },</span>
+    <span class="hljs-comment">//   loginKeyName: &apos;testgb&apos;,</span>
+    <span class="hljs-comment">//     isFeeChargingMonitoring: false,</span>
+    <span class="hljs-comment">//   publicIp: &apos;&apos;,</span>
+    <span class="hljs-comment">//   privateIp: /**private ip**/,</span>
+    <span class="hljs-comment">//   serverImageName: &apos;tensorflow-ubuntu-16.04-64-server&apos;,</span>
+    <span class="hljs-comment">//   serverInstanceStatus: { code: &apos;INIT&apos;, codeName: &apos;Server init state&apos; },</span>
+    <span class="hljs-comment">//   serverInstanceOperation: { code: &apos;NULL&apos;, codeName: &apos;Server NULL OP&apos; },</span>
+    <span class="hljs-comment">//   serverInstanceStatusName: &apos;init&apos;,</span>
+    <span class="hljs-comment">//     createDate: &apos;2017-10-13T02:35:11+0900&apos;,</span>
+    <span class="hljs-comment">//   uptime: &apos;2017-10-13T02:35:11+0900&apos;,</span>
+    <span class="hljs-comment">//   vmImageId: &apos;SPSW0LINUX000065&apos;,</span>
+    <span class="hljs-comment">//   vmFlavorId: &apos;SPSVRSSD00000010&apos;,</span>
+    <span class="hljs-comment">//   isProtectServerTermination: false,</span>
+    <span class="hljs-comment">//   portForwardingPublicIp: /**public ip for port forwarding**/,</span>
+    <span class="hljs-comment">//   zone: { zoneNo: 2, zoneName: &apos;KR-1&apos;, zoneDescription: &apos;&#xAC00;&#xC0B0; NANG zone&apos; },</span>
+    <span class="hljs-comment">//   region: { regionNo: 1, regionCode: &apos;KR&apos;, regionName: &apos;Korea&apos; },</span>
+    <span class="hljs-comment">//   baseBlockStorageDiskType: { code: &apos;NET&apos;, codeName: &apos;Network Storage&apos; },</span>
+    <span class="hljs-comment">//   userData: &apos;&apos;,</span>
+    <span class="hljs-comment">//     accessControlGroupList: [ &apos;&apos; ] }</span>
+})
 </code></pre>
 <h3 id="use-case-3---create-vm-with-userdata-script">Use Case 3 - Create VM with <code>userData</code> script</h3>
-<pre><code class="lang-javascript">  client.compute.createServer({
+<pre><code class="lang-javascript">client.compute.createServer({
     vmImageId: <span class="hljs-string">&apos;SPSW0LINUX000046&apos;</span>,
     vmFlavorId: <span class="hljs-string">&apos;SPSVRSSD00000010&apos;</span>,
     serverName: <span class="hljs-string">&apos;helloworld45&apos;</span>,
@@ -532,7 +532,7 @@ Retunrs the server in the callback <code>f(err, server)</code>;</p>
     loginKeyName : <span class="hljs-string">&apos;testgb&apos;</span>,
     accessControlGroupConfigurationNoList: [<span class="hljs-number">4656</span>],
     userData: <span class="hljs-string">&quot;#!/bin/bash \n yum update -y &amp;&amp; yum install -y vim \n mkdir ~/helloWorld&quot;</span>
-  }, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, res</span>) </span>{
+}, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, res</span>) </span>{
     <span class="hljs-keyword">if</span>( err ) {
       <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log( err.message );
     }
@@ -565,7 +565,7 @@ Retunrs the server in the callback <code>f(err, server)</code>;</p>
     <span class="hljs-comment">//   baseBlockStorageDiskType: { code: &apos;NET&apos;, codeName: &apos;Network Storage&apos; },</span>
     <span class="hljs-comment">//   userData: &apos;#!/bin/bash \n yum update -y &amp;&amp; yum install -y vim \n mkdir ~/helloWorld&apos;,</span>
     <span class="hljs-comment">//     accessControlGroupList: [ &apos;&apos; ] }</span>
-  })
+})
 </code></pre>
 <h3 id="use-case-4---create-vm-with-userdata-script-from-a-file">Use Case 4 - Create VM with <code>userData</code> script from a file</h3>
 <ul>
@@ -622,6 +622,499 @@ Retunrs the server in the callback <code>f(err, server)</code>;</p>
 touch ~/helloworld
 mkdir ~/<span class="hljs-built_in">test</span>
 </code></pre>
+<hr>
+<h2 id="rebootserver-action-rebootserverinstances"><code>rebootServer</code>, action <code>rebootServerInstances</code></h2>
+<p>Reboots the specified server with options.<br>This method only works for the running VMs.</p>
+<h3 id="arguments">Arguments</h3>
+<table>
+<thead>
+<tr>
+<th>Input parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>serverInstanceNo</code></td>
+<td><code>string</code></td>
+<td><strong>required</strong></td>
+<td>Unique Id of a running server that can be got from <code>findServers</code> method(action <code>getServerInstanceList</code>).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example">Example</h3>
+<pre><code class="lang-javascript">client.compute.rebootServer({ serverInstanceNo: <span class="hljs-number">500601</span> }, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, res</span>) </span>{
+    <span class="hljs-keyword">if</span> ( err ) {
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log( err.message );
+    }
+
+    <span class="hljs-built_in">console</span>.log( res );
+    <span class="hljs-comment">// response example=&gt;</span>
+    <span class="hljs-comment">// {</span>
+    <span class="hljs-comment">//   &quot;serverInstanceNo&quot;: 500601,</span>
+    <span class="hljs-comment">//   &quot;serverName&quot;: &quot;helloworld48&quot;,</span>
+    <span class="hljs-comment">//   &quot;serverDescription&quot;: &quot;test&quot;,</span>
+    <span class="hljs-comment">//   &quot;cpuCount&quot;: 2,</span>
+    <span class="hljs-comment">//   &quot;memorySize&quot;: 8589934592,</span>
+    <span class="hljs-comment">//   &quot;baseBlockStorageSize&quot;: 53687091200,</span>
+    <span class="hljs-comment">//   &quot;platformType&quot;: {</span>
+    <span class="hljs-comment">//   &quot;code&quot;: &quot;LNX64&quot;,</span>
+    <span class="hljs-comment">//     &quot;codeName&quot;: &quot;Linux 64 Bit&quot;</span>
+    <span class="hljs-comment">// },</span>
+    <span class="hljs-comment">//   &quot;loginKeyName&quot;: &quot;testgb&quot;,</span>
+    <span class="hljs-comment">//   &quot;isFeeChargingMonitoring&quot;: false,</span>
+    <span class="hljs-comment">//   &quot;publicIp&quot;: &quot;&quot;,</span>
+    <span class="hljs-comment">//   &quot;privateIp&quot;: /**privateIpValue**/,</span>
+    <span class="hljs-comment">//   &quot;serverImageName&quot;: &quot;centos-7.3-64&quot;,</span>
+    <span class="hljs-comment">//   &quot;serverInstanceStatus&quot;: {</span>
+    <span class="hljs-comment">//   &quot;code&quot;: &quot;RUN&quot;,</span>
+    <span class="hljs-comment">//     &quot;codeName&quot;: &quot;Server run state&quot;</span>
+    <span class="hljs-comment">// },</span>
+    <span class="hljs-comment">//   &quot;serverInstanceOperation&quot;: {</span>
+    <span class="hljs-comment">//   &quot;code&quot;: &quot;RESTA&quot;,</span>
+    <span class="hljs-comment">//     &quot;codeName&quot;: &quot;Server RESTART OP&quot;</span>
+    <span class="hljs-comment">// },</span>
+    <span class="hljs-comment">//   &quot;serverInstanceStatusName&quot;: &quot;rebooting&quot;,</span>
+    <span class="hljs-comment">//   &quot;createDate&quot;: &quot;2017-10-14T03:19:42+0900&quot;,</span>
+    <span class="hljs-comment">//   &quot;uptime&quot;: &quot;2017-10-15T21:19:43+0900&quot;,</span>
+    <span class="hljs-comment">//   &quot;vmImageId&quot;: &quot;SPSW0LINUX000046&quot;,</span>
+    <span class="hljs-comment">//   &quot;vmFlavorId&quot;: &quot;SPSVRSSD00000010&quot;,</span>
+    <span class="hljs-comment">//   &quot;isProtectServerTermination&quot;: false,</span>
+    <span class="hljs-comment">//   &quot;portForwardingPublicIp&quot;: /**portForwardingPublicIpValue**/,</span>
+    <span class="hljs-comment">//   &quot;zone&quot;: {</span>
+    <span class="hljs-comment">//   &quot;zoneNo&quot;: 2,</span>
+    <span class="hljs-comment">//     &quot;zoneName&quot;: &quot;KR-1&quot;,</span>
+    <span class="hljs-comment">//     &quot;zoneDescription&quot;: &quot;&#xAC00;&#xC0B0; NANG zone&quot;</span>
+    <span class="hljs-comment">// },</span>
+    <span class="hljs-comment">//   &quot;region&quot;: {</span>
+    <span class="hljs-comment">//   &quot;regionNo&quot;: 1,</span>
+    <span class="hljs-comment">//     &quot;regionCode&quot;: &quot;KR&quot;,</span>
+    <span class="hljs-comment">//     &quot;regionName&quot;: &quot;Korea&quot;</span>
+    <span class="hljs-comment">// },</span>
+    <span class="hljs-comment">//   &quot;baseBlockStorageDiskType&quot;: {</span>
+    <span class="hljs-comment">//   &quot;code&quot;: &quot;NET&quot;,</span>
+    <span class="hljs-comment">//     &quot;codeName&quot;: &quot;Network Storage&quot;</span>
+    <span class="hljs-comment">// },</span>
+    <span class="hljs-comment">//   &quot;userData&quot;: &quot;#!/bin/bash\n\ntouch ~/helloworld\nmkdir ~/test\n&quot;,</span>
+    <span class="hljs-comment">//   &quot;accessControlGroupList&quot;: [</span>
+    <span class="hljs-comment">//   {</span>
+    <span class="hljs-comment">//     &quot;accessControlGroup&quot;: {</span>
+    <span class="hljs-comment">//       &quot;accessControlGroupConfigurationNo&quot;: 4656,</span>
+    <span class="hljs-comment">//       &quot;accessControlGroupName&quot;: &quot;ncloud-default-acg&quot;,</span>
+    <span class="hljs-comment">//       &quot;accessControlGroupDescription&quot;: &quot;Default AccessControlGroup&quot;,</span>
+    <span class="hljs-comment">//       &quot;isDefault&quot;: true,</span>
+    <span class="hljs-comment">//       &quot;createDate&quot;: &quot;2017-02-17T11:56:27+0900&quot;</span>
+    <span class="hljs-comment">//     }</span>
+    <span class="hljs-comment">//   }</span>
+    <span class="hljs-comment">// ]</span>
+    <span class="hljs-comment">// }</span>
+})
+</code></pre>
+<hr>
+<h2 id="stopserver-action-stopserverinstances"><code>stopServer</code>, action <code>stopServerInstances</code></h2>
+<p>Stops the specified server with options.<br>This method only works for the running VMs.</p>
+<h3 id="arguments">Arguments</h3>
+<table>
+<thead>
+<tr>
+<th>Input parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>serverInstanceNo</code></td>
+<td><code>string</code></td>
+<td><strong>required</strong></td>
+<td>Unique Id of a running server that can be got from <code>findServers</code> method(action <code>getServerInstanceList</code>).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example">Example</h3>
+<pre><code class="lang-javascript">client.compute.stopServer({ serverInstanceNo: <span class="hljs-string">&quot;500601&quot;</span> }, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, res</span>) </span>{
+  <span class="hljs-keyword">if</span> ( err ) {
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log( err.message );
+  }
+
+  <span class="hljs-built_in">console</span>.log( res );
+  <span class="hljs-comment">// response example =&gt;</span>
+  <span class="hljs-comment">// {</span>
+  <span class="hljs-comment">//   &quot;serverInstanceNo&quot;: 500601,</span>
+  <span class="hljs-comment">//   &quot;serverName&quot;: &quot;helloworld48&quot;,</span>
+  <span class="hljs-comment">//   &quot;serverDescription&quot;: &quot;test&quot;,</span>
+  <span class="hljs-comment">//   &quot;cpuCount&quot;: 2,</span>
+  <span class="hljs-comment">//   &quot;memorySize&quot;: 8589934592,</span>
+  <span class="hljs-comment">//   &quot;baseBlockStorageSize&quot;: 53687091200,</span>
+  <span class="hljs-comment">//   &quot;platformType&quot;: {</span>
+  <span class="hljs-comment">//   &quot;code&quot;: &quot;LNX64&quot;,</span>
+  <span class="hljs-comment">//     &quot;codeName&quot;: &quot;Linux 64 Bit&quot;</span>
+  <span class="hljs-comment">// },</span>
+  <span class="hljs-comment">//   &quot;loginKeyName&quot;: &quot;testgb&quot;,</span>
+  <span class="hljs-comment">//   &quot;isFeeChargingMonitoring&quot;: false,</span>
+  <span class="hljs-comment">//   &quot;publicIp&quot;: &quot;&quot;,</span>
+  <span class="hljs-comment">//   &quot;privateIp&quot;: /**privateIpValue**/,</span>
+  <span class="hljs-comment">//   &quot;serverImageName&quot;: &quot;centos-7.3-64&quot;,</span>
+  <span class="hljs-comment">//   &quot;serverInstanceStatus&quot;: {</span>
+  <span class="hljs-comment">//   &quot;code&quot;: &quot;RUN&quot;,</span>
+  <span class="hljs-comment">//     &quot;codeName&quot;: &quot;Server run state&quot;</span>
+  <span class="hljs-comment">// },</span>
+  <span class="hljs-comment">//   &quot;serverInstanceOperation&quot;: {</span>
+  <span class="hljs-comment">//   &quot;code&quot;: &quot;SHTDN&quot;,</span>
+  <span class="hljs-comment">//     &quot;codeName&quot;: &quot;Server SHUTDOWN OP&quot;</span>
+  <span class="hljs-comment">// },</span>
+  <span class="hljs-comment">//   &quot;serverInstanceStatusName&quot;: &quot;shutting down&quot;,</span>
+  <span class="hljs-comment">//   &quot;createDate&quot;: &quot;2017-10-14T03:19:42+0900&quot;,</span>
+  <span class="hljs-comment">//   &quot;uptime&quot;: &quot;2017-10-15T21:22:01+0900&quot;,</span>
+  <span class="hljs-comment">//   &quot;vmImageId&quot;: &quot;SPSW0LINUX000046&quot;,</span>
+  <span class="hljs-comment">//   &quot;vmFlavorId&quot;: &quot;SPSVRSSD00000010&quot;,</span>
+  <span class="hljs-comment">//   &quot;isProtectServerTermination&quot;: false,</span>
+  <span class="hljs-comment">//   &quot;portForwardingPublicIp&quot;: /**portForwardingPublicIpValue**/,</span>
+  <span class="hljs-comment">//   &quot;zone&quot;: {</span>
+  <span class="hljs-comment">//   &quot;zoneNo&quot;: 2,</span>
+  <span class="hljs-comment">//     &quot;zoneName&quot;: &quot;KR-1&quot;,</span>
+  <span class="hljs-comment">//     &quot;zoneDescription&quot;: &quot;&#xAC00;&#xC0B0; NANG zone&quot;</span>
+  <span class="hljs-comment">// },</span>
+  <span class="hljs-comment">//   &quot;region&quot;: {</span>
+  <span class="hljs-comment">//   &quot;regionNo&quot;: 1,</span>
+  <span class="hljs-comment">//     &quot;regionCode&quot;: &quot;KR&quot;,</span>
+  <span class="hljs-comment">//     &quot;regionName&quot;: &quot;Korea&quot;</span>
+  <span class="hljs-comment">// },</span>
+  <span class="hljs-comment">//   &quot;baseBlockStorageDiskType&quot;: {</span>
+  <span class="hljs-comment">//   &quot;code&quot;: &quot;NET&quot;,</span>
+  <span class="hljs-comment">//     &quot;codeName&quot;: &quot;Network Storage&quot;</span>
+  <span class="hljs-comment">// },</span>
+  <span class="hljs-comment">//   &quot;userData&quot;: &quot;#!/bin/bash\n\ntouch ~/helloworld\nmkdir ~/test\n&quot;,</span>
+  <span class="hljs-comment">//   &quot;accessControlGroupList&quot;: [</span>
+  <span class="hljs-comment">//   {</span>
+  <span class="hljs-comment">//     &quot;accessControlGroup&quot;: {</span>
+  <span class="hljs-comment">//       &quot;accessControlGroupConfigurationNo&quot;: 4656,</span>
+  <span class="hljs-comment">//       &quot;accessControlGroupName&quot;: &quot;ncloud-default-acg&quot;,</span>
+  <span class="hljs-comment">//       &quot;accessControlGroupDescription&quot;: &quot;Default AccessControlGroup&quot;,</span>
+  <span class="hljs-comment">//       &quot;isDefault&quot;: true,</span>
+  <span class="hljs-comment">//       &quot;createDate&quot;: &quot;2017-02-17T11:56:27+0900&quot;</span>
+  <span class="hljs-comment">//     }</span>
+  <span class="hljs-comment">//   }</span>
+  <span class="hljs-comment">// ]</span>
+  <span class="hljs-comment">// }</span>
+})
+</code></pre>
+<hr>
+<h2 id="startserver-action-startserverinstances"><code>startServer</code>, action <code>startServerInstances</code></h2>
+<p>Starts the specified server with options.<br>This method only works for the stopped VMs.</p>
+<h3 id="arguments">Arguments</h3>
+<table>
+<thead>
+<tr>
+<th>Input parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>serverInstanceNo</code></td>
+<td><code>string</code></td>
+<td><strong>required</strong></td>
+<td>Unique Id of a running server that can be got from <code>findServers</code> method(action <code>getServerInstanceList</code>).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example">Example</h3>
+<pre><code class="lang-javascript">client.compute.startServer({ serverInstanceNo: <span class="hljs-number">500580</span> }, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, res</span>) </span>{
+    <span class="hljs-keyword">if</span> ( err ) {
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log( err.message );
+    }
+
+    <span class="hljs-built_in">console</span>.log( res );
+    <span class="hljs-comment">// response example=&gt;</span>
+    <span class="hljs-comment">// {</span>
+    <span class="hljs-comment">//   &quot;serverInstanceNo&quot;: 500580,</span>
+    <span class="hljs-comment">//   &quot;serverName&quot;: &quot;testtest&quot;,</span>
+    <span class="hljs-comment">//   &quot;serverDescription&quot;: &quot;&quot;,</span>
+    <span class="hljs-comment">//   &quot;cpuCount&quot;: 8,</span>
+    <span class="hljs-comment">//   &quot;memorySize&quot;: 17179869184,</span>
+    <span class="hljs-comment">//   &quot;baseBlockStorageSize&quot;: 53687091200,</span>
+    <span class="hljs-comment">//   &quot;platformType&quot;: {</span>
+    <span class="hljs-comment">//   &quot;code&quot;: &quot;LNX64&quot;,</span>
+    <span class="hljs-comment">//     &quot;codeName&quot;: &quot;Linux 64 Bit&quot;</span>
+    <span class="hljs-comment">// },</span>
+    <span class="hljs-comment">//   &quot;loginKeyName&quot;: &quot;testgb&quot;,</span>
+    <span class="hljs-comment">//   &quot;isFeeChargingMonitoring&quot;: false,</span>
+    <span class="hljs-comment">//   &quot;publicIp&quot;: &quot;&quot;,</span>
+    <span class="hljs-comment">//   &quot;privateIp&quot;: /**privateIpValue**/,</span>
+    <span class="hljs-comment">//   &quot;serverImageName&quot;: &quot;centos-7.3-64&quot;,</span>
+    <span class="hljs-comment">//   &quot;serverInstanceStatus&quot;: {</span>
+    <span class="hljs-comment">//   &quot;code&quot;: &quot;NSTOP&quot;,</span>
+    <span class="hljs-comment">//     &quot;codeName&quot;: &quot;Server normal stopped state&quot;</span>
+    <span class="hljs-comment">// },</span>
+    <span class="hljs-comment">//   &quot;serverInstanceOperation&quot;: {</span>
+    <span class="hljs-comment">//   &quot;code&quot;: &quot;START&quot;,</span>
+    <span class="hljs-comment">//     &quot;codeName&quot;: &quot;Server START OP&quot;</span>
+    <span class="hljs-comment">// },</span>
+    <span class="hljs-comment">//   &quot;serverInstanceStatusName&quot;: &quot;booting&quot;,</span>
+    <span class="hljs-comment">//   &quot;createDate&quot;: &quot;2017-10-14T00:34:16+0900&quot;,</span>
+    <span class="hljs-comment">//   &quot;uptime&quot;: &quot;2017-10-14T01:36:42+0900&quot;,</span>
+    <span class="hljs-comment">//   &quot;vmImageId&quot;: &quot;SPSW0LINUX000046&quot;,</span>
+    <span class="hljs-comment">//   &quot;vmFlavorId&quot;: &quot;SPSVRSSD00000007&quot;,</span>
+    <span class="hljs-comment">//   &quot;isProtectServerTermination&quot;: false,</span>
+    <span class="hljs-comment">//   &quot;portForwardingPublicIp&quot;: /**portForwardingPublicIpValue**/,</span>
+    <span class="hljs-comment">//   &quot;zone&quot;: {</span>
+    <span class="hljs-comment">//   &quot;zoneNo&quot;: 2,</span>
+    <span class="hljs-comment">//     &quot;zoneName&quot;: &quot;KR-1&quot;,</span>
+    <span class="hljs-comment">//     &quot;zoneDescription&quot;: &quot;&#xAC00;&#xC0B0; NANG zone&quot;</span>
+    <span class="hljs-comment">// },</span>
+    <span class="hljs-comment">//   &quot;region&quot;: {</span>
+    <span class="hljs-comment">//   &quot;regionNo&quot;: 1,</span>
+    <span class="hljs-comment">//     &quot;regionCode&quot;: &quot;KR&quot;,</span>
+    <span class="hljs-comment">//     &quot;regionName&quot;: &quot;Korea&quot;</span>
+    <span class="hljs-comment">// },</span>
+    <span class="hljs-comment">//   &quot;baseBlockStorageDiskType&quot;: {</span>
+    <span class="hljs-comment">//   &quot;code&quot;: &quot;NET&quot;,</span>
+    <span class="hljs-comment">//     &quot;codeName&quot;: &quot;Network Storage&quot;</span>
+    <span class="hljs-comment">// },</span>
+    <span class="hljs-comment">//   &quot;userData&quot;: &quot;&quot;,</span>
+    <span class="hljs-comment">//   &quot;accessControlGroupList&quot;: [</span>
+    <span class="hljs-comment">//   {</span>
+    <span class="hljs-comment">//     &quot;accessControlGroup&quot;: {</span>
+    <span class="hljs-comment">//       &quot;accessControlGroupConfigurationNo&quot;: 4656,</span>
+    <span class="hljs-comment">//       &quot;accessControlGroupName&quot;: &quot;ncloud-default-acg&quot;,</span>
+    <span class="hljs-comment">//       &quot;accessControlGroupDescription&quot;: &quot;Default AccessControlGroup&quot;,</span>
+    <span class="hljs-comment">//       &quot;isDefault&quot;: true,</span>
+    <span class="hljs-comment">//       &quot;createDate&quot;: &quot;2017-02-17T11:56:27+0900&quot;</span>
+    <span class="hljs-comment">//     }</span>
+    <span class="hljs-comment">//   }</span>
+    <span class="hljs-comment">// ]</span>
+    <span class="hljs-comment">// }</span>
+})
+})
+</code></pre>
+<hr>
+<h2 id="rebuildserver-action-changeserverinstancespec"><code>rebuildServer</code>, action <code>changeServerInstanceSpec</code></h2>
+<p>Rebuilds the specified server with options
+This method only works for the stopped VMs.<br>After this method executed, you should call <code>startServer</code> method to make the VM working because it keeps its STOPPED status. </p>
+<h3 id="arguments">Arguments</h3>
+<table>
+<thead>
+<tr>
+<th>Input parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>serverInstanceNo</code></td>
+<td><code>string</code></td>
+<td><strong>required</strong></td>
+<td>Unique Id of a running server that can be got from <code>findServers</code> method(action <code>getServerInstanceList</code>).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example">Example</h3>
+<pre><code class="lang-javascript">client.compute.rebuildServer( { serverInstanceNo: <span class="hljs-number">500580</span>, vmFlavorId: <span class="hljs-string">&apos;SPSVRSSD00000007&apos;</span> }, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, res</span>) </span>{
+    <span class="hljs-keyword">if</span> ( err ) {
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log( err.message );
+    }
+
+    <span class="hljs-built_in">console</span>.log( res );
+    <span class="hljs-comment">// response example=&gt;</span>
+    <span class="hljs-comment">// {</span>
+    <span class="hljs-comment">//   &quot;serverInstanceNo&quot;: 500580,</span>
+    <span class="hljs-comment">//   &quot;serverName&quot;: &quot;testtest&quot;,</span>
+    <span class="hljs-comment">//   &quot;serverDescription&quot;: &quot;&quot;,</span>
+    <span class="hljs-comment">//   &quot;cpuCount&quot;: 2,</span>
+    <span class="hljs-comment">//   &quot;memorySize&quot;: 4294967296,</span>
+    <span class="hljs-comment">//   &quot;baseBlockStorageSize&quot;: 53687091200,</span>
+    <span class="hljs-comment">//   &quot;platformType&quot;: {</span>
+    <span class="hljs-comment">//   &quot;code&quot;: &quot;LNX64&quot;,</span>
+    <span class="hljs-comment">//     &quot;codeName&quot;: &quot;Linux 64 Bit&quot;</span>
+    <span class="hljs-comment">// },</span>
+    <span class="hljs-comment">//   &quot;loginKeyName&quot;: &quot;testgb&quot;,</span>
+    <span class="hljs-comment">//   &quot;isFeeChargingMonitoring&quot;: false,</span>
+    <span class="hljs-comment">//   &quot;publicIp&quot;: &quot;&quot;,</span>
+    <span class="hljs-comment">//   &quot;privateIp&quot;: &quot;10.33.2.140&quot;,</span>
+    <span class="hljs-comment">//   &quot;serverImageName&quot;: &quot;centos-7.3-64&quot;,</span>
+    <span class="hljs-comment">//   &quot;serverInstanceStatus&quot;: {</span>
+    <span class="hljs-comment">//   &quot;code&quot;: &quot;NSTOP&quot;,</span>
+    <span class="hljs-comment">//     &quot;codeName&quot;: &quot;Server normal stopped state&quot;</span>
+    <span class="hljs-comment">// },</span>
+    <span class="hljs-comment">//   &quot;serverInstanceOperation&quot;: {</span>
+    <span class="hljs-comment">//   &quot;code&quot;: &quot;CHNG&quot;,</span>
+    <span class="hljs-comment">//     &quot;codeName&quot;: &quot;Server SPEC CHANGE OP&quot;</span>
+    <span class="hljs-comment">// },</span>
+    <span class="hljs-comment">//   &quot;serverInstanceStatusName&quot;: &quot;changingSpec&quot;,</span>
+    <span class="hljs-comment">//   &quot;createDate&quot;: &quot;2017-10-14T00:34:16+0900&quot;,</span>
+    <span class="hljs-comment">//   &quot;uptime&quot;: &quot;2017-10-14T01:36:42+0900&quot;,</span>
+    <span class="hljs-comment">//   &quot;vmImageId&quot;: &quot;SPSW0LINUX000046&quot;,</span>
+    <span class="hljs-comment">//   &quot;vmFlavorId&quot;: &quot;SPSVRSSD00000003&quot;,</span>
+    <span class="hljs-comment">//   &quot;isProtectServerTermination&quot;: false,</span>
+    <span class="hljs-comment">//   &quot;portForwardingPublicIp&quot;: &quot;220.230.112.133&quot;,</span>
+    <span class="hljs-comment">//   &quot;zone&quot;: {</span>
+    <span class="hljs-comment">//   &quot;zoneNo&quot;: 2,</span>
+    <span class="hljs-comment">//     &quot;zoneName&quot;: &quot;KR-1&quot;,</span>
+    <span class="hljs-comment">//     &quot;zoneDescription&quot;: &quot;&#xAC00;&#xC0B0; NANG zone&quot;</span>
+    <span class="hljs-comment">// },</span>
+    <span class="hljs-comment">//   &quot;region&quot;: {</span>
+    <span class="hljs-comment">//   &quot;regionNo&quot;: 1,</span>
+    <span class="hljs-comment">//     &quot;regionCode&quot;: &quot;KR&quot;,</span>
+    <span class="hljs-comment">//     &quot;regionName&quot;: &quot;Korea&quot;</span>
+    <span class="hljs-comment">// },</span>
+    <span class="hljs-comment">//   &quot;baseBlockStorageDiskType&quot;: {</span>
+    <span class="hljs-comment">//   &quot;code&quot;: &quot;NET&quot;,</span>
+    <span class="hljs-comment">//     &quot;codeName&quot;: &quot;Network Storage&quot;</span>
+    <span class="hljs-comment">// },</span>
+    <span class="hljs-comment">//   &quot;userData&quot;: &quot;&quot;,</span>
+    <span class="hljs-comment">//   &quot;accessControlGroupList&quot;: [</span>
+    <span class="hljs-comment">//   {</span>
+    <span class="hljs-comment">//     &quot;accessControlGroup&quot;: {</span>
+    <span class="hljs-comment">//       &quot;accessControlGroupConfigurationNo&quot;: 4656,</span>
+    <span class="hljs-comment">//       &quot;accessControlGroupName&quot;: &quot;ncloud-default-acg&quot;,</span>
+    <span class="hljs-comment">//       &quot;accessControlGroupDescription&quot;: &quot;Default AccessControlGroup&quot;,</span>
+    <span class="hljs-comment">//       &quot;isDefault&quot;: true,</span>
+    <span class="hljs-comment">//       &quot;createDate&quot;: &quot;2017-02-17T11:56:27+0900&quot;</span>
+    <span class="hljs-comment">//     }</span>
+    <span class="hljs-comment">//   }</span>
+    <span class="hljs-comment">// ]</span>
+    <span class="hljs-comment">// }</span>
+})
+})
+</code></pre>
+<hr>
+<h2 id="destroyserver-action-terminateserverinstances"><code>destroyServer</code>, action <code>terminateServerInstances</code></h2>
+<p>Destroys the specified server with options.<br>This method only works for the stopped VMs.</p>
+<h3 id="arguments">Arguments</h3>
+<table>
+<thead>
+<tr>
+<th>Input parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>serverInstanceNo</code></td>
+<td><code>string</code></td>
+<td><strong>required</strong></td>
+<td>Unique Id of a running server that can be got from <code>findServers</code> method(action <code>getServerInstanceList</code>).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example">Example</h3>
+<pre><code class="lang-javascript">client.compute.destroyServer({ serverInstanceNo: <span class="hljs-number">500601</span> }, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, res</span>) </span>{
+    <span class="hljs-keyword">if</span> ( err ) {
+
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log( err.message );
+    }
+
+    <span class="hljs-built_in">console</span>.log( res );
+    <span class="hljs-comment">// response example=&gt;</span>
+    <span class="hljs-comment">// {</span>
+    <span class="hljs-comment">//   &quot;serverInstanceNo&quot;: 500601,</span>
+    <span class="hljs-comment">//   &quot;serverName&quot;: &quot;helloworld48&quot;,</span>
+    <span class="hljs-comment">//   &quot;serverDescription&quot;: &quot;test&quot;,</span>
+    <span class="hljs-comment">//   &quot;cpuCount&quot;: 2,</span>
+    <span class="hljs-comment">//   &quot;memorySize&quot;: 8589934592,</span>
+    <span class="hljs-comment">//   &quot;baseBlockStorageSize&quot;: 53687091200,</span>
+    <span class="hljs-comment">//   &quot;platformType&quot;: {</span>
+    <span class="hljs-comment">//   &quot;code&quot;: &quot;LNX64&quot;,</span>
+    <span class="hljs-comment">//     &quot;codeName&quot;: &quot;Linux 64 Bit&quot;</span>
+    <span class="hljs-comment">// },</span>
+    <span class="hljs-comment">//   &quot;loginKeyName&quot;: &quot;testgb&quot;,</span>
+    <span class="hljs-comment">//   &quot;isFeeChargingMonitoring&quot;: false,</span>
+    <span class="hljs-comment">//   &quot;publicIp&quot;: &quot;&quot;,</span>
+    <span class="hljs-comment">//   &quot;privateIp&quot;: &quot;10.33.4.26&quot;,</span>
+    <span class="hljs-comment">//   &quot;serverImageName&quot;: &quot;centos-7.3-64&quot;,</span>
+    <span class="hljs-comment">//   &quot;serverInstanceStatus&quot;: {</span>
+    <span class="hljs-comment">//   &quot;code&quot;: &quot;NSTOP&quot;,</span>
+    <span class="hljs-comment">//     &quot;codeName&quot;: &quot;Server normal stopped state&quot;</span>
+    <span class="hljs-comment">// },</span>
+    <span class="hljs-comment">//   &quot;serverInstanceOperation&quot;: {</span>
+    <span class="hljs-comment">//   &quot;code&quot;: &quot;TERMT&quot;,</span>
+    <span class="hljs-comment">//     &quot;codeName&quot;: &quot;Server TERMINATE OP&quot;</span>
+    <span class="hljs-comment">// },</span>
+    <span class="hljs-comment">//   &quot;serverInstanceStatusName&quot;: &quot;terminating&quot;,</span>
+    <span class="hljs-comment">//   &quot;createDate&quot;: &quot;2017-10-14T03:19:42+0900&quot;,</span>
+    <span class="hljs-comment">//   &quot;uptime&quot;: &quot;2017-10-15T21:22:01+0900&quot;,</span>
+    <span class="hljs-comment">//   &quot;vmImageId&quot;: &quot;SPSW0LINUX000046&quot;,</span>
+    <span class="hljs-comment">//   &quot;vmFlavorId&quot;: &quot;SPSVRSSD00000010&quot;,</span>
+    <span class="hljs-comment">//   &quot;isProtectServerTermination&quot;: false,</span>
+    <span class="hljs-comment">//   &quot;portForwardingPublicIp&quot;: &quot;220.230.112.133&quot;,</span>
+    <span class="hljs-comment">//   &quot;zone&quot;: {</span>
+    <span class="hljs-comment">//   &quot;zoneNo&quot;: 2,</span>
+    <span class="hljs-comment">//     &quot;zoneName&quot;: &quot;KR-1&quot;,</span>
+    <span class="hljs-comment">//     &quot;zoneDescription&quot;: &quot;&#xAC00;&#xC0B0; NANG zone&quot;</span>
+    <span class="hljs-comment">// },</span>
+    <span class="hljs-comment">//   &quot;region&quot;: {</span>
+    <span class="hljs-comment">//   &quot;regionNo&quot;: 1,</span>
+    <span class="hljs-comment">//     &quot;regionCode&quot;: &quot;KR&quot;,</span>
+    <span class="hljs-comment">//     &quot;regionName&quot;: &quot;Korea&quot;</span>
+    <span class="hljs-comment">// },</span>
+    <span class="hljs-comment">//   &quot;baseBlockStorageDiskType&quot;: {</span>
+    <span class="hljs-comment">//   &quot;code&quot;: &quot;NET&quot;,</span>
+    <span class="hljs-comment">//     &quot;codeName&quot;: &quot;Network Storage&quot;</span>
+    <span class="hljs-comment">// },</span>
+    <span class="hljs-comment">//   &quot;userData&quot;: &quot;#!/bin/bash\n\ntouch ~/helloworld\nmkdir ~/test\n&quot;,</span>
+    <span class="hljs-comment">//   &quot;accessControlGroupList&quot;: [</span>
+    <span class="hljs-comment">//   {</span>
+    <span class="hljs-comment">//     &quot;accessControlGroup&quot;: {</span>
+    <span class="hljs-comment">//       &quot;accessControlGroupConfigurationNo&quot;: 4656,</span>
+    <span class="hljs-comment">//       &quot;accessControlGroupName&quot;: &quot;ncloud-default-acg&quot;,</span>
+    <span class="hljs-comment">//       &quot;accessControlGroupDescription&quot;: &quot;Default AccessControlGroup&quot;,</span>
+    <span class="hljs-comment">//       &quot;isDefault&quot;: true,</span>
+    <span class="hljs-comment">//       &quot;createDate&quot;: &quot;2017-02-17T11:56:27+0900&quot;</span>
+    <span class="hljs-comment">//     }</span>
+    <span class="hljs-comment">//   }</span>
+    <span class="hljs-comment">// ]</span>
+    <span class="hljs-comment">// }</span>
+})
+</code></pre>
+<hr>
+<h2 id="findrootpassword-action-getrootpassword"><code>findRootPassword</code>, action <code>getRootPassword</code></h2>
+<p>Returns the password for SSH login to access the specified server.  </p>
+<h3 id="arguments">Arguments</h3>
+<table>
+<thead>
+<tr>
+<th>Input parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>serverInstanceNo</code></td>
+<td><code>string</code></td>
+<td><strong>required</strong></td>
+<td>Unique Id of a running server that can be got from <code>findServers</code> method(action <code>getServerInstanceList</code>).</td>
+</tr>
+<tr>
+<td><code>privateKey</code></td>
+<td><code>string</code></td>
+<td><strong>required</strong></td>
+<td>The privateKey of loginKey assigned to the VM server.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example">Example</h3>
+<pre><code class="lang-javascript"> client.compute.findRootPassword({ serverInstanceNo: <span class="hljs-number">500601</span>, privateKey: fs.readFileSync(<span class="hljs-string">&apos;./testgb.pem&apos;</span>, <span class="hljs-string">&apos;utf8&apos;</span>)}, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, res</span>) </span>{
+  <span class="hljs-comment">//   if ( err ) {</span>
+  <span class="hljs-comment">//     return console.log( err.message );</span>
+  <span class="hljs-comment">//   }</span>
+  <span class="hljs-comment">//</span>
+  <span class="hljs-comment">//   console.log( res );</span>
+  <span class="hljs-comment">//   // result example =&gt;</span>
+  <span class="hljs-comment">//   // { rootPassword: &apos;B7FEfi*aar&apos; }</span>
+})
+</code></pre>
 
                                 
                                 </section>
@@ -665,7 +1158,7 @@ mkdir ~/<span class="hljs-built_in">test</span>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"ServerInstance","level":"1.2.4","depth":2,"next":{"title":"MemberServerImage","level":"1.2.5","depth":2,"path":"compute/memberserverimage/memberserverimage-01.md","ref":"./compute/memberserverimage/memberserverimage-01.md","articles":[]},"previous":{"title":"Product","level":"1.2.3","depth":2,"path":"compute/product/product-01.md","ref":"./compute/product/product-01.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"compute/serverinstance/serverinstance-01.md","mtime":"2017-10-13T13:17:48.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-10-13T13:38:22.073Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"ServerInstance","level":"1.2.4","depth":2,"next":{"title":"MemberServerImage","level":"1.2.5","depth":2,"path":"compute/memberserverimage/memberserverimage-01.md","ref":"./compute/memberserverimage/memberserverimage-01.md","articles":[]},"previous":{"title":"Product","level":"1.2.3","depth":2,"path":"compute/product/product-01.md","ref":"./compute/product/product-01.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"compute/serverinstance/serverinstance-01.md","mtime":"2017-10-15T13:53:17.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-10-15T14:00:41.031Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

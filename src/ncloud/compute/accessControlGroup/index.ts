@@ -2,7 +2,8 @@ import {
   alias,
   InterfaceRequestInfo,
   InterfaceCallback,
-  errorHandling
+  errorHandling,
+  responseFilter
 } from '../../';
 
 import axios from 'axios';
@@ -29,8 +30,13 @@ export function findAccessControlGroup(callback: InterfaceCallback ): void {
     if( response.data.getAccessControlGroupListResponse.returnCode !== 0){
       callback( new Error( response.data.getAccessControlGroupListResponse.returnMessage ), null );
     }else{
-      callback( null, alias( response.data.getAccessControlGroupListResponse.accessControlGroupList[0].accessControlGroup,
-      paramSet[ 'findACG'].response_alias ) );
+      const accessControlGroupList = responseFilter( response.data.getAccessControlGroupListResponse.accessControlGroupList[0], 'accessControlGroup');
+
+      callback( null,
+        alias(
+          accessControlGroupList,
+          paramSet[ 'findACG'].response_alias
+        ));
     }
   })
     .catch( err=>errorHandling(err, callback));

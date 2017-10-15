@@ -2,6 +2,7 @@
 
 ## `findPrivateImages`, action `getMemberServerImageList` 
 Lists all private Images that are available to use on your ncloud account.  
+Callback returns `f(err, privateImageList)` where `privateImageList` is an `Array`.  
 
 ### Arguments  
  No Input Arguments
@@ -65,7 +66,7 @@ Creates an Image based on a server.
 
 | Input parameter    | Type       | Required     | Description |
 |--------------------|------------|--------------|-------------|
-| `serverInstanceNo` | `string`   | **required** | Unique Id of an operating server that can be got from `findServers` method(action `getServerInstanceList`).   |             
+| `serverInstanceNo` | `string`   | **required** | Unique Id of a running server that can be got from `findServers` method(action `getServerInstanceList`).   |             
 | `privateImageName` | `string`   | optional     | name for the resulting image. |  
 | `privateImageDescription` | `string`   | optional     | description for the resulting image. |  
  

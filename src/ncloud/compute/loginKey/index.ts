@@ -1,16 +1,19 @@
 import {
   InterfaceRequestInfo,
   InterfaceCallback,
-  errorHandling
+  errorHandling,
+  responseFilter
 } from '../../';
 
 import axios from 'axios';
 import * as url from 'url';
-import paramSet from './paramSet';
+// import paramSet from './paramSet';
+import * as fs from 'fs';
+import * as path from 'path';
 
 export interface InterfaceLoginKey {
   findLoginKeys( callback: InterfaceCallback ): void;
-  createLoginKey( arg: { keyName: string }, callback: InterfaceCallback ): void;
+  createLoginKey( args: { keyName: string, outputPath?: string }, callback: InterfaceCallback ): void;
 }
 
 export function findLoginKeys( callback: InterfaceCallback ): void {
@@ -29,22 +32,27 @@ export function findLoginKeys( callback: InterfaceCallback ): void {
     if( response.data.getLoginKeyListResponse.returnCode !== 0){
       callback( new Error(response.data.getLoginKeyListResponse.returnMessage ), null );
     }else{
-      callback( null, response.data.getLoginKeyListResponse.loginKeyList );
+      const loginKeyList: any[] = responseFilter(response.data.getLoginKeyListResponse.loginKeyList[0], 'loginKey');
+
+      callback( null, loginKeyList );
     }
   })
     .catch( err=>errorHandling(err, callback));
 
 }
 
-export function createLoginKey( arg, callback: InterfaceCallback ){
+export function createLoginKey( args, callback: InterfaceCallback ){
   const requestInfo: InterfaceRequestInfo = {
     requestMethod: 'GET',
     requestUrl: this.requestUrl,
     requestAction: 'createLoginKey',
   };
 
+  const { outputPath=null, keyName } = args;
+  args = { keyName };
+
   const queryString: string = this.oauth
-    .getQueryString( arg, paramSet['createLoginKey'], requestInfo );
+    .getQueryString( args, requestInfo );
 
   axios.get(
     url.resolve( requestInfo.requestUrl, `?${queryString}` ),
@@ -53,7 +61,13 @@ export function createLoginKey( arg, callback: InterfaceCallback ){
     if( response.data.createLoginKeyResponse.returnCode !== 0 ){
       callback( new Error( response.data.createLoginKeyResponse.returnMessage ), null );
     } else {
-      callback( null , { privateKey: response.data.createLoginKeyResponse.privateKey } );
+      const privateKey: string = response.data.createLoginKeyResponse.privateKey;
+
+      if ( outputPath ) {
+        fs.writeFileSync(path.join( outputPath, keyName + '.pem'), privateKey, {encoding: "utf8"});
+      }
+
+      callback( null , { privateKey } );
     }
   })
     .catch( err=>errorHandling(err, callback));

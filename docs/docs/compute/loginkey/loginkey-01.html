@@ -285,7 +285,8 @@
                                 
                                 <h1 id="compute--loginkey">Compute : LoginKey</h1>
 <h2 id="findloginkeys-action-getloginkeylist"><code>findLoginKeys</code>, action <code>getLoginKeyList</code></h2>
-<p>Get all of login keys you have registered.</p>
+<p>Get all of login keys you have registered.
+Callback returns <code>f(err, loginKeyList)</code> where <code>loginKeyList</code> is an <code>Array</code>.  </p>
 <h3 id="arguments">Arguments</h3>
 <p> No Input Arguments</p>
 <h3 id="examples">Examples</h3>
@@ -301,6 +302,49 @@
       <span class="hljs-comment">//     createDate: &apos;2017-05-24T00:00:24+0900&apos; } } ]</span>
     }
   });
+</code></pre>
+<hr>
+<h2 id="createloginkey-action-createloginkey"><code>createLoginKey</code>, action <code>createLoginKey</code></h2>
+<p>Get all of login keys you have registered.</p>
+<h3 id="arguments">Arguments</h3>
+<table>
+<thead>
+<tr>
+<th>Input parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>keyName</code></td>
+<td><code>string</code></td>
+<td><strong>required</strong></td>
+<td>name for a new login key.</td>
+</tr>
+<tr>
+<td><code>outputPath</code></td>
+<td><code>string</code></td>
+<td>optional</td>
+<td>path for the resulting privateKey</td>
+</tr>
+</tbody>
+</table>
+<h3 id="examples">Examples</h3>
+<pre><code class="lang-javascript">client.compute.createLoginKey( { keyName: <span class="hljs-string">&quot;myTest04&quot;</span>, outputPath: __dirname }, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> error, response </span>)</span>{
+    <span class="hljs-keyword">if</span> ( error ){
+      <span class="hljs-built_in">console</span>.log( error.message );
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-built_in">console</span>.log( response );
+      <span class="hljs-comment">//    example=&gt;</span>
+      <span class="hljs-comment">//   { privateKey: &apos;-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEAs0fJZJWRmxhlYoGCEgyQGtFa6l5dB1N+fZtCqu5XnSUSx/2</span>
+      <span class="hljs-comment">//   p\nYd7wfjsBp1zINIom9vrALr+qzGsBRT0tCSSpULf6SpQJn4hHqkvqhQ8NoBEyLDLW\n+VmZTBkqBm23ZxKlQ+syS2u56j7ntwm+arZ46k7P9</span>
+      <span class="hljs-comment">//   Zbxb3hR4Lr1oPVK6IED30+B\ntVgt3tqZSCChIhUEcNfKuedHeBU0bCLM3IED4d4H7JXWlgBO2EXuAP\n9tB0GQKBgQDKCWBqk2gcHM6heQ1Ey</span>
+      <span class="hljs-comment">//           /** the last part omitted **/</span>
+      <span class="hljs-comment">//   hcRQVDS1SSiJQCg==\n-----END RSA PRIVATE KEY-----\n&apos; }</span>
+    }
+})
 </code></pre>
 
                                 
@@ -345,7 +389,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"LoginKey","level":"1.2.2","depth":2,"next":{"title":"Product","level":"1.2.3","depth":2,"path":"compute/product/product-01.md","ref":"./compute/product/product-01.md","articles":[]},"previous":{"title":"AccessControlGroup","level":"1.2.1","depth":2,"path":"compute/accesscontrolgroup/accesscontrolgroup-01.md","ref":"./compute/accesscontrolgroup/accesscontrolgroup-01.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"compute/loginkey/loginkey-01.md","mtime":"2017-10-10T06:09:56.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-10-13T13:38:22.073Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"LoginKey","level":"1.2.2","depth":2,"next":{"title":"Product","level":"1.2.3","depth":2,"path":"compute/product/product-01.md","ref":"./compute/product/product-01.md","articles":[]},"previous":{"title":"AccessControlGroup","level":"1.2.1","depth":2,"path":"compute/accesscontrolgroup/accesscontrolgroup-01.md","ref":"./compute/accesscontrolgroup/accesscontrolgroup-01.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"compute/loginkey/loginkey-01.md","mtime":"2017-10-15T14:00:09.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-10-15T14:00:41.031Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

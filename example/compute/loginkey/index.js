@@ -20,9 +20,9 @@ var ncloud = require('../../../lib/');
   });
 
 
-  client.compute.createLoginKey( { keyName: "myKey" }, function( err, response ){
-    if ( err ){
-      console.log( err );
+  client.compute.createLoginKey( { keyName: "myTest04", outputPath: __dirname }, function( error, response ){
+    if ( error ){
+      console.log( error.message );
     } else {
       console.log( response );
       //    example=>
