@@ -547,7 +547,7 @@ client.compute.startServer({ serverInstanceNo: 500580 }, function (err, res) {
 ---
 
 ## `rebuildServer`, action `changeServerInstanceSpec` 
-Rebuilds the specified server with options
+Rebuilds the specified server with options.  
 This method only works for the stopped VMs.  
 You may as well call `startServer` method to make the VM working because it keeps its STOPPED status after `rebuildServer` method executed. 
 
@@ -556,7 +556,7 @@ You may as well call `startServer` method to make the VM working because it keep
  | Input parameter    | Type       | Required     | Description |
  |--------------------|------------|--------------|-------------|
  | `serverInstanceNo` | `string`   | **required** | Unique Id of a running server that can be got from `findServers` method(action `getServerInstanceList`). |
-  
+ | `vmFlavorId`       | `string`   | optional     | an Id for one of VM hardware templates. It can be got from `findFlavors` method(action `getServerProductList`).     |
   
 ### Example
 ```javascript
