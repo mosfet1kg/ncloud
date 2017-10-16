@@ -556,7 +556,7 @@ You may as well call `startServer` method to make the VM working because it keep
  | Input parameter    | Type       | Required     | Description |
  |--------------------|------------|--------------|-------------|
  | `serverInstanceNo` | `string`   | **required** | Unique Id of a running server that can be got from `findServers` method(action `getServerInstanceList`). |
- | `vmFlavorId`       | `string`   | optional     | an Id for one of VM hardware templates. It can be got from `findFlavors` method(action `getServerProductList`).     |
+ | `vmFlavorId`       | `string`   | **required**     | an Id for one of VM hardware templates. It can be got from `findFlavors` method(action `getServerProductList`).     |
   
 ### Example
 ```javascript
