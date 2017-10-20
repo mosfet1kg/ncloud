@@ -1,14 +1,12 @@
 import {
   InterfaceOauthKey,
-  InterfaceRequestInfo,
+  InterfaceFetchClientInput,
   InterfaceCallback,
+  fetchClient,
   Validator,
-  Oauth,
   errorHandling
 } from '../../';
-import axios from 'axios';
 import paramSet from './paramSet';
-import * as url from 'url';
 
 const { ValidIpOnly, ValidParametersOnlyClass, MustIncludeRequiredParametersClass } = Validator;
 
@@ -19,36 +17,33 @@ export interface InterfaceGeoLocation {
 @MustIncludeRequiredParametersClass(paramSet)
 @ValidParametersOnlyClass(paramSet)
 export class GeoLocation implements InterfaceGeoLocation {
-  private oauth: Oauth;
-  private requestUrl: string;
+  private oauthKey: InterfaceOauthKey;
+  private requestPath: string;
 
   constructor(
     oauthKey: InterfaceOauthKey,
   ) {
-    this.oauth = new Oauth( oauthKey );
-    this.requestUrl = 'https://api.ncloud.com/geolocation/';
+    this.oauthKey = oauthKey;
+    this.requestPath = '/geolocation/';
   }
 
   @ValidIpOnly
   public findLocation(args, callback: InterfaceCallback ): void {
-    const requestInfo: InterfaceRequestInfo = {
+    const requestInfo: InterfaceFetchClientInput = {
       requestMethod: 'GET',
-      requestUrl: this.requestUrl,
+      requestPath: this.requestPath,
       requestAction: 'getLocation',
     };
 
-    const queryString: string = this.oauth
-      .getQueryString( args, requestInfo );
-
-    axios.get(
-      url.resolve( requestInfo.requestUrl, `?${queryString}` ),
-    ).then(response => {
-      if ( response.data.returnCode !== 0 ) {
-        callback( new Error( response.data.returnMessage ), null );
-      } else {
-        callback( null, response.data.geoLocation );
-      }
-    })
+    fetchClient( args, requestInfo, this.oauthKey )
+      .then( (response) => {
+        if ( response.data.returnCode !== 0 ) {
+          callback( new Error( response.data.returnMessage ), null );
+        } else {
+          callback( null, response.data.geoLocation );
+        }
+      })
       .catch( err=>errorHandling(err, callback));
+
   }
 }

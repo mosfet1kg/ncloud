@@ -1,12 +1,11 @@
 import {
-  InterfaceRequestInfo,
+  InterfaceFetchClientInput,
   InterfaceCallback,
+  fetchClient,
   errorHandling,
   responseFilter
 } from '../../';
 
-import axios from 'axios';
-import * as url from 'url';
 // import paramSet from './paramSet';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -17,59 +16,50 @@ export interface InterfaceLoginKey {
 }
 
 export function findLoginKeys( callback: InterfaceCallback ): void {
-  const requestInfo: InterfaceRequestInfo = {
+  const requestInfo: InterfaceFetchClientInput = {
     requestMethod: 'GET',
-    requestUrl: this.requestUrl,
+    requestPath: this.requestPath,
     requestAction: 'getLoginKeyList',
   };
 
-  const queryString: string = this.oauth.getQueryString( {}, requestInfo );
+  fetchClient( {}, requestInfo, this.oauthKey )
+    .then( (response) => {
+      if( response.data.getLoginKeyListResponse.returnCode !== 0){
+        callback( new Error(response.data.getLoginKeyListResponse.returnMessage ), null );
+      }else{
+        const loginKeyList: any[] = responseFilter(response.data.getLoginKeyListResponse.loginKeyList[0], 'loginKey');
 
-  axios.get(
-    url.resolve( requestInfo.requestUrl, `?${queryString}`)
-  ).then( function(response){
-
-    if( response.data.getLoginKeyListResponse.returnCode !== 0){
-      callback( new Error(response.data.getLoginKeyListResponse.returnMessage ), null );
-    }else{
-      const loginKeyList: any[] = responseFilter(response.data.getLoginKeyListResponse.loginKeyList[0], 'loginKey');
-
-      callback( null, loginKeyList );
-    }
-  })
+        callback( null, loginKeyList );
+      }
+    })
     .catch( err=>errorHandling(err, callback));
 
 }
 
 export function createLoginKey( args, callback: InterfaceCallback ){
-  const requestInfo: InterfaceRequestInfo = {
+  const requestInfo: InterfaceFetchClientInput = {
     requestMethod: 'GET',
-    requestUrl: this.requestUrl,
+    requestPath: this.requestPath,
     requestAction: 'createLoginKey',
   };
 
   const { outputPath=null, keyName } = args;
   args = { keyName };
 
-  const queryString: string = this.oauth
-    .getQueryString( args, requestInfo );
+  fetchClient( args, requestInfo, this.oauthKey )
+    .then( (response) => {
+      if( response.data.createLoginKeyResponse.returnCode !== 0 ){
+        callback( new Error( response.data.createLoginKeyResponse.returnMessage ), null );
+      } else {
+        const privateKey: string = response.data.createLoginKeyResponse.privateKey;
 
-  axios.get(
-    url.resolve( requestInfo.requestUrl, `?${queryString}` ),
-  ).then(response => {
+        if ( outputPath ) {
+          fs.writeFileSync(path.join( outputPath, keyName + '.pem'), privateKey, {encoding: "utf8"});
+        }
 
-    if( response.data.createLoginKeyResponse.returnCode !== 0 ){
-      callback( new Error( response.data.createLoginKeyResponse.returnMessage ), null );
-    } else {
-      const privateKey: string = response.data.createLoginKeyResponse.privateKey;
-
-      if ( outputPath ) {
-        fs.writeFileSync(path.join( outputPath, keyName + '.pem'), privateKey, {encoding: "utf8"});
+        callback( null , { privateKey } );
       }
-
-      callback( null , { privateKey } );
-    }
-  })
+    })
     .catch( err=>errorHandling(err, callback));
 
 }

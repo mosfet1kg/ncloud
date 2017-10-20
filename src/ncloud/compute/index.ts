@@ -2,7 +2,6 @@ import {
   InterfaceOauthKey,
   InterfaceCallback,
   mergeParams,
-  Oauth,
   Validator
 } from '../';
 import * as product from './product';
@@ -34,12 +33,12 @@ export interface InterfaceCompute
 @ValidParametersOnlyClass(getParams(__dirname))
 @ValidConstraintsOnlyClass(getParams(__dirname))
 export class Compute implements InterfaceCompute {
-  private oauth: Oauth;
-  private requestUrl: string;
+  private oauthKey: InterfaceOauthKey;
+  private requestPath: string;
 
   constructor (  oauthKey: InterfaceOauthKey ) {
-    this.oauth = new Oauth( oauthKey );
-    this.requestUrl = 'https://api.ncloud.com/server/';
+    this.oauthKey = oauthKey;
+    this.requestPath = '/server/';
   };
 
   /** product **/
@@ -62,6 +61,9 @@ export class Compute implements InterfaceCompute {
   }
 
   /** serverInstance **/
+  findServer( args, callback: InterfaceCallback ) {
+    serverInstance.findServer.bind(this).apply( this, arguments );
+  }
   findServers( callback:InterfaceCallback ){
     serverInstance.findServers.bind(this).apply( this, arguments );
   }

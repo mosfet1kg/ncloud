@@ -13,6 +13,7 @@ export interface InterfaceClient {
 }
 
 export class Ncloud implements InterfaceClient {
+  static baseUrl: string = 'https://api.ncloud.com';
   public openapi: InterfaceOpenApi;
   public compute: InterfaceCompute;
 

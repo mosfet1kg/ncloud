@@ -1,13 +1,12 @@
 import {
-  InterfaceRequestInfo,
+  InterfaceFetchClientInput,
   InterfaceCallback,
   alias,
+  fetchClient,
   errorHandling,
   responseFilter
 } from '../../';
 
-import axios from 'axios';
-import * as url from 'url';
 import paramSet from './paramSet';
 
 export interface InterfaceMemberServerImage {
@@ -17,82 +16,71 @@ export interface InterfaceMemberServerImage {
 }
 
 export function findPrivateImages( callback: InterfaceCallback ): void {
-  const requestInfo: InterfaceRequestInfo = {
+  const requestInfo: InterfaceFetchClientInput = {
     requestMethod: 'GET',
-    requestUrl: this.requestUrl,
+    requestPath: this.requestPath,
     requestAction: 'getMemberServerImageList'
   };
 
-  const queryString: string = this.oauth.getQueryString( {}, requestInfo );
+  fetchClient( {}, requestInfo, this.oauthKey )
+    .then( (response) => {
+      if( response.data.getMemberServerImageListResponse.returnCode !== 0){
+        callback( new Error(response.data.getMemberServerImageListResponse.returnMessage ), null);
+      } else {
 
-  axios.get(
-    url.resolve( requestInfo.requestUrl, `?${queryString}`)
-  ).then( function(response){
+        let privateImageList = responseFilter(response.data.getMemberServerImageListResponse.memberServerImageList[0], 'memberServerImage');
 
-    if( response.data.getMemberServerImageListResponse.returnCode !== 0){
-      callback( new Error(response.data.getMemberServerImageListResponse.returnMessage ), null);
-    } else {
+        privateImageList = alias( privateImageList, paramSet[ 'findPrivateImages' ].response_alias );
 
-      let privateImageList = responseFilter(response.data.getMemberServerImageListResponse.memberServerImageList[0], 'memberServerImage');
-
-      privateImageList = alias( privateImageList, paramSet[ 'findPrivateImages' ].response_alias );
-
-      callback( null, privateImageList );
-    }
-
-  })
+        callback( null, privateImageList );
+      }
+    })
     .catch( err=>errorHandling(err, callback));
+
 }
 
 export function createPrivateImage( args, callback: InterfaceCallback ): void {
-  const requestInfo: InterfaceRequestInfo = {
+  const requestInfo: InterfaceFetchClientInput = {
     requestMethod: 'GET',
-    requestUrl: this.requestUrl,
+    requestPath: this.requestPath,
     requestAction: 'createMemberServerImage',
   };
 
   args = alias( args, paramSet[ 'createPrivateImage' ].request_alias );
-  const queryString: string = this.oauth.getQueryString( args, requestInfo );
 
-  axios.get(
-    url.resolve( requestInfo.requestUrl, `?${queryString}`)
-  ).then( function(response){
+  fetchClient( args, requestInfo, this.oauthKey )
+    .then( (response) => {
+      if( response.data.createMemberServerImageResponse.returnCode !== 0){
+        callback( new Error(response.data.createMemberServerImageResponse.returnMessage ), null);
+      } else {
+        const result = response.data.createMemberServerImageResponse.memberServerImageList[0].memberServerImage;
 
-    if( response.data.createMemberServerImageResponse.returnCode !== 0){
-      callback( new Error(response.data.createMemberServerImageResponse.returnMessage ), null);
-    } else {
-      const result = response.data.createMemberServerImageResponse.memberServerImageList[0].memberServerImage;
-
-      callback( null, alias( result, paramSet['createPrivateImage'].response_alias ) );
-    }
-
-  })
+        callback( null, alias( result, paramSet['createPrivateImage'].response_alias ) );
+      }
+    })
     .catch( err=>errorHandling(err, callback));
+
 }
 
 export function destroyPrivateImage( args, callback: InterfaceCallback ): void {
-  const requestInfo: InterfaceRequestInfo = {
+  const requestInfo: InterfaceFetchClientInput = {
     requestMethod: 'GET',
-    requestUrl: this.requestUrl,
+    requestPath: this.requestPath,
     requestAction: 'deleteMemberServerImages',
   };
 
   args = alias( args, paramSet[ 'destroyPrivateImage' ].request_alias );
 
-  const queryString: string = this.oauth.getQueryString( args, requestInfo );
+  fetchClient( args, requestInfo, this.oauthKey )
+    .then( (response) => {
+      if( response.data.deleteMemberServerImagesResponse.returnCode !== 0){
+        callback( new Error(response.data.deleteMemberServerImagesResponse.returnMessage ), null);
+      } else {
+        const result = response.data.deleteMemberServerImagesResponse.memberServerImageList[0].memberServerImage;
 
-  axios.get(
-    url.resolve( requestInfo.requestUrl, `?${queryString}`)
-  ).then( function(response){
-
-    if( response.data.deleteMemberServerImagesResponse.returnCode !== 0){
-      callback( new Error(response.data.deleteMemberServerImagesResponse.returnMessage ), null);
-    } else {
-      const result = response.data.deleteMemberServerImagesResponse.memberServerImageList[0].memberServerImage;
-
-      callback( null, alias( result, paramSet['destroyPrivateImage'].response_alias ) );
-    }
-
-  })
+        callback( null, alias( result, paramSet['destroyPrivateImage'].response_alias ) );
+      }
+    })
     .catch( err=>errorHandling(err, callback));
+
 }
