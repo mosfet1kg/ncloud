@@ -37,11 +37,7 @@ export class GeoLocation implements InterfaceGeoLocation {
 
     fetchClient( args, requestInfo, this.oauthKey )
       .then( (response) => {
-        if ( response.data.returnCode !== 0 ) {
-          callback( new Error( response.data.returnMessage ), null );
-        } else {
-          callback( null, response.data.geoLocation );
-        }
+        callback( null, response.data.geoLocation );
       })
       .catch( err=>errorHandling(err, callback));
 

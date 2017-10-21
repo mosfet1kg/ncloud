@@ -45,14 +45,10 @@ export function findServer( args, callback: InterfaceCallback ): void {
 
   fetchClient( args, requestInfo, this.oauthKey )
     .then( (response) => {
-      if( response.data.getServerInstanceListResponse.returnCode !== 0){
-        callback( new Error(response.data.getServerInstanceListResponse.returnMessage ), null );
-      }else{
-        const serverInstanceList = responseFilter( response.data.getServerInstanceListResponse.serverInstanceList[0], 'serverInstance' );
-        const server = setServerReflect.bind(this)( alias( serverInstanceList[0], paramSet['findServer'].response_alias ) );
+      const serverInstanceList = responseFilter( response.data.getServerInstanceListResponse.serverInstanceList[0], 'serverInstance' );
+      const server = setServerReflect.bind(this)( alias( serverInstanceList[0], paramSet['findServer'].response_alias ) );
 
-        callback( null,  server );
-      }
+      callback( null,  server );
     })
     .catch( err=>errorHandling(err, callback));
 
@@ -67,19 +63,14 @@ export function findServers( callback: InterfaceCallback ): void {
 
   fetchClient( {}, requestInfo, this.oauthKey )
     .then( (response) => {
+      let serverInstanceList =
+        responseFilter( response.data.getServerInstanceListResponse.serverInstanceList[0],
+          'serverInstance' );
 
-      if( response.data.getServerInstanceListResponse.returnCode !== 0){
-        callback( new Error(response.data.getServerInstanceListResponse.returnMessage ), null );
-      }else{
-        let serverInstanceList =
-          responseFilter( response.data.getServerInstanceListResponse.serverInstanceList[0],
-            'serverInstance' );
+      serverInstanceList = alias( serverInstanceList, paramSet['findServers'].response_alias)
+        .map( server=>setServerReflect.bind(this)( server ));
 
-        serverInstanceList = alias( serverInstanceList, paramSet['findServers'].response_alias)
-          .map( server=>setServerReflect.bind(this)( server ));
-
-        callback( null, serverInstanceList  );
-      }
+      callback( null, serverInstanceList  );
     })
     .catch( err=>errorHandling(err, callback));
 
@@ -100,14 +91,10 @@ export function createServer( args, callback: InterfaceCallback ) {
 
   fetchClient( args, requestInfo, this.oauthKey )
     .then( (response) => {
-      if( response.data.createServerInstancesResponse.returnCode !== 0){
-        callback( new Error(response.data.createServerInstancesResponse.returnMessage ), null );
-      }else{
-        let server = response.data.createServerInstancesResponse.serverInstanceList[0].serverInstance;
-        server = setServerReflect.bind(this)( alias( server, paramSet['createServer'].response_alias ) );
+      let server = response.data.createServerInstancesResponse.serverInstanceList[0].serverInstance;
+      server = setServerReflect.bind(this)( alias( server, paramSet['createServer'].response_alias ) );
 
-        callback( null,  server );
-      }
+      callback( null,  server );
     })
     .catch( err=>errorHandling(err, callback));
 
@@ -124,14 +111,10 @@ export function destroyServer( args, callback: InterfaceCallback ) {
 
   fetchClient( args, requestInfo, this.oauthKey )
     .then( (response) => {
-      if( response.data.terminateServerInstancesResponse.returnCode !== 0){
-        callback( new Error(response.data.terminateServerInstancesResponse.returnMessage ), null );
-      }else{
-        let server = response.data.terminateServerInstancesResponse.serverInstanceList[0].serverInstance;
-        server = setServerReflect.bind(this)( alias( server, paramSet['destroyServer'].response_alias ) );
+      let server = response.data.terminateServerInstancesResponse.serverInstanceList[0].serverInstance;
+      server = setServerReflect.bind(this)( alias( server, paramSet['destroyServer'].response_alias ) );
 
-        callback( null, server );
-      }
+      callback( null, server );
     })
     .catch( err=>errorHandling(err, callback));
 
@@ -148,14 +131,10 @@ export function rebuildServer( args, callback: InterfaceCallback ) {
 
   fetchClient( args, requestInfo, this.oauthKey )
     .then( (response) => {
-      if( response.data.changeServerInstanceSpecResponse.returnCode !== 0){
-        callback( new Error(response.data.changeServerInstanceSpecResponse.returnMessage ), null );
-      }else{
-        let server = response.data.changeServerInstanceSpecResponse.serverInstanceList[0].serverInstance;
-        server = setServerReflect.bind(this)( alias( server, paramSet['rebuildServer'].response_alias ) );
+      let server = response.data.changeServerInstanceSpecResponse.serverInstanceList[0].serverInstance;
+      server = setServerReflect.bind(this)( alias( server, paramSet['rebuildServer'].response_alias ) );
 
-        callback( null, server );
-      }
+      callback( null, server );
     })
     .catch( err=>errorHandling(err, callback));
 
@@ -172,14 +151,10 @@ export function rebootServer( args, callback: InterfaceCallback ) {
 
   fetchClient( args, requestInfo, this.oauthKey )
     .then( (response) => {
-      if( response.data.rebootServerInstancesResponse.returnCode !== 0){
-        callback( new Error(response.data.rebootServerInstancesResponse.returnMessage ), null );
-      }else{
-        let server = response.data.rebootServerInstancesResponse.serverInstanceList[0].serverInstance;
-        server = setServerReflect.bind(this)( alias( server , paramSet['rebootServer'].response_alias ) );
+      let server = response.data.rebootServerInstancesResponse.serverInstanceList[0].serverInstance;
+      server = setServerReflect.bind(this)( alias( server , paramSet['rebootServer'].response_alias ) );
 
-        callback( null, server );
-      }
+      callback( null, server );
     })
     .catch( err=>errorHandling(err, callback));
 
@@ -196,14 +171,10 @@ export function startServer( args, callback: InterfaceCallback ) {
 
   fetchClient( args, requestInfo, this.oauthKey )
     .then( (response) => {
-      if( response.data.startServerInstancesResponse.returnCode !== 0){
-        callback( new Error(response.data.startServerInstancesResponse.returnMessage ), null );
-      }else{
-        let server = response.data.startServerInstancesResponse.serverInstanceList[0].serverInstance;
-        server = setServerReflect.bind(this)( alias( server, paramSet['startServer'].response_alias ) );
+      let server = response.data.startServerInstancesResponse.serverInstanceList[0].serverInstance;
+      server = setServerReflect.bind(this)( alias( server, paramSet['startServer'].response_alias ) );
 
-        callback( null, server );
-      }
+      callback( null, server );
     })
     .catch( err=>errorHandling(err, callback));
 
@@ -220,14 +191,10 @@ export function stopServer( args, callback: InterfaceCallback ) {
 
   fetchClient( args, requestInfo, this.oauthKey )
     .then( (response) => {
-      if( response.data.stopServerInstancesResponse.returnCode !== 0){
-        callback( new Error(response.data.stopServerInstancesResponse.returnMessage ), null );
-      }else{
-        let server = response.data.stopServerInstancesResponse.serverInstanceList[0].serverInstance;
-        server = setServerReflect.bind(this)( alias( server, paramSet['stopServer'].response_alias ) );
+      let server = response.data.stopServerInstancesResponse.serverInstanceList[0].serverInstance;
+      server = setServerReflect.bind(this)( alias( server, paramSet['stopServer'].response_alias ) );
 
-        callback( null, server );
-      }
+      callback( null, server );
     })
     .catch( err=>errorHandling(err, callback));
 

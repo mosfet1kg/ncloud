@@ -10,6 +10,8 @@ import * as loginKey from './loginKey';
 import * as serverInstance from './serverInstance';
 import * as accessControlGroup from './accessControlGroup';
 import * as memberServerImage from './memberServerImage';
+import * as publicInstance from './publicIpInstance';
+
 import { isNull } from 'lodash';
 const { ValidParametersOnlyClass, MustIncludeRequiredParametersClass, ValidConstraintsOnlyClass } = Validator;
 let params = null;
@@ -21,12 +23,13 @@ function getParams( dir ) {
 
 export interface InterfaceCompute
   extends
-    product.InterfaceProduct,
-    zone.InterfaceZone,
-    loginKey.InterfaceLoginKey,
-    serverInstance.InterfaceServerInstance,
     accessControlGroup.InterfaceSecurityGroup,
-    memberServerImage.InterfaceMemberServerImage
+    loginKey.InterfaceLoginKey,
+    memberServerImage.InterfaceMemberServerImage,
+    product.InterfaceProduct,
+    publicInstance.InterfacePublicIpInstance,
+    serverInstance.InterfaceServerInstance,
+    zone.InterfaceZone
 { }
 
 @MustIncludeRequiredParametersClass(getParams(__dirname))
@@ -43,65 +46,85 @@ export class Compute implements InterfaceCompute {
 
   /** product **/
   findPublicImages ( callback: InterfaceCallback ) {
-    product.findPublicImages.bind(this).apply( this, arguments );
+    product.findPublicImages.apply( this, arguments );
   }
   findFlavors( args, callback: InterfaceCallback ) {
-    product.findFlavors.bind(this).apply( this, arguments);
+    product.findFlavors.apply( this, arguments);
   }
   /** zone **/
   findZones( callback: InterfaceCallback ){
-    zone.findZones.bind(this).apply( this, arguments ); }
+    zone.findZones.apply( this, arguments ); }
 
   /** loginKey **/
   findLoginKeys( callback: InterfaceCallback ){
-    loginKey.findLoginKeys.bind(this).apply( this, arguments );
+    loginKey.findLoginKeys.apply( this, arguments );
   }
   createLoginKey( args, callback: InterfaceCallback ){
-    loginKey.createLoginKey.bind(this).apply( this, arguments );
+    loginKey.createLoginKey.apply( this, arguments );
   }
 
   /** serverInstance **/
   findServer( args, callback: InterfaceCallback ) {
-    serverInstance.findServer.bind(this).apply( this, arguments );
+    serverInstance.findServer.apply( this, arguments );
   }
   findServers( callback:InterfaceCallback ){
-    serverInstance.findServers.bind(this).apply( this, arguments );
+    serverInstance.findServers.apply( this, arguments );
   }
   createServer( args, callback: InterfaceCallback ) {
-    serverInstance.createServer.bind(this).apply( this, arguments );
+    serverInstance.createServer.apply( this, arguments );
   }
   destroyServer( args, callback: InterfaceCallback ) {
-    serverInstance.destroyServer.bind(this).apply( this, arguments );
+    serverInstance.destroyServer.apply( this, arguments );
   }
   rebuildServer( args, callback: InterfaceCallback ) {
-    serverInstance.rebuildServer.bind(this).apply( this, arguments );
+    serverInstance.rebuildServer.apply( this, arguments );
   }
   rebootServer( args, callback: InterfaceCallback ) {
-    serverInstance.rebootServer.bind(this).apply( this, arguments );
+    serverInstance.rebootServer.apply( this, arguments );
   }
   startServer( args, callback: InterfaceCallback ) {
-    serverInstance.startServer.bind(this).apply( this, arguments );
+    serverInstance.startServer.apply( this, arguments );
   }
   stopServer( args, callback: InterfaceCallback ) {
-    serverInstance.stopServer.bind(this).apply( this, arguments );
+    serverInstance.stopServer.apply( this, arguments );
   }
   findRootPassword( args, callback: InterfaceCallback ) {
-    serverInstance.findRootPassword.bind(this).apply( this, arguments );
+    serverInstance.findRootPassword.apply( this, arguments );
   }
 
   /** accessControlGroup **/
   findAccessControlGroup( callback: InterfaceCallback ){
-    accessControlGroup.findAccessControlGroup.bind(this).apply( this, arguments );
+    accessControlGroup.findAccessControlGroup.apply( this, arguments );
+  }
+  findAccessControlRules( args, callback: InterfaceCallback ) {
+    accessControlGroup.findAccessControlRules.apply( this, arguments );
   }
 
   /** memberServerImage **/
   findPrivateImages( callback: InterfaceCallback ) {
-    memberServerImage.findPrivateImages.bind(this).apply( this, arguments );
+    memberServerImage.findPrivateImages.apply( this, arguments );
   }
   createPrivateImage( args, callback: InterfaceCallback ) {
-    memberServerImage.createPrivateImage.bind(this).apply(this, arguments);
+    memberServerImage.createPrivateImage.apply(this, arguments);
   }
   destroyPrivateImage( args, callback: InterfaceCallback ) {
-    memberServerImage.destroyPrivateImage.bind(this).apply(this,arguments);
+    memberServerImage.destroyPrivateImage.apply(this,arguments);
+  }
+
+  /** publicInstance **/
+  findPublicIpInstances( callback: InterfaceCallback ) {
+    publicInstance.findPublicIpInstances.apply(this, arguments);
+  }
+  createPublicIpInstance(args, callback?: InterfaceCallback ) {
+    publicInstance.createPublicIpInstance.apply(this, arguments);
+  }
+  attachPublicIpInstance(args, callback: InterfaceCallback ) {
+    publicInstance.attachPublicIpInstance.apply(this, arguments);
+  }
+  detachPublicIpInstance(args, callback: InterfaceCallback ) {
+    publicInstance.detachPublicIpInstance.apply(this, arguments);
+  }
+  destroyPublicIpInstance(args, callback: InterfaceCallback ) {
+    publicInstance.destroyPublicIpInstance.apply(this, arguments);
   }
 }

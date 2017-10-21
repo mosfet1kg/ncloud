@@ -60,7 +60,7 @@ export function isValidParam ( args, paramSet ) {
   }).join(',');
 
   if( invalidParam.length >0 ){
-    throw new Error('Error: Invalid Parameters : ' + invalidParam);
+    throw new Error(`Error: Invalid Parameters : ${invalidParam}\nThis function requires following Parameters: ${ param.join(', ')}`);
   }
 }
 
@@ -75,6 +75,7 @@ export function isValidIp ( targetIp ) {
 }
 
 export function isValidConstraints( args, param ) {
+
   const { constraints=[], required=[] } = param;
 
   constraints.forEach( constraint=>{

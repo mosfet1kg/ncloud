@@ -25,14 +25,10 @@ export function findPublicImages( callback: InterfaceCallback ): void {
 
   fetchClient( {}, requestInfo, this.oauthKey )
     .then( (response) => {
-      if( response.data.getServerImageProductListResponse.returnCode !== 0){
-        callback( new Error( response.data.getServerImageProductListResponse.returnMessage), null );
-      }else{
-        let vmImageList = responseFilter(response.data.getServerImageProductListResponse.productList[0], 'product');
-        vmImageList = setVmImageListReflect( alias( vmImageList, paramSet[ 'findPublicImages' ].response_alias ) );
+      let vmImageList = responseFilter(response.data.getServerImageProductListResponse.productList[0], 'product');
+      vmImageList = setVmImageListReflect( alias( vmImageList, paramSet[ 'findPublicImages' ].response_alias ) );
 
-        callback( null, vmImageList );
-      }
+      callback( null, vmImageList );
     })
     .catch( err=>errorHandling(err, callback));
 
@@ -49,37 +45,33 @@ export function findFlavors( args, callback: InterfaceCallback ): void {
 
   fetchClient( args, requestInfo, this.oauthKey )
     .then( (response) => {
-      if( response.data.getServerProductListResponse.returnCode  !== 0){
-        callback( new Error( response.data.getServerProductListResponse.returnMessage ), null );
-      }else{
-        let vmFlavorList = responseFilter(response.data.getServerProductListResponse.productList[0], 'product')
-          .map( serverProduct=>{
+      let vmFlavorList = responseFilter(response.data.getServerProductListResponse.productList[0], 'product')
+        .map( serverProduct=>{
 
-            if ( serverProduct.productName ) {
-              serverProduct.productName = serverProduct.productName
-                .replace("개","EA")
-                .replace("메모리","Memory")
-                .replace("디스크","Disk")
-                .replace("기본", "default ")
-                .replace("추가","additional ")
-            }
+          if ( serverProduct.productName ) {
+            serverProduct.productName = serverProduct.productName
+              .replace("개","EA")
+              .replace("메모리","Memory")
+              .replace("디스크","Disk")
+              .replace("기본", "default ")
+              .replace("추가","additional ")
+          }
 
-            if ( serverProduct.productDescription ) {
-              serverProduct.productDescription = serverProduct.productDescription
-                .replace("개","EA")
-                .replace("메모리","Memory")
-                .replace("디스크","Disk")
-                .replace("기본", "default ")
-                .replace("추가","additional ")
-            }
+          if ( serverProduct.productDescription ) {
+            serverProduct.productDescription = serverProduct.productDescription
+              .replace("개","EA")
+              .replace("메모리","Memory")
+              .replace("디스크","Disk")
+              .replace("기본", "default ")
+              .replace("추가","additional ")
+          }
 
-            return serverProduct;
-          }); // end map
+          return serverProduct;
+        }); // end map
 
-        vmFlavorList = setFlavorListReflect( alias( vmFlavorList, paramSet[ 'findFlavors' ].response_alias ) );
+      vmFlavorList = setFlavorListReflect( alias( vmFlavorList, paramSet[ 'findFlavors' ].response_alias ) );
 
-        callback( null, vmFlavorList );
-      }
+      callback( null, vmFlavorList );
     })
     .catch( err=>errorHandling(err, callback));
 }
@@ -100,7 +92,7 @@ function setVmImageListReflect( vmImageList ) {
         }
 
         return filter( vmImageList, ( vmImage ) => {
-          return (vmImage.vmImageName === vmImageName)
+          return (vmImage.vmImageName === vmImageName);
         })
       }
     }
