@@ -3,6 +3,10 @@ import {
 } from '../../'
 
 export function errorHandling( error: any, callback: InterfaceCallback ) {
+  if ( ! error.response ) {
+    return callback( error, null );
+  }
+
   if ( error.response.data.responseError ) {
     error.response.data = error.response.data.responseError;
   }

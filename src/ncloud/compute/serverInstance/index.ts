@@ -41,7 +41,7 @@ export function findServer( args, callback: InterfaceCallback ): void {
     requestAction: 'getServerInstanceList',
   };
 
-  args= alias( args, paramSet['findServer'].request_alias );
+  args = alias( args, paramSet['findServer'].request_alias );
 
   fetchClient( args, requestInfo, this.oauthKey )
     .then( (response) => {
@@ -49,9 +49,9 @@ export function findServer( args, callback: InterfaceCallback ): void {
         callback( new Error(response.data.getServerInstanceListResponse.returnMessage ), null );
       }else{
         const serverInstanceList = responseFilter( response.data.getServerInstanceListResponse.serverInstanceList[0], 'serverInstance' );
-        const server = alias( serverInstanceList[0], paramSet['findServer'].response_alias );
+        const server = setServerReflect.bind(this)( alias( serverInstanceList[0], paramSet['findServer'].response_alias ) );
 
-        callback( null, setReflect.bind(this)( server ) );
+        callback( null,  server );
       }
     })
     .catch( err=>errorHandling(err, callback));
@@ -71,9 +71,14 @@ export function findServers( callback: InterfaceCallback ): void {
       if( response.data.getServerInstanceListResponse.returnCode !== 0){
         callback( new Error(response.data.getServerInstanceListResponse.returnMessage ), null );
       }else{
-        const serverInstanceList = responseFilter( response.data.getServerInstanceListResponse.serverInstanceList[0], 'serverInstance' );
+        let serverInstanceList =
+          responseFilter( response.data.getServerInstanceListResponse.serverInstanceList[0],
+            'serverInstance' );
 
-        callback( null, alias( serverInstanceList, paramSet['findServers'].response_alias) );
+        serverInstanceList = alias( serverInstanceList, paramSet['findServers'].response_alias)
+          .map( server=>setServerReflect.bind(this)( server ));
+
+        callback( null, serverInstanceList  );
       }
     })
     .catch( err=>errorHandling(err, callback));
@@ -99,9 +104,9 @@ export function createServer( args, callback: InterfaceCallback ) {
         callback( new Error(response.data.createServerInstancesResponse.returnMessage ), null );
       }else{
         let server = response.data.createServerInstancesResponse.serverInstanceList[0].serverInstance;
-        server = alias( server, paramSet['createServer'].response_alias );
+        server = setServerReflect.bind(this)( alias( server, paramSet['createServer'].response_alias ) );
 
-        callback( null, setReflect.bind(this)( server ) );
+        callback( null,  server );
       }
     })
     .catch( err=>errorHandling(err, callback));
@@ -122,8 +127,10 @@ export function destroyServer( args, callback: InterfaceCallback ) {
       if( response.data.terminateServerInstancesResponse.returnCode !== 0){
         callback( new Error(response.data.terminateServerInstancesResponse.returnMessage ), null );
       }else{
-        const result = response.data.terminateServerInstancesResponse.serverInstanceList[0].serverInstance;
-        callback( null, alias( result, paramSet['destroyServer'].response_alias ) );
+        let server = response.data.terminateServerInstancesResponse.serverInstanceList[0].serverInstance;
+        server = setServerReflect.bind(this)( alias( server, paramSet['destroyServer'].response_alias ) );
+
+        callback( null, server );
       }
     })
     .catch( err=>errorHandling(err, callback));
@@ -144,8 +151,10 @@ export function rebuildServer( args, callback: InterfaceCallback ) {
       if( response.data.changeServerInstanceSpecResponse.returnCode !== 0){
         callback( new Error(response.data.changeServerInstanceSpecResponse.returnMessage ), null );
       }else{
-        const result = response.data.changeServerInstanceSpecResponse.serverInstanceList[0].serverInstance;
-        callback( null, alias( result, paramSet['rebuildServer'].response_alias ) );
+        let server = response.data.changeServerInstanceSpecResponse.serverInstanceList[0].serverInstance;
+        server = setServerReflect.bind(this)( alias( server, paramSet['rebuildServer'].response_alias ) );
+
+        callback( null, server );
       }
     })
     .catch( err=>errorHandling(err, callback));
@@ -166,9 +175,10 @@ export function rebootServer( args, callback: InterfaceCallback ) {
       if( response.data.rebootServerInstancesResponse.returnCode !== 0){
         callback( new Error(response.data.rebootServerInstancesResponse.returnMessage ), null );
       }else{
-        let server = alias(  response.data.rebootServerInstancesResponse.serverInstanceList[0].serverInstance, paramSet['rebootServer'].response_alias );
+        let server = response.data.rebootServerInstancesResponse.serverInstanceList[0].serverInstance;
+        server = setServerReflect.bind(this)( alias( server , paramSet['rebootServer'].response_alias ) );
 
-        callback( null, setReflect.call( { requestUrl: this.requestUrl, oauth: this.oauth }, server ) );
+        callback( null, server );
       }
     })
     .catch( err=>errorHandling(err, callback));
@@ -189,8 +199,10 @@ export function startServer( args, callback: InterfaceCallback ) {
       if( response.data.startServerInstancesResponse.returnCode !== 0){
         callback( new Error(response.data.startServerInstancesResponse.returnMessage ), null );
       }else{
-        const result = response.data.startServerInstancesResponse.serverInstanceList[0].serverInstance;
-        callback( null, alias( result, paramSet['startServer'].response_alias ) );
+        let server = response.data.startServerInstancesResponse.serverInstanceList[0].serverInstance;
+        server = setServerReflect.bind(this)( alias( server, paramSet['startServer'].response_alias ) );
+
+        callback( null, server );
       }
     })
     .catch( err=>errorHandling(err, callback));
@@ -211,8 +223,10 @@ export function stopServer( args, callback: InterfaceCallback ) {
       if( response.data.stopServerInstancesResponse.returnCode !== 0){
         callback( new Error(response.data.stopServerInstancesResponse.returnMessage ), null );
       }else{
-        const result = response.data.stopServerInstancesResponse.serverInstanceList[0].serverInstance;
-        callback( null, alias( result, paramSet['stopServer'].response_alias ) );
+        let server = response.data.stopServerInstancesResponse.serverInstanceList[0].serverInstance;
+        server = setServerReflect.bind(this)( alias( server, paramSet['stopServer'].response_alias ) );
+
+        callback( null, server );
       }
     })
     .catch( err=>errorHandling(err, callback));
@@ -261,7 +275,6 @@ function getRootPassword( response ) {
   return result;
 }
 
-
 export interface InterfaceServer {
   serverInstanceNo: number | string,
   serverName: string,
@@ -290,8 +303,12 @@ export interface InterfaceServer {
   region: { regionNo: number, regionCode: string, regionName: string },
   baseBlockStorageDiskType: { code: string, codeName: string },
   userData: string
-  accessControlGroupList: any[],
-  __proto__: any
+  accessControlGroupList: any[]
+}
+
+export interface InterfaceServerResponse extends InterfaceServer {
+  setWait ({ status, interval, timeout, verbose }: { status: string, interval?: number, timeout?: number, verbose?: boolean }, callback: InterfaceCallback ): void;
+  STATUS: any;
 }
 
 function setWait({ status, interval=5000, timeout=1800000, verbose=false }: { status: string, interval?: number, timeout?: number, verbose?: boolean }, cb ) {
@@ -337,9 +354,10 @@ function setWait({ status, interval=5000, timeout=1800000, verbose=false }: { st
 
 }
 
-function setReflect( server: InterfaceServer ): InterfaceServer {
-  server.__proto__ = {
-    get ["STATUS"]() {
+function setServerReflect(server: InterfaceServer ): InterfaceServerResponse {
+
+  Reflect.defineProperty( server, 'STATUS', {
+    get: ()=>{
       return {
         init         : 'init',
         creating     : 'creating',
@@ -352,8 +370,10 @@ function setReflect( server: InterfaceServer ): InterfaceServer {
         shuttingDown : 'shutting down',
         terminating  : 'terminating',
       }
-    }
-  };
+    },
+    configurable: false,
+    enumerable: false
+  });
 
   Reflect.defineProperty( server, "setWait", {
     get: ()=>{
@@ -363,5 +383,5 @@ function setReflect( server: InterfaceServer ): InterfaceServer {
     enumerable: false
   });
 
-  return server;
+  return server as InterfaceServerResponse;
 }
