@@ -62,7 +62,7 @@ export function isValidParam ( args, paramSet={ param: []} ) {
   }).join(',');
 
   if( invalidParam.length >0 ){
-    throw new Error(`Error: Invalid Parameters : ${invalidParam}\nThis function requires following Parameters: ${ param.join(', ')}`);
+    throw new Error(`Error: Invalid Parameters : ${invalidParam}\nThis function allow following Parameters: ${ param.join(', ')}`);
   }
 }
 
