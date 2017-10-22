@@ -41,6 +41,9 @@ Refer to the following link
 
 
 # Release Note
+v0.1.18
+  - Add new features ( publicIpInstance, portForwarding, region )
+
 v0.1.17
   - Add `rebootServer` method(action `rebootServerInstances`)
   - Add `stopServer` method(action `stopServerInstances`)
