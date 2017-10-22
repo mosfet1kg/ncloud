@@ -7,6 +7,7 @@
   * [ServerInstance](./compute/serverinstance/serverinstance-01.md)
   * [MemberServerImage](./compute/memberserverimage/memberserverimage-01.md)
   * [Zone](./compute/zone/zone-01.md)
+  * [Getting Started](./compute/getting-started-compute/getting-compute-01.md)
 ---  
 * OpenAPI
-  * [Geolocation](./openapi/geolocation/geo-1.md)
+  * [Geolocation](./openapi/geolocation/geo-01.md)
