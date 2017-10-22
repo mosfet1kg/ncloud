@@ -16,8 +16,7 @@ export interface InterfaceSecurityGroup {
 
 export function findAccessControlGroup(callback: InterfaceCallback ): void {
   const requestInfo: InterfaceFetchClientInput = {
-    requestMethod: 'GET',
-    requestPath: this.requestPath,
+    ...this.defaultRequestInfo,
     requestAction: 'getAccessControlGroupList',
   };
 
@@ -34,8 +33,7 @@ export function findAccessControlGroup(callback: InterfaceCallback ): void {
 
 export function findAccessControlRules(args, callback: InterfaceCallback ): void {
   const requestInfo: InterfaceFetchClientInput = {
-    requestMethod: 'GET',
-    requestPath: this.requestPath,
+    ...this.defaultRequestInfo,
     requestAction: 'getAccessControlRuleList',
   };
 

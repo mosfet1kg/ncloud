@@ -11,6 +11,8 @@ import * as serverInstance from './serverInstance';
 import * as accessControlGroup from './accessControlGroup';
 import * as memberServerImage from './memberServerImage';
 import * as publicInstance from './publicIpInstance';
+import * as portForwarding from './portForwarding';
+import * as region from './region';
 
 import { isNull } from 'lodash';
 const { ValidParametersOnlyClass, MustIncludeRequiredParametersClass, ValidConstraintsOnlyClass } = Validator;
@@ -27,8 +29,10 @@ export interface InterfaceCompute
     loginKey.InterfaceLoginKey,
     memberServerImage.InterfaceMemberServerImage,
     product.InterfaceProduct,
+    portForwarding.InterfacePortForwarding,
     publicInstance.InterfacePublicIpInstance,
     serverInstance.InterfaceServerInstance,
+    region.InterfaceRegion,
     zone.InterfaceZone
 { }
 
@@ -39,10 +43,20 @@ export class Compute implements InterfaceCompute {
   private oauthKey: InterfaceOauthKey;
   private requestPath: string;
 
-  constructor (  oauthKey: InterfaceOauthKey ) {
+  public regionNo: number | string;
+
+  constructor ( oauthKey: InterfaceOauthKey ) {
     this.oauthKey = oauthKey;
     this.requestPath = '/server/';
   };
+
+  get defaultRequestInfo () {
+    return {
+      requestMethod: 'GET',
+      requestPath: this.requestPath,
+      regionNo: this.regionNo
+    }
+  }
 
   /** product **/
   findPublicImages ( callback: InterfaceCallback ) {
@@ -126,5 +140,21 @@ export class Compute implements InterfaceCompute {
   }
   destroyPublicIpInstance(args, callback: InterfaceCallback ) {
     publicInstance.destroyPublicIpInstance.apply(this, arguments);
+  }
+
+  /** portForwarding **/
+  findPortForwardingRules( callback: InterfaceCallback ) {
+    portForwarding.findPortForwardingRules.apply(this, arguments);
+  }
+  createPortForwardingRule( args, callback: InterfaceCallback ) {
+    portForwarding.createPortForwardingRule.apply(this, arguments);
+  }
+  destroyPortForwardingRule( args, callback: InterfaceCallback ) {
+    portForwarding.destroyPortForwardingRule.apply(this, arguments);
+  }
+
+  /** region **/
+  findRegions( callback: InterfaceCallback ) {
+    region.findRegions.apply(this, arguments);
   }
 }

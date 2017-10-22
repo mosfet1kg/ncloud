@@ -30,9 +30,9 @@ export function isParamOutOfBound(args_object, param_array){
     .join(',');
 }
 
-export function requiredParamChecker ( args, paramSet ) {
+export function requiredParamChecker ( args, paramSet={ param: [], required: [] } ) {
   const param_required_array = paramSet.required || [];
-  const param_array = paramSet.param;
+  const param_array = paramSet.param || [];
 
   const not_exist_required_param = isRequiredParamExist(args, param_required_array);
   if( not_exist_required_param.length >0 ) {
@@ -45,8 +45,10 @@ export function requiredParamChecker ( args, paramSet ) {
   }
 }
 
-export function isValidParam ( args, paramSet ) {
+export function isValidParam ( args, paramSet={ param: []} ) {
   const  { param=[] } = paramSet;
+
+  if ( param.length === 0 ) return;
 
   const invalidParam = Object.keys( args ).map( function(el){
     return (<any>param).map( function(el){
@@ -74,7 +76,7 @@ export function isValidIp ( targetIp ) {
   }
 }
 
-export function isValidConstraints( args, param ) {
+export function isValidConstraints( args, param={ constraints: [], required: [] } ) {
 
   const { constraints=[], required=[] } = param;
 

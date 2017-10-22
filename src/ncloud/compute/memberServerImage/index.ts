@@ -17,8 +17,7 @@ export interface InterfaceMemberServerImage {
 
 export function findPrivateImages( callback: InterfaceCallback ): void {
   const requestInfo: InterfaceFetchClientInput = {
-    requestMethod: 'GET',
-    requestPath: this.requestPath,
+    ...this.defaultRequestInfo,
     requestAction: 'getMemberServerImageList'
   };
 
@@ -36,8 +35,7 @@ export function findPrivateImages( callback: InterfaceCallback ): void {
 
 export function createPrivateImage( args, callback: InterfaceCallback ): void {
   const requestInfo: InterfaceFetchClientInput = {
-    requestMethod: 'GET',
-    requestPath: this.requestPath,
+    ...this.defaultRequestInfo,
     requestAction: 'createMemberServerImage',
   };
 
@@ -55,8 +53,7 @@ export function createPrivateImage( args, callback: InterfaceCallback ): void {
 
 export function destroyPrivateImage( args, callback: InterfaceCallback ): void {
   const requestInfo: InterfaceFetchClientInput = {
-    requestMethod: 'GET',
-    requestPath: this.requestPath,
+    ...this.defaultRequestInfo,
     requestAction: 'deleteMemberServerImages',
   };
 

@@ -36,16 +36,21 @@ export interface InterfaceServerInstance {
 
 export function findServer( args, callback: InterfaceCallback ): void {
   const requestInfo: InterfaceFetchClientInput = {
-    requestMethod: 'GET',
-    requestPath: this.requestPath,
+    ...this.defaultRequestInfo,
     requestAction: 'getServerInstanceList',
   };
 
+  const { serverInstanceNo } = args;
   args = alias( args, paramSet['findServer'].request_alias );
 
   fetchClient( args, requestInfo, this.oauthKey )
     .then( (response) => {
       const serverInstanceList = responseFilter( response.data.getServerInstanceListResponse.serverInstanceList[0], 'serverInstance' );
+
+      if ( serverInstanceList.length === 0 ) {
+        throw new Error(`Error: The server instance(${ serverInstanceNo }) does not exist.`)
+      }
+
       const server = setServerReflect.bind(this)( alias( serverInstanceList[0], paramSet['findServer'].response_alias ) );
 
       callback( null,  server );
@@ -56,8 +61,7 @@ export function findServer( args, callback: InterfaceCallback ): void {
 
 export function findServers( callback: InterfaceCallback ): void {
   const requestInfo: InterfaceFetchClientInput = {
-    requestMethod: 'GET',
-    requestPath: this.requestPath,
+    ...this.defaultRequestInfo,
     requestAction: 'getServerInstanceList',
   };
 
@@ -78,8 +82,7 @@ export function findServers( callback: InterfaceCallback ): void {
 
 export function createServer( args, callback: InterfaceCallback ) {
   const requestInfo: InterfaceFetchClientInput = {
-    requestMethod: 'GET',
-    requestPath: this.requestPath,
+    ...this.defaultRequestInfo,
     requestAction: 'createServerInstances',
   };
 
@@ -102,8 +105,7 @@ export function createServer( args, callback: InterfaceCallback ) {
 
 export function destroyServer( args, callback: InterfaceCallback ) {
   const requestInfo: InterfaceFetchClientInput = {
-    requestMethod: 'GET',
-    requestPath: this.requestPath,
+    ...this.defaultRequestInfo,
     requestAction: 'terminateServerInstances',
   };
 
@@ -122,8 +124,7 @@ export function destroyServer( args, callback: InterfaceCallback ) {
 
 export function rebuildServer( args, callback: InterfaceCallback ) {
   const requestInfo: InterfaceFetchClientInput = {
-    requestMethod: 'GET',
-    requestPath: this.requestPath,
+    ...this.defaultRequestInfo,
     requestAction: 'changeServerInstanceSpec',
   };
 
@@ -142,8 +143,7 @@ export function rebuildServer( args, callback: InterfaceCallback ) {
 
 export function rebootServer( args, callback: InterfaceCallback ) {
   const requestInfo: InterfaceFetchClientInput = {
-    requestMethod: 'GET',
-    requestPath: this.requestPath,
+    ...this.defaultRequestInfo,
     requestAction: 'rebootServerInstances',
   };
 
@@ -162,8 +162,7 @@ export function rebootServer( args, callback: InterfaceCallback ) {
 
 export function startServer( args, callback: InterfaceCallback ) {
   const requestInfo: InterfaceFetchClientInput = {
-    requestMethod: 'GET',
-    requestPath: this.requestPath,
+    ...this.defaultRequestInfo,
     requestAction: 'startServerInstances',
   };
 
@@ -182,8 +181,7 @@ export function startServer( args, callback: InterfaceCallback ) {
 
 export function stopServer( args, callback: InterfaceCallback ) {
   const requestInfo: InterfaceFetchClientInput = {
-    requestMethod: 'GET',
-    requestPath: this.requestPath,
+    ...this.defaultRequestInfo,
     requestAction: 'stopServerInstances',
   };
 
@@ -202,8 +200,7 @@ export function stopServer( args, callback: InterfaceCallback ) {
 
 export function findRootPassword( args, callback: InterfaceCallback ) {
   const requestInfo: InterfaceFetchClientInput = {
-    requestMethod: 'GET',
-    requestPath: this.requestPath,
+    ...this.defaultRequestInfo,
     requestAction: 'getRootPassword',
   };
 
@@ -283,7 +280,7 @@ function setWait({ status, interval=5000, timeout=1800000, verbose=false }: { st
     return cb( new Error(`Error: \'status\' must be defined.`))
   }
 
-  ((callback, _interval, _status, _timeout, self)=>{
+  (function (callback, _interval, _status, _timeout, self) {
     let watcherTimer = null;
     let timeOutTimer = null;
 
@@ -302,7 +299,7 @@ function setWait({ status, interval=5000, timeout=1800000, verbose=false }: { st
         }
 
         if ( verbose ) {
-          console.log({
+          callback(null, {
             serverName: server.serverName,
             serverInstanceStatusName: server.serverInstanceStatusName
           });
@@ -321,7 +318,7 @@ function setWait({ status, interval=5000, timeout=1800000, verbose=false }: { st
 
 }
 
-function setServerReflect(server: InterfaceServer ): InterfaceServerResponse {
+function setServerReflect(server: InterfaceServer): InterfaceServerResponse {
 
   Reflect.defineProperty( server, 'STATUS', {
     get: ()=>{
@@ -344,7 +341,7 @@ function setServerReflect(server: InterfaceServer ): InterfaceServerResponse {
 
   Reflect.defineProperty( server, "setWait", {
     get: ()=>{
-      return setWait.bind({...this, ...server});
+      return setWait.bind({...this, defaultRequestInfo: this.defaultRequestInfo, ...server});
     },
     configurable: false,
     enumerable: false

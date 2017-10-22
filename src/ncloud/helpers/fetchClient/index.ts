@@ -12,6 +12,7 @@ export interface InterfaceFetchClientInput {
   requestMethod: string;
   requestPath: string;
   requestAction: string;
+  regionNo?: number | string;
 }
 
 export function fetchClient( args, fetchClientInput: InterfaceFetchClientInput, oauthKey: InterfaceOauthKey): any {
@@ -20,7 +21,8 @@ export function fetchClient( args, fetchClientInput: InterfaceFetchClientInput, 
   const requestInfo = {
     requestMethod: fetchClientInput.requestMethod,
     requestUrl: url.resolve( Ncloud.baseUrl, fetchClientInput.requestPath ),
-    requestAction: fetchClientInput.requestAction
+    requestAction: fetchClientInput.requestAction,
+    regionNo: fetchClientInput.regionNo
   } as InterfaceRequestInfo;
 
   const queryString: string = oauth.getQueryString( args, requestInfo );

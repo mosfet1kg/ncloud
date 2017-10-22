@@ -8,20 +8,20 @@ import {
 
 // import paramSet from './paramSet';
 
-export interface InterfaceZone {
-  findZones( callback: InterfaceCallback ): void;
+export interface InterfaceRegion {
+  findRegions( callback: InterfaceCallback ): void;
 }
 
-export function findZones( callback: InterfaceCallback ): void {
+export function findRegions( callback: InterfaceCallback ): void {
   const requestInfo: InterfaceFetchClientInput = {
     ...this.defaultRequestInfo,
-    requestAction: 'getZoneList',
+    requestAction: 'getRegionList',
   };
 
   fetchClient( {}, requestInfo, this.oauthKey )
     .then( (response) => {
-      const zoneList = responseFilter( response.data.getZoneListResponse.zoneList[0], 'zone');
-      callback( null, zoneList );
+      const regionList = responseFilter( response.data.getRegionListResponse.regionList[0], 'region');
+      callback( null, regionList );
     })
     .catch( err=>errorHandling(err, callback));
 

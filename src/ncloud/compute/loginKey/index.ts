@@ -17,8 +17,7 @@ export interface InterfaceLoginKey {
 
 export function findLoginKeys( callback: InterfaceCallback ): void {
   const requestInfo: InterfaceFetchClientInput = {
-    requestMethod: 'GET',
-    requestPath: this.requestPath,
+    ...this.defaultRequestInfo,
     requestAction: 'getLoginKeyList',
   };
 
@@ -34,8 +33,7 @@ export function findLoginKeys( callback: InterfaceCallback ): void {
 
 export function createLoginKey( args, callback: InterfaceCallback ){
   const requestInfo: InterfaceFetchClientInput = {
-    requestMethod: 'GET',
-    requestPath: this.requestPath,
+    ...this.defaultRequestInfo,
     requestAction: 'createLoginKey',
   };
 

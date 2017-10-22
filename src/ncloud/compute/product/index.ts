@@ -18,8 +18,7 @@ export interface InterfaceProduct {
 
 export function findPublicImages( callback: InterfaceCallback ): void {
   const requestInfo: InterfaceFetchClientInput = {
-    requestMethod: 'GET',
-    requestPath: this.requestPath,
+    ...this.defaultRequestInfo,
     requestAction: 'getServerImageProductList',
   };
 
@@ -36,8 +35,7 @@ export function findPublicImages( callback: InterfaceCallback ): void {
 
 export function findFlavors( args, callback: InterfaceCallback ): void {
   const requestInfo: InterfaceFetchClientInput = {
-    requestMethod: 'GET',
-    requestPath: this.requestPath,
+    ...this.defaultRequestInfo,
     requestAction: 'getServerProductList',
   };
 

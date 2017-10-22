@@ -27,12 +27,18 @@ export class GeoLocation implements InterfaceGeoLocation {
     this.requestPath = '/geolocation/';
   }
 
+  get defaultRequestInfo () {
+    return {
+      requestMethod: 'GET',
+      requestPath: this.requestPath,
+    }
+  }
+
   @ValidIpOnly
   public findLocation(args, callback: InterfaceCallback ): void {
     const requestInfo: InterfaceFetchClientInput = {
-      requestMethod: 'GET',
-      requestPath: this.requestPath,
-      requestAction: 'getLocation',
+      ...this.defaultRequestInfo,
+      requestAction: 'getLocation'
     };
 
     fetchClient( args, requestInfo, this.oauthKey )

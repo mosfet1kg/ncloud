@@ -9,6 +9,7 @@ export interface InterfaceRequestInfo {
   requestMethod: string;
   requestUrl: string;
   requestAction: string;
+  regionNo?: string | number;
 }
 
 export class Oauth {
@@ -20,6 +21,10 @@ export class Oauth {
 
   public getQueryString( args, requestInfo: InterfaceRequestInfo ): string {
     const paramTemp = {...args};
+
+    if ( requestInfo.regionNo ) {
+      paramTemp.regionNo = requestInfo.regionNo;
+    }
 
     paramTemp.action = requestInfo.requestAction;
     paramTemp.oauth_consumer_key = this.authKey.oauth_consumer_key;

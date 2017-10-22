@@ -21,6 +21,8 @@ export function ValidIpOnly( target, key, descriptor ) {
 }
 
 export function ValidParametersOnlyClass( paramSet, paramKey=null ) {
+  if ( ! paramSet ) return;
+
   return (target: object)=>{
     // save a reference to the original constructor
     const original = target;
@@ -29,6 +31,9 @@ export function ValidParametersOnlyClass( paramSet, paramKey=null ) {
     function construct(constructor, args) {
 
       Object.getOwnPropertyNames( constructor['prototype'] ).forEach( methodName=>{
+        const { get, set } = Object.getOwnPropertyDescriptor( constructor['prototype'], methodName);
+        if ( get || set ) return;
+
         const originalMethod = constructor['prototype'][ methodName ];
 
         constructor['prototype'][ methodName ] = function(){
@@ -80,6 +85,8 @@ export function ValidParametersOnlyClass( paramSet, paramKey=null ) {
 }
 
 export function MustIncludeRequiredParametersClass( paramSet, paramKey=null ) {
+  if ( ! paramSet ) return;
+
   return (target: object)=>{
     // save a reference to the original constructor
     const original = target;
@@ -88,6 +95,9 @@ export function MustIncludeRequiredParametersClass( paramSet, paramKey=null ) {
     function construct(constructor, args) {
 
       Object.getOwnPropertyNames( constructor['prototype'] ).forEach( methodName=>{
+        const { get, set } = Object.getOwnPropertyDescriptor( constructor['prototype'], methodName);
+        if ( get || set ) return;
+
         const originalMethod = constructor['prototype'][ methodName ];
 
         constructor['prototype'][ methodName ] = function(){
@@ -103,7 +113,7 @@ export function MustIncludeRequiredParametersClass( paramSet, paramKey=null ) {
               if ( !!paramKey ) {
                 paramSet = paramSet[paramKey];
               } else {
-                paramSet = paramSet[ methodName ];
+                paramSet = paramSet[methodName];
               }
 
               validatorService.requiredParamChecker( arguments[0], paramSet );
@@ -140,6 +150,8 @@ export function MustIncludeRequiredParametersClass( paramSet, paramKey=null ) {
 }
 
 export function ValidConstraintsOnlyClass( paramSet, paramKey=null ) {
+  if ( ! paramSet ) return;
+
   return (target: object)=>{
     // save a reference to the original constructor
     const original = target;
@@ -148,6 +160,9 @@ export function ValidConstraintsOnlyClass( paramSet, paramKey=null ) {
     function construct(constructor, args) {
 
       Object.getOwnPropertyNames( constructor['prototype'] ).forEach( methodName=>{
+        const { get, set } = Object.getOwnPropertyDescriptor( constructor['prototype'], methodName);
+        if ( get || set ) return;
+
         const originalMethod = constructor['prototype'][ methodName ];
 
         constructor['prototype'][ methodName ] = function(){

@@ -20,8 +20,7 @@ export interface InterfacePublicIpInstance {
 
 export function findPublicIpInstances( callback: InterfaceCallback ): void {
   const requestInfo: InterfaceFetchClientInput = {
-    requestMethod: 'GET',
-    requestPath: this.requestPath,
+    ...this.defaultRequestInfo,
     requestAction: 'getPublicIpInstanceList',
   };
 
@@ -46,8 +45,7 @@ export function findPublicIpInstances( callback: InterfaceCallback ): void {
 
 export function createPublicIpInstance(args, callback?: InterfaceCallback ) {
   const requestInfo: InterfaceFetchClientInput = {
-    requestMethod: 'GET',
-    requestPath: this.requestPath,
+    ...this.defaultRequestInfo,
     requestAction: 'createPublicIpInstance',
   };
 
@@ -74,8 +72,7 @@ export function createPublicIpInstance(args, callback?: InterfaceCallback ) {
 
 export function attachPublicIpInstance( args, callback: InterfaceCallback ) {
   const requestInfo: InterfaceFetchClientInput = {
-    requestMethod: 'GET',
-    requestPath: this.requestPath,
+    ...this.defaultRequestInfo,
     requestAction: 'associatePublicIpWithServerInstance',
   };
 
@@ -95,8 +92,7 @@ export function attachPublicIpInstance( args, callback: InterfaceCallback ) {
 
 export function detachPublicIpInstance( args, callback: InterfaceCallback ) {
   const requestInfo: InterfaceFetchClientInput = {
-    requestMethod: 'GET',
-    requestPath: this.requestPath,
+    ...this.defaultRequestInfo,
     requestAction: 'disassociatePublicIpFromServerInstance',
   };
 
@@ -116,8 +112,7 @@ export function detachPublicIpInstance( args, callback: InterfaceCallback ) {
 
 export function destroyPublicIpInstance( args, callback: InterfaceCallback ) {
   const requestInfo: InterfaceFetchClientInput = {
-    requestMethod: 'GET',
-    requestPath: this.requestPath,
+    ...this.defaultRequestInfo,
     requestAction: 'deletePublicIpInstances',
   };
 
