@@ -6,6 +6,7 @@
   * [MemberServerImage](./compute/memberserverimage/memberserverimage-01.md)
   * [PortForwarding](./compute/portforwarding/port-01.md)
   * [Product](./compute/product/product-01.md)
+  * [PublicIpInstance](./compute/publicipinstance/publicipinstance-01.md)
   * [Region](./compute/region/region-01.md)
   * [ServerInstance](./compute/serverinstance/serverinstance-01.md)
   * [Zone](./compute/zone/zone-01.md)
