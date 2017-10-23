@@ -40,9 +40,7 @@ launch a server, and then output its details to the command line.
         serverName: 'server1',
         loginKeyName: 'testgb'
       }, handlerServerResponse );
-
     })
-
   });
 
   function handlerServerResponse(err, server) {

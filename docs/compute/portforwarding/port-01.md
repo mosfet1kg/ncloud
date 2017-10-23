@@ -39,7 +39,7 @@ These variables can vary depending on `regionNo`.
 ---
 
 ## `createPortForwardingRule`, action `addPortForwardingRules` 
-Creates a port forwarding rule and then attach it to a server.
+Creates a port forwarding rule and then attaches it to a server.
 
 ### Arguments  
 
@@ -67,7 +67,7 @@ Creates a port forwarding rule and then attach it to a server.
 ---
 
 ## `destroyPortForwardingRule`, action `deletePortForwardingRules` 
-Detach a port forwarding rule from a server.
+Detaches a port forwarding rule from a server.
 
 ### Arguments  
 
