@@ -16,12 +16,14 @@ export interface InterfacePortForwarding {
   createPortForwardingRule( args: {
     portForwardingConfigurationNo?: number | string,
     serverInstanceNo: number | string,
-    externalPort: number
+    externalPort: number,
+    internalPort: number
   }, callback: InterfaceCallback ): void;
   destroyPortForwardingRule( args: {
     portForwardingConfigurationNo?: number | string,
     serverInstanceNo: number | string,
     externalPort: number
+    internalPort: number
   }, callback: InterfaceCallback ): void;
 }
 

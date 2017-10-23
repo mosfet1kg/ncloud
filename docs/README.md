@@ -48,6 +48,9 @@ const client = ncloud.createClient({
 | MemberServerImage  | deleteMemberServerImages  | [destroyPrivateImage](./compute/memberserverimage/memberserverimage-01.md#destroyprivateimages-action-deletememberserverimage)   |
 | Product            | getServerImageProductList | [findPublicImages](./compute/product/product-01.md#findpublicimages-action-getserverimageproductlist)       |
 | Product            | getServerProductList      | [findFlavors](./compute/product/product-01.md#findflavors-action-getserverproductlist)            |
+| PortForwarding     | getPortForwardingRuleList | [findPortForwardingRules](./compute/portforwarding/port-01.html)       |
+| PortForwarding     | addPortForwardingRules    | [createPortForwardingRule](./compute/product/product-01.md#findpublicimages-action-getserverimageproductlist)       |
+| PortForwarding     | deletePortForwardingRules | [destroyPortForwardingRule](./compute/product/product-01.md#findpublicimages-action-getserverimageproductlist)       |
 | ServerInstance     | getServerInstanceList     | [findServers](./compute/serverinstance/serverinstance-01.md#findservers-action-getserverinstancelist)            |
 | ServerInstance     | createServerInstances     | [createServer](./compute/serverinstance/serverinstance-01.md#createserver-action-createserverinstances)           |
 | ServerInstance     | rebootServerInstances     | [rebootServer](./compute/serverinstance/serverinstance-01.md#rebootserver-action-rebootserverinstances)           |
@@ -63,7 +66,7 @@ const client = ncloud.createClient({
 
 | Category          | Action                     | Method                 |
 |-------------------|----------------------------|------------------------|
-| Geolocation       | getLocation                | [findLocation](./openapi/geolocation/geo-1.md#findlocation-action-getlocation)       |
+| Geolocation       | getLocation                | [findLocation](./openapi/geolocation/geo-01.md#findlocation-action-getlocation)       |
  
 
 # Others 
