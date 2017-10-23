@@ -22,7 +22,7 @@ launch a server, and then output its details to the command line.
   // first we're going to get our public images
   client.compute.findPublicImages( function (err, images) {
 
-    // pick an image base on CentOs 7.3
+    // pick an image base on CentOS 7.3
     const vmImageId = images.filter({vmImageName: 'centos-7.3-64'})[0].vmImageId;
     console.log( 'vmImageId: ' + vmImageId );
 

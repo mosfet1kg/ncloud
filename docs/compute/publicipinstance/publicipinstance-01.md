@@ -81,7 +81,7 @@ client.compute.findPublicIpInstances(function( error, publicIpInstanceList ) {
 ## `createPublicIpInstance`, action `createPublicIpInstance` 
 Returns lists all public ip instances in the callback `f(err, publicIpInstances)`.   
 Callback returns `f(err, publicIpInstances)` where `publicIpInstances` is an `Array`.  
-If public ip instance is not allocated to any server, `publicIpInstanceStatusName` shows `created` and doesn't have `serverInstanceAssociatedWithPublicIp` property.
+If a public ip instance is not allocated to any server, its `publicIpInstanceStatusName` shows `created` and doesn't have `serverInstanceAssociatedWithPublicIp` property.
    
 ### Arguments  
 | Input parameter       | Type       | Required     | Description |
