@@ -3,7 +3,7 @@
 ## Using ncloud
 
 In this example, we're going to create a ncloud compute client, 
-create a server, and then output its details to the command line.
+launch a server, and then output its details to the command line.
 
 ```javascript
   var ncloud = require('ncloud');
