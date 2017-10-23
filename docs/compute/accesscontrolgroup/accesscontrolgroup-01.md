@@ -7,7 +7,7 @@ Callback returns `f(err, acgList)` where `acgList` is an `Array`.
 ### Arguments  
  No Input Arguments
  
-### Examples  
+### Example  
 ```javascript
 client.compute.findAccessControlGroup( function( error, response ){
     if( error ){

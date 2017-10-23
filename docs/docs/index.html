@@ -138,33 +138,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.3" data-path="compute/product/product-01.html">
-            
-                <a href="compute/product/product-01.html">
-            
-                    
-                    Product
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.4" data-path="compute/serverinstance/serverinstance-01.html">
-            
-                <a href="compute/serverinstance/serverinstance-01.html">
-            
-                    
-                    ServerInstance
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.5" data-path="compute/memberserverimage/memberserverimage-01.html">
+        <li class="chapter " data-level="1.2.3" data-path="compute/memberserverimage/memberserverimage-01.html">
             
                 <a href="compute/memberserverimage/memberserverimage-01.html">
             
@@ -177,7 +151,59 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.6" data-path="compute/zone/zone-01.html">
+        <li class="chapter " data-level="1.2.4" data-path="compute/portforwarding/port-01.html">
+            
+                <a href="compute/portforwarding/port-01.html">
+            
+                    
+                    PortForwarding
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="compute/product/product-01.html">
+            
+                <a href="compute/product/product-01.html">
+            
+                    
+                    Product
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.6" data-path="compute/region/region-01.html">
+            
+                <a href="compute/region/region-01.html">
+            
+                    
+                    Region
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.7" data-path="compute/serverinstance/serverinstance-01.html">
+            
+                <a href="compute/serverinstance/serverinstance-01.html">
+            
+                    
+                    ServerInstance
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.8" data-path="compute/zone/zone-01.html">
             
                 <a href="compute/zone/zone-01.html">
             
@@ -190,7 +216,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.7" data-path="compute/getting-started-compute/getting-compute-01.html">
+        <li class="chapter " data-level="1.2.9" data-path="compute/getting-started-compute/getting-compute-01.html">
             
                 <a href="compute/getting-started-compute/getting-compute-01.html">
             
@@ -357,6 +383,21 @@ $ yarn add ncloud
 <td><a href="compute/memberserverimage/memberserverimage-01.html#destroyprivateimages-action-deletememberserverimage">destroyPrivateImage</a></td>
 </tr>
 <tr>
+<td>PortForwarding</td>
+<td>getPortForwardingRuleList</td>
+<td><a href="compute/portforwarding/port-01.html#findportforwardingrules-action-getportforwardingrulelist">findPortForwardingRules</a></td>
+</tr>
+<tr>
+<td>PortForwarding</td>
+<td>addPortForwardingRules</td>
+<td><a href="compute/portforwarding/port-01.html#createportforwardingrule-action-addportforwardingrules">createPortForwardingRule</a></td>
+</tr>
+<tr>
+<td>PortForwarding</td>
+<td>deletePortForwardingRules</td>
+<td><a href="compute/portforwarding/port-01.html#destroyportforwardingrule-action-deleteportforwardingrules">destroyPortForwardingRule</a></td>
+</tr>
+<tr>
 <td>Product</td>
 <td>getServerImageProductList</td>
 <td><a href="compute/product/product-01.html#findpublicimages-action-getserverimageproductlist">findPublicImages</a></td>
@@ -365,6 +406,36 @@ $ yarn add ncloud
 <td>Product</td>
 <td>getServerProductList</td>
 <td><a href="compute/product/product-01.html#findflavors-action-getserverproductlist">findFlavors</a></td>
+</tr>
+<tr>
+<td>PublicIpInstance</td>
+<td>getPublicIpInstanceList</td>
+<td><a href="">findPublicIpInstances</a></td>
+</tr>
+<tr>
+<td>PublicIpInstance</td>
+<td>createPublicIpInstance</td>
+<td><a href="">createPublicIpInstance</a></td>
+</tr>
+<tr>
+<td>PublicIpInstance</td>
+<td>associatePublicIpWithServerInstance</td>
+<td><a href="">attachPublicIpInstance</a></td>
+</tr>
+<tr>
+<td>PublicIpInstance</td>
+<td>disassociatePublicIpFromServerInstance</td>
+<td><a href="">detachPublicIpInstance</a></td>
+</tr>
+<tr>
+<td>PublicIpInstance</td>
+<td>deletePublicIpInstances</td>
+<td><a href="">destroyPublicIpInstance</a></td>
+</tr>
+<tr>
+<td>Region</td>
+<td>getRegionList</td>
+<td><a href="compute/region/region-01.html#findregions-action-getRegionList">findRegions</a></td>
 </tr>
 <tr>
 <td>ServerInstance</td>
@@ -426,7 +497,7 @@ $ yarn add ncloud
 <tr>
 <td>Geolocation</td>
 <td>getLocation</td>
-<td><a href="openapi/geolocation/geo-1.md#findlocation-action-getlocation">findLocation</a></td>
+<td><a href="openapi/geolocation/geo-01.html#findlocation-action-getlocation">findLocation</a></td>
 </tr>
 </tbody>
 </table>
@@ -467,7 +538,7 @@ $ yarn add ncloud
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Compute","level":"1.2","depth":1,"ref":"","articles":[{"title":"AccessControlGroup","level":"1.2.1","depth":2,"path":"compute/accesscontrolgroup/accesscontrolgroup-01.md","ref":"./compute/accesscontrolgroup/accesscontrolgroup-01.md","articles":[]},{"title":"LoginKey","level":"1.2.2","depth":2,"path":"compute/loginkey/loginkey-01.md","ref":"./compute/loginkey/loginkey-01.md","articles":[]},{"title":"Product","level":"1.2.3","depth":2,"path":"compute/product/product-01.md","ref":"./compute/product/product-01.md","articles":[]},{"title":"ServerInstance","level":"1.2.4","depth":2,"path":"compute/serverinstance/serverinstance-01.md","ref":"./compute/serverinstance/serverinstance-01.md","articles":[]},{"title":"MemberServerImage","level":"1.2.5","depth":2,"path":"compute/memberserverimage/memberserverimage-01.md","ref":"./compute/memberserverimage/memberserverimage-01.md","articles":[]},{"title":"Zone","level":"1.2.6","depth":2,"path":"compute/zone/zone-01.md","ref":"./compute/zone/zone-01.md","articles":[]},{"title":"Getting Started","level":"1.2.7","depth":2,"path":"compute/getting-started-compute/getting-compute-01.md","ref":"./compute/getting-started-compute/getting-compute-01.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2017-10-16T15:15:39.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-10-22T17:43:35.836Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Compute","level":"1.2","depth":1,"ref":"","articles":[{"title":"AccessControlGroup","level":"1.2.1","depth":2,"path":"compute/accesscontrolgroup/accesscontrolgroup-01.md","ref":"./compute/accesscontrolgroup/accesscontrolgroup-01.md","articles":[]},{"title":"LoginKey","level":"1.2.2","depth":2,"path":"compute/loginkey/loginkey-01.md","ref":"./compute/loginkey/loginkey-01.md","articles":[]},{"title":"MemberServerImage","level":"1.2.3","depth":2,"path":"compute/memberserverimage/memberserverimage-01.md","ref":"./compute/memberserverimage/memberserverimage-01.md","articles":[]},{"title":"PortForwarding","level":"1.2.4","depth":2,"path":"compute/portforwarding/port-01.md","ref":"./compute/portforwarding/port-01.md","articles":[]},{"title":"Product","level":"1.2.5","depth":2,"path":"compute/product/product-01.md","ref":"./compute/product/product-01.md","articles":[]},{"title":"Region","level":"1.2.6","depth":2,"path":"compute/region/region-01.md","ref":"./compute/region/region-01.md","articles":[]},{"title":"ServerInstance","level":"1.2.7","depth":2,"path":"compute/serverinstance/serverinstance-01.md","ref":"./compute/serverinstance/serverinstance-01.md","articles":[]},{"title":"Zone","level":"1.2.8","depth":2,"path":"compute/zone/zone-01.md","ref":"./compute/zone/zone-01.md","articles":[]},{"title":"Getting Started","level":"1.2.9","depth":2,"path":"compute/getting-started-compute/getting-compute-01.md","ref":"./compute/getting-started-compute/getting-compute-01.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2017-10-23T14:23:59.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-10-23T14:25:46.448Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

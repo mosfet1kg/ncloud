@@ -46,11 +46,17 @@ const client = ncloud.createClient({
 | MemberServerImage  | getMemberServerImageList  | [findPrivateImages](./compute/memberserverimage/memberserverimage-01.md#findprivateimages-action-getmemberserverimagelist)      |
 | MemberServerImage  | createMemberServerImage   | [createPrivateImage](./compute/memberserverimage/memberserverimage-01.md#createprivateimage-action-creatememberserverimage)     |
 | MemberServerImage  | deleteMemberServerImages  | [destroyPrivateImage](./compute/memberserverimage/memberserverimage-01.md#destroyprivateimages-action-deletememberserverimage)   |
+| PortForwarding     | getPortForwardingRuleList | [findPortForwardingRules](./compute/portforwarding/port-01.md#findportforwardingrules-action-getportforwardingrulelist)       |
+| PortForwarding     | addPortForwardingRules    | [createPortForwardingRule](./compute/portforwarding/port-01.md#createportforwardingrule-action-addportforwardingrules)       |
+| PortForwarding     | deletePortForwardingRules | [destroyPortForwardingRule](./compute/portforwarding/port-01.md#destroyportforwardingrule-action-deleteportforwardingrules)       |
 | Product            | getServerImageProductList | [findPublicImages](./compute/product/product-01.md#findpublicimages-action-getserverimageproductlist)       |
 | Product            | getServerProductList      | [findFlavors](./compute/product/product-01.md#findflavors-action-getserverproductlist)            |
-| PortForwarding     | getPortForwardingRuleList | [findPortForwardingRules](./compute/portforwarding/port-01.html)       |
-| PortForwarding     | addPortForwardingRules    | [createPortForwardingRule](./compute/product/product-01.md#findpublicimages-action-getserverimageproductlist)       |
-| PortForwarding     | deletePortForwardingRules | [destroyPortForwardingRule](./compute/product/product-01.md#findpublicimages-action-getserverimageproductlist)       |
+| PublicIpInstance   | getPublicIpInstanceList   | [findPublicIpInstances]() |
+| PublicIpInstance   | createPublicIpInstance    | [createPublicIpInstance]() |
+| PublicIpInstance   | associatePublicIpWithServerInstance    | [attachPublicIpInstance]() |
+| PublicIpInstance   | disassociatePublicIpFromServerInstance | [detachPublicIpInstance]() |
+| PublicIpInstance   | deletePublicIpInstances   | [destroyPublicIpInstance]() |
+| Region             | getRegionList             | [findRegions](./compute/region/region-01.md#findregions-action-getRegionList)            |
 | ServerInstance     | getServerInstanceList     | [findServers](./compute/serverinstance/serverinstance-01.md#findservers-action-getserverinstancelist)            |
 | ServerInstance     | createServerInstances     | [createServer](./compute/serverinstance/serverinstance-01.md#createserver-action-createserverinstances)           |
 | ServerInstance     | rebootServerInstances     | [rebootServer](./compute/serverinstance/serverinstance-01.md#rebootserver-action-rebootserverinstances)           |
@@ -60,7 +66,6 @@ const client = ncloud.createClient({
 | ServerInstance     | terminateServerInstances  | [destroyServer](./compute/serverinstance/serverinstance-01.md#destroyserver-action-terminateserverinstances)           |
 | ServerInstance     | getRootPassword           | [findRootPassword](./compute/serverinstance/serverinstance-01.md#findrootpassword-action-getrootpassword)           |
 | Zone               | getZoneList               | [findZones](./compute/zone/zone-01.md#findzones-action-getzonelist)              |
-
 
 ### OpenAPI
 

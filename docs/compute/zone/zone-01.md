@@ -11,12 +11,12 @@ Refer to `createServer` method.
 ### Examples  
 ```javascript
 client.compute.findZones( function( error, response ){
-     if( error ){
-         console.log( error );
-     }else {
-         console.log( response );
-         // response example =>
-         // [ { zoneNo: 2, zoneName: 'KR-1', zoneDescription: '가산 NANG zone' } ]
-     }
- });
+  if( error ){
+    console.log( error );
+  }else {
+    console.log( response );
+    // response example =>
+    // [ { zoneNo: 2, zoneName: 'KR-1', zoneDescription: '가산 NANG zone' } ]
+  }
+});
 ```

@@ -7,7 +7,7 @@ Callback returns `f(err, privateImageList)` where `privateImageList` is an `Arra
 ### Arguments  
  No Input Arguments
  
-### Examples  
+### Example  
 ```javascript
 client.compute.findPrivateImages( function( error, response ){
     if( error ){
@@ -64,10 +64,10 @@ Creates an Image based on a server.
 
 ### Arguments  
 
-| Input parameter    | Type       | Required     | Description |
-|--------------------|------------|--------------|-------------|
-| `serverInstanceNo` | `string`   | **required** | Unique Id of a running server that can be got from `findServers` method(action `getServerInstanceList`).   |             
-| `privateImageName` | `string`   | optional     | name for the resulting image. |  
+| Input parameter           | Type       | Required     | Description |
+|---------------------------|------------|--------------|-------------|
+| `serverInstanceNo`        | `string`   | **required** | Unique Id of a running server that can be got from `findServers` method(action `getServerInstanceList`).   |             
+| `privateImageName`        | `string`   | optional     | name for the resulting image. |  
 | `privateImageDescription` | `string`   | optional     | description for the resulting image. |  
  
 ### Examples  
@@ -137,7 +137,7 @@ Destroys the specified image and returns a confirmation.
 |--------------------|------------|--------------|-------------|
 | `privateImageNo`   | `string[]`   | **required** | Unique Id of a private image that can be got from `findPrivateImages` method(action `getMemberServerImageList`).   |             
  
-### Examples  
+### Example
 ```javascript
 client.compute.destroyPrivateImage({ privateImageNo: 3800 }, function(err, res) {
     if ( err ) {

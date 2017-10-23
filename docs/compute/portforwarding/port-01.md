@@ -45,7 +45,7 @@ Creates a port forwarding rule and then attach it to a server.
 
 | Input parameter                  | Type       | Required     | Description |
 |----------------------------------|------------|--------------|-------------|
-| `portForwardingConfigurationNo`  | `string`   | optional     | The value to create port forwarding rule based on the region. It can be obtained from `findPortForwardingRules` method(action `getPortForwardingRuleList`). It can vary depending on `regionNo`.  |             
+| `portForwardingConfigurationNo`  | `string`   | optional     | The value to create port forwarding rule based on the region. (Default: the config number for the region you chose ).   It can be obtained from `findPortForwardingRules` method(action `getPortForwardingRuleList`). It can vary depending on `regionNo`.  |             
 | `serverInstanceNo`               | `string`   | **required** | Unique number of a server for where to forward.  |  
 | `externalPort`                   | `string`   | **required** | External port to access the server via SSH. |  
 | `internalPort`                   | `string`   | **required** | Destination port. Choose either 22 or 3389. Values other than these are invalid. |  
@@ -73,12 +73,12 @@ Detach a port forwarding rule from a server.
 
 | Input parameter                  | Type       | Required     | Description |
 |----------------------------------|------------|--------------|-------------|
-| `portForwardingConfigurationNo`  | `string`   | optional     | The value to create port forwarding rule based on the region. It can be obtained from `findPortForwardingRules` method(action `getPortForwardingRuleList`). It can vary depending on `regionNo`.  |             
+| `portForwardingConfigurationNo`  | `string`   | optional     | The value to create port forwarding rule based on the region. (Default: the config number for the region you chose ).  It can be obtained from `findPortForwardingRules` method(action `getPortForwardingRuleList`). It can vary depending on `regionNo`.  |             
 | `serverInstanceNo`               | `string`   | **required** | Unique number of a server for where to forward.  |  
 | `externalPort`                   | `string`   | **required** | External port to access the server via SSH. |  
 | `internalPort`                   | `string`   | **required** | Destination port. Choose either 22 or 3389. Values other than these are invalid. |  
 
-### Examples  
+### Example
 ```javascript
   client.compute.destroyPortForwardingRule({ serverInstanceNo: 507498, externalPort: 52273, internalPort: 22 }, function( err, rules ) {
     if ( err ) {

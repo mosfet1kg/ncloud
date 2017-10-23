@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Product · GitBook</title>
+        <title>Region · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../region/region-01.html" />
+    <link rel="next" href="../serverinstance/serverinstance-01.html" />
     
     
-    <link rel="prev" href="../portforwarding/port-01.html" />
+    <link rel="prev" href="../product/product-01.html" />
     
 
     </head>
@@ -168,9 +168,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2.5" data-path="product-01.html">
+        <li class="chapter " data-level="1.2.5" data-path="../product/product-01.html">
             
-                <a href="product-01.html">
+                <a href="../product/product-01.html">
             
                     
                     Product
@@ -181,9 +181,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.6" data-path="../region/region-01.html">
+        <li class="chapter active" data-level="1.2.6" data-path="region-01.html">
             
-                <a href="../region/region-01.html">
+                <a href="region-01.html">
             
                     
                     Region
@@ -307,7 +307,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >Product</a>
+        <a href="../.." >Region</a>
     </h1>
 </div>
 
@@ -322,78 +322,25 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="compute--product">Compute : Product</h1>
-<h2 id="findpublicimages-action-getserverimageproductlist"><code>findPublicImages</code>, action <code>getServerImageProductList</code></h2>
-<p>Returns the whole list of VM Image Types.</p>
+                                <h1 id="compute--region">Compute : Region</h1>
+<h2 id="findregions-action-getregionlist"><code>findRegions</code>, action <code>getRegionList</code></h2>
+<p>Returns the whole list of available regions.</p>
 <h3 id="arguments">Arguments</h3>
 <p> No Input Arguments</p>
-<h3 id="examples">Examples</h3>
-<pre><code class="lang-javascript">client.compute.findPublicImages( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> error, response </span>)</span>{
-    <span class="hljs-keyword">if</span>( error ){
-        <span class="hljs-built_in">console</span>.log( error );
-    }<span class="hljs-keyword">else</span> {
-        <span class="hljs-built_in">console</span>.log(response);
-
-        <span class="hljs-comment">// response example =&gt;</span>
-        <span class="hljs-comment">// [ { vmImageId: &apos;SPSW0LINUX000043&apos;,</span>
-        <span class="hljs-comment">//     vmImageName: &apos;centos-5.11-64&apos;,</span>
-        <span class="hljs-comment">//     vmImageType: { code: &apos;LINUX&apos;, codeName: &apos;Linux&apos; },</span>
-        <span class="hljs-comment">//     vmImageDescription: &apos;CentOS 5.11(64bit)&apos;,</span>
-        <span class="hljs-comment">//     infraResourceType: { code: &apos;SW&apos;, codeName: &apos;Software&apos; },</span>
-        <span class="hljs-comment">//     cpuCount: 0,</span>
-        <span class="hljs-comment">//     memorySize: 0,</span>
-        <span class="hljs-comment">//     baseBlockStorageSize: 0,</span>
-        <span class="hljs-comment">//     platformType: { code: &apos;LNX64&apos;, codeName: &apos;Linux 64 Bit&apos; },</span>
-        <span class="hljs-comment">//     osInformation: &apos;CentOS 5.11 (64-bit)&apos;,</span>
-        <span class="hljs-comment">//     addBlockStroageSize: 0 },</span>
-        <span class="hljs-comment">//          /** more items **/</span>
-        <span class="hljs-comment">// ]</span>
-    }
-});
-</code></pre>
-<hr>
-<h2 id="findflavors-action-getserverproductlist"><code>findFlavors</code>, action <code>getServerProductList</code></h2>
-<p>Returns the whole list for VM Flavor types which are compatible with a VM Image Type<code>vmImageId</code>.  </p>
-<h3 id="arguments">Arguments</h3>
-<table>
-<thead>
-<tr>
-<th>Input parameter</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>vmImageId</code></td>
-<td><code>string</code></td>
-<td><strong>required</strong></td>
-<td>The VM Image Type Id is used for searching the whole compatible list of VM Flavor Type. Flavors are templates used to define VM configurations such as the the number of cores, storage capacity and etc. <code>vmImageId</code> can be obtained from <code>findPublicImages</code></td>
-</tr>
-</tbody>
-</table>
 <h3 id="example">Example</h3>
-<pre><code class="lang-javascript">client.compute.findFlavors( { vmImageId: <span class="hljs-string">&apos;SPSW0LINUX000031&apos;</span> }, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> error, response </span>)</span>{
-    <span class="hljs-keyword">if</span>( error ){
-        <span class="hljs-built_in">console</span>.log( error );
-    }<span class="hljs-keyword">else</span>{
-        <span class="hljs-built_in">console</span>.log( response );
-        <span class="hljs-comment">// response example =&gt;</span>
-        <span class="hljs-comment">// [ { vmFlavorId: &apos;SPSVRSTAND000056&apos;,</span>
-        <span class="hljs-comment">//     vmFlavorName: &apos;vCPU 1EA, Memory 1GB, Disk 50GB&apos;,</span>
-        <span class="hljs-comment">//     vmFlavorType: { code: &apos;MICRO&apos;, codeName: &apos;Micro Server&apos; },</span>
-        <span class="hljs-comment">//     vmFlavorDescription: &apos;vCPU 1EA, Memory 1GB, Disk 50GB&apos;,</span>
-        <span class="hljs-comment">//     infraResourceType: { code: &apos;SVR&apos;, codeName: &apos;Server&apos; },</span>
-        <span class="hljs-comment">//     cpuCount: 1,</span>
-        <span class="hljs-comment">//     memorySize: 1073741824,</span>
-        <span class="hljs-comment">//     baseBlockStorageSize: 53687091200,</span>
-        <span class="hljs-comment">//     osInformation: &apos;&apos;,</span>
-        <span class="hljs-comment">//     diskType: { code: &apos;NET&apos;, codeName: &apos;Network Storage&apos; },</span>
-        <span class="hljs-comment">//     addBlockStroageSize: 0 },</span>
-        <span class="hljs-comment">//              /** more items**/</span>
-        <span class="hljs-comment">// }]</span>
-    }
+<pre><code class="lang-javascript">client.compute.findRegions( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"> error, response </span>)</span>{
+  <span class="hljs-keyword">if</span>( error ){
+    <span class="hljs-built_in">console</span>.log( error );
+  }<span class="hljs-keyword">else</span> {
+    <span class="hljs-built_in">console</span>.log( response  );
+    <span class="hljs-comment">// response example =&gt;</span>
+    <span class="hljs-comment">// [ { regionNo: 1, regionCode: &apos;KR&apos;, regionName: &apos;Korea&apos; },</span>
+    <span class="hljs-comment">//   { regionNo: 2, regionCode: &apos;USW&apos;, regionName: &apos;US-West&apos; },</span>
+    <span class="hljs-comment">//   { regionNo: 3, regionCode: &apos;HK&apos;, regionName: &apos;HongKong&apos; },</span>
+    <span class="hljs-comment">//   { regionNo: 4, regionCode: &apos;SG&apos;, regionName: &apos;Sigapore&apos; },</span>
+    <span class="hljs-comment">//   { regionNo: 5, regionCode: &apos;JP&apos;, regionName: &apos;Japan&apos; },</span>
+    <span class="hljs-comment">//   { regionNo: 6, regionCode: &apos;DE&apos;, regionName: &apos;Germany&apos; } ]</span>
+  }
 });
 </code></pre>
 
@@ -423,12 +370,12 @@
 
             
                 
-                <a href="../portforwarding/port-01.html" class="navigation navigation-prev " aria-label="Previous page: PortForwarding">
+                <a href="../product/product-01.html" class="navigation navigation-prev " aria-label="Previous page: Product">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../region/region-01.html" class="navigation navigation-next " aria-label="Next page: Region">
+                <a href="../serverinstance/serverinstance-01.html" class="navigation navigation-next " aria-label="Next page: ServerInstance">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -439,7 +386,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Product","level":"1.2.5","depth":2,"next":{"title":"Region","level":"1.2.6","depth":2,"path":"compute/region/region-01.md","ref":"./compute/region/region-01.md","articles":[]},"previous":{"title":"PortForwarding","level":"1.2.4","depth":2,"path":"compute/portforwarding/port-01.md","ref":"./compute/portforwarding/port-01.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"compute/product/product-01.md","mtime":"2017-10-23T14:25:10.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-10-23T14:25:46.448Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Region","level":"1.2.6","depth":2,"next":{"title":"ServerInstance","level":"1.2.7","depth":2,"path":"compute/serverinstance/serverinstance-01.md","ref":"./compute/serverinstance/serverinstance-01.md","articles":[]},"previous":{"title":"Product","level":"1.2.5","depth":2,"path":"compute/product/product-01.md","ref":"./compute/product/product-01.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"compute/region/region-01.md","mtime":"2017-10-23T14:25:07.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-10-23T14:25:46.448Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

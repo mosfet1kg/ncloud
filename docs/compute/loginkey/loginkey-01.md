@@ -6,7 +6,7 @@ Callback returns `f(err, loginKeyList)` where `loginKeyList` is an `Array`.
 ### Arguments  
  No Input Arguments
  
-### Examples  
+### Example  
 ```javascript
   client.compute.findLoginKeys( function( error, response ){
     if( error ){
@@ -35,7 +35,7 @@ Get all of login keys you have registered.
 | `outputPath`       | `string`   | optional     | path for the resulting privateKey |  
  
  
-### Examples  
+### Example  
 ```javascript
 client.compute.createLoginKey( { keyName: "myTest04", outputPath: __dirname }, function( error, response ){
     if ( error ){
