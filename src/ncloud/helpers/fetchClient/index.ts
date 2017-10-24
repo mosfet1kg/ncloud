@@ -8,6 +8,8 @@ import axios from 'axios';
 import * as url from 'url';
 import { Ncloud } from '../../../';
 
+let serverCreationJobs = 0;
+
 export interface InterfaceFetchClientInput {
   requestMethod: string;
   requestPath: string;
@@ -16,6 +18,36 @@ export interface InterfaceFetchClientInput {
 }
 
 export function fetchClient( args, fetchClientInput: InterfaceFetchClientInput, oauthKey: InterfaceOauthKey): any {
+  const { requestAction } = fetchClientInput;
+
+  if ( requestAction === 'createServerInstances' ) {
+    let result = null;
+
+    if ( serverCreationJobs >= 1 ) {
+      result = new Promise((resolve, reject)=>{
+        setTimeout(()=>{
+          resolve(fetch.apply(null, [args, fetchClientInput, oauthKey]));
+          serverCreationJobs--;
+        },serverCreationJobs * 3000);
+      })
+    } else {
+      result = new Promise((resolve, reject)=>{
+        setTimeout(()=>{
+          resolve(fetch.apply(null, [args, fetchClientInput, oauthKey]));
+          serverCreationJobs--;
+        },1000);
+      })
+    } // end if
+
+    serverCreationJobs++;
+
+    return result;
+  } else {
+    return fetch.apply(null, arguments);
+  }
+}
+
+function fetch( args, fetchClientInput: InterfaceFetchClientInput, oauthKey: InterfaceOauthKey ): any {
   const oauth = new Oauth( oauthKey );
 
   const requestInfo = {
@@ -29,3 +61,4 @@ export function fetchClient( args, fetchClientInput: InterfaceFetchClientInput, 
 
   return axios.get( url.resolve( requestInfo.requestUrl, `?${queryString}`)  )
 }
+
