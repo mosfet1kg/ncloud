@@ -88,7 +88,7 @@ client.compute.destroyPortForwardingRule({ serverInstanceNo: 507498, externalPor
   // list port forwarding rules like the result of findPortForwardingRules method.
   console.log( rules );
   
-  // It is possible to wait for the detached rule completely if needed.
+  // It is possible to wait for the rule to be detached completely if needed.
   rules.setWait({},function(err, rules) {
     if ( err ) {
       return console.log( err.message );
