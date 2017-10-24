@@ -1,7 +1,12 @@
 ncloud
 ======
-![](./docs/assets/ncloudicon-01.png)   
+![](https://img.shields.io/node/v/ncloud.svg) 
+[![GitHub license](https://img.shields.io/github/license/mosfet1kg/ncloud.svg)](https://github.com/mosfet1kg/ncloud/blob/master/LICENSE)
+  
+  
 [![NPM](https://nodei.co/npm/ncloud.png?compact=true)](https://nodei.co/npm/ncloud/)  
+  
+![](./docs/assets/ncloudicon-01.png)   
 The NAVER Cloud Platform(https://www.ncloud.com/) Library for Node.js  
 This project is inspired from [pkgcloud](https://github.com/pkgcloud/pkgcloud).  
 **Currently, this package supports geolocation only. The other functions are unstable.**
