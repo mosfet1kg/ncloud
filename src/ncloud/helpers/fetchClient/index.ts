@@ -21,27 +21,14 @@ export function fetchClient( args, fetchClientInput: InterfaceFetchClientInput, 
   const { requestAction } = fetchClientInput;
 
   if ( requestAction === 'createServerInstances' ) {
-    let result = null;
-
-    if ( serverCreationJobs >= 1 ) {
-      result = new Promise((resolve, reject)=>{
-        setTimeout(()=>{
-          resolve(fetch.apply(null, [args, fetchClientInput, oauthKey]));
-          serverCreationJobs--;
-        },serverCreationJobs * 3000);
-      })
-    } else {
-      result = new Promise((resolve, reject)=>{
-        setTimeout(()=>{
-          resolve(fetch.apply(null, [args, fetchClientInput, oauthKey]));
-          serverCreationJobs--;
-        },1000);
-      })
-    } // end if
-
     serverCreationJobs++;
 
-    return result;
+    return new Promise((resolve, reject)=>{
+      setTimeout(()=>{
+        resolve(fetch.apply(null, [args, fetchClientInput, oauthKey]));
+        serverCreationJobs--;
+      },serverCreationJobs * 3000);
+    });
   } else {
     return fetch.apply(null, arguments);
   }
