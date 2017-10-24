@@ -2,7 +2,7 @@
 ## `findPublicIpInstances`, action `getPublicIpInstanceList` 
 Returns lists all public ip instances in the callback `f(err, publicIpInstances)`.   
 Callback returns `f(err, publicIpInstances)` where `publicIpInstances` is an `Array`.  
-If public ip instance is not allocated to any server, `publicIpInstanceStatusName` shows `created` and doesn't have `serverInstanceAssociatedWithPublicIp` property.
+If a public ip instance is not allocated to any server, the `publicIpInstanceStatusName` shows `created` and doesn't have `serverInstanceAssociatedWithPublicIp` property.
    
 ### Arguments  
  No Input Arguments

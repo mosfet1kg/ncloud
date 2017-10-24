@@ -82,7 +82,7 @@ client.compute.findServers( function( error, response ){
 
 ## `createServer`, action `createServerInstances` 
 Creates a server with the options specified.
-Returns the server in the callback `f(err, server)`;
+Returns the server in the callback `f(err, server)`.
 
 ### Arguments  
  **Tip**: Choose either `vmImageId` or `privateImageNo` for VM configuration. 

@@ -2,7 +2,7 @@
 ## `findAccessControlGroup`, action `getAccessControlGroupList` 
 Lists all access control groups that are available to use on your ncloud account.  
 Callback returns `f(err, acgList)` where `acgList` is an `Array`.  
-`acg` stands for `accessControlGroup`.
+`acg` stands for `accessControlGroup` and we can use it as predefined configurations for firewall.
 
 ### Arguments  
  No Input Arguments
