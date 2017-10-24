@@ -1,12 +1,13 @@
 import {
   InterfaceFetchClientInput,
   InterfaceCallback,
+  alias,
   fetchClient,
   errorHandling,
   responseFilter
 } from '../../';
 
-// import paramSet from './paramSet';
+import paramSet from './paramSet';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -23,7 +24,8 @@ export function findLoginKeys( callback: InterfaceCallback ): void {
 
   fetchClient( {}, requestInfo, this.oauthKey )
     .then( (response) => {
-      const loginKeyList: any[] = responseFilter(response.data.getLoginKeyListResponse.loginKeyList[0], 'loginKey');
+      let loginKeyList: any[] = responseFilter(response.data.getLoginKeyListResponse.loginKeyList[0], 'loginKey');
+      loginKeyList = alias( loginKeyList, paramSet['findLoginKeys'].response_alias );
 
       callback( null, loginKeyList );
     })
@@ -37,18 +39,19 @@ export function createLoginKey( args, callback: InterfaceCallback ){
     requestAction: 'createLoginKey',
   };
 
-  const { outputPath=null, keyName } = args;
-  args = { keyName };
+  const { outputPath=null, loginKeyName } = args;
+  args = { loginKeyName };
+  args = alias(args, paramSet['createLoginKey'].request_alias);
 
   fetchClient( args, requestInfo, this.oauthKey )
     .then( (response) => {
       const privateKey: string = response.data.createLoginKeyResponse.privateKey;
 
       if ( outputPath ) {
-        fs.writeFileSync(path.join( outputPath, keyName + '.pem'), privateKey, {encoding: "utf8"});
+        fs.writeFileSync(path.join( outputPath, loginKeyName + '.pem'), privateKey, {encoding: "utf8"});
       }
 
-      callback( null , { privateKey } );
+      callback( null , { loginKeyName, privateKey } );
     })
     .catch( err=>errorHandling(err, callback));
 
