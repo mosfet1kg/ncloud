@@ -259,6 +259,45 @@
                 <span>
             
                     
+                    Management
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.1" data-path="management/monitoring-01.html">
+            
+                <a href="management/monitoring-01.html">
+            
+                    
+                    Monitoring
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="divider"></li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" >
+            
+                <span>
+            
+                    
                     OpenAPI
             
                 </span>
@@ -268,7 +307,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="2.1.1" data-path="openapi/geolocation/geo-01.html">
+        <li class="chapter " data-level="3.1.1" data-path="openapi/geolocation/geo-01.html">
             
                 <a href="openapi/geolocation/geo-01.html">
             
@@ -333,7 +372,10 @@
                                 
                                 <h1 id="introduction">Introduction</h1>
 <h1 id="ncloud">ncloud</h1>
-<p><img src="assets/ncloudicon-01.png" alt=""><br><a href="https://nodei.co/npm/ncloud/" target="_blank"><img src="https://nodei.co/npm/ncloud.png?compact=true" alt="NPM"></a><br>The NAVER Cloud Platform(<a href="https://www.ncloud.com/" target="_blank">https://www.ncloud.com/</a>) Library for Node.js<br><a href="https://www.npmjs.com/package/ncloud" target="_blank">https://www.npmjs.com/package/ncloud</a><br><strong>Currently, this package supports geolocation only.... The other functions are unstable...</strong></p>
+<p><img src="https://img.shields.io/node/v/ncloud.svg" alt=""> 
+<a href="https://github.com/mosfet1kg/ncloud/blob/master/LICENSE" target="_blank"><img src="https://img.shields.io/github/license/mosfet1kg/ncloud.svg" alt="GitHub license"></a></p>
+<p><a href="https://nodei.co/npm/ncloud/" target="_blank"><img src="https://nodei.co/npm/ncloud.png?compact=true" alt="NPM"></a>  </p>
+<p><img src="docs/assets/ncloudicon-01.png" alt=""><br>NAVER Cloud Platform(<a href="https://www.ncloud.com/" target="_blank">https://www.ncloud.com/</a>) Library for Node.js<br>This project is inspired from <a href="https://github.com/pkgcloud/pkgcloud" target="_blank">pkgcloud</a>.<br><strong>Currently, this package supports geolocation only. The other functions are unstable.</strong></p>
 <h1 id="installing-dependencies">Installing Dependencies</h1>
 <pre><code>$ npm install ncloud
 or
@@ -368,7 +410,12 @@ $ yarn add ncloud
 <tr>
 <td>AccessControlGroup</td>
 <td>getAccessControlGroupList</td>
-<td><a href="compute/accesscontrolgroup/accesscontrolgroup-01.html#findaccesscontrolgroup-action-getaccesscontrolgrouplist">findAccessControlGroup</a></td>
+<td><a href="compute/accesscontrolgroup/accesscontrolgroup-01.html#findaccesscontrolgroup-action-getaccesscontrolgrouplist">findAccessControlGroups</a></td>
+</tr>
+<tr>
+<td>AccessControlGroup</td>
+<td>getAccessControlRuleList</td>
+<td><a href="compute/accesscontrolgroup/accesscontrolgroup-01.html#findaccesscontrolrules-action-getaccesscontrolrulelist">findAccessControlRules</a></td>
 </tr>
 <tr>
 <td>LoginKey</td>
@@ -497,6 +544,28 @@ $ yarn add ncloud
 </tr>
 </tbody>
 </table>
+<h3 id="management">Management</h3>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Action</th>
+<th>Method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Monitoring</td>
+<td>getListMetrics</td>
+<td><a href="management/monitoring-01.html#findmetrics-action-getlistmetrics">findMetrics</a></td>
+</tr>
+<tr>
+<td>Monitoring</td>
+<td>getMetricStatistics</td>
+<td><a href="management/monitoring-01.html#findstatistics-action-getmetricstatistics">findStatistics</a></td>
+</tr>
+</tbody>
+</table>
 <h3 id="openapi">OpenAPI</h3>
 <table>
 <thead>
@@ -551,7 +620,7 @@ $ yarn add ncloud
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Compute","level":"1.2","depth":1,"ref":"","articles":[{"title":"AccessControlGroup","level":"1.2.1","depth":2,"path":"compute/accesscontrolgroup/accesscontrolgroup-01.md","ref":"./compute/accesscontrolgroup/accesscontrolgroup-01.md","articles":[]},{"title":"LoginKey","level":"1.2.2","depth":2,"path":"compute/loginkey/loginkey-01.md","ref":"./compute/loginkey/loginkey-01.md","articles":[]},{"title":"MemberServerImage","level":"1.2.3","depth":2,"path":"compute/memberserverimage/memberserverimage-01.md","ref":"./compute/memberserverimage/memberserverimage-01.md","articles":[]},{"title":"PortForwarding","level":"1.2.4","depth":2,"path":"compute/portforwarding/port-01.md","ref":"./compute/portforwarding/port-01.md","articles":[]},{"title":"Product","level":"1.2.5","depth":2,"path":"compute/product/product-01.md","ref":"./compute/product/product-01.md","articles":[]},{"title":"PublicIpInstance","level":"1.2.6","depth":2,"path":"compute/publicipinstance/publicipinstance-01.md","ref":"./compute/publicipinstance/publicipinstance-01.md","articles":[]},{"title":"Region","level":"1.2.7","depth":2,"path":"compute/region/region-01.md","ref":"./compute/region/region-01.md","articles":[]},{"title":"ServerInstance","level":"1.2.8","depth":2,"path":"compute/serverinstance/serverinstance-01.md","ref":"./compute/serverinstance/serverinstance-01.md","articles":[]},{"title":"Zone","level":"1.2.9","depth":2,"path":"compute/zone/zone-01.md","ref":"./compute/zone/zone-01.md","articles":[]},{"title":"Getting Started","level":"1.2.10","depth":2,"path":"compute/getting-started-compute/getting-compute-01.md","ref":"./compute/getting-started-compute/getting-compute-01.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2017-10-23T14:27:58.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-10-24T15:24:35.550Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.1","depth":1,"next":{"title":"Compute","level":"1.2","depth":1,"ref":"","articles":[{"title":"AccessControlGroup","level":"1.2.1","depth":2,"path":"compute/accesscontrolgroup/accesscontrolgroup-01.md","ref":"./compute/accesscontrolgroup/accesscontrolgroup-01.md","articles":[]},{"title":"LoginKey","level":"1.2.2","depth":2,"path":"compute/loginkey/loginkey-01.md","ref":"./compute/loginkey/loginkey-01.md","articles":[]},{"title":"MemberServerImage","level":"1.2.3","depth":2,"path":"compute/memberserverimage/memberserverimage-01.md","ref":"./compute/memberserverimage/memberserverimage-01.md","articles":[]},{"title":"PortForwarding","level":"1.2.4","depth":2,"path":"compute/portforwarding/port-01.md","ref":"./compute/portforwarding/port-01.md","articles":[]},{"title":"Product","level":"1.2.5","depth":2,"path":"compute/product/product-01.md","ref":"./compute/product/product-01.md","articles":[]},{"title":"PublicIpInstance","level":"1.2.6","depth":2,"path":"compute/publicipinstance/publicipinstance-01.md","ref":"./compute/publicipinstance/publicipinstance-01.md","articles":[]},{"title":"Region","level":"1.2.7","depth":2,"path":"compute/region/region-01.md","ref":"./compute/region/region-01.md","articles":[]},{"title":"ServerInstance","level":"1.2.8","depth":2,"path":"compute/serverinstance/serverinstance-01.md","ref":"./compute/serverinstance/serverinstance-01.md","articles":[]},{"title":"Zone","level":"1.2.9","depth":2,"path":"compute/zone/zone-01.md","ref":"./compute/zone/zone-01.md","articles":[]},{"title":"Getting Started","level":"1.2.10","depth":2,"path":"compute/getting-started-compute/getting-compute-01.md","ref":"./compute/getting-started-compute/getting-compute-01.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"README.md","mtime":"2017-10-29T11:06:57.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-10-29T17:22:40.682Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

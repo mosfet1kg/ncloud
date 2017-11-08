@@ -3,6 +3,7 @@ import {
   InterfaceCallback,
   alias,
   fetchClient,
+  setFilterReflect,
   errorHandling,
   responseFilter
 } from '../../';
@@ -25,7 +26,7 @@ export function findPublicImages( callback: InterfaceCallback ): void {
   fetchClient( {}, requestInfo, this.oauthKey )
     .then( (response) => {
       let vmImageList = responseFilter(response.data.getServerImageProductListResponse.productList[0], 'product');
-      vmImageList = setVmImageListReflect( alias( vmImageList, paramSet[ 'findPublicImages' ].response_alias ) );
+      vmImageList = setFilterReflect( alias( vmImageList, paramSet[ 'findPublicImages' ].response_alias ) );
 
       callback( null, vmImageList );
     })
@@ -73,32 +74,6 @@ export function findFlavors( args, callback: InterfaceCallback ): void {
     })
     .catch( err=>errorHandling(err, callback));
 }
-
-function setVmImageListReflect( vmImageList ) {
-
-  Reflect.defineProperty( vmImageList, 'filter', {
-    get: ()=>{
-      return function(args: { vmImageName: string }) {
-        if ( ! args ) {
-          return vmImageList;
-        }
-
-        const { vmImageName } = args;
-
-        if ( !vmImageName ) {
-          throw new Error('Invalid Argument: \'vmImageName\' must be in argument.')
-        }
-
-        return filter( vmImageList, ( vmImage ) => {
-          return (vmImage.vmImageName === vmImageName);
-        })
-      }
-    }
-  });
-
-  return vmImageList;
-}
-
 
 function setFlavorListReflect( flavorList ) {
 

@@ -7,12 +7,20 @@ ncloud
 [![NPM](https://nodei.co/npm/ncloud.png?compact=true)](https://nodei.co/npm/ncloud/)  
   
 ![](./docs/assets/ncloudicon-01.png)   
-The NAVER Cloud Platform(https://www.ncloud.com/) Library for Node.js  
+NAVER Cloud Platform(https://www.ncloud.com/) Library for Node.js  
 This project is inspired from [pkgcloud](https://github.com/pkgcloud/pkgcloud).  
 **Currently, this package supports geolocation only. The other functions are unstable.**
 
-# Author
-Gyubeom Choi <mosfet1kg@gmail.com>
+# Notice
+This project welcomes new contributors and invites everyone to participate.  
+My aim is to build an open community. There are many different ways to get involved:  
+
+- Adding new features, enhancements, tests or fixing bugs
+- Pull request reviews
+- Release management and verification
+- Documentation
+
+People that help with the project in any of the above categories or other ways are contributors.
 
 # Installing Dependencies
 ```
@@ -46,6 +54,9 @@ Refer to the following link
 
 
 # Release Note
+v0.1.28
+  - Add new features ( management/monitoring )
+
 v0.1.18
   - Add new features ( publicIpInstance, portForwarding, region )
 

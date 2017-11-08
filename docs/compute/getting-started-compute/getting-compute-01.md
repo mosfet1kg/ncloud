@@ -58,13 +58,13 @@ launch a server, and then output its details to the command line.
         return console.log( srvRes );
       }
 
-      // attach a new public ipv4 to our server
-      client.compute.createPublicIpInstance({serverInstanceNo: srvRes.serverInstanceNo}, function(err, publicIpInstance) {
+      // attach a public ipv4 to our server
+      client.compute.attachPublicIpInstance({serverInstanceNo: srvRes.serverInstanceNo}, function(err, publicIpInstance) {
         if ( err ) {
           return console.log( err.message );
         }
 
-        // set up port forwarding to connect via SSH to our server
+        // set up port forwarding to connect our server via SSH
         client.compute.createPortForwardingRule({ serverInstanceNo: srvRes.serverInstanceNo, externalPort: _.random(30000,65534), internalPort: 22 }, function (err, pfRes) {
           if ( err ) {
             return console.log( err.message );

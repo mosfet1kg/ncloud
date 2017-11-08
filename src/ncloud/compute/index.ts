@@ -54,7 +54,7 @@ export class Compute implements InterfaceCompute {
     return {
       requestMethod: 'GET',
       requestPath: this.requestPath,
-      regionNo: this.regionNo
+      regionNo: this.regionNo,
     }
   }
 
@@ -107,8 +107,8 @@ export class Compute implements InterfaceCompute {
   }
 
   /** accessControlGroup **/
-  findAccessControlGroup( callback: InterfaceCallback ){
-    accessControlGroup.findAccessControlGroup.apply( this, arguments );
+  findAccessControlGroups( callback: InterfaceCallback ){
+    accessControlGroup.findAccessControlGroups.apply( this, arguments );
   }
   findAccessControlRules( args, callback: InterfaceCallback ) {
     accessControlGroup.findAccessControlRules.apply( this, arguments );

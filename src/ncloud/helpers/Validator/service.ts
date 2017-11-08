@@ -1,6 +1,6 @@
 import * as validator from 'validator';
 import * as ip from 'ip';
-import { isUndefined, indexOf } from 'lodash';
+import { isUndefined, indexOf, pullAll } from 'lodash';
 
 export function isRequiredParamExist(args_object, param_required_array){
   return param_required_array.reduce( function( prev, curr){
@@ -36,17 +36,17 @@ export function requiredParamChecker ( args, paramSet={ param: [], required: [] 
 
   const not_exist_required_param = isRequiredParamExist(args, param_required_array);
   if( not_exist_required_param.length >0 ) {
-    throw new Error('Error: The following parameters should be defined : ' + not_exist_required_param);
+    throw new Error('Error: The following parameters must be defined : ' + not_exist_required_param);
   }
 
   const out_bound_parameters = isParamOutOfBound( args, param_array );
   if( out_bound_parameters.length >0 ){
-    throw new Error('Error: The following parameters should be inbound : ' + out_bound_parameters);
+    throw new Error('Error: The following parameters must be inbound : ' + out_bound_parameters);
   }
 }
 
-export function isValidParam ( args, paramSet={ param: []} ) {
-  const  { param=[] } = paramSet;
+export function isValidParam ( args, paramSet={ param: [], required: []} ) {
+  const  { param=[], required=[] } = paramSet;
 
   if ( param.length === 0 ) return;
 
@@ -62,7 +62,10 @@ export function isValidParam ( args, paramSet={ param: []} ) {
   }).join(',');
 
   if( invalidParam.length >0 ){
-    throw new Error(`Error: Invalid Parameters : ${invalidParam}\nThis function allow following Parameters: ${ param.join(', ')}`);
+
+    const restParam = pullAll( param, required );
+    const paramDescription = [ ...required.map(el=>'*'+el), ...restParam ].join(', ');
+    throw new Error(`Error: Invalid Parameters : ${invalidParam}\nThis function allows following parameters: ${ paramDescription }`);
   }
 }
 
@@ -106,7 +109,7 @@ export function isValidConstraints( args, param={ constraints: [], required: [] 
 
       if( !( testResultMaxItems && testResultMinItems ) ) {
         throw new Error(
-          [ `The length of \'${ constraint.name }\' must be `,
+          [ `Error: The length of \'${ constraint.name }\' must be `,
             [ `${ isUndefined(constraint.minItems)? "" : `greater than or equals to ${ constraint.minItems }`}`,
               `${ isUndefined(constraint.maxItems)? "" : `less than or equals to ${ constraint.maxItems }`}`
             ].filter(el=>el.length>0).join(" and ")

@@ -3,6 +3,9 @@ logs
 *.log
 npm-debug.log*
 .note
+**/**/mytest.js
+**/**/reset.js
+**/**/env.json
 
 # Dependencies
 node_modules/

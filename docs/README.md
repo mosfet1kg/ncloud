@@ -2,11 +2,16 @@
 
 ncloud
 ======
-![](./assets/ncloudicon-01.png)   
+![](https://img.shields.io/node/v/ncloud.svg) 
+[![GitHub license](https://img.shields.io/github/license/mosfet1kg/ncloud.svg)](https://github.com/mosfet1kg/ncloud/blob/master/LICENSE)
+  
+  
 [![NPM](https://nodei.co/npm/ncloud.png?compact=true)](https://nodei.co/npm/ncloud/)  
-The NAVER Cloud Platform(https://www.ncloud.com/) Library for Node.js  
-https://www.npmjs.com/package/ncloud  
-**Currently, this package supports geolocation only.... The other functions are unstable...**
+  
+![](./docs/assets/ncloudicon-01.png)   
+NAVER Cloud Platform(https://www.ncloud.com/) Library for Node.js  
+This project is inspired from [pkgcloud](https://github.com/pkgcloud/pkgcloud).  
+**Currently, this package supports geolocation only. The other functions are unstable.**
 
 # Installing Dependencies
 ```
@@ -40,7 +45,8 @@ const client = ncloud.createClient({
 
 | Category           | Action                    |      Method            |
 |--------------------|---------------------------|------------------------|
-| AccessControlGroup | getAccessControlGroupList | [findAccessControlGroup](./compute/accesscontrolgroup/accesscontrolgroup-01.md#findaccesscontrolgroup-action-getaccesscontrolgrouplist) |
+| AccessControlGroup | getAccessControlGroupList | [findAccessControlGroups](./compute/accesscontrolgroup/accesscontrolgroup-01.md#findaccesscontrolgroup-action-getaccesscontrolgrouplist) |
+| AccessControlGroup | getAccessControlRuleList  | [findAccessControlRules](./compute/accesscontrolgroup/accesscontrolgroup-01.md#findaccesscontrolrules-action-getaccesscontrolrulelist) |
 | LoginKey           | getLoginKeyList           | [findLoginKeys](./compute/loginkey/loginkey-01.md#findloginkeys-action-getloginkeylist)          |
 | LoginKey           | createLoginKey            | [createLoginKey](./compute/loginkey/loginkey-01.md#createloginkey-action-createloginkey)          |
 | MemberServerImage  | getMemberServerImageList  | [findPrivateImages](./compute/memberserverimage/memberserverimage-01.md#findprivateimages-action-getmemberserverimagelist)      |
@@ -67,6 +73,13 @@ const client = ncloud.createClient({
 | ServerInstance     | getRootPassword           | [findRootPassword](./compute/serverinstance/serverinstance-01.md#findrootpassword-action-getrootpassword)           |
 | Zone               | getZoneList               | [findZones](./compute/zone/zone-01.md#findzones-action-getzonelist)              |
 
+### Management
+
+| Category          | Action                     | Method                 |
+|-------------------|----------------------------|------------------------|
+| Monitoring        | getListMetrics             | [findMetrics](./management/monitoring-01.md#findmetrics-action-getlistmetrics)       |
+| Monitoring        | getMetricStatistics        | [findStatistics](./management/monitoring-01.md#findstatistics-action-getmetricstatistics)       |
+ 
 ### OpenAPI
 
 | Category          | Action                     | Method                 |

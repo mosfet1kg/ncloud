@@ -261,6 +261,45 @@
                 <span>
             
                     
+                    Management
+            
+                </span>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="2.1.1" data-path="../../management/monitoring-01.html">
+            
+                <a href="../../management/monitoring-01.html">
+            
+                    
+                    Monitoring
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+        
+        <li class="divider"></li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" >
+            
+                <span>
+            
+                    
                     OpenAPI
             
                 </span>
@@ -270,7 +309,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="2.1.1" data-path="../../openapi/geolocation/geo-01.html">
+        <li class="chapter " data-level="3.1.1" data-path="../../openapi/geolocation/geo-01.html">
             
                 <a href="../../openapi/geolocation/geo-01.html">
             
@@ -389,13 +428,13 @@ launch a server, and then output its details to the command line.</p>
         <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log( srvRes );
       }
 
-      <span class="hljs-comment">// attach a new public ipv4 to our server</span>
-      client.compute.createPublicIpInstance({serverInstanceNo: srvRes.serverInstanceNo}, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, publicIpInstance</span>) </span>{
+      <span class="hljs-comment">// attach a public ipv4 to our server</span>
+      client.compute.attachPublicIpInstance({serverInstanceNo: srvRes.serverInstanceNo}, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">err, publicIpInstance</span>) </span>{
         <span class="hljs-keyword">if</span> ( err ) {
           <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log( err.message );
         }
 
-        <span class="hljs-comment">// set up port forwarding to connect via SSH to our server</span>
+        <span class="hljs-comment">// set up port forwarding to connect our server via SSH</span>
         client.compute.createPortForwardingRule({ serverInstanceNo: srvRes.serverInstanceNo, externalPort: _.random(<span class="hljs-number">30000</span>,<span class="hljs-number">65534</span>), internalPort: <span class="hljs-number">22</span> }, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err, pfRes</span>) </span>{
           <span class="hljs-keyword">if</span> ( err ) {
             <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.log( err.message );
@@ -458,7 +497,7 @@ launch a server, and then output its details to the command line.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Getting Started","level":"1.2.10","depth":2,"next":{"title":"OpenAPI","level":"2.1","depth":1,"ref":"","articles":[{"title":"Geolocation","level":"2.1.1","depth":2,"path":"openapi/geolocation/geo-01.md","ref":"./openapi/geolocation/geo-01.md","articles":[]}]},"previous":{"title":"Zone","level":"1.2.9","depth":2,"path":"compute/zone/zone-01.md","ref":"./compute/zone/zone-01.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"compute/getting-started-compute/getting-compute-01.md","mtime":"2017-10-23T14:51:44.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-10-24T15:24:35.550Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Getting Started","level":"1.2.10","depth":2,"next":{"title":"Management","level":"2.1","depth":1,"ref":"","articles":[{"title":"Monitoring","level":"2.1.1","depth":2,"path":"management/monitoring-01.md","ref":"./management/monitoring-01.md","articles":[]}]},"previous":{"title":"Zone","level":"1.2.9","depth":2,"path":"compute/zone/zone-01.md","ref":"./compute/zone/zone-01.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"compute/getting-started-compute/getting-compute-01.md","mtime":"2017-10-29T11:06:57.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-10-29T17:22:40.682Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

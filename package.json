@@ -1,10 +1,10 @@
 {
   "name": "ncloud",
-  "version": "0.1.22",
-  "description": "The NAVER Cloud Platform(https://www.ncloud.com/) Library for Node.js",
+  "version": "0.1.29",
+  "description": "NAVER Cloud Platform(https://www.ncloud.com/) Library for Node.js",
   "engineStrict": true,
   "engines": {
-    "node": ">= 6.9.0"
+    "node": ">= 7.10.1"
   },
   "main": "./lib/index.js",
   "devDependencies": {
@@ -12,8 +12,8 @@
     "@types/node": "~6.0.73",
     "gitbook-cli": "^2.3.2",
     "jest": "~20.0.0",
+    "moment-timezone": "^0.5.13",
     "rimraf": "~2.6.1",
-    "tslib": "^1.7.1",
     "tslint": "~4.5.1",
     "tslint-config-airbnb": "^5.1.2",
     "tslint-microsoft-contrib": "~4.0.1",
@@ -26,7 +26,6 @@
     "build": "tsc -p tsconfig.json",
     "watch": "tsc -w -p tsconfig.json",
     "lint": "tslint -t stylish '{src,__tests__}/**/*.{ts,tsx}'",
-    "pretest": "npm run lint",
     "test": "npm run test-only",
     "test-only": "jest --coverage",
     "test:watch": "jest --watch",
@@ -52,6 +51,9 @@
     "crypto-js": "^3.1.9-1",
     "ip": "^1.1.5",
     "lodash": "^4.17.4",
-    "validator": "^7.0.0"
+    "mime-types": "^2.1.17",
+    "tslib": "^1.7.1",
+    "validator": "^7.0.0",
+    "xml2json": "^0.11.0"
   }
 }

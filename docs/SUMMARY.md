@@ -11,6 +11,9 @@
   * [ServerInstance](./compute/serverinstance/serverinstance-01.md)
   * [Zone](./compute/zone/zone-01.md)
   * [Getting Started](./compute/getting-started-compute/getting-compute-01.md)
+---
+* Management
+  * [Monitoring](./management/monitoring-01.md)
 ---  
 * OpenAPI
   * [Geolocation](./openapi/geolocation/geo-01.md)

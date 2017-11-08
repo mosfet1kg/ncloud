@@ -9,7 +9,7 @@ import {
 
 import paramSet from './paramSet';
 
-import { find } from 'lodash';
+import { find, isArray, isUndefined, includes } from 'lodash';
 
 export interface InterfacePortForwarding {
   findPortForwardingRules( callback: InterfaceCallback ): void;
@@ -18,7 +18,12 @@ export interface InterfacePortForwarding {
     serverInstanceNo: number | string,
     externalPort: number,
     internalPort: number
-  }, callback: InterfaceCallback ): void;
+  } | {
+    portForwardingConfigurationNo?: number | string,
+    serverInstanceNo: number | string,
+    externalPort: number,
+    internalPort: number
+  }[], callback: InterfaceCallback ): void;
   destroyPortForwardingRule( args: {
     portForwardingConfigurationNo?: number | string,
     serverInstanceNo: number | string,
@@ -67,35 +72,74 @@ export function createPortForwardingRule( args, callback: InterfaceCallback ): v
     requestAction: 'addPortForwardingRules',
   };
 
-  const { externalPort } = args;
+  if ( isArray( args ) ) {
+    if ( args.every(el=>isUndefined(el.portForwardingConfigurationNo))) {
+      findPortForwardingRules.bind(this)((err, response)=>{
+        if ( err ) {
+          return callback(err, null);
+        }
 
-  const requestHandler = ()=>{
-    args = alias( args, paramSet['createPortForwardingRule'].request_alias );
+        const { portForwardingConfigurationNo } = response;
+        const externalPorts = args.map(el=>el.externalPort);
 
-    fetchClient( args, requestInfo, this.oauthKey )
-      .then( (response) => {
+        args = args.reduce((prev, curr, idx) => {
+          return {
+            ...prev,
+            [`portForwardingRuleList.${ idx + 1 }.serverInstanceNo`]: curr.serverInstanceNo,
+            [`portForwardingRuleList.${ idx + 1 }.portForwardingExternalPort`]: curr.externalPort,
+            [`portForwardingRuleList.${ idx + 1 }.portForwardingInternalPort`]: curr.internalPort
+          };
+        }, { portForwardingConfigurationNo });
 
-        const portForwardingRules = responseFilter( response.data.addPortForwardingRulesResponse.portForwardingRuleList[0], 'portForwardingRule');
-        const resultRule = find( portForwardingRules, { portForwardingExternalPort: externalPort });
-        resultRule.serverInstance = alias( resultRule.serverInstance, paramSet['createPortForwardingRule'].response_alias);
+        fetchClient( args, requestInfo, this.oauthKey )
+          .then( (response) => {
+            const portForwardingRules = responseFilter( response.data.addPortForwardingRulesResponse.portForwardingRuleList[0], 'portForwardingRule');
+            let resultRules = portForwardingRules.filter(el=>includes(externalPorts, el.portForwardingExternalPort));
 
-        callback( null, resultRule );
-      })
-      .catch( err=>errorHandling(err, callback));
-  };
+            resultRules = resultRules.map( rule=>{
+              rule.serverInstance = alias( rule.serverInstance, paramSet['createPortForwardingRule'].response_alias);
+              return rule;
+            });
 
-  if ( args.portForwardingConfigurationNo ) {
-    requestHandler();
+            callback( null, resultRules );
+          })
+          .catch( err=>errorHandling(err, callback));
+      }) // end findPortForwardingRules
+    } else {
+      throw new Error(`Error: This method doesn't allow \'portForwardingConfigurationNo\' in array.`);
+    }
   } else {
-    findPortForwardingRules.bind(this)((err, res)=>{
-      if ( err ) {
-        return callback(err, null);
-      }
+    const { externalPort } = args;
 
-      args.portForwardingConfigurationNo = res.portForwardingConfigurationNo;
-      requestHandler();
-    })
+    const requestHandler = (args)=>{
+      args = alias( args, paramSet['createPortForwardingRule'].request_alias );
+
+      fetchClient( args, requestInfo, this.oauthKey )
+        .then( (response) => {
+
+          const portForwardingRules = responseFilter( response.data.addPortForwardingRulesResponse.portForwardingRuleList[0], 'portForwardingRule');
+          const resultRule = find( portForwardingRules, { portForwardingExternalPort: externalPort });
+          resultRule.serverInstance = alias( resultRule.serverInstance, paramSet['createPortForwardingRule'].response_alias);
+
+          callback( null, resultRule );
+        })
+        .catch( err=>errorHandling(err, callback));
+    };
+
+    if ( args.portForwardingConfigurationNo ) {
+      requestHandler(args);
+    } else {
+      findPortForwardingRules.bind(this)((err, res)=>{
+        if ( err ) {
+          return callback(err, null);
+        }
+
+        args.portForwardingConfigurationNo = res.portForwardingConfigurationNo;
+        requestHandler(args);
+      })
+    }
   }
+
 }
 
 export function destroyPortForwardingRule( args, callback: InterfaceCallback ): void {

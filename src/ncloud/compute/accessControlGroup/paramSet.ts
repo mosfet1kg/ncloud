@@ -1,5 +1,5 @@
 export default {
-  findAccessControlGroup: {
+  findAccessControlGroups: {
     param: [],
     required:[],
     request_alias: [],
@@ -10,6 +10,6 @@ export default {
     required:['accessControlGroupConfigurationNo'],
     request_alias: [],
     response_alias: []
-  }
+  },
 };
 

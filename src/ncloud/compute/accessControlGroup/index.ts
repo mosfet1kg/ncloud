@@ -3,6 +3,7 @@ import {
   InterfaceFetchClientInput,
   InterfaceCallback,
   fetchClient,
+  setFilterReflect,
   errorHandling,
   responseFilter
 } from '../../';
@@ -10,11 +11,11 @@ import {
 import paramSet from './paramSet';
 
 export interface InterfaceSecurityGroup {
-  findAccessControlGroup(callback: InterfaceCallback ): void;
+  findAccessControlGroups(callback: InterfaceCallback ): void;
   findAccessControlRules( args: { accessControlGroupConfigurationNo: string | number }, callback: InterfaceCallback ): void;
 }
 
-export function findAccessControlGroup(callback: InterfaceCallback ): void {
+export function findAccessControlGroups(callback: InterfaceCallback ): void {
   const requestInfo: InterfaceFetchClientInput = {
     ...this.defaultRequestInfo,
     requestAction: 'getAccessControlGroupList',
@@ -23,7 +24,7 @@ export function findAccessControlGroup(callback: InterfaceCallback ): void {
   fetchClient( {}, requestInfo, this.oauthKey )
     .then( (response) => {
       let accessControlGroupList = responseFilter(response.data.getAccessControlGroupListResponse.accessControlGroupList[0], 'accessControlGroup');
-      accessControlGroupList = alias( accessControlGroupList, paramSet['findAccessControlGroup'].response_alias );
+      accessControlGroupList = setFilterReflect( alias( accessControlGroupList, paramSet['findAccessControlGroups'].response_alias ) );
 
       callback(null, accessControlGroupList);
     })
@@ -40,7 +41,7 @@ export function findAccessControlRules(args, callback: InterfaceCallback ): void
   fetchClient( args, requestInfo, this.oauthKey )
     .then( (response) => {
       let accessControlGroupRules = responseFilter(response.data.getAccessControlRuleListResponse.accessControlRuleList[0], 'accessControlRule');
-      accessControlGroupRules = alias( accessControlGroupRules, paramSet['findAccessControlRules'].response_alias );
+      accessControlGroupRules = setFilterReflect( alias( accessControlGroupRules, paramSet['findAccessControlRules'].response_alias ) );
 
       callback(null, accessControlGroupRules);
     })

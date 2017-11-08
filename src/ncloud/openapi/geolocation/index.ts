@@ -46,6 +46,5 @@ export class GeoLocation implements InterfaceGeoLocation {
         callback( null, response.data.geoLocation );
       })
       .catch( err=>errorHandling(err, callback));
-
   }
 }

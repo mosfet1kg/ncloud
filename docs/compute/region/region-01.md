@@ -19,6 +19,9 @@ client.compute.findRegions( function( error, response ){
     //   { regionNo: 4, regionCode: 'SG', regionName: 'Sigapore' },
     //   { regionNo: 5, regionCode: 'JP', regionName: 'Japan' },
     //   { regionNo: 6, regionCode: 'DE', regionName: 'Germany' } ]
+    
+    // you can change regionNo variable to handle resources within the specific region.
+    client.compute.regionNo = 2;
   }
 });
 

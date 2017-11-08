@@ -165,10 +165,11 @@ Attaches a unused public ip instance to the specific server.
 ### Arguments  
 | Input parameter       | Type       | Required     | Description |
 |-----------------------|------------|--------------|-------------|
-| `publicIpInstanceNo`  | `string`   | **required** | Unique Id of a public ip instance that can be got from `findPublicIpInstances`(action `getPublicIpInstanceList`).  |
+| `publicIpInstanceNo`  | `string`   | optional     | Unique Id of a public ip instance that can be got from `findPublicIpInstances`(action `getPublicIpInstanceList`). If this field is omitted, one of unused instances is going to be chosen. |
 | `serverInstanceNo`    | `string`   | **required** | Unique Id of a running server that can be got from `findServers` method(action `getServerInstanceList`).  |
+| `autoCreateIp`        | `boolean`  | optional     | A new public ip instance will be created if `publicIpInstanceNo` field is omitted and there is no available one on your ncloud account. <br/> default: true | 
  
-### Example
+### Use Case 1 - attach the specific public ip instance to a server
 ```javascript
 client.compute.attachPublicIpInstance({ publicIpInstanceNo: 506969, serverInstanceNo: 503087}, function(error, result) {
   if ( error ) {
@@ -217,6 +218,54 @@ client.compute.attachPublicIpInstance({ publicIpInstanceNo: 506969, serverInstan
 })
 ```
 
+### Use Case 2 - attach a unused public ip instance to a server
+```javascript
+client.compute.attachPublicIpInstance({ serverInstanceNo: 503087 }, function(error, result) {
+  if ( error ) {
+    return console.log( error.message );
+  }
+  
+  console.log( result );
+  // result example =>
+  // { publicIpInstanceNo: 506969,
+  //   publicIp: /**publicIpValue**/,
+  //   publicIpDescription: '',
+  //   createDate: '2017-10-22T02:03:42+0900',
+  //   publicIpInstanceStatusName: 'using',
+  //   publicIpInstanceStatus: { code: 'CREAT', codeName: 'NET CREATE state' },
+  //   publicIpInstanceOperation: { code: 'USE', codeName: 'NET USE OP' },
+  //   publicIpKindType: { code: 'GEN', codeName: 'General' },
+  //   serverInstanceAssociatedWithPublicIp:
+  //   { serverInstanceNo: 503087,
+  //     serverName: 'dbtest',
+  //     serverDescription: 'E3r4!!4t9@n',
+  //     cpuCount: 2,
+  //     memorySize: 8589934592,
+  //     baseBlockStorageSize: 53687091200,
+  //     platformType: { code: 'LNX64', codeName: 'Linux 64 Bit' },
+  //     loginKeyName: 'real004',
+  //       isFeeChargingMonitoring: false,
+  //     publicIp: /**publicIpValue**/,
+  //     privateIp: /**privateIpValue**/,
+  //     serverImageName: 'centos-7.3-64',
+  //     serverInstanceStatus: { code: 'RUN', codeName: 'Server run state' },
+  //     serverInstanceOperation: { code: 'NULL', codeName: 'Server NULL OP' },
+  //     serverInstanceStatusName: 'running',
+  //       createDate: '2017-10-18T14:27:20+0900',
+  //     uptime: '2017-10-18T14:29:50+0900',
+  //     vmImageId: 'SPSW0LINUX000046',
+  //     vmFlavorId: 'SPSVRSSD00000010',
+  //     isProtectServerTermination: false,
+  //     portForwardingPublicIp: /**portForwardingPublicIp**/,
+  //     portForwardingExternalPort: 2223,
+  //     portForwardingInternalPort: 22,
+  //     zone: { zoneNo: 2, zoneName: 'KR-1', zoneDescription: '가산 NANG zone' },
+  //     region: { regionNo: 1, regionCode: 'KR', regionName: 'Korea' },
+  //     baseBlockStorageDiskType: { code: 'NET', codeName: 'Network Storage' },
+  //     userData: '',
+  //       accessControlGroupList: [ [Object] ] } }
+})
+```
 ---
 
 ## `detachPublicIpInstance`, action `disassociatePublicIpFromServerInstance` 

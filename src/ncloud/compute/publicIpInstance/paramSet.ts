@@ -20,10 +20,10 @@ export default {
   attachPublicIpInstance: {
     param: [
       'publicIpInstanceNo',
-      'serverInstanceNo'
+      'serverInstanceNo',
+      'autoCreateIp'
     ],
     required:[
-      'publicIpInstanceNo',
       'serverInstanceNo'
     ],
     request_alias: [], response_alias: [

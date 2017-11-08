@@ -1,4 +1,9 @@
 import * as CryptoJS from 'crypto-js';
+import { isNull } from 'lodash';
+import {isUndefined} from "util";
+import { Logger } from '../../helpers';
+
+const logger = Logger.createLogger();
 
 export interface InterfaceOauthKey {
   oauth_consumer_key: string;
@@ -8,7 +13,7 @@ export interface InterfaceOauthKey {
 export interface InterfaceRequestInfo {
   requestMethod: string;
   requestUrl: string;
-  requestAction: string;
+  requestAction?: string;
   regionNo?: string | number;
 }
 
@@ -19,50 +24,107 @@ export class Oauth {
     this.authKey = authKey;
   }
 
-  public getQueryString( args, requestInfo: InterfaceRequestInfo ): string {
-    const paramTemp = {...args};
+  public makeAuthorizationHeader( args, requestInfo: InterfaceRequestInfo ) {
+    let { significantParameters, authSignature } = Oauth.getParametersForAuth( args, requestInfo, this.authKey );
+
+    let authHeaderString = Object.keys(significantParameters).map((key)=>{
+      if ( !isNull( significantParameters[key] ) ) {
+        return (key + '=\"' + significantParameters[key] + '\"');
+      }
+    }).filter(el=>!isUndefined(el)).join(', ');
+
+    return 'OAuth ' + authHeaderString + ', oauth_signature=\"' + encodeURIComponent(authSignature) + '\"';
+  }
+
+  static getParametersForAuth( args, requestInfo, authKey ) {
+    let paramTemp = {...args};
 
     if ( requestInfo.regionNo ) {
       paramTemp.regionNo = requestInfo.regionNo;
     }
 
-    paramTemp.action = requestInfo.requestAction;
-    paramTemp.oauth_consumer_key = this.authKey.oauth_consumer_key;
-    paramTemp.oauth_nonce = Oauth.generateNonce(15)();
-    paramTemp.oauth_signature_method = 'HMAC-SHA1';
-    paramTemp.oauth_timestamp = Math.floor( Date.now() / 1000 );
-    paramTemp.oauth_version = '1.0';
-    paramTemp.responseFormatType = 'json';
+    if ( requestInfo.requestAction ) {
+      paramTemp.action = requestInfo.requestAction;
+    }
 
-    const sortedSet: object = Object.keys( paramTemp ).sort().reduce((prev, key)=>{
-      if ( Array.isArray( paramTemp[key]) ) {
-        for ( let i: number = 1; i <= paramTemp[key].length ; i++) {
-          prev[ key + '.' + i ] = paramTemp[key][i - 1];
+    paramTemp = {
+      ...paramTemp,
+      ...Oauth.getSignificantParameters( authKey )
+    };
+
+    /** Get Significant Parameters For Signature Base String **/
+    const significantParameters: object = Oauth.getSortedSet( paramTemp );
+    const sortedSignificantParameters = Oauth.getSortedSet( significantParameters );
+
+    const queryString = Object.keys(sortedSignificantParameters).map( (key) => {
+      const value = sortedSignificantParameters[key];
+      return key + '=' + ( isNull(value) ? "" : encodeURIComponent(value));
+    }).filter(el=>!isUndefined(el)).join('&');
+
+    const baseString = Oauth.getBaseString( requestInfo, queryString );
+    const authSignature = Oauth.getAuthSignature( baseString, authKey );
+
+    logger.debug( queryString );
+    logger.debug( baseString );
+    logger.debug( authSignature );
+    return {
+      queryString,
+      baseString,
+      authSignature,
+      significantParameters
+    }
+  }
+
+  static getQueryStringForRequest( significantParameters ): string {
+    if ( Object.keys( significantParameters ).length === 0 || isUndefined( significantParameters ) )
+      return "";
+
+    const sortedSignificantParameters = Oauth.getSortedSet( significantParameters );
+
+    return Object.keys(sortedSignificantParameters).map( (key) => {
+      const value = sortedSignificantParameters[key];
+
+      return key + ( isNull(value) ? "" : "=" + encodeURIComponent(value) );
+    }).filter(el=>!isUndefined(el)).join('&');
+  }
+
+  static getSortedSet( targetObject ) {
+    return Object.keys( targetObject ).sort().reduce((prev, key)=>{
+      if ( Array.isArray( targetObject[key]) ) {
+        for ( let i: number = 1; i <= targetObject[key].length ; i++) {
+          prev[ key + '.' + i ] = targetObject[key][i - 1];
         }
       } else {
-        prev[ key ] = paramTemp[ key ];
+        prev[ key ] = targetObject[ key ];
       } // end if
 
       return prev;
     }, {});
+  }
 
-    let queryString: string =  Object.keys(sortedSet).reduce( (prev, curr) => {
-      return prev + curr + '=' + encodeURIComponent(sortedSet[curr]) + '&';
-    }, '' ).slice(0, -1);
+  static getSignificantParameters ( authKey ) {
+    return {
+      oauth_consumer_key : authKey.oauth_consumer_key,
+      oauth_nonce : Oauth.generateNonce(15)(),
+      oauth_signature_method : 'HMAC-SHA1',
+      oauth_timestamp : Math.floor(Date.now() / 1000),
+      oauth_version : '1.0',
+    }
+  }
 
-    const baseString = Oauth.getBaseString( requestInfo, queryString );
-    const authSignature = Oauth.getAuthSignature( baseString, this.authKey );
+  static getBaseString ( request: InterfaceRequestInfo,  queryString: string ): string {
+    return `${request.requestMethod.toUpperCase()}&${encodeURIComponent( request.requestUrl )}&${encodeURIComponent( queryString )}`;
+  }
 
-    queryString +=  '&oauth_signature=' + encodeURIComponent( authSignature );
-
-    return queryString;
-  };
+  static getAuthSignature ( baseString: string, authKey: InterfaceOauthKey ): string {
+    return CryptoJS.HmacSHA1( baseString, authKey.oauth_consumer_secret + '&' ).toString(CryptoJS.enc.Base64);
+  }
 
   static generateNonce(length) {
     let last: number  = null;
     let repeat: number = 0;
 
-    if ( length === 'undefined') {
+    if ( typeof length === 'undefined') {
       length = 15;
     }
 
@@ -80,12 +142,4 @@ export class Oauth {
       return +s.substr(s.length - length) + '';
     };
   };
-
-  static getBaseString ( request: InterfaceRequestInfo,  queryString: string ): string {
-    return `${request.requestMethod}&${encodeURIComponent( request.requestUrl )}&${encodeURIComponent( queryString )}`;
-  }
-
-  static getAuthSignature ( baseString: string, authKey: InterfaceOauthKey ): string {
-    return CryptoJS.HmacSHA1( baseString, authKey.oauth_consumer_secret + '&' ).toString(CryptoJS.enc.Base64);
-  }
 }
