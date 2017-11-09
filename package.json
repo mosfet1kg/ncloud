@@ -27,7 +27,7 @@
     "watch": "tsc -w -p tsconfig.json",
     "lint": "tslint -t stylish '{src,__tests__}/**/*.{ts,tsx}'",
     "test": "npm run test-only",
-    "test-only": "jest --coverage",
+    "test-only": "jest",
     "test:watch": "jest --watch",
     "predeploy": "npm run build",
     "deploy": "npm publish",

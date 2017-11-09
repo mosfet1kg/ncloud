@@ -4,6 +4,7 @@ import {
   InterfaceCallback,
   fetchClient,
   setFilterReflect,
+  InterfaceFilterReflectReturn,
   errorHandling,
   responseFilter
 } from '../../';
@@ -26,7 +27,7 @@ export function findAccessControlGroups(callback: InterfaceCallback ): void {
       let accessControlGroupList = responseFilter(response.data.getAccessControlGroupListResponse.accessControlGroupList[0], 'accessControlGroup');
       accessControlGroupList = setFilterReflect( alias( accessControlGroupList, paramSet['findAccessControlGroups'].response_alias ) );
 
-      callback(null, accessControlGroupList);
+      callback(null, accessControlGroupList as any | InterfaceFilterReflectReturn );
     })
     .catch( err=>errorHandling(err, callback));
 
@@ -43,7 +44,7 @@ export function findAccessControlRules(args, callback: InterfaceCallback ): void
       let accessControlGroupRules = responseFilter(response.data.getAccessControlRuleListResponse.accessControlRuleList[0], 'accessControlRule');
       accessControlGroupRules = setFilterReflect( alias( accessControlGroupRules, paramSet['findAccessControlRules'].response_alias ) );
 
-      callback(null, accessControlGroupRules);
+      callback(null, accessControlGroupRules as any | InterfaceFilterReflectReturn);
     })
     .catch( err=>errorHandling(err, callback));
 }

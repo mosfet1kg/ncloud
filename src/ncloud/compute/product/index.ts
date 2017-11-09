@@ -4,6 +4,7 @@ import {
   alias,
   fetchClient,
   setFilterReflect,
+  InterfaceFilterReflectReturn,
   errorHandling,
   responseFilter
 } from '../../';
@@ -28,7 +29,7 @@ export function findPublicImages( callback: InterfaceCallback ): void {
       let vmImageList = responseFilter(response.data.getServerImageProductListResponse.productList[0], 'product');
       vmImageList = setFilterReflect( alias( vmImageList, paramSet[ 'findPublicImages' ].response_alias ) );
 
-      callback( null, vmImageList );
+      callback( null, vmImageList as any | InterfaceFilterReflectReturn );
     })
     .catch( err=>errorHandling(err, callback));
 

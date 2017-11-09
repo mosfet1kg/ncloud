@@ -5,6 +5,7 @@ import {
   alias,
   fetchClient,
   setFilterReflect,
+  InterfaceFilterReflectReturn,
   responseFilter,
   Validator,
   errorHandling
@@ -52,7 +53,7 @@ export class Monitoring implements InterfaceMonitoring {
         let metrics = responseFilter(response.data.getListMetricsResponse.metrics[0], 'member');
         metrics = setFilterReflect( alias( metrics, paramSet['findMetrics'].response_alias ) );
 
-        callback( null, metrics );
+        callback( null, metrics as any | InterfaceFilterReflectReturn );
 
       })
       .catch( err=>errorHandling(err, callback));

@@ -1,14 +1,18 @@
 import { filter, isEqual } from 'lodash';
 
-export function setFilterReflect(acgList ) {
-  Reflect.defineProperty( acgList, 'filter', {
+export interface InterfaceFilterReflectReturn {
+  filter(): any[];
+}
+
+export function setFilterReflect( list ) {
+  Reflect.defineProperty( list, 'filter', {
     get: ()=>{
       return function ( userInput ) {
         if ( ! userInput ) {
-          return acgList;
+          return list;
         }
 
-        return filter( acgList, (acg) => Object.keys(userInput).every(key => {
+        return filter( list, (acg) => Object.keys(userInput).every(key => {
             return isEqual( acg[key], userInput[key] );
           })
         );
@@ -18,5 +22,5 @@ export function setFilterReflect(acgList ) {
     enumerable: false
   });
 
-  return acgList;
+  return list;
 }
