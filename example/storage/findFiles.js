@@ -10,7 +10,9 @@ var path = require('path');
   const params = {
     ncloudParams: {
       containerName: 'helloworld',
-      key: '/'
+      key: '/',
+      listMarker:0,
+      listSize:1
     }
   };
 
@@ -20,13 +22,15 @@ var path = require('path');
     }
 
     console.log( res );
-    // [ { name: 'kickass2.mkv',
-    //   'resource-type': '4',
-    //   etag: '114352073644237862',
-    //   'resource-status': '2',
-    //   'last-modified': '1509993830134',
-    //   'content-type': 'video/x-matroska',
-    //   size: '3458409669' } ]
+    // { Contents:
+    //   [ { name: 'kickass2.mkv',
+    //     'resource-type': '4',
+    //     etag: '114352073644237862',
+    //     'resource-status': '2',
+    //     'last-modified': '1509993830134',
+    //     'content-type': 'video/x-matroska',
+    //     size: '3458409669' } ],
+    //     NextMarker: 1 }
   })
 
 })();

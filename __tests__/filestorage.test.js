@@ -67,7 +67,49 @@ describe('FileStorage Test', function () {
         done.fail(e);
       }
     })
-  })
+  });
+
+
+  test('find acls', function(done) {
+    const params = {
+      ncloudParams: {
+        containerName: 'helloworld',
+        key: '/'
+      }
+    };
+
+    client.storage.findAcl( params, function (err, res) {
+      try {
+        expect(err).toBeNull();
+
+        console.log( res );
+        done();
+      } catch (e) {
+        done.fail(e);
+      }
+    })
+  });
+
+  test('find files', function(done) {
+    const params = {
+      ncloudParams: {
+        containerName: 'helloworld',
+        key: '/',
+        listMarker:0,
+        listSize:1
+      }
+    };
+
+    client.storage.findFiles( params, function (err, res) {
+      expect(err).toBeNull();
+
+      console.log( res );
+      expect( Object.keys(res) ).toContain('Contents');
+      expect( Object.keys(res) ).toContain('NextMarker');
+
+      done();
+    })
+  });
 
 
 });

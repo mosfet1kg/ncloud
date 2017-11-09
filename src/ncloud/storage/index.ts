@@ -20,7 +20,7 @@ import * as path from 'path';
 import * as mime from 'mime-types';
 import { toJson as xml2Json } from 'xml2json';
 import { Logger } from "../helpers/Logger";
-import { isUndefined } from "lodash";
+import { isUndefined, slice } from "lodash";
 import { ObjTree } from "../helpers/ObjTree";
 
 const logger = Logger.createLogger();
@@ -275,6 +275,7 @@ export class Storage implements InterfaceStorage {
 
   findFiles( args, callback: InterfaceCallback ): void {
     const { ncloudParams } = args;
+    let { listMarker=0, listSize=999 } = ncloudParams;
 
     let input = {
       requestUrl: this.baseFsUrl,
@@ -282,15 +283,16 @@ export class Storage implements InterfaceStorage {
       requestMethod: 'GET',
     } as InterfaceFetchClientInput;
 
-    fetchClient({ list: null }, input, this.oauthKey )
+    fetchClient({ list: null, 'list-marker': listMarker, 'list-size': (listSize+1) }, input, this.oauthKey )
       .then(res=> {
 
         const entries = responseFilter( res.data['list-result'].entries, 'entry');
-        console.log( entries );
+
         callback(null, {
-          status: res.status,
-          statusText: res.statusText
+          Contents: slice(entries,0,listSize),
+          NextMarker: entries.length > listSize ? ( listMarker + listSize ) : null
         });
+
       })
       .catch(err=>{
         logger.debug( err );
