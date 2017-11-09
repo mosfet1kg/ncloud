@@ -95,7 +95,6 @@ describe('FileStorage Test', function () {
       ncloudParams: {
         containerName: 'helloworld',
         key: '/',
-        listMarker:0,
         listSize:1
       }
     };

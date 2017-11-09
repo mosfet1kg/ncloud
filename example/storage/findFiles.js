@@ -10,9 +10,7 @@ var path = require('path');
   const params = {
     ncloudParams: {
       containerName: 'helloworld',
-      key: '/',
-      listMarker:0,
-      listSize:1
+      key: '/'
     }
   };
 

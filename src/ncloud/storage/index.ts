@@ -20,7 +20,7 @@ import * as path from 'path';
 import * as mime from 'mime-types';
 import { toJson as xml2Json } from 'xml2json';
 import { Logger } from "../helpers/Logger";
-import { isUndefined, slice } from "lodash";
+import { isUndefined, slice, pickBy } from "lodash";
 import { ObjTree } from "../helpers/ObjTree";
 
 const logger = Logger.createLogger();
@@ -275,7 +275,7 @@ export class Storage implements InterfaceStorage {
 
   findFiles( args, callback: InterfaceCallback ): void {
     const { ncloudParams } = args;
-    let { listMarker=0, listSize=999 } = ncloudParams;
+    let { listMarker, listSize=999 }: { listMarker: string, listSize: number } = ncloudParams;
 
     let input = {
       requestUrl: this.baseFsUrl,
@@ -283,14 +283,14 @@ export class Storage implements InterfaceStorage {
       requestMethod: 'GET',
     } as InterfaceFetchClientInput;
 
-    fetchClient({ list: null, 'list-marker': listMarker, 'list-size': (listSize+1) }, input, this.oauthKey )
+    fetchClient(pickBy({ list: null, 'list-marker': listMarker, 'list-size': (listSize+1) }, (el)=>!isUndefined(el)), input, this.oauthKey )
       .then(res=> {
 
         const entries = responseFilter( res.data['list-result'].entries, 'entry');
 
         callback(null, {
           Contents: slice(entries,0,listSize),
-          NextMarker: entries.length > listSize ? ( listMarker + listSize ) : null
+          NextMarker: entries.length > listSize ? slice(entries,listSize,entries.length) : null
         });
 
       })
