@@ -5,6 +5,7 @@ import {
   fetchClient,
   errorHandling,
   responseFilter,
+  findValue,
   // Validator
 } from '../';
 
@@ -156,7 +157,7 @@ export class Storage implements InterfaceStorage {
                 const progressTotal = currentOffset/fileSize;
                 myEmitter.emit('progress', { progressTotal });
 
-                const etag = res.headers.etag;
+                const etag = findValue(res.headers, 'etag');
                 largeFileComplete['large-file-complete']['part-info'].push({
                   'part-num': largeFilePartId++,
                   etag
@@ -222,7 +223,7 @@ export class Storage implements InterfaceStorage {
 
     fetchClient({}, input, this.oauthKey, 'stream')
       .then(response=> {
-        const contentSize = response.headers['content-length'];
+        const contentSize = findValue( response.headers, 'content-length');
         let progressAmount = 0;
 
         response.data.pipe( fs.createWriteStream( localFile ));

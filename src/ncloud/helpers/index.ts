@@ -6,5 +6,6 @@ export * from './errorHandler';
 export * from './responseHandler';
 export * from './fetchClient';
 export * from './reflect';
+export * from './findValue';
 import * as Validator from './Validator';
 export { Validator }

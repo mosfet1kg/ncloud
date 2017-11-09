@@ -1,6 +1,7 @@
 import {
   Oauth,
   InterfaceOauthKey,
+  findValue
   // InterfaceRequestInfo,
 } from '../../helpers'
 
@@ -77,7 +78,7 @@ function fetch( args, fetchClientInput: InterfaceFetchClientInput, oauthKey: Int
 
   return axios( axiosRequest ).then((response: any)=>{
 
-    if ( response.headers['content-type'].indexOf( 'application/xml' ) >= 0 ) {
+    if ( findValue(response.headers,'content-type') && findValue(response.headers,'content-type').toLowerCase().indexOf( 'application/xml' ) >= 0 ) {
       logger.debug( response.data );
       logger.debug( response.headers );
       logger.debug( response.data.length );

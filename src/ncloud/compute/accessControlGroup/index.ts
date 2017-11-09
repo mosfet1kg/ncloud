@@ -12,7 +12,7 @@ import {
 import paramSet from './paramSet';
 
 export interface InterfaceSecurityGroup {
-  findAccessControlGroups(callback: InterfaceCallback ): void;
+  findAccessControlGroups(callback: InterfaceCallback): void;
   findAccessControlRules( args: { accessControlGroupConfigurationNo: string | number }, callback: InterfaceCallback ): void;
 }
 
@@ -33,7 +33,7 @@ export function findAccessControlGroups(callback: InterfaceCallback ): void {
 
 }
 
-export function findAccessControlRules(args, callback: InterfaceCallback ): void {
+export function findAccessControlRules(args, callback: InterfaceCallback): void {
   const requestInfo: InterfaceFetchClientInput = {
     ...this.defaultRequestInfo,
     requestAction: 'getAccessControlRuleList',
