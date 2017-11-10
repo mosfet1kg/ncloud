@@ -99,7 +99,22 @@ export interface InterfaceStorage
       key: string;
     },
     callback: InterfaceCallback ): void;
+
+  createFolder(
+    args: {
+      container: string;
+      key: string;
+    },
+    callback: InterfaceCallback ): void;
+
+  deleteFolder(
+    args: {
+      container: string;
+      key: string;
+    },
+    callback: InterfaceCallback ): void;
 }
+
 
 // @MustIncludeRequiredParametersClass(paramSet)
 // @ValidParametersOnlyClass(paramSet)
@@ -374,7 +389,7 @@ export class Storage implements InterfaceStorage {
       requestPath: '/' + path.join(container, key),
       requestMethod: 'get',
     } as InterfaceFetchClientInput;
-    // TODO: How to use part-gt?
+
     fetchClient({ 'largefile-part-list': null , 'part-list-size': partListSize, 'part-gt' : partGt}, input, this.oauthKey )
       .then(res=> {
         callback(null, res.data);
@@ -462,6 +477,43 @@ export class Storage implements InterfaceStorage {
         errorHandling( fileStorageErrorHandler(err), callback)}
       );
   }
+
+  createFolder( args, callback: InterfaceCallback ): void {
+    const { container, key } = args;
+
+    let input = {
+      requestUrl: this.baseFsUrl,
+      requestPath: '/' + path.join( container, key ),
+      requestMethod: 'put'
+    } as InterfaceFetchClientInput;
+
+    fetchClient({ 'folder': null }, input, this.oauthKey )
+      .then(res=> {
+        callback(null, res.data);
+      })
+      .catch(err=>
+        errorHandling( fileStorageErrorHandler(err), callback)
+      );
+  }
+
+  deleteFolder( args, callback: InterfaceCallback ): void {
+    const { container, key } = args;
+
+    let input = {
+      requestUrl: this.baseFsUrl,
+      requestPath: '/' + path.join( container, key ),
+      requestMethod: 'delete'
+    } as InterfaceFetchClientInput;
+
+    fetchClient({ 'folder': null }, input, this.oauthKey )
+      .then(res=> {
+        callback(null, res.data);
+      })
+      .catch(err=>
+        errorHandling( fileStorageErrorHandler(err), callback)
+      );
+  }
+
 }
 
 

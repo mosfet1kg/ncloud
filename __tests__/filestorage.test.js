@@ -141,6 +141,42 @@ describe('FileStorage Test', function () {
         done.fail(e);
       }
     })
+  });
+
+  test('test createFolder', function(done){
+    const params = {
+      container: 'helloworld',
+      key: 'testFolder'
+    };
+
+    client.storage.createFolder( params, function (err, res) {
+      try {
+        expect(err).toBeNull();
+
+        console.log( res );
+        done();
+      } catch (e) {
+        done.fail(e);
+      }
+    })
+  });
+
+  test('test deleteFolder', function(done){
+    const params = {
+      container: 'helloworld',
+      key: 'testFolder'
+    };
+
+    client.storage.deleteFolder( params, function (err, res) {
+      try {
+        expect(err).toBeNull();
+
+        console.log( res );
+        done();
+      } catch (e) {
+        done.fail(e);
+      }
+    })
   })
 });
 
