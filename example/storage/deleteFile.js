@@ -8,10 +8,8 @@ var path = require('path');
   });
 
   const params = {
-    ncloudParams: {
-      containerName: 'helloworld',
-      key: 'testfile.gif'
-    }
+    container: 'helloworld',
+    key: 'testfile.gif'
   };
 
   client.storage.deleteFile( params, function (err, res) {

@@ -8,10 +8,9 @@ describe('FileStorage Test', function () {
   test('LargeFileUpload Test', function(done) {
     const params = {
       localFile: path.join(__dirname, '../example/storage/testfile.gif'),
-      ncloudParams: {
-        containerName: 'helloworld',
-        key: 'testfile.gif'
-      }
+      container: 'helloworld',
+      key: 'testfile.gif'
+
     };
 
     const uploader = client.storage.uploadFile(params);
@@ -32,10 +31,8 @@ describe('FileStorage Test', function () {
 
   test('Delete Uploaded File', function(done) {
     const params = {
-      ncloudParams: {
-        containerName: 'helloworld',
-        key: 'testfile.gif'
-      }
+      container: 'helloworld',
+      key: 'testfile.gif'
     };
 
     client.storage.deleteFile( params, function (err, res) {
@@ -52,10 +49,8 @@ describe('FileStorage Test', function () {
 
   test('Delete nonexistent File', function(done) {
     const params = {
-      ncloudParams: {
-        containerName: 'helloworld',
-        key: 'nonexistentfile.gif'
-      }
+      container: 'helloworld',
+      key: 'nonexistentfile.gif'
     };
 
     client.storage.deleteFile( params, function (err, res) {
@@ -69,13 +64,33 @@ describe('FileStorage Test', function () {
     })
   });
 
-
-  test('find acls', function(done) {
+  test('find files', function(done) {
     const params = {
-      ncloudParams: {
-        containerName: 'helloworld',
-        key: '/'
+      container: 'helloworld',
+      key: '/',
+      // listMarker:'kickass2.mkv',
+      // listSize:1
+    };
+
+    client.storage.findFiles( params, function (err, res) {
+      try {
+        expect(err).toBeNull();
+
+        console.log( res );
+        expect( Object.keys(res) ).toContain('Contents');
+        expect( Object.keys(res) ).toContain('NextMarker');
+
+        done();
+      } catch(e){
+        done.fail(e);
       }
+    })
+  });
+
+  test('test findAcl', function(done) {
+    const params = {
+      container: 'helloworld',
+      key: '/'
     };
 
     client.storage.findAcl( params, function (err, res) {
@@ -90,26 +105,42 @@ describe('FileStorage Test', function () {
     })
   });
 
-  test('find files', function(done) {
+  test('test putAcl', function(done) {
     const params = {
-      ncloudParams: {
-        containerName: 'helloworld',
-        key: '/',
-        listSize:1
-      }
+      container: 'helloworld',
+      key: '/',
+      operations:'rq',
+      policy: 'ALLOW'
     };
 
-    client.storage.findFiles( params, function (err, res) {
-      expect(err).toBeNull();
+    client.storage.putAcl( params, function (err, res) {
+      try {
+        expect(err).toBeNull();
 
-      console.log( res );
-      expect( Object.keys(res) ).toContain('Contents');
-      expect( Object.keys(res) ).toContain('NextMarker');
-
-      done();
+        console.log( res );
+        done();
+      } catch (e) {
+        done.fail(e);
+      }
     })
   });
 
+  test('test makeAclPristine', function(done) {
+    const params = {
+      container: 'helloworld',
+      key: '/'
+    };
 
+    client.storage.makeAclPristine( params, function (err, res) {
+      try {
+        expect(err).toBeNull();
+
+        console.log( res );
+        done();
+      } catch (e) {
+        done.fail(e);
+      }
+    })
+  })
 });
 

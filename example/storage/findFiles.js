@@ -8,10 +8,10 @@ var path = require('path');
   });
 
   const params = {
-    ncloudParams: {
-      containerName: 'helloworld',
-      key: '/'
-    }
+    container: 'helloworld',
+    key: '/',
+    listMarker:'kickass2.mkv',
+    listSize:1
   };
 
   client.storage.findFiles( params, function (err, res) {
@@ -21,14 +21,22 @@ var path = require('path');
 
     console.log( res );
     // { Contents:
-    //   [ { name: 'kickass2.mkv',
+    //   [ { name: 'testfile.gif',
     //     'resource-type': '4',
-    //     etag: '114352073644237862',
+    //     etag: '3776665248554716403',
     //     'resource-status': '2',
-    //     'last-modified': '1509993830134',
-    //     'content-type': 'video/x-matroska',
-    //     size: '3458409669' } ],
-    //     NextMarker: 1 }
+    //     'last-modified': '1510242716806',
+    //     'content-type': 'image/gif',
+    //     size: '5088649' } ],
+    //     NextMarker:
+    //     { name: 'testfile2.gif',
+    //     'resource-type': '3',
+    //     etag: '6332511357442342509',
+    //     'resource-status': '2',
+    //     'last-modified': '1510243389176',
+    //     'content-type': 'image/gif',
+    //     size: '5088649' } }
+
   })
 
 })();

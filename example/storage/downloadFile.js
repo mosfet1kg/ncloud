@@ -9,10 +9,8 @@ var path = require('path');
 
   const params = {
     localFile: path.join(__dirname, './testfile2.gif'),
-    ncloudParams: {
-      containerName: 'helloworld',
-      key: 'testfile.gif'
-    }
+    container: 'helloworld',
+    key: 'testfile.gif'
   };
 
   const downloader = client.storage.downloadFile( params );

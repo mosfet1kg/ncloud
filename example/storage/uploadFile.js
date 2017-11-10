@@ -9,10 +9,8 @@ var path = require('path');
 
   const params = {
     localFile: path.join(__dirname, 'kickass2.mkv'),
-    ncloudParams: {
-      containerName: 'helloworld',
-      key: 'kickass2.mkv'
-    }
+    container: 'helloworld',
+    key: 'kickass2.mkv'
   };
 
   const uploader = client.storage.uploadFile(params);

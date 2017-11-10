@@ -30,70 +30,74 @@ export interface InterfaceStorage
   uploadFile(
     args: {
       localFile: string,
-      ncloudParams: {
-        containerName: string;
-        key: string,
-        prefix?: string
-      }}): any;
+      container: string;
+      key: string;
+      uploadChunkSize?: number;
+    }): any;
 
   downloadFile(
     args: {
       localFile: string,
-      ncloudParams: {
-        containerName: string;
-        key: string,
-        prefix?: string
-      }}): any;
+      container: string;
+      key: string;
+    }): any;
 
   deleteFile(
     args: {
-      ncloudParams: {
-        containerName: string;
-        key: string,
-        prefix?: string
-      }},
+      container: string;
+      key: string;
+    },
     callback: InterfaceCallback ): void;
 
   findFiles(
     args: {
-      ncloudParams: {
-        containerName: string;
-        key: string,
-        prefix?: string
-      }},
+      container: string;
+      key: string;
+      listMarker?: string;
+      listSize?: number;
+    },
     callback: InterfaceCallback ): void;
 
   findLargeFileParts(
     args: {
+      containerName: string;
+      key: string;
       partListSize?: number;
-      localFile: string,
-      ncloudParams: {
-        containerName: string;
-        key: string,
-        prefix?: string
-        commit?: string,
-      }},
-    callback: InterfaceCallback ): void;
-
-  findAcl(
-    args: {
-      localFile: string,
-      ncloudParams: {
-        containerName: string;
-        key: string,
-        prefix?: string
-      }},
+      partGt?: number;
+    },
     callback: InterfaceCallback ): void;
 
   commitLargeFile(
     args: {
-      localFile: string,
-      ncloudParams: {
-        containerName: string;
-        key: string,
-        prefix?: string,
-        commit: boolean,
-      }},
+      container: string;
+      key: string;
+      commit: boolean;
+      largeFileComplete?: any;
+    },
+    callback: InterfaceCallback ): void;
+
+  findAcl(
+    args: {
+      container: string;
+      key: string;
+    },
+    callback: InterfaceCallback ): void;
+
+  putAcl(
+    args: {
+      container: string;
+      key: string;
+      grantee?: string;
+      operations: string;
+      policy: string;
+    },
+    callback: InterfaceCallback ): void;
+
+  makeAclPristine(
+    args: {
+      container: string;
+      key: string;
+    },
     callback: InterfaceCallback ): void;
 }
 
@@ -104,19 +108,16 @@ export class Storage implements InterfaceStorage {
   private oauthKey: InterfaceOauthKey;
   private baseFsUrl: string = 'http://restapi.fs.ncloud.com';
 
-  public uploadChunkSize = 10 * 1024 * 1024;
-
   constructor ( oauthKey: InterfaceOauthKey ) {
     this.oauthKey = oauthKey;
   };
 
   uploadFile ( args ): any {
-    const { localFile } = args;
-    const { ncloudParams } = args;
+    const { localFile, container, key, uploadChunkSize=(10 * 1024 * 1024) } = args;
 
     let input = {
       requestUrl: this.baseFsUrl,
-      requestPath: '/' + path.join(ncloudParams.containerName, ncloudParams.key ),
+      requestPath: '/' + path.join( container, key ),
       requestMethod: 'PUT',
       requestHeader: {
         'Content-Type': mime.lookup( localFile ),
@@ -136,7 +137,7 @@ export class Storage implements InterfaceStorage {
         };
         let largeFilePartId = 1;
 
-        const readStream = fs.createReadStream( localFile, { highWaterMark: this.uploadChunkSize } as any);
+        const readStream = fs.createReadStream( localFile, { highWaterMark: uploadChunkSize } as any);
         readStream
           .on('data', (chunk) => {
 
@@ -153,7 +154,7 @@ export class Storage implements InterfaceStorage {
             fetchClient({'largefile-part': null, 'part-id': largeFilePartId }, newInput, this.oauthKey )
               .then((res)=>{
 
-                const currentOffset = (this.uploadChunkSize * largeFilePartId > fileSize ? fileSize : this.uploadChunkSize * largeFilePartId);
+                const currentOffset = ( uploadChunkSize * largeFilePartId > fileSize ? fileSize : uploadChunkSize * largeFilePartId);
                 const progressTotal = currentOffset/fileSize;
                 myEmitter.emit('progress', { progressTotal });
 
@@ -170,7 +171,7 @@ export class Storage implements InterfaceStorage {
                     ...args,
                     largeFileComplete
                   };
-                  args.ncloudParams.commit = true;
+                  args.commit = true;
 
                   this.commitLargeFile.bind(this)( args, (err, res)=>{
                     if ( err ) {
@@ -187,7 +188,7 @@ export class Storage implements InterfaceStorage {
                 logger.debug( err );
 
                 /** Destroy uploaded files if error occur **/
-                args.ncloudParams.commit = false;
+                args.commit = false;
                 this.commitLargeFile.bind(this)( args, (err, res)=>{
                   if ( err ) {
                     myEmitter.emit('error', fileStorageErrorHandler(err));
@@ -212,12 +213,12 @@ export class Storage implements InterfaceStorage {
   } // end function uploadFile
 
   downloadFile( args ): any {
-    const { localFile } = args;
-    const { ncloudParams } = args;
+    const { localFile, container, key } = args;
+
     const myEmitter = new MyEmitter();
     let input = {
       requestUrl: this.baseFsUrl,
-      requestPath: '/' + path.join(ncloudParams.containerName, ncloudParams.key ),
+      requestPath: '/' + path.join(container, key),
       requestMethod: 'GET',
     } as InterfaceFetchClientInput;
 
@@ -252,11 +253,11 @@ export class Storage implements InterfaceStorage {
   }
 
   deleteFile( args, callback: InterfaceCallback ): void {
-    const { ncloudParams } = args;
+    const { container, key } = args;
 
     let input = {
       requestUrl: this.baseFsUrl,
-      requestPath: '/' + path.join(ncloudParams.containerName, ncloudParams.key ),
+      requestPath: '/' + path.join(container, key),
       requestMethod: 'DELETE',
     } as InterfaceFetchClientInput;
 
@@ -274,12 +275,11 @@ export class Storage implements InterfaceStorage {
   }
 
   findFiles( args, callback: InterfaceCallback ): void {
-    const { ncloudParams } = args;
-    let { listMarker, listSize=999 }: { listMarker: string, listSize: number } = ncloudParams;
+    const { container, key, listMarker, listSize=999 } = args;
 
     let input = {
       requestUrl: this.baseFsUrl,
-      requestPath: '/' + path.join(ncloudParams.containerName, ncloudParams.key ),
+      requestPath: '/' + path.join( container, key ),
       requestMethod: 'GET',
     } as InterfaceFetchClientInput;
 
@@ -290,7 +290,7 @@ export class Storage implements InterfaceStorage {
 
         callback(null, {
           Contents: slice(entries,0,listSize),
-          NextMarker: entries.length > listSize ? slice(entries,listSize,entries.length) : null
+          NextMarker: entries.length > listSize ? slice(entries,listSize,entries.length)[0] : null
         });
 
       })
@@ -301,15 +301,14 @@ export class Storage implements InterfaceStorage {
   }
 
   commitLargeFile ( args, callback: InterfaceCallback ): void {
-    const { ncloudParams } = args;
-    let { commit } = ncloudParams;
-    let { largeFileComplete } = args;
+    const { container, key } = args;
+    let { commit, largeFileComplete } = args;
     commit = commit ? 'Y' : 'N';
 
     const requestHandler = ( commit, requestMessage )=>{
       let input = {
         requestUrl: this.baseFsUrl,
-        requestPath: '/' + path.join(ncloudParams.containerName, ncloudParams.key ),
+        requestPath: '/' + path.join(container, key),
         requestMethod: 'put',
         requestHeader: {
           'Content-Type': 'application/xml',
@@ -367,16 +366,16 @@ export class Storage implements InterfaceStorage {
   }
 
   findLargeFileParts ( args, callback: InterfaceCallback ): void {
-    const { ncloudParams } = args;
-    const { partListSize = 100 } = args;
+    const { container, key } = args;
+    const { partGt = 0, partListSize = 100 } = args;
 
     let input = {
       requestUrl: this.baseFsUrl,
-      requestPath: '/' + path.join(ncloudParams.containerName, ncloudParams.key ),
+      requestPath: '/' + path.join(container, key),
       requestMethod: 'get',
     } as InterfaceFetchClientInput;
-
-    fetchClient({ 'largefile-part-list': null , 'part-list-size': partListSize, 'part-gt' : 0}, input, this.oauthKey )
+    // TODO: How to use part-gt?
+    fetchClient({ 'largefile-part-list': null , 'part-list-size': partListSize, 'part-gt' : partGt}, input, this.oauthKey )
       .then(res=> {
         callback(null, res.data);
       })
@@ -387,11 +386,11 @@ export class Storage implements InterfaceStorage {
   }
 
   findAcl( args, callback: InterfaceCallback ): void {
-    const { ncloudParams } = args;
+    const { container, key } = args;
 
     let input = {
       requestUrl: this.baseFsUrl,
-      requestPath: '/' + path.join( ncloudParams.containerName, ncloudParams.key ),
+      requestPath: '/' + path.join( container, key ),
       requestMethod: 'get',
     } as InterfaceFetchClientInput;
 
@@ -405,6 +404,64 @@ export class Storage implements InterfaceStorage {
       );
   }
 
+  putAcl ( args, callback: InterfaceCallback ): void {
+    const { container, key, grantee='*', operations, policy } = args;
+
+    const requestBody =
+      `<?xml version="1.0" encoding="UTF-8"?>
+       <acl>
+          <access-control grantee="${ grantee }" operations="${ operations.toLowerCase() }" policy="${ policy.toUpperCase() }"/>
+       </acl>`;
+
+    let input = {
+      requestUrl: this.baseFsUrl,
+      requestPath: '/' + path.join( container, key ),
+      requestMethod: 'put',
+      requestHeader: {
+        'Content-Type': 'application/xml',
+        'Content-Length': requestBody.length
+      },
+      requestBody
+    } as InterfaceFetchClientInput;
+
+    fetchClient({ 'acl': null }, input, this.oauthKey )
+      .then(res=> {
+        callback(null, res.data);
+      })
+      .catch(err=>{
+        logger.debug( 'error:',  { ...err.response.config.headers, url: err.response.config.url} );
+        errorHandling( fileStorageErrorHandler(err), callback)}
+      );
+  }
+
+  makeAclPristine ( args, callback: InterfaceCallback ): void {
+    const { container, key } = args;
+
+    const requestBody =
+      `<?xml version="1.0" encoding="UTF-8"?>
+       <acl>
+       </acl>`;
+
+    let input = {
+      requestUrl: this.baseFsUrl,
+      requestPath: '/' + path.join( container, key ),
+      requestMethod: 'put',
+      requestHeader: {
+        'Content-Type': 'application/xml',
+        'Content-Length': requestBody.length
+      },
+      requestBody
+    } as InterfaceFetchClientInput;
+
+    fetchClient({ 'acl': null }, input, this.oauthKey )
+      .then(res=> {
+        callback(null, res.data);
+      })
+      .catch(err=>{
+        logger.debug( 'error:',  { ...err.response.config.headers, url: err.response.config.url} );
+        errorHandling( fileStorageErrorHandler(err), callback)}
+      );
+  }
 }
 
 
