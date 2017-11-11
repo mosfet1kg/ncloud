@@ -9,6 +9,7 @@ describe('Geolocation API Test', function () {
       try {
         expect( err ).toBeNull();
 
+        console.log( res );
         expect( res ).toBeDefined();
         expect( Object.keys(res) ).toContain('country');
         expect( Object.keys(res) ).toContain('code');
@@ -28,6 +29,7 @@ describe('Geolocation API Test', function () {
 
         expect(res).toBeDefined();
 
+        console.log( res );
         const keys = Object.keys(res);
         expect(keys).toContain('country');
         expect(keys).toContain('code');
@@ -42,6 +44,18 @@ describe('Geolocation API Test', function () {
         done.fail( e );
       }
     })
+  });
+
+  test('Geolocation API Test #3', function (done) {
+    try {
+      client.openapi.geolocation.findLocation({ ip: '143.248.142.77', ext1: 't'});
+      done.fail();
+    } catch(e){
+      console.log( e );
+      expect(e).toBeInstanceOf( Error );
+      done();
+    }
+
   });
 });
 
