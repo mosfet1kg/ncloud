@@ -3,8 +3,8 @@ const ncloud = require('../lib/');
 
 const client = ncloud.createClient(env);
 
-describe('Compute ACG Test', function( ){
-  test('ACG API Test #1', function ( done ){
+describe('Test ACG', function( ){
+  test('Test findAccessControlGroups', function ( done ){
 
     client.compute.findAccessControlGroups( function( error, response ) {
       try {
@@ -22,12 +22,24 @@ describe('Compute ACG Test', function( ){
         expect( keys ).toContain('createDate');
 
         done();
-
       } catch (e) {
         done.fail(e);
       }
     })
   });
 
+  test('Test findAccessControlRules', function ( done ){
+    client.compute.findAccessControlRules( { accessControlGroupConfigurationNo: 4656 }, function( err, response ) {
+      try {
+        expect( err ).toBeNull();
+        expect( response ).toBeInstanceOf( Array );
+
+        console.log( response );
+        done();
+      } catch (e) {
+        done.fail( e );
+      }
+    })
+  });
 });
 
