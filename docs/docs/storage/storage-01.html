@@ -483,6 +483,62 @@ uploader.on(<span class="hljs-string">&apos;end&apos;</span>, <span class="hljs-
 <code>progressAmount</code>, <code>progressTotal</code> properties change.    </li>
 </ul>
 <hr>
+<h2 id="downloadfile"><code>downloadFile</code></h2>
+<p>Downloads a file from ncloud container.</p>
+<h3 id="arguments">Arguments</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>localFile</td>
+<td><code>string</code></td>
+<td><strong>required</strong></td>
+<td>Local file path to be downloaded</td>
+</tr>
+<tr>
+<td>container</td>
+<td><code>string</code></td>
+<td><strong>required</strong></td>
+<td>Container name where the file is stored.</td>
+</tr>
+<tr>
+<td>key</td>
+<td><code>string</code></td>
+<td><strong>required</strong></td>
+<td>Name of file to be downloaded</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example">Example</h3>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> params = {
+  localFile: path.join(__dirname, <span class="hljs-string">&apos;./testfile.gif&apos;</span>),
+  container: <span class="hljs-string">&apos;helloworld&apos;</span>,
+  key: <span class="hljs-string">&apos;testfile.gif&apos;</span>
+};
+
+<span class="hljs-keyword">const</span> downloader = client.storage.downloadFile( params );
+
+downloader.on(<span class="hljs-string">&apos;progress&apos;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">progress</span>) </span>{
+  <span class="hljs-built_in">console</span>.log( progress );
+  <span class="hljs-comment">//{ progressAmount: 4850115, progressTotal: 0.9531242968418533 }</span>
+});
+
+downloader.on(<span class="hljs-string">&apos;error&apos;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) </span>{
+  <span class="hljs-built_in">console</span>.log( err );
+});
+
+downloader.on(<span class="hljs-string">&apos;end&apos;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+  <span class="hljs-built_in">console</span>.log( <span class="hljs-string">&apos;end&apos;</span>);
+})
+</code></pre>
+<hr>
 <h2 id="deletefile"><code>deleteFile</code></h2>
 <p>Deletes the file in ncloud container.</p>
 <h3 id="arguments">Arguments</h3>
@@ -874,7 +930,7 @@ client.storage.makeAclPristine( params, <span class="hljs-function"><span class=
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Storage","level":"3.1.1","depth":2,"next":{"title":"OpenAPI","level":"4.1","depth":1,"ref":"","articles":[{"title":"Geolocation","level":"4.1.1","depth":2,"path":"openapi/geolocation/geo-01.md","ref":"./openapi/geolocation/geo-01.md","articles":[]}]},"previous":{"title":"Storage","level":"3.1","depth":1,"ref":"","articles":[{"title":"Storage","level":"3.1.1","depth":2,"path":"storage/storage-01.md","ref":"./storage/storage-01.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"storage/storage-01.md","mtime":"2017-11-12T08:45:02.171Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-11-12T09:30:15.995Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Storage","level":"3.1.1","depth":2,"next":{"title":"OpenAPI","level":"4.1","depth":1,"ref":"","articles":[{"title":"Geolocation","level":"4.1.1","depth":2,"path":"openapi/geolocation/geo-01.md","ref":"./openapi/geolocation/geo-01.md","articles":[]}]},"previous":{"title":"Storage","level":"3.1","depth":1,"ref":"","articles":[{"title":"Storage","level":"3.1.1","depth":2,"path":"storage/storage-01.md","ref":"./storage/storage-01.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"storage/storage-01.md","mtime":"2017-11-12T09:42:19.500Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2017-11-12T09:42:33.464Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

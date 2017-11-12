@@ -53,6 +53,43 @@ And these events
   
 ---
 
+## `downloadFile`
+
+Downloads a file from ncloud container.
+
+### Arguments
+| Name      | Type      | Required     | Description                |
+|-----------|-----------|--------------|----------------------------|
+| localFile | `string`  | **required** | Local file path to be downloaded |         
+| container | `string`  | **required** | Container name where the file is stored. |
+| key       | `string`  | **required** | Name of file to be downloaded |
+
+### Example
+```javascript
+const params = {
+  localFile: path.join(__dirname, './testfile.gif'),
+  container: 'helloworld',
+  key: 'testfile.gif'
+};
+
+const downloader = client.storage.downloadFile( params );
+
+downloader.on('progress', function (progress) {
+  console.log( progress );
+  //{ progressAmount: 4850115, progressTotal: 0.9531242968418533 }
+});
+
+downloader.on('error', function (err) {
+  console.log( err );
+});
+
+downloader.on('end', function () {
+  console.log( 'end');
+})
+```
+
+---
+
 ## `deleteFile`
 Deletes the file in ncloud container.
 
