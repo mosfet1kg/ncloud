@@ -84,6 +84,7 @@ const client = ncloud.createClient({
 | Category  | Method |
 |-----------|--------|
 | Storage   | [uploadFile](./storage/storage-01.md#uploadfile)  |
+| Storage   | [downloadFile](./storage/storage-01.md#downloadfile) |
 | Storage   | [deleteFile](./storage/storage-01.md#deletefile)  |
 | Storage   | [findFiles](./storage/storage-01.md#findfiles)  |
 | Storage   | [createFolder](./storage/storage-01.md#createfolder)  |
