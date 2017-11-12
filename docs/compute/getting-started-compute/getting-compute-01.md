@@ -76,12 +76,12 @@ launch a server, and then output its details to the command line.
               return console.log( err.message );
             }
 
-            console.log( 'SERVER INFO');
-            console.log( 'serverName: ' + srvRes.serverName );
-            console.log( 'serverIpv4: ' + publicIpInstance.publicIp);
-            console.log( 'command for SSH to connect the resulting server: ssh -p ' + pfRes.portForwardingExternalPort + ' root@' + srvRes.portForwardingPublicIp );
-            console.log( 'try the aforementioned command a few moments later.');
-            console.log( 'root password: ' + pwRes.rootPassword );
+            console.log('SERVER INFO');
+            console.log('serverName: ' + srvRes.serverName);
+            console.log('serverIpv4: ' + publicIpInstance.publicIp);
+            console.log('command for SSH to connect the resulting server: ssh -p ' + pfRes.portForwardingExternalPort + ' root@' + srvRes.portForwardingPublicIp);
+            console.log('try the aforementioned command a few moments later.');
+            console.log('root password: ' + pwRes.rootPassword);
           });
         });
       });

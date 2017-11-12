@@ -54,6 +54,9 @@ Refer to the following link
 
 
 # Release Note
+v0.1.31
+  - Add new features ( management/storage )
+
 v0.1.28
   - Add new features ( management/monitoring )
 

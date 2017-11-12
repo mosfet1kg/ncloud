@@ -8,9 +8,9 @@ var path = require('path');
   });
 
   const params = {
-    localFile: path.join(__dirname, 'kickass2.mkv'),
+    localFile: '/Users/gbchoi/Downloads/kickass2/kickass2.mkv',
     container: 'helloworld',
-    key: 'kickass2.mkv'
+    key: 'kickass5.mkv'//'testfile.gif'
   };
 
   const uploader = client.storage.uploadFile(params);

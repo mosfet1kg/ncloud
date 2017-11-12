@@ -29,7 +29,7 @@ export class Oauth {
 
     let authHeaderString = Object.keys(significantParameters).map((key)=>{
       if ( !isNull( significantParameters[key] ) ) {
-        return (key + '=\"' + significantParameters[key] + '\"');
+        return (key + '=\"' + encodeURIComponent(significantParameters[key]) + '\"');
       }
     }).filter(el=>!isUndefined(el)).join(', ');
 

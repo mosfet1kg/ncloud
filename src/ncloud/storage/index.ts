@@ -169,11 +169,11 @@ export class Storage implements InterfaceStorage {
             fetchClient({'largefile-part': null, 'part-id': largeFilePartId }, newInput, this.oauthKey )
               .then((res)=>{
 
-                const currentOffset = ( uploadChunkSize * largeFilePartId > fileSize ? fileSize : uploadChunkSize * largeFilePartId);
-                const progressTotal = currentOffset/fileSize;
-                myEmitter.emit('progress', { progressTotal });
-
                 const etag = findValue(res.headers, 'etag');
+                const progressAmount = ( uploadChunkSize * largeFilePartId > fileSize ? fileSize : uploadChunkSize * largeFilePartId);
+                const progressTotal = progressAmount/fileSize;
+                myEmitter.emit('progress', { etag, progressAmount, progressTotal });
+
                 largeFileComplete['large-file-complete']['part-info'].push({
                   'part-num': largeFilePartId++,
                   etag

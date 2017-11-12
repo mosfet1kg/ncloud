@@ -80,6 +80,18 @@ const client = ncloud.createClient({
 | Monitoring        | getListMetrics             | [findMetrics](./management/monitoring-01.md#findmetrics-action-getlistmetrics)       |
 | Monitoring        | getMetricStatistics        | [findStatistics](./management/monitoring-01.md#findstatistics-action-getmetricstatistics)       |
  
+### Storage
+| Category  | Method |
+|-----------|--------|
+| Storage   | [uploadFile](./storage/storage-01.md#uploadfile)  |
+| Storage   | [deleteFile](./storage/storage-01.md#deletefile)  |
+| Storage   | [findFiles](./storage/storage-01.md#findfiles)  |
+| Storage   | [createFolder](./storage/storage-01.md#createfolder)  |
+| Storage   | [deleteFolder](./storage/storage-01.md#deletefolder)  |
+| Storage   | [findAcl](./storage/storage-01.md#findacl)  |  
+| Storage   | [putAcl](./storage/storage-01.md#putacl)  | 
+| Storage   | [makeAclPristine](./storage/storage-01.md#makeaclpristine)  | 
+  
 ### OpenAPI
 
 | Category          | Action                     | Method                 |
