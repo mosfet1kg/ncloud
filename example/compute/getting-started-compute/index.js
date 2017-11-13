@@ -54,8 +54,8 @@ var ncloud = require('../../../lib/');
         return console.log( srvRes );
       }
 
-      // attach a new public ipv4 to our server
-      client.compute.createPublicIpInstance({serverInstanceNo: srvRes.serverInstanceNo}, function(err, publicIpInstance) {
+      // attach a public ipv4 to our server
+      client.compute.attachPublicIpInstance({serverInstanceNo: srvRes.serverInstanceNo, autoCreateIp: true}, function(err, publicIpInstance) {
         if ( err ) {
           return console.log( err.message );
         }

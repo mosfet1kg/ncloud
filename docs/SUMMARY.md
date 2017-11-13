@@ -16,7 +16,7 @@
   * [Monitoring](./management/monitoring-01.md)  
 ---
 * Storage
-  * [Storage](./storage/storage-01.md)
+  * [File Storage](./storage/storage-01.md)
 ---  
 * OpenAPI
   * [Geolocation](./openapi/geolocation/geo-01.md)

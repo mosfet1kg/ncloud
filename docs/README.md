@@ -83,15 +83,15 @@ const client = ncloud.createClient({
 ### Storage
 | Category  | Method |
 |-----------|--------|
-| Storage   | [uploadFile](./storage/storage-01.md#uploadfile)  |
-| Storage   | [downloadFile](./storage/storage-01.md#downloadfile) |
-| Storage   | [deleteFile](./storage/storage-01.md#deletefile)  |
-| Storage   | [findFiles](./storage/storage-01.md#findfiles)  |
-| Storage   | [createFolder](./storage/storage-01.md#createfolder)  |
-| Storage   | [deleteFolder](./storage/storage-01.md#deletefolder)  |
-| Storage   | [findAcl](./storage/storage-01.md#findacl)  |  
-| Storage   | [putAcl](./storage/storage-01.md#putacl)  | 
-| Storage   | [makeAclPristine](./storage/storage-01.md#makeaclpristine)  | 
+| FileStorage   | [uploadFile](./storage/storage-01.md#uploadfile)  |
+| FileStorage   | [downloadFile](./storage/storage-01.md#downloadfile) |
+| FileStorage   | [deleteFile](./storage/storage-01.md#deletefile)  |
+| FileStorage   | [findFiles](./storage/storage-01.md#findfiles)  |
+| FileStorage   | [createFolder](./storage/storage-01.md#createfolder)  |
+| FileStorage   | [deleteFolder](./storage/storage-01.md#deletefolder)  |
+| FileStorage   | [findAcl](./storage/storage-01.md#findacl)  |  
+| FileStorage   | [putAcl](./storage/storage-01.md#putacl)  | 
+| FileStorage   | [makeAclPristine](./storage/storage-01.md#makeaclpristine)  | 
   
 ### OpenAPI
 

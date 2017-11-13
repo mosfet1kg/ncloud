@@ -1,4 +1,4 @@
-# Storage
+# Storage: File Storage
 
 ## `uploadFile` 
 Uploads local file to ncloud container.  
