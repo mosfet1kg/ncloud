@@ -19,8 +19,40 @@ describe('Test serverInstance', function( ){
       }
     });
 
-
   });
+
+  test('test findPublicImages', function(done) {
+
+    client.compute.findPublicImages( function (err, publicImages) {
+      try {
+        expect(err).toBeNull();
+
+        console.log( publicImages.filter(function(el){ return el.vmImageType.code==='WINNT'}));
+
+        done();
+      } catch(e){
+        console.log( e );
+        done.fail(e);
+      }
+    })
+  });
+
+  test('test findPublicImages', function(done) {
+
+    client.compute.findPublicImages( function (err, publicImages) {
+      try {
+        expect(err).toBeNull();
+
+        console.log( publicImages.filter(function(el){ return el.vmImageType.code==='WINNT'}));
+        console.log( publicImages.filter({vmImageName: 'centos-7.3-64'}) );
+        done();
+      } catch(e){
+        console.log( e );
+        done.fail(e);
+      }
+    })
+  })
+
 
 });
 

@@ -7,7 +7,7 @@ import {
   responseFilter
 } from '../../';
 
-import { filter, isString } from 'lodash';
+import { isUndefined, isFunction, filter, isString } from 'lodash';
 import paramSet from './paramSet';
 
 export interface InterfacePublicIpInstance {
@@ -171,9 +171,13 @@ function setPublicInstancesReflect( publicInstanceList ) {
 
   Reflect.defineProperty( publicInstanceList, 'filter', {
     get: ()=>{
-      return function(args: { publicInstanceStatus: string }) {
-        if ( ! args ) {
+      return function( args: { publicInstanceStatus: string }) {
+        if ( isUndefined( args ) ) {
           return publicInstanceList;
+        }
+
+        if ( isFunction(args) ) {
+          return [...publicInstanceList].filter( args as any );
         }
 
         const { publicInstanceStatus } = args;

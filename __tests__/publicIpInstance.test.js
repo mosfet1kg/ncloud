@@ -20,5 +20,21 @@ describe('Test publicIpInstance', function( ){
 
   });
 
+  test('Test findPublicIpInstances', function(done){
+    client.compute.findPublicIpInstances(function(err,res){
+      try {
+        expect(err).toBeNull();
+
+        // console.log( res.filter({publicInstanceStatus:'used'}) );
+        console.log( res.filter( function(el){ return el.publicIp==='220.230.124.139'}));
+
+
+        done();
+      } catch(e){
+        done.fail(e);
+      }
+    })
+  })
+
 });
 

@@ -1,4 +1,4 @@
-import { filter, isEqual } from 'lodash';
+import { filter, isEqual, isFunction, isUndefined } from 'lodash';
 
 export interface InterfaceFilterReflectReturn {
   filter(): any[];
@@ -8,8 +8,12 @@ export function setFilterReflect( list ) {
   Reflect.defineProperty( list, 'filter', {
     get: ()=>{
       return function ( userInput ) {
-        if ( ! userInput ) {
+        if ( isUndefined(userInput) ) {
           return list;
+        }
+
+        if ( isFunction(userInput) ) {
+          return [...list].filter( userInput );
         }
 
         return filter( list, (acg) => Object.keys(userInput).every(key => {
