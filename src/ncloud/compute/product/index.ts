@@ -9,7 +9,7 @@ import {
   responseFilter
 } from '../../';
 
-import { filter, isNull, isNumber } from 'lodash';
+import { filter, isNull, isNumber, isUndefined, isFunction } from 'lodash';
 import * as bytes from 'bytes';
 import paramSet from './paramSet';
 
@@ -80,12 +80,16 @@ function setFlavorListReflect( flavorList ) {
 
   Reflect.defineProperty( flavorList, 'filter', {
     get: ()=>{
-      return function (args: { vCpu?: number, memory?: number | string, storage?: number | string, storageType?: string }) {
-        if ( ! args ) {
+      return function (userInput: { vCpu?: number, memory?: number | string, storage?: number | string, storageType?: string }) {
+        if ( isUndefined(userInput) ) {
           return flavorList;
         }
 
-        let { vCpu, memory, storage, storageType } = args;
+        if ( isFunction(userInput) ) {
+          return [...flavorList as any ].filter( userInput as any );
+        }
+
+        let { vCpu, memory, storage, storageType } = userInput;
 
         if ( vCpu && !isNumber( vCpu ) ) {
           throw new Error('Invalid Argument: \'vCpu\' must be numeric.')

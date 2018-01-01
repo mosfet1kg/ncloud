@@ -21,7 +21,7 @@ describe('Test serverInstance', function( ){
 
   });
 
-  test('test findPublicImages', function(done) {
+  test('test findPublicImages 1', function(done) {
 
     client.compute.findPublicImages( function (err, publicImages) {
       try {
@@ -37,7 +37,7 @@ describe('Test serverInstance', function( ){
     })
   });
 
-  test('test findPublicImages', function(done) {
+  test('test findPublicImages 2', function(done) {
 
     client.compute.findPublicImages( function (err, publicImages) {
       try {
@@ -51,8 +51,27 @@ describe('Test serverInstance', function( ){
         done.fail(e);
       }
     })
+  });
+
+  test('test findFlavors 1', function(done) {
+
+    client.compute.findFlavors({ vmImageId: 'SPSW0LINUX000046'}, function (err, flavors) {
+      try {
+        expect(err).toBeNull();
+        console.log(flavors);
+
+        const target = flavors.filter( function(el) {
+          return el.vmFlavorId === 'SPSVRSSD00000031';
+        });
+
+        console.log( target );
+
+        done();
+      } catch(e){
+        console.log( e );
+        done.fail(e);
+      }
+    })
   })
-
-
 });
 
