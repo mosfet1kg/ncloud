@@ -32,8 +32,8 @@ describe('FileStorage Test', function () {
     const params = {
       container: 'helloworld',
       key: 'testfile.gif',
-      pos: 0,
-      len: 5
+      pos: 2490367,
+      len: 1
     };
 
     client.storage.downloadPartialFile( params, function(err, res) {
