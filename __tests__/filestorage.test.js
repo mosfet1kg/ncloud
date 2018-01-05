@@ -5,6 +5,50 @@ const client = ncloud.createClient(env);
 
 describe('FileStorage Test', function () {
 
+  test('fileDownload test', function(done) {
+    const params = {
+      container: 'helloworld',
+      key: 'testfile.gif',
+      localFile: path.join(__dirname, 'testfile.gif')
+    };
+
+    const downloader = client.storage.downloadFile( params );
+
+    downloader.on('progress', function (progress) {
+      console.log( progress );
+    });
+
+    downloader.on('error', function (err) {
+      console.log( err );
+      done.fail( err );
+    });
+
+    downloader.on('end', function () {
+      done();
+    });
+  });
+
+  test('downloadPartialFile test', function(done) {
+    const params = {
+      container: 'helloworld',
+      key: 'testfile.gif',
+      pos: 0,
+      len: 5
+    };
+
+    client.storage.downloadPartialFile( params, function(err, res) {
+      try {
+        expect(err).toBeNull();
+
+        console.log( res );
+        done();
+      } catch (e) {
+        console.log( e.message );
+        done.fail(e);
+      }
+    });
+  });
+
   test('copyFile Test', function(done) {
     const params = {
       container: 'helloworld',

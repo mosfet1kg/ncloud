@@ -51,6 +51,15 @@ export interface InterfaceStorage
       key: string;
     }): any;
 
+  downloadPartialFile(
+    args: {
+      container: string;
+      key: string;
+      pos: number;
+      len: number;
+    },
+    callback: InterfaceCallback ): void;
+
   deleteFile(
     args: {
       container: string;
@@ -309,6 +318,28 @@ export class Storage implements InterfaceStorage {
       });
 
     return myEmitter;
+  }
+
+  downloadPartialFile( args, callback: InterfaceCallback ): any {
+    const { container, key, pos, len } = args;
+
+    let input = {
+      requestUrl: this.baseFsUrl,
+      requestPath: '/' + path.join(container, key),
+      requestMethod: 'GET',
+      requestHeader: {
+        Range: `bytes=${pos}-${pos+len}`
+      }
+    } as InterfaceFetchClientInput;
+
+    fetchClient({}, input, this.oauthKey )
+      .then(response=> {
+        callback(null, response.data);
+      })
+      .catch((err)=>{
+        logger.debug( err );
+        errorHandling( fileStorageErrorHandler(err), callback);
+      });
   }
 
   deleteFile( args, callback: InterfaceCallback ): void {
