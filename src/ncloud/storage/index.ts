@@ -27,6 +27,11 @@ const logger = Logger.createLogger();
 
 export interface InterfaceStorage
 {
+  copyFile(
+    args: any,
+    callback: InterfaceCallback
+  ): any;
+
   uploadFile(
     args: {
       localFile: string,
@@ -55,6 +60,13 @@ export interface InterfaceStorage
       key: string;
       listMarker?: string;
       listSize?: number;
+    },
+    callback: InterfaceCallback ): void;
+
+  findMetaData(
+    args: {
+      container: string;
+      key: string;
     },
     callback: InterfaceCallback ): void;
 
@@ -126,6 +138,36 @@ export class Storage implements InterfaceStorage {
   constructor ( oauthKey: InterfaceOauthKey ) {
     this.oauthKey = oauthKey;
   };
+
+  copyFile ( args, callback: InterfaceCallback ): any {
+    const { container, key } = args;
+
+    let input = {
+      requestUrl: this.baseFsUrl,
+      requestPath: '/' + path.join( container, key ),
+      requestMethod: 'PUT',
+      requestHeader: {
+        'Content-Type': 'video/x-ms-wmv',
+        'Content-Length': 1562063,
+        'x-ncloud-copy-source': 'helloworld/verfied_bts_5345.wmv',
+        'x-ncloud-copy-range': 'bytes=0-1562062',
+        'x-ncloud-copy-meta': 'TRUE'
+      }
+    } as InterfaceFetchClientInput;
+
+    fetchClient({} , input, this.oauthKey )
+      .then(res=> {
+
+        console.log( res.data);
+        callback(null, {
+        });
+
+      })
+      .catch(err=>{
+        logger.debug( err );
+        errorHandling( fileStorageErrorHandler(err), callback)}
+      );
+  }
 
   uploadFile ( args ): any {
     const { localFile, container, key, uploadChunkSize=(10 * 1024 * 1024) } = args;
@@ -305,7 +347,37 @@ export class Storage implements InterfaceStorage {
 
         callback(null, {
           Contents: slice(entries,0,listSize),
-          NextMarker: entries.length > listSize ? slice(entries,listSize,entries.length)[0] : null
+          NextMarker: entries.length > listSize ? entries[entries.length-2] : null
+        });
+
+      })
+      .catch(err=>{
+        logger.debug( err );
+        errorHandling( fileStorageErrorHandler(err), callback)}
+      );
+  }
+
+  findMetaData( args, callback: InterfaceCallback ): void {
+    const { container, key } = args;
+
+    let input = {
+      requestUrl: this.baseFsUrl,
+      requestPath: '/' + path.join( container, key ),
+      requestMethod: 'GET',
+    } as InterfaceFetchClientInput;
+
+    fetchClient(pickBy({ meta: null }, (el)=>!isUndefined(el)), input, this.oauthKey )
+      .then(res=> {
+
+        callback(null, res.data as {
+          'resource-meta-info' : {
+            'resource-type': string,
+            'etag': string,
+            'resource-status': string,
+            'last-modified': string,
+            'size': string,
+            'meta-data': any
+          }
         });
 
       })
