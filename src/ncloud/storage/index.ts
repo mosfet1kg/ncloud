@@ -28,7 +28,11 @@ const logger = Logger.createLogger();
 export interface InterfaceStorage
 {
   copyFile(
-    args: any,
+    args: {
+      container: string;
+      sourceKey: string;
+      destinationKey: string;
+    },
     callback: InterfaceCallback
   ): any;
 
@@ -140,21 +144,19 @@ export class Storage implements InterfaceStorage {
   };
 
   copyFile ( args, callback: InterfaceCallback ): any {
-    const { container, key } = args;
+    const { container, sourceKey, destinationKey } = args;
 
     let input = {
       requestUrl: this.baseFsUrl,
-      requestPath: '/' + path.join( container, key ),
+      requestPath: '/' + path.join( container, destinationKey ),
       requestMethod: 'PUT',
       requestHeader: {
-        'Content-Type': 'video/x-ms-wmv',
-        'Content-Length': 1562063,
-        'x-ncloud-copy-source': 'helloworld/verfied_bts_5345.wmv',
-        'x-ncloud-copy-range': 'bytes=0-1562062',
+        'x-ncloud-copy-source': path.join( container, sourceKey ),
         'x-ncloud-copy-meta': 'TRUE'
       }
     } as InterfaceFetchClientInput;
 
+    console.log( input );
     fetchClient({} , input, this.oauthKey )
       .then(res=> {
 

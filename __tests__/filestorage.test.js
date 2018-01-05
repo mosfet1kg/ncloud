@@ -8,13 +8,13 @@ describe('FileStorage Test', function () {
   test('copyFile Test', function(done) {
     const params = {
       container: 'helloworld',
-      key: '/test/verfied_bts_5345.wmv'
+      sourceKey: 'kickass2.mkv',
+      destinationKey: 'test/kickass2.mkv'
     };
 
     client.storage.copyFile( params, function(err, res) {
       try {
         expect(err).toBeNull();
-
 
         console.log( res );
         done();
