@@ -5,6 +5,27 @@ const client = ncloud.createClient(env);
 
 describe('FileStorage Test', function () {
 
+  test('copyFile Test', function(done) {
+    const params = {
+      container: 'helloworld',
+      sourceKey: 'kickass2.mkv',
+      destinationKey: 'test/kickass2.mkv'
+    };
+
+    client.storage.copyFile( params, function(err, res) {
+      try {
+        expect(err).toBeNull();
+
+        console.log( res );
+        done();
+      } catch (e) {
+        console.log( e.message );
+        done.fail(e);
+      }
+    })
+
+  });
+
   test('LargeFileUpload Test', function(done) {
     const params = {
       localFile: path.join(__dirname, '../example/storage/testfile.gif'),
@@ -69,7 +90,7 @@ describe('FileStorage Test', function () {
       container: 'helloworld',
       key: '/',
       // listMarker:'kickass2.mkv',
-      // listSize:1
+      listSize: 1
     };
 
     client.storage.findFiles( params, function (err, res) {
@@ -79,6 +100,25 @@ describe('FileStorage Test', function () {
         console.log( res );
         expect( Object.keys(res) ).toContain('Contents');
         expect( Object.keys(res) ).toContain('NextMarker');
+
+        done();
+      } catch(e){
+        done.fail(e);
+      }
+    })
+  });
+
+  test('find metaData', function(done) {
+    const params = {
+      container: 'helloworld',
+      key: '/kickass2.mkv'
+    };
+
+    client.storage.findMetaData( params, function (err, res) {
+      try {
+        expect(err).toBeNull();
+
+        console.log( res );
 
         done();
       } catch(e){
