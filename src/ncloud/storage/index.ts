@@ -328,7 +328,7 @@ export class Storage implements InterfaceStorage {
       requestPath: '/' + path.join(container, key),
       requestMethod: 'GET',
       requestHeader: {
-        Range: `bytes=${pos}-${pos+len}`
+        Range: `bytes=${pos}-${pos+len-1}`
       }
     } as InterfaceFetchClientInput;
 
