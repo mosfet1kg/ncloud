@@ -33,7 +33,7 @@ describe('FileStorage Test', function () {
       container: 'helloworld',
       key: 'testfile.gif',
       pos: 2490367,
-      len: 1
+      len: 5
     };
 
     client.storage.downloadPartialFile( params, function(err, res) {

@@ -332,7 +332,7 @@ export class Storage implements InterfaceStorage {
       }
     } as InterfaceFetchClientInput;
 
-    fetchClient({}, input, this.oauthKey )
+    fetchClient({}, input, this.oauthKey, 'arraybuffer' )
       .then(response=> {
         callback(null, { data: response.data, length: response.headers['content-length']});
       })
