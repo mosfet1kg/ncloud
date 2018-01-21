@@ -5,6 +5,15 @@ const client = ncloud.createClient(env);
 
 describe('FileStorage Test', function () {
 
+  beforeAll(function (){
+    // Clears the database and adds some testing data.
+    // Jest will wait for this promise to resolve before running tests.
+    // jest.setTimeout = 50000;
+    console.log('set Interval');
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 500000;
+  });
+
+
   test('fileDownload test', function(done) {
     const params = {
       container: 'helloworld',
@@ -50,6 +59,7 @@ describe('FileStorage Test', function () {
   });
 
   test('copyFile Test', function(done) {
+
     const params = {
       container: 'helloworld',
       sourceKey: 'kickass2.mkv',
