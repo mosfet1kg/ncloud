@@ -11,6 +11,10 @@ NAVER Cloud Platform(https://www.ncloud.com/) Library for Node.js
 This project is inspired from [pkgcloud](https://github.com/pkgcloud/pkgcloud).  
 **Currently, this package supports geolocation only. The other functions are unstable.**
 
+# 개인 블로그  
+
+https://mosfet1kg.github.io/
+
 # Notice
 This project welcomes new contributors and invites everyone to participate.  
 My aim is to build an open community. There are many different ways to get involved:  
