@@ -35,3 +35,10 @@ build/
 #lib
 lib
 lib/**/**
+
+#pem
+*/**/*.pem
+package-lock.json
+
+#type
+src/**/*.d.ts
