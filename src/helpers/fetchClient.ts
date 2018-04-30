@@ -1,5 +1,8 @@
 import * as CryptoJS from "crypto-js";
 import * as Base64 from 'crypto-js/enc-base64';
+import {
+  sortBy,
+} from 'lodash';
 import axios from 'axios';
 import env from '../const/env';
 import {
@@ -38,13 +41,13 @@ export default function (
 
   actionParams = {...actionParams, responseFormatType: 'json'};
 
-  for( let key in actionParams ) {
+  for( const key of sortBy( Object.keys(actionParams) ) ) {
     params.push(`${key}=${actionParams[key]}`);
   } // end for loop
 
   const paramsString = params.join('&');
   const url = basePath + action + '?' + paramsString;
-
+console.log(url );
   message.push(method);
   message.push(space);
   message.push(url);
@@ -58,9 +61,9 @@ export default function (
   const authSignature = Base64.stringify(CryptoJS.HmacSHA256(message.join(''), secretKey));
 
   return axios.request({
-    url,
-    baseURL,
     method,
+    baseURL,
+    url,
     headers: {
       "x-ncp-apigw-timestamp" : timestamp,
       "x-ncp-apigw-api-key" : apiKey,

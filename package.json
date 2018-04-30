@@ -1,6 +1,6 @@
 {
   "name": "ncloud",
-  "version": "0.1.39",
+  "version": "0.2.0",
   "description": "NAVER Cloud Platform(https://www.ncloud.com/) Library for Node.js",
   "engineStrict": true,
   "engines": {
@@ -33,11 +33,10 @@
     "gitbookBuild": "cd docs && rimraf docs && gitbook build && mv ./_book ./docs",
     "gitbookServe": "cd docs && gitbook serve"
   },
-  "author": "Gyubeom Choi <mosfet1kg@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mosfet1kg/ncloud.git"
+    "url": "https://github.com/ncloudlab/ncloud-node-sdk.git"
   },
   "keywords": [
     "ncloud",

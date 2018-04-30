@@ -13,6 +13,19 @@ const client = ncloud.createClient({
 });
 
 describe('Test IaaS Server Method', function( ){
+  test('Test getServerImageProductListResponse', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const serverImages = await server.getServerImageProductList();
+
+      console.log( serverImages );
+      done();
+    } catch (e) {
+      done.fail(e);
+    }
+  });
+
   test('Test getZoneList', async ( done ) => {
     try {
       const server = client.IaaS.server();
