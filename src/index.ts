@@ -1,43 +1,41 @@
+// import {
+//   InterfaceOauthKey,
+//   InterfaceOpenApi,
+//   InterfaceCompute,
+//   InterfaceManagement,
+//   InterfaceStorage,
+//   OpenApi,
+//   Compute,
+//   Management,
+//   Storage
+// } from './ncloud';
+// export * from './ncloud';
 import {
-  InterfaceOauthKey,
-  InterfaceOpenApi,
-  InterfaceCompute,
-  InterfaceManagement,
-  InterfaceStorage,
-  OpenApi,
-  Compute,
-  Management,
-  Storage
-} from './ncloud';
-export * from './ncloud';
+  InterfaceAuthParams,
+} from './const/interface';
 
-export interface InterfaceClient {
-  openapi: InterfaceOpenApi;
-  compute: InterfaceCompute;
-  management: InterfaceManagement;
-  storage: InterfaceStorage;
-}
+import IaaS from './iaas';
 
-export class Ncloud implements InterfaceClient {
-  static baseUrl: string = 'https://api.ncloud.com';
+export class Ncloud {
+  // public openapi: InterfaceOpenApi;
+  // public compute: InterfaceCompute;
+  // public management: InterfaceManagement;
+  // public storage: InterfaceStorage;
+  public IaaS;
 
-  public openapi: InterfaceOpenApi;
-  public compute: InterfaceCompute;
-  public management: InterfaceManagement;
-  public storage: InterfaceStorage;
-
-  private constructor( oauthKey: InterfaceOauthKey ) {
-    this.openapi = new OpenApi( oauthKey );
-    this.compute = new Compute( oauthKey );
-    this.management = new Management( oauthKey );
-    this.storage = new Storage( oauthKey );
+  private constructor( authParams: InterfaceAuthParams ) {
+    this.IaaS = new IaaS({ authParams });
+    // this.openapi = new OpenApi( oauthKey );
+    // this.compute = new Compute( oauthKey );
+    // this.management = new Management( oauthKey );
+    // this.storage = new Storage( oauthKey );
   }
 
-  static createClient ( oauthKey: InterfaceOauthKey ): InterfaceClient {
-    return new Ncloud(oauthKey);
+  static createClient ( authParams ) {
+    return new Ncloud( authParams );
   }
 }
 
-export function createClient(  oauthKey: InterfaceOauthKey ): InterfaceClient {
-  return Ncloud.createClient( oauthKey );
+export function createClient( authParams: InterfaceAuthParams ) {
+  return Ncloud.createClient( authParams );
 }

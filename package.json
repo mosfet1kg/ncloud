@@ -4,20 +4,19 @@
   "description": "NAVER Cloud Platform(https://www.ncloud.com/) Library for Node.js",
   "engineStrict": true,
   "engines": {
-    "node": ">= 7.10.1"
+    "node": ">= 8.9.4"
   },
   "main": "./lib/index.js",
   "devDependencies": {
-    "@types/jest": "~19.2.3",
-    "@types/node": "~6.0.73",
+    "@types/jest": "^22.2.2",
+    "@types/node": "^9.6.1",
     "gitbook-cli": "^2.3.2",
-    "jest": "~20.0.0",
-    "moment-timezone": "^0.5.13",
-    "rimraf": "~2.6.1",
-    "tslint": "~4.5.1",
-    "tslint-config-airbnb": "^5.1.2",
-    "tslint-microsoft-contrib": "~4.0.1",
-    "typescript": "^2.5.3"
+    "jest": "^22.4.3",
+    "moment-timezone": "^0.5.14",
+    "rimraf": "^2.6.2",
+    "tslint": "^5.9.1",
+    "tslint-config-airbnb": "^5.8.0",
+    "typescript": "^2.8.1"
   },
   "scripts": {
     "clean": "rimraf coverage build tmp lib",
@@ -46,15 +45,17 @@
     "NAVER Cloud Platform"
   ],
   "dependencies": {
-    "axios": "^0.16.2",
+    "axios": "^0.18.0",
     "bytes": "^3.0.0",
     "crypto-js": "^3.1.9-1",
     "ip": "^1.1.5",
-    "lodash": "^4.17.4",
-    "mime-types": "^2.1.17",
-    "tslib": "^1.7.1",
-    "validator": "^7.0.0",
-    "xml2json": "^0.11.0"
+    "lodash": "^4.17.5",
+    "mime-types": "^2.1.18",
+    "tslib": "^1.9.0",
+    "validator": "^9.4.1",
+    "xml2json": "^0.11.2"
   },
-  "jest": { "testEnvironment": "node" }
+  "jest": {
+    "testEnvironment": "node"
+  }
 }
