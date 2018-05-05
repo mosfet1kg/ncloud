@@ -6,6 +6,7 @@ import {
   InterfaceGetServerImageProductListResponse,
   InterfaceGetServerProductListResponse,
   InterfaceGetZoneListResponse,
+  InterfaceGetRegionListResponse,
 } from './interfaceResponses';
 
 export interface InterfaceAuthParams {
@@ -26,4 +27,5 @@ export interface InterfaceNcloudIaaSServer {
   getServerImageProductList(input: InterfaceIaaSServerGetServerImageProductListInput): Promise<InterfaceGetServerImageProductListResponse>;
   getServerProductList(input: InterfaceIaaSServerGetServerProductListInput): Promise<InterfaceGetServerProductListResponse>;
   getZoneList(): Promise<InterfaceGetZoneListResponse>;
+  getRegionList(): Promise<InterfaceGetRegionListResponse>;
 }

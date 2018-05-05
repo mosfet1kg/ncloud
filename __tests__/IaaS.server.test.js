@@ -46,9 +46,21 @@ describe('Test IaaS Server Method', function( ){
     try {
       const server = client.IaaS.server();
 
-      const zone = await server.getZoneList();
+      const zoneList = await server.getZoneList();
 
-      console.log( zone );
+      console.log( zoneList );
+      done();
+    } catch (e) {
+      done.fail(e);
+    }
+  });
+
+  test('Test getRegionList', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const regionList = await server.getRegionList();
+      console.log( regionList );
       done();
     } catch (e) {
       done.fail(e);

@@ -32,5 +32,9 @@ apis:
         basePath: /server/v1/
         action: getZoneList
         responseName: getZoneListResponse
-
+      getRegionList:
+        method: GET
+        basePath: /server/v1/
+        action: getRegionList
+        responseName: getRegionListResponse
 

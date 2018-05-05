@@ -10,6 +10,7 @@ import {
   InterfaceGetServerImageProductListResponse,
   InterfaceGetServerProductListResponse,
   InterfaceGetZoneListResponse,
+  InterfaceGetRegionListResponse,
 } from '../const/interfaceResponses';
 import generateMethods from '../helpers/generateMethods';
 import apiDescription from '../helpers/apiDescription';
@@ -31,6 +32,7 @@ export default class Server implements InterfaceNcloudIaaSServer {
   getServerImageProductList: (input?: InterfaceIaaSServerGetServerImageProductListInput) => Promise<InterfaceGetServerImageProductListResponse>;
   getServerProductList: (input?: InterfaceIaaSServerGetServerProductListInput) => Promise<InterfaceGetServerProductListResponse>;
   getZoneList: () => Promise<InterfaceGetZoneListResponse>;
+  getRegionList: () => Promise<InterfaceGetRegionListResponse>;
 }
 
 Object
