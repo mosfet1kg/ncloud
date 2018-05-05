@@ -4,12 +4,10 @@ import {
   sortBy,
 } from 'lodash';
 import axios from 'axios';
-import env from '../const/env';
 import {
   InterfaceAuthParams,
 } from '../const/interface'
 
-const baseURL = env.baseURL;
 const space = " ";
 const newLine = "\n";
 
@@ -19,12 +17,14 @@ const newLine = "\n";
 export default function (
   {
     method,
+    baseURL,
     basePath,
     action,
     actionParams={},
     authParams,
   }: {
     method: string;
+    baseURL: string;
     basePath: string;
     action: string;
     actionParams?: any;
@@ -47,7 +47,7 @@ export default function (
 
   const paramsString = params.join('&');
   const url = basePath + action + '?' + paramsString;
-
+console.log( url );
   message.push(method);
   message.push(space);
   message.push(url);

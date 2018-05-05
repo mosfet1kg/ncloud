@@ -2,13 +2,18 @@ import {
   InterfaceAuthParams,
   InterfaceNcloudIaaSServer,
 } from '../const/interface';
+import{
+  InterfaceIaaSServerGetServerImageProductList
+} from '../const/interfaceInput';
 import {
   InterfaceGetServerImageProductListResponse,
   InterfaceGetZoneListResponse,
 } from '../const/interfaceResponses';
-
-
-import fetchClient from '../helpers/fetchClient';
+import generateMethods from '../helpers/generateMethods';
+import apiDescription from '../helpers/apiDescription';
+import {
+  get
+} from 'lodash';
 
 export default class Server implements InterfaceNcloudIaaSServer {
   private authParams: InterfaceAuthParams;
@@ -21,31 +26,19 @@ export default class Server implements InterfaceNcloudIaaSServer {
     this.authParams = authParamsInput;
   }
 
-  getServerImageProductList: () => Promise<InterfaceGetServerImageProductListResponse>;
+  getServerImageProductList: (input?: InterfaceIaaSServerGetServerImageProductList) => Promise<InterfaceGetServerImageProductListResponse>;
   getZoneList: () => Promise<InterfaceGetZoneListResponse>;
 }
 
-Server.prototype.getServerImageProductList = function() {
-  return fetchClient({
-    method: 'GET',
-    action: 'getServerImageProductList',
-    basePath: '/server/v1/',
-    actionParams: {
-      // "platformTypeCodeList.0": 'LNX64',
-      // "exclusionProductCode": "SPSVRDBAAS000001",
-      // productCode: "SPSW0LINUX000046"
-      // blockStorageSize: 50,
-      // regionNo: "1"
-    },
-    authParams: this.authParams,
-  }).then( response => response.data.getServerImageProductListResponse );
-};
+Object
+  .keys( get(apiDescription, 'apis.IaaS.Server') )
+  .forEach( action => {
+    (Server as any).prototype[action] = function(input={}) {
+      return generateMethods({
+        actionPath: `apis.IaaS.Server.${action}`,
+        input,
+        authParams: this.authParams,
+      });
+    };
+  });
 
-Server.prototype.getZoneList = function() {
-  return fetchClient({
-    method: 'GET',
-    action: 'getZoneList',
-    basePath: '/server/v1/',
-    authParams: this.authParams,
-  }).then( response => response.data.getZoneListResponse );
-};

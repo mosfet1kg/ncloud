@@ -16,7 +16,10 @@ describe('Test IaaS Server Method', function( ){
   test('Test getServerImageProductListResponse', async ( done ) => {
     try {
       const server = client.IaaS.server();
-      const serverImages = await server.getServerImageProductList();
+      const serverImages = await server.getServerImageProductList({
+        platformTypeCodeList: ['LNX64'],
+        regionNo: '1'
+      });
 
       console.log( serverImages );
       done();

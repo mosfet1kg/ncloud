@@ -23,7 +23,7 @@ export interface InterfaceGetServerImageProductListResponse {
       code: string; // "NET",
       codeName: string; // "Network Storage"
     },
-    addBlockStroageSize: number; // 0  // TODO 오타 수정
+    addBlockStorageSize: number; // 0
   }[]
 }
 

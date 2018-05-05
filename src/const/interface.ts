@@ -1,4 +1,7 @@
 import {
+  InterfaceIaaSServerGetServerImageProductList
+} from "./interfaceInput";
+import {
   InterfaceGetServerImageProductListResponse,
   InterfaceGetZoneListResponse,
 } from './interfaceResponses';
@@ -18,6 +21,6 @@ export interface InterfaceNcloudIaaS {
 }
 
 export interface InterfaceNcloudIaaSServer {
-  getServerImageProductList(): Promise<InterfaceGetServerImageProductListResponse>;
+  getServerImageProductList(input: InterfaceIaaSServerGetServerImageProductList): Promise<InterfaceGetServerImageProductListResponse>;
   getZoneList(): Promise<InterfaceGetZoneListResponse>;
 }
