@@ -47,7 +47,7 @@ export default function (
 
   const paramsString = params.join('&');
   const url = basePath + action + '?' + paramsString;
-console.log( url );
+
   message.push(method);
   message.push(space);
   message.push(url);

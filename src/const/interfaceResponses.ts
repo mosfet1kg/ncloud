@@ -27,6 +27,35 @@ export interface InterfaceGetServerImageProductListResponse {
   }[]
 }
 
+export interface InterfaceGetServerProductListResponse {
+  requestId: string;
+  returnCode: string;
+  returnMessage: string;
+  totalRows: number;
+  productList: {
+    productCode: string; // "SPSVRSTAND000056",
+    productName: string; // "vCPU 1EA, Memory 1GB, Disk 50GB",
+    productType: {
+      code: string; // "MICRO",
+      codeName: string; // "Micro Server"
+    },
+    productDescription: string; // "vCPU 1EA, Memory 1GB, Disk 50GB",
+    infraResourceType: {
+      code: string; // "SVR",
+      codeName: string; // "Server"
+    },
+    cpuCount: number; // 1,
+    memorySize: number; // 1073741824,
+    baseBlockStorageSize: number; // 53687091200,
+    osInformation: string; //  "",
+    diskType: {
+      code: string; // "NET",
+      codeName: string; // "Network Storage"
+    },
+    addBlockStorageSize: string; // 0
+  }[]
+}
+
 export interface InterfaceGetZoneListResponse {
   requestId: string;
   returnCode: string;

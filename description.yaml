@@ -13,11 +13,24 @@ apis:
             type: string[]
           regionNo:
             type: string
-            required: true
         responseName: getServerImageProductListResponse
+      getServerProductList:
+        method: GET
+        basePath: /server/v1/
+        action: getServerProductList
+        actionParamList:
+          serverImageProductCode:
+            type: string
+            required: true
+          regionNo:
+            type: string
+          zoneNo:
+            type: string
+        responseName: getServerProductListResponse
       getZoneList:
         method: GET
         basePath: /server/v1/
         action: getZoneList
         responseName: getZoneListResponse
+
 

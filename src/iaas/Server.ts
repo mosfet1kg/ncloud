@@ -3,10 +3,12 @@ import {
   InterfaceNcloudIaaSServer,
 } from '../const/interface';
 import{
-  InterfaceIaaSServerGetServerImageProductList
-} from '../const/interfaceInput';
+  InterfaceIaaSServerGetServerImageProductListInput,
+  InterfaceIaaSServerGetServerProductListInput,
+} from '../const/interfaceInputs';
 import {
   InterfaceGetServerImageProductListResponse,
+  InterfaceGetServerProductListResponse,
   InterfaceGetZoneListResponse,
 } from '../const/interfaceResponses';
 import generateMethods from '../helpers/generateMethods';
@@ -26,7 +28,8 @@ export default class Server implements InterfaceNcloudIaaSServer {
     this.authParams = authParamsInput;
   }
 
-  getServerImageProductList: (input?: InterfaceIaaSServerGetServerImageProductList) => Promise<InterfaceGetServerImageProductListResponse>;
+  getServerImageProductList: (input?: InterfaceIaaSServerGetServerImageProductListInput) => Promise<InterfaceGetServerImageProductListResponse>;
+  getServerProductList: (input?: InterfaceIaaSServerGetServerProductListInput) => Promise<InterfaceGetServerProductListResponse>;
   getZoneList: () => Promise<InterfaceGetZoneListResponse>;
 }
 
@@ -41,4 +44,3 @@ Object
       });
     };
   });
-
