@@ -1,9 +1,11 @@
 import Server from './Server';
 import {
   InterfaceAuthParams,
+  InterfaceNcloudIaaS,
+  InterfaceNcloudIaaSServer,
 } from '../const/interface';
 
-export default class IaaS {
+export default class IaaS implements InterfaceNcloudIaaS {
   private authParams: InterfaceAuthParams;
 
   constructor(
@@ -16,7 +18,7 @@ export default class IaaS {
     this.authParams = authParamsInput;
   } // end construct
 
-  server(params?) {
+  server(params?): InterfaceNcloudIaaSServer {
     return new Server(
       {
         authParams: this.authParams,

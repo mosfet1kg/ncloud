@@ -16,7 +16,6 @@ describe('Test IaaS Server Method', function( ){
   test('Test getServerImageProductListResponse', async ( done ) => {
     try {
       const server = client.IaaS.server();
-
       const serverImages = await server.getServerImageProductList();
 
       console.log( serverImages );

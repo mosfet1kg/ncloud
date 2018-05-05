@@ -1,27 +1,13 @@
-// import {
-//   InterfaceOauthKey,
-//   InterfaceOpenApi,
-//   InterfaceCompute,
-//   InterfaceManagement,
-//   InterfaceStorage,
-//   OpenApi,
-//   Compute,
-//   Management,
-//   Storage
-// } from './ncloud';
-// export * from './ncloud';
 import {
   InterfaceAuthParams,
+  InterfaceNcloud,
+  InterfaceNcloudIaaS,
 } from './const/interface';
 
 import IaaS from './iaas';
 
-export class Ncloud {
-  // public openapi: InterfaceOpenApi;
-  // public compute: InterfaceCompute;
-  // public management: InterfaceManagement;
-  // public storage: InterfaceStorage;
-  public IaaS;
+export class Ncloud implements InterfaceNcloud {
+  public IaaS: InterfaceNcloudIaaS;
 
   private constructor( authParams: InterfaceAuthParams ) {
     this.IaaS = new IaaS({ authParams });
