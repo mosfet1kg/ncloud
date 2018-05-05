@@ -1,3 +1,16 @@
+export interface InterfaceRegion {
+  regionNo: string; // "1",
+  regionCode: string; // "KR",
+  regionName: string; // "Korea"
+}
+export interface InterfaceZone {
+  zoneNo: string; // "2",
+  zoneName: string; // "KR-1",
+  zoneCode: string; // "KR-1",
+  zoneDescription: string; // "가산 zone",
+  regionNo: string; // "1"
+}
+
 export interface InterfaceGetServerImageProductListResponse {
   requestId: string;
   returnCode: string;
@@ -26,7 +39,6 @@ export interface InterfaceGetServerImageProductListResponse {
     addBlockStorageSize: number; // 0
   }[]
 }
-
 export interface InterfaceGetServerProductListResponse {
   requestId: string;
   returnCode: string;
@@ -55,28 +67,56 @@ export interface InterfaceGetServerProductListResponse {
     addBlockStorageSize: string; // 0
   }[]
 }
-
 export interface InterfaceGetZoneListResponse {
   requestId: string;
   returnCode: string;
   returnMessage: string;
-  zoneList: {
-    zoneNo: string;
-    zoneName: string;
-    zoneCode: string;
-    zoneDescription: string;
-    regionNo: string;
-  }[]
+  zoneList: InterfaceZone[]
 }
-
 export interface InterfaceGetRegionListResponse {
   requestId: string; // 'd2a7f2da-1c16-48bf-8439-afc3a9979c3d',
   returnCode: string; // '0',
   returnMessage: string; // 'success',
   totalRows: number; // 7,
-  regionList: {
-    regionNo: string; //'1',
-    regionCode: string; // 'KR',
-    regionName: string; // 'Korea'
-  }[]
+  regionList: InterfaceRegion[]
+}
+export interface InterfaceCreateNasVolumeInstanceResponse {
+  requestId: string; // 'd2a7f2da-1c16-48bf-8439-afc3a9979c3d',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+  totalRows: number; // 7,
+  nasVolumeInstanceList: {
+    nasVolumeInstanceNo: string; // "767717",
+    nasVolumeInstanceStatus: {
+      code: string; // "CREAT",
+      codeName: string; // "NAS create"
+    },
+    nasVolumeInstanceOperation: {
+      code: string; // "NULL",
+      codeName: string; // "NAS NULL OP"
+    },
+    nasVolumeInstanceStatusName: string; // "created",
+    createDate: string; // "2018-05-06T02:26:26+0900",
+    nasVolumeInstanceDescription: string; // "",
+    mountInformation: string; // "10.101.83.37:/n780247_testVol",
+    volumeAllotmentProtocolType: {
+      code: string; // "NFS",
+      codeName: string; // "NFS"
+    },
+    volumeName: string; // "n780247_testVol",
+    volumeTotalSize: number; // 536870912000,
+    volumeSize: number; // 536870912000,
+    volumeUseSize: number; // 278528,
+    volumeUseRatio: number; // 0,
+    snapshotVolumeConfigurationRatio: number; // 0,
+    snapshotVolumeSize: number; // 0,
+    snapshotVolumeUseSize: number; // 0,
+    snapshotVolumeUseRatio: number; // 0,
+    isSnapshotConfiguration: boolean; // false,
+    isEventConfiguration: boolean; // false,
+    region: InterfaceRegion,
+    zone: InterfaceZone,
+    nasVolumeInstanceCustomIpList: any[];  // TODO DECLARE TYPE
+    nasVolumeServerInstanceList: any[];
+  }[];
 }

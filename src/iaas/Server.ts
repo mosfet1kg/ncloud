@@ -5,12 +5,14 @@ import {
 import{
   InterfaceIaaSServerGetServerImageProductListInput,
   InterfaceIaaSServerGetServerProductListInput,
+  InterfaceCreateNasVolumeInstanceInput,
 } from '../const/interfaceInputs';
 import {
   InterfaceGetServerImageProductListResponse,
   InterfaceGetServerProductListResponse,
   InterfaceGetZoneListResponse,
   InterfaceGetRegionListResponse,
+  InterfaceCreateNasVolumeInstanceResponse,
 } from '../const/interfaceResponses';
 import generateMethods from '../helpers/generateMethods';
 import apiDescription from '../helpers/apiDescription';
@@ -30,9 +32,10 @@ export default class Server implements InterfaceNcloudIaaSServer {
   }
 
   getServerImageProductList: (input?: InterfaceIaaSServerGetServerImageProductListInput) => Promise<InterfaceGetServerImageProductListResponse>;
-  getServerProductList: (input?: InterfaceIaaSServerGetServerProductListInput) => Promise<InterfaceGetServerProductListResponse>;
+  getServerProductList: (input: InterfaceIaaSServerGetServerProductListInput) => Promise<InterfaceGetServerProductListResponse>;
   getZoneList: () => Promise<InterfaceGetZoneListResponse>;
   getRegionList: () => Promise<InterfaceGetRegionListResponse>;
+  createNasVolumeInstance: (input: InterfaceCreateNasVolumeInstanceInput) => Promise<InterfaceCreateNasVolumeInstanceResponse>;
 }
 
 Object

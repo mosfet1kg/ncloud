@@ -1,12 +1,14 @@
 import {
   InterfaceIaaSServerGetServerImageProductListInput,
   InterfaceIaaSServerGetServerProductListInput,
+  InterfaceCreateNasVolumeInstanceInput,
 } from "./interfaceInputs";
 import {
   InterfaceGetServerImageProductListResponse,
   InterfaceGetServerProductListResponse,
   InterfaceGetZoneListResponse,
   InterfaceGetRegionListResponse,
+  InterfaceCreateNasVolumeInstanceResponse,
 } from './interfaceResponses';
 
 export interface InterfaceAuthParams {
@@ -24,8 +26,9 @@ export interface InterfaceNcloudIaaS {
 }
 
 export interface InterfaceNcloudIaaSServer {
-  getServerImageProductList(input: InterfaceIaaSServerGetServerImageProductListInput): Promise<InterfaceGetServerImageProductListResponse>;
+  getServerImageProductList(input?: InterfaceIaaSServerGetServerImageProductListInput): Promise<InterfaceGetServerImageProductListResponse>;
   getServerProductList(input: InterfaceIaaSServerGetServerProductListInput): Promise<InterfaceGetServerProductListResponse>;
   getZoneList(): Promise<InterfaceGetZoneListResponse>;
   getRegionList(): Promise<InterfaceGetRegionListResponse>;
+  createNasVolumeInstance(input: InterfaceCreateNasVolumeInstanceInput): Promise<InterfaceCreateNasVolumeInstanceResponse>;
 }

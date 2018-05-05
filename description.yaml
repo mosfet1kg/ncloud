@@ -37,4 +37,32 @@ apis:
         basePath: /server/v1/
         action: getRegionList
         responseName: getRegionListResponse
-
+      createNasVolumeInstance:
+        method: GET
+        basePath: /server/v1/
+        action: createNasVolumeInstance
+        actionParamList:
+          volumeName:
+            type: string
+            required: true
+          volumeSize:
+            type: string
+            required: true
+          volumeAllotmentProtocolTypeCode:
+            type: string
+            required: true
+          serverInstanceNoList:
+            type: string[]
+          customIpList:
+            type: string[]
+          cifsUserName:
+            type: string
+          cifsUserPassword:
+            type: string
+          nasVolumeDescription:
+            type: string
+          regionNo:
+            type: string
+          zoneNo:
+            type: string
+        responseName: createNasVolumeInstanceResponse
