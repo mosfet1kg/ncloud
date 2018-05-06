@@ -241,13 +241,18 @@ describe('Test IaaS Server Method', function( ){
 
   test('Test createLoginKey', async ( done ) => {
     try {
+      const fs = require('fs');
+      const path = require('path');
       const server = client.IaaS.server();
 
       const createLoginKeyResponse = await server.createLoginKey({
-        keyName: 'mytest2'
+        keyName: 'mytest'
       });
 
       console.log( createLoginKeyResponse );
+
+      fs.writeFileSync( path.join(__dirname, './loginKey.pem'), createLoginKeyResponse.privateKey, { encoding: 'utf8'});
+
       done();
     } catch (e) {
       console.log( e.response );
@@ -340,9 +345,10 @@ describe('Test IaaS Server Method', function( ){
       const createServerInstancesResponse = await server.createServerInstances({
         serverImageProductCode: 'SPSW0LINUX000046',
         serverProductCode: 'SPSVRSTAND000003',
-        serverName: 'mytesta',
+        serverName: 'mytestb',
         // serverCreateCount: 3,
         accessControlGroupConfigurationNoList: ['42895'],
+        loginKeyName: 'mytest',
         userData: `#!/bin/bash
         
         echo hello world
@@ -435,6 +441,25 @@ describe('Test IaaS Server Method', function( ){
       });
 
       console.log( startServerInstancesResponse );
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
+  test('Test getRootPassword', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+      const fs = require('fs');
+      const path = require('path');
+
+      const getRootPasswordResponse = await server.getRootPassword({
+        serverInstanceNo: '768407',
+        privateKey: fs.readFileSync(path.join(__dirname, './loginKey.pem'), 'utf8')
+      });
+
+      console.log( getRootPasswordResponse );
       done();
     } catch (e) {
       console.log( e.response );

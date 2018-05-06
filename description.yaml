@@ -381,3 +381,17 @@ apis:
             required: true
         responseName: stopServerInstancesResponse
 
+      getRootPassword:
+        method: GET
+        basePath: /server/v1/
+        action: getRootPassword
+        actionParamList:
+          serverInstanceNo:
+            type: string
+            required: true
+          privateKey:
+            type: string
+            required: true
+        responseName: getRootPasswordResponse
+
+

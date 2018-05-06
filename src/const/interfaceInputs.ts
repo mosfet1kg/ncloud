@@ -132,3 +132,8 @@ export interface InterfaceStartServerInstancesInput {
 export interface InterfaceStopServerInstancesInput {
   serverInstanceNoList: string[];
 }
+
+export interface InterfaceGetRootPasswordInput {
+  serverInstanceNo: string;
+  privateKey: string;
+}

@@ -17,7 +17,10 @@ import {
   InterfaceCreateServerInstancesInput,
   InterfaceTerminateServerInstancesInput,
   InterfaceChangeServerInstanceSpecInput,
-  InterfaceRebootServerInstancesInput, InterfaceStartServerInstancesInput, InterfaceStopServerInstancesInput,
+  InterfaceRebootServerInstancesInput,
+  InterfaceStartServerInstancesInput,
+  InterfaceStopServerInstancesInput,
+  InterfaceGetRootPasswordInput,
 } from "./interfaceInputs";
 import {
   InterfaceGetServerImageProductListResponse,
@@ -37,7 +40,9 @@ import {
   InterfaceStopServerInstancesResponse,
   InterfaceTerminateServerInstancesResponse,
   InterfaceChangeServerInstanceSpecResponse,
-  InterfaceRebootServerInstancesResponse, InterfaceStartServerInstancesResponse,
+  InterfaceRebootServerInstancesResponse,
+  InterfaceStartServerInstancesResponse,
+  InterfaceGetRootPasswordResponse,
 } from './interfaceResponses';
 
 export interface InterfaceAuthParams {
@@ -80,4 +85,5 @@ export interface InterfaceNcloudIaaSServer {
   rebootServerInstances(input: InterfaceRebootServerInstancesInput): Promise<InterfaceRebootServerInstancesResponse>;
   startServerInstances(input: InterfaceStartServerInstancesInput): Promise<InterfaceStartServerInstancesResponse>;
   stopServerInstances(input: InterfaceStopServerInstancesInput): Promise<InterfaceStopServerInstancesResponse>;
+  getRootPassword(input: InterfaceGetRootPasswordInput): Promise<InterfaceGetRootPasswordResponse>;
 }

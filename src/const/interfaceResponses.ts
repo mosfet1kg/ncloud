@@ -312,3 +312,10 @@ export interface InterfaceStartServerInstancesResponse {
   totalRows: number; // 7,
   serverInstanceList: InterfaceServerInfo[];
 }
+
+export interface InterfaceGetRootPasswordResponse {
+  requestId: string; // '66882489-edb1-48ac-8574-4d9c797d4290',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+  rootPassword: string;
+}
