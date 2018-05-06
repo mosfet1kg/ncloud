@@ -79,6 +79,9 @@ export default class Server implements InterfaceNcloudIaaSServer {
   startServerInstances: InterfaceNcloudIaaSServer['startServerInstances'];
   stopServerInstances: InterfaceNcloudIaaSServer['stopServerInstances'];
   getRootPassword: InterfaceNcloudIaaSServer['getRootPassword'];
+  getMemberServerImageList: InterfaceNcloudIaaSServer['getMemberServerImageList'];
+  createMemberServerImage: InterfaceNcloudIaaSServer['createMemberServerImage'];
+  deleteMemberServerImages: InterfaceNcloudIaaSServer['deleteMemberServerImages'];
 }
 
 Object

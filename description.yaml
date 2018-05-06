@@ -394,4 +394,50 @@ apis:
             required: true
         responseName: getRootPasswordResponse
 
+      getMemberServerImageList:
+        method: GET
+        basePath: /server/v1/
+        action: getMemberServerImageList
+        actionParamList:
+          memberServerImageNoList:
+            type: string[]
+          platformTypeCodeList:
+            type: string[]
+          regionNo:
+            type: string
+          pageNo:
+            type: number
+          pageSize:
+            type: number
+          sortedBy:
+            type: string
+          sortingOrder:
+            type: string
+            enum:
+              - ascending
+              - descending
+        responseName: getMemberServerImageListResponse
 
+      createMemberServerImage:
+        method: GET
+        basePath: /server/v1/
+        action: createMemberServerImage
+        actionParamList:
+          memberServerImageName:
+            type: string
+          memberServerImageDescription:
+            type: string
+          serverInstanceNo:
+            type: string
+            required: true
+        responseName: createMemberServerImageResponse
+
+      deleteMemberServerImages:
+        method: GET
+        basePath: /server/v1/
+        action: deleteMemberServerImages
+        actionParamList:
+          memberServerImageNoList:
+            type: string[]
+            required: true
+        responseName: deleteMemberServerImagesResponse

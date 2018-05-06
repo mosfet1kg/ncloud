@@ -137,3 +137,23 @@ export interface InterfaceGetRootPasswordInput {
   serverInstanceNo: string;
   privateKey: string;
 }
+
+export interface InterfaceGetMemberServerImageListInput {
+  memberServerImageNoList?: string[];
+  platformTypeCodeList?: string[];
+  regionNo?: string;
+  pageNo?: number;
+  pageSize?: number;
+  sortedBy?: string;
+  sortingOrder?: string;
+}
+
+export interface InterfaceCreateMemberServerImageInput {
+  memberServerImageName?: string;
+  memberServerImageDescription?: string;
+  serverInstanceNo: string;
+}
+
+export interface InterfaceDeleteMemberServerImagesInput {
+  memberServerImageNoList: string[];
+}

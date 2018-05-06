@@ -21,6 +21,9 @@ import {
   InterfaceStartServerInstancesInput,
   InterfaceStopServerInstancesInput,
   InterfaceGetRootPasswordInput,
+  InterfaceGetMemberServerImageListInput,
+  InterfaceCreateMemberServerImageInput,
+  InterfaceDeleteMemberServerImagesInput,
 } from "./interfaceInputs";
 import {
   InterfaceGetServerImageProductListResponse,
@@ -43,6 +46,9 @@ import {
   InterfaceRebootServerInstancesResponse,
   InterfaceStartServerInstancesResponse,
   InterfaceGetRootPasswordResponse,
+  InterfaceGetMemberServerImageListResponse,
+  InterfaceCreateMemberServerImageResponse,
+  InterfaceDeleteMemberServerImagesResponse,
 } from './interfaceResponses';
 
 export interface InterfaceAuthParams {
@@ -86,4 +92,7 @@ export interface InterfaceNcloudIaaSServer {
   startServerInstances(input: InterfaceStartServerInstancesInput): Promise<InterfaceStartServerInstancesResponse>;
   stopServerInstances(input: InterfaceStopServerInstancesInput): Promise<InterfaceStopServerInstancesResponse>;
   getRootPassword(input: InterfaceGetRootPasswordInput): Promise<InterfaceGetRootPasswordResponse>;
+  getMemberServerImageList(input: InterfaceGetMemberServerImageListInput): Promise<InterfaceGetMemberServerImageListResponse>;
+  createMemberServerImage(input: InterfaceCreateMemberServerImageInput): Promise<InterfaceCreateMemberServerImageResponse>;
+  deleteMemberServerImages(input: InterfaceDeleteMemberServerImagesInput): Promise<InterfaceDeleteMemberServerImagesResponse>;
 }

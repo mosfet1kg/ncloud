@@ -466,5 +466,53 @@ describe('Test IaaS Server Method', function( ){
       done.fail(e);
     }
   });
+
+  test('Test getMemberServerImageList', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const getMemberServerImageListResponse = await server.getMemberServerImageList();
+
+      console.log( getMemberServerImageListResponse );
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
+  test('Test createMemberServerImage', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const createMemberServerImageResponse = await server.createMemberServerImage({
+        memberServerImageName: 'hello',
+        memberServerImageDescription:'hello test',
+        serverInstanceNo: '768416'
+      });
+
+      console.log( createMemberServerImageResponse );
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
+  test('Test deleteMemberServerImages', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const deleteMemberServerImagesResponse = await server.deleteMemberServerImages({
+        memberServerImageNoList: ['7300']
+      });
+
+      console.log( deleteMemberServerImagesResponse );
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
 });
 

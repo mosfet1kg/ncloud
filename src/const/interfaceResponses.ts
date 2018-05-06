@@ -65,6 +65,38 @@ export interface InterfaceServerInfo {
   }[]
 }
 
+export interface InterfaceMemberServerImageItem {
+  memberServerImageNo: string; //  "7300",
+  memberServerImageName: string; // "hello",
+  memberServerImageDescription: string; // "hello test",
+  originalServerInstanceNo: string; // "768416",
+  originalServerProductCode: string; // "SPSVRSSD00000003",
+  originalServerName: string; // "test",
+  originalBaseBlockStorageDiskType: {
+    code: string; // "NET",
+    codeName: string; // "Network Storage"
+  },
+  originalServerImageProductCode: string; // "SPSW0LINUX000046",
+  originalOsInformation: string; // "CentOS 7.3 (64-bit)",
+  originalServerImageName: string; // "centos-7.3-64",
+  memberServerImageStatusName: string; // "creating",
+  memberServerImageStatus: {
+    code: string; // "INIT",
+    codeName: string; // "NSI INIT state"
+  },
+  memberServerImageOperation: {
+    code: string; // "CREAT",
+    codeName: string; // "NSI CREAT OP"
+  },
+  memberServerImagePlatformType: {
+    code: string; // "LNX64",
+    codeName: string; // "Linux 64 Bit"
+  },
+  createDate: string; // "2018-05-07T00:38:40+0900",
+  region: InterfaceRegion,
+  memberServerImageBlockStorageTotalRows: number; // 0,
+  memberServerImageBlockStorageTotalSize: number; // 0
+}
 
 export interface InterfaceGetServerImageProductListResponse {
   requestId: string;
@@ -318,4 +350,28 @@ export interface InterfaceGetRootPasswordResponse {
   returnCode: string; // '0',
   returnMessage: string; // 'success',
   rootPassword: string;
+}
+
+export interface InterfaceGetMemberServerImageListResponse {
+  requestId: string; // '66882489-edb1-48ac-8574-4d9c797d4290',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+  totalRows: number;
+  memberServerImageList: InterfaceMemberServerImageItem[];
+}
+
+export interface InterfaceCreateMemberServerImageResponse {
+  requestId: string; // '66882489-edb1-48ac-8574-4d9c797d4290',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+  totalRows: number;
+  memberServerImageList: InterfaceMemberServerImageItem[];
+}
+
+export interface InterfaceDeleteMemberServerImagesResponse {
+  requestId: string; // '66882489-edb1-48ac-8574-4d9c797d4290',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+  totalRows: number;
+  memberServerImageList: InterfaceMemberServerImageItem[];
 }
