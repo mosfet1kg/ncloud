@@ -185,3 +185,9 @@ export interface InterfaceCreateBlockStorageInstanceInput {
 export interface InterfaceDeleteBlockStorageInstancesInput {
   blockStorageInstanceNoList: string[];
 }
+
+export interface InterfaceGetBlockStorageSnapshotInstanceListInput {
+  regionNo?: string;
+  pageNo?: number;
+  pageSize?: number;
+}

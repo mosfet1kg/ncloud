@@ -85,6 +85,7 @@ export default class Server implements InterfaceNcloudIaaSServer {
   getBlockStorageInstanceList: InterfaceNcloudIaaSServer['getBlockStorageInstanceList'];
   createBlockStorageInstance: InterfaceNcloudIaaSServer['createBlockStorageInstance'];
   deleteBlockStorageInstances: InterfaceNcloudIaaSServer['deleteBlockStorageInstances'];
+  getBlockStorageSnapshotInstanceList: InterfaceNcloudIaaSServer['getBlockStorageSnapshotInstanceList'];
 }
 
 Object

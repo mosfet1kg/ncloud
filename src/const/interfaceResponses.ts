@@ -133,6 +133,30 @@ export interface InterfaceBlockStorageInstance {
   zone: InterfaceZone;
 }
 
+export interface InterfaceBlockStoageSnapshotInstance {
+  blockStorageSnapshotInstanceNo: string; // "768434",
+  blockStorageSnapshotName: string; // "test",
+  blockStorageSnapshotVolumeSize: number; // 53687091200,
+  originalBlockStorageInstanceNo: string; // "768417",
+  originalBlockStorageName: string; // "test",
+  blockStorageSnapshotInstanceStatus: {
+    code: string; // "INIT",
+    codeName: string; // "Block storage INIT state"
+  },
+  blockStorageSnapshotInstanceOperation: {
+    code: string; // "NULL",
+    codeName: string; // "Block Storage NULLOP"
+  },
+  blockStorageSnapshotInstanceStatusName: string; // "initialized",
+  createDate: string; // "2018-05-07T01:17:40+0900",
+  blockStorageSnapshotInstanceDescription: string; // "",
+  serverImageProductCode: string; // "SPSW0LINUX000046",
+  osInformation: string; // "CentOS 7.3 (64-bit)"
+}
+
+/////
+
+
 export interface InterfaceGetServerImageProductListResponse {
   requestId: string;
   returnCode: string;
@@ -441,4 +465,12 @@ export interface InterfaceDeleteBlockStorageInstancesResponse {
   returnMessage: string; // 'success',
   totalRows: number;
   blockStorageInstanceList: InterfaceBlockStorageInstance[];
+}
+
+export interface InterfaceGetBlockStorageSnapshotInstanceListResponse {
+  requestId: string; // '66882489-edb1-48ac-8574-4d9c797d4290',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+  totalRows: number;
+  blockStorageSnapshotInstanceList: InterfaceBlockStoageSnapshotInstance[];
 }

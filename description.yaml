@@ -506,3 +506,16 @@ apis:
             type: string[]
             required: true
         responseName: deleteBlockStorageInstancesResponse
+
+      getBlockStorageSnapshotInstanceList:
+        method: GET
+        basePath: /server/v1/
+        action: getBlockStorageSnapshotInstanceList
+        actionParamList:
+          regionNo:
+            type: string
+          pageNo:
+            type: string
+          pageSize:
+            type: string
+        responseName: getBlockStorageSnapshotInstanceListResponse

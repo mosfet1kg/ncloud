@@ -561,5 +561,19 @@ describe('Test IaaS Server Method', function( ){
       done.fail(e);
     }
   });
+
+  test('Test getBlockStorageSnapshotInstanceList', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const getBlockStorageSnapshotInstanceListResponse = await server.getBlockStorageSnapshotInstanceList();
+
+      console.log( getBlockStorageSnapshotInstanceListResponse );
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
 });
 
