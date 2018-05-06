@@ -2,18 +2,19 @@ import {
   InterfaceAuthParams,
   InterfaceNcloudIaaSServer,
 } from '../const/interface';
-import{
+import {
   InterfaceIaaSServerGetServerImageProductListInput,
   InterfaceIaaSServerGetServerProductListInput,
   InterfaceCreateNasVolumeInstanceInput,
   InterfaceDeleteNasVolumeInstanceInput,
+  InterfaceGetNasVolumeInstanceListInput, InterfaceChangeNasVolumeSize,
 } from '../const/interfaceInputs';
 import {
   InterfaceGetServerImageProductListResponse,
   InterfaceGetServerProductListResponse,
   InterfaceGetZoneListResponse,
   InterfaceGetRegionListResponse,
-  InterfaceCreateNasVolumeInstanceResponse,
+  InterfaceNasVolumeInstanceListResponse,
 } from '../const/interfaceResponses';
 import generateMethods from '../helpers/generateMethods';
 import apiDescription from '../helpers/apiDescription';
@@ -36,8 +37,10 @@ export default class Server implements InterfaceNcloudIaaSServer {
   getServerProductList: (input: InterfaceIaaSServerGetServerProductListInput) => Promise<InterfaceGetServerProductListResponse>;
   getZoneList: () => Promise<InterfaceGetZoneListResponse>;
   getRegionList: () => Promise<InterfaceGetRegionListResponse>;
-  createNasVolumeInstance: (input: InterfaceCreateNasVolumeInstanceInput) => Promise<InterfaceCreateNasVolumeInstanceResponse>;
-  deleteNasVolumeInstance: (input: InterfaceDeleteNasVolumeInstanceInput) => Promise<InterfaceCreateNasVolumeInstanceResponse>;
+  createNasVolumeInstance: (input: InterfaceCreateNasVolumeInstanceInput) => Promise<InterfaceNasVolumeInstanceListResponse>;
+  deleteNasVolumeInstance: (input: InterfaceDeleteNasVolumeInstanceInput) => Promise<InterfaceNasVolumeInstanceListResponse>;
+  getNasVolumeInstanceList: (input?: InterfaceGetNasVolumeInstanceListInput) => Promise<InterfaceNasVolumeInstanceListResponse>;
+  changeNasVolumeSize: (input: InterfaceChangeNasVolumeSize) => Promise<InterfaceNasVolumeInstanceListResponse>;
 }
 
 Object

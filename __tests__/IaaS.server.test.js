@@ -100,8 +100,41 @@ describe('Test IaaS Server Method', function( ){
       const deleteNasVolumeInstanceResponse = await server.deleteNasVolumeInstance({
         nasVolumeInstanceNo: '768200',
       });
-      
+
       console.log( deleteNasVolumeInstanceResponse );
+
+      done();
+    } catch (e) {
+      console.log( e.response.data );
+      done.fail(e);
+    }
+  });
+
+  test('Test getNasVolumeInstanceList', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const getNasVolumeInstanceListResponse = await server.getNasVolumeInstanceList();
+
+      console.log( getNasVolumeInstanceListResponse );
+
+      done();
+    } catch (e) {
+      console.log( e.response.data );
+      done.fail(e);
+    }
+  });
+
+  test('Test changeNasVolumeSize', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const changeNasVolumeSizeResponse = await server.changeNasVolumeSize({
+        nasVolumeInstanceNo: '768204',
+        volumeSize: '600' // GB
+      });
+
+      console.log( changeNasVolumeSizeResponse );
 
       done();
     } catch (e) {

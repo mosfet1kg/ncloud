@@ -25,3 +25,14 @@ export interface InterfaceCreateNasVolumeInstanceInput {
 export interface InterfaceDeleteNasVolumeInstanceInput {
   nasVolumeInstanceNo: string;
 }
+
+export interface InterfaceGetNasVolumeInstanceListInput {
+  volumeAllotmentProtocolTypeCode?: string;
+  isEventConfiguration?: boolean;
+  isSnapshotConfiguration?: boolean;
+}
+
+export interface InterfaceChangeNasVolumeSize {
+  nasVolumeInstanceNo: string;
+  volumeSize: string;
+}

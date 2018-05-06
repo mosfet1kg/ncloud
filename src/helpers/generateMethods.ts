@@ -55,7 +55,9 @@ export default function(
       basePath,
       actionParams,
       authParams,
-    }).then(response => get(response.data, responseName));
+    })
+      // .then(response=>{ console.log( response.data ); return response;})
+      .then(response => get(response.data, responseName));
   })
 };
 

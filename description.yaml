@@ -80,3 +80,27 @@ apis:
             type: string
             required: true
         responseName: deleteNasVolumeInstanceResponse
+
+      getNasVolumeInstanceList:
+        method: GET
+        basePath: /server/v1/
+        action: getNasVolumeInstanceList
+        actionParamList:
+          volumeAllotmentProtocolTypeCode:
+            type: string
+          isEventConfiguration:
+            type: boolean
+          isSnapshotConfiguration:
+            type: bollean
+        responseName: getNasVolumeInstanceListResponse
+
+      changeNasVolumeSize:
+        method: GET
+        basePath: /server/v1/
+        action: changeNasVolumeSize
+        actionParamList:
+          nasVolumeInstanceNo:
+            type: string
+          volumeSize:
+            type: string
+        responseName: changeNasVolumeSizeResponse

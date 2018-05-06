@@ -80,7 +80,7 @@ export interface InterfaceGetRegionListResponse {
   totalRows: number; // 7,
   regionList: InterfaceRegion[]
 }
-export interface InterfaceCreateNasVolumeInstanceResponse {
+export interface InterfaceNasVolumeInstanceListResponse {
   requestId: string; // 'd2a7f2da-1c16-48bf-8439-afc3a9979c3d',
   returnCode: string; // '0',
   returnMessage: string; // 'success',
