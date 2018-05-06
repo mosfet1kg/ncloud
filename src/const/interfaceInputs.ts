@@ -111,3 +111,24 @@ export interface InterfaceCreateServerInstancesInput {
   accessControlGroupConfigurationNoList?: string[];
   userData?: string;
 }
+
+export interface InterfaceTerminateServerInstancesInput {
+  serverInstanceNoList: string[];
+}
+
+export interface InterfaceChangeServerInstanceSpecInput {
+  serverInstanceNo: string;
+  serverProductCode: string;
+}
+
+export interface InterfaceRebootServerInstancesInput {
+  serverInstanceNoList: string[];
+}
+
+export interface InterfaceStartServerInstancesInput {
+  serverInstanceNoList: string[];
+}
+
+export interface InterfaceStopServerInstancesInput {
+  serverInstanceNoList: string[];
+}

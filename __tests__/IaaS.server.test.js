@@ -351,10 +351,90 @@ describe('Test IaaS Server Method', function( ){
         cd ~/hello
         touch test
         `
-
       });
 
       console.log( createServerInstancesResponse );
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
+  test('Test stopServerInstances', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const stopServerInstancesInputResponse = await server.stopServerInstances({
+        serverInstanceNoList: ['768370']
+      });
+
+      console.log( stopServerInstancesInputResponse );
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
+  test('Test terminateServerInstances', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const terminateServerInstancesResponse = await server.terminateServerInstances({
+        serverInstanceNoList: ['768370']
+      });
+
+      console.log( terminateServerInstancesResponse );
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
+  test('Test changeServerInstanceSpec', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const changeServerInstanceSpecResponse = await server.changeServerInstanceSpec({
+        serverInstanceNo: '768364',
+        serverProductCode: 'SPSVRSTAND000005'
+      });
+
+      console.log( changeServerInstanceSpecResponse );
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
+  test('Test rebootServerInstances', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const rebootServerInstancesResponse = await server.rebootServerInstances({
+        serverInstanceNoList: ['768316'],
+      });
+
+      console.log( rebootServerInstancesResponse );
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
+  test('Test startServerInstances', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const startServerInstancesResponse = await server.startServerInstances({
+        serverInstanceNoList: ['768361', '768358'],
+      });
+
+      console.log( startServerInstancesResponse );
       done();
     } catch (e) {
       console.log( e.response );

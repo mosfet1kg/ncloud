@@ -15,6 +15,9 @@ import {
   InterfaceGetAccessControlRuleListInput,
   InterfaceGetServerInstanceListInput,
   InterfaceCreateServerInstancesInput,
+  InterfaceTerminateServerInstancesInput,
+  InterfaceChangeServerInstanceSpecInput,
+  InterfaceRebootServerInstancesInput, InterfaceStartServerInstancesInput, InterfaceStopServerInstancesInput,
 } from "./interfaceInputs";
 import {
   InterfaceGetServerImageProductListResponse,
@@ -31,6 +34,10 @@ import {
   InterfaceGetAccessControlRuleListResponse,
   InterfaceGetServerInstanceListResponse,
   InterfaceCreateServerInstancesResponse,
+  InterfaceStopServerInstancesResponse,
+  InterfaceTerminateServerInstancesResponse,
+  InterfaceChangeServerInstanceSpecResponse,
+  InterfaceRebootServerInstancesResponse, InterfaceStartServerInstancesResponse,
 } from './interfaceResponses';
 
 export interface InterfaceAuthParams {
@@ -68,4 +75,9 @@ export interface InterfaceNcloudIaaSServer {
   getAccessControlRuleList(input: InterfaceGetAccessControlRuleListInput): Promise<InterfaceGetAccessControlRuleListResponse>
   getServerInstanceList(input?: InterfaceGetServerInstanceListInput): Promise<InterfaceGetServerInstanceListResponse>;
   createServerInstances(input: InterfaceCreateServerInstancesInput): Promise<InterfaceCreateServerInstancesResponse>;
+  terminateServerInstances(input: InterfaceTerminateServerInstancesInput): Promise<InterfaceTerminateServerInstancesResponse>;
+  changeServerInstanceSpec(input: InterfaceChangeServerInstanceSpecInput): Promise<InterfaceChangeServerInstanceSpecResponse>;
+  rebootServerInstances(input: InterfaceRebootServerInstancesInput): Promise<InterfaceRebootServerInstancesResponse>;
+  startServerInstances(input: InterfaceStartServerInstancesInput): Promise<InterfaceStartServerInstancesResponse>;
+  stopServerInstances(input: InterfaceStopServerInstancesInput): Promise<InterfaceStopServerInstancesResponse>;
 }

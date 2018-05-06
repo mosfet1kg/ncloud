@@ -73,6 +73,11 @@ export default class Server implements InterfaceNcloudIaaSServer {
 
     return (this as any).createServerInstancesProto(input);
   };
+  terminateServerInstances: InterfaceNcloudIaaSServer['terminateServerInstances'];
+  changeServerInstanceSpec: InterfaceNcloudIaaSServer['changeServerInstanceSpec'];
+  rebootServerInstances: InterfaceNcloudIaaSServer['rebootServerInstances'];
+  startServerInstances: InterfaceNcloudIaaSServer['startServerInstances'];
+  stopServerInstances: InterfaceNcloudIaaSServer['stopServerInstances'];
 }
 
 Object

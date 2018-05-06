@@ -272,3 +272,43 @@ export interface InterfaceCreateServerInstancesResponse {
   totalRows: number; // 7,
   serverInstanceList: InterfaceServerInfo[];
 }
+
+export interface InterfaceStopServerInstancesResponse {
+  requestId: string; // '66882489-edb1-48ac-8574-4d9c797d4290',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+  totalRows: number; // 7,
+  serverInstanceList: InterfaceServerInfo[];
+}
+
+export interface InterfaceTerminateServerInstancesResponse {
+  requestId: string; // '66882489-edb1-48ac-8574-4d9c797d4290',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+  totalRows: number; // 7,
+  serverInstanceList: InterfaceServerInfo[];
+}
+
+export interface InterfaceChangeServerInstanceSpecResponse {
+  requestId: string; // '66882489-edb1-48ac-8574-4d9c797d4290',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+  totalRows: number; // 7,
+  serverInstanceList: InterfaceServerInfo[];
+}
+
+export interface InterfaceRebootServerInstancesResponse {
+  requestId: string; // '66882489-edb1-48ac-8574-4d9c797d4290',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+  totalRows: number; // 7,
+  serverInstanceList: InterfaceServerInfo[];
+}
+
+export interface InterfaceStartServerInstancesResponse {
+  requestId: string; // '66882489-edb1-48ac-8574-4d9c797d4290',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+  totalRows: number; // 7,
+  serverInstanceList: InterfaceServerInfo[];
+}

@@ -327,3 +327,57 @@ apis:
           userData:
             type: string
         responseName: createServerInstancesResponse
+
+      terminateServerInstances:
+        method: GET
+        basePath: /server/v1/
+        action: terminateServerInstances
+        actionParamList:
+          serverInstanceNoList:
+            type: string[]
+            required: true
+        responseName: terminateServerInstancesResponse
+
+      changeServerInstanceSpec:
+        method: GET
+        basePath: /server/v1/
+        action: changeServerInstanceSpec
+        actionParamList:
+          serverInstanceNo:
+            type: string
+            required: true
+          serverProductCode:
+            type: string
+            required: true
+        responseName: changeServerInstanceSpecResponse
+
+      rebootServerInstances:
+        method: GET
+        basePath: /server/v1/
+        action: rebootServerInstances
+        actionParamList:
+          serverInstanceNoList:
+            type: string[]
+            required: true
+        responseName: rebootServerInstancesResponse
+
+      startServerInstances:
+        method: GET
+        basePath: /server/v1/
+        action: startServerInstances
+        actionParamList:
+          serverInstanceNoList:
+            type: string[]
+            required: true
+        responseName: startServerInstancesResponse
+
+      stopServerInstances:
+        method: GET
+        basePath: /server/v1/
+        action: stopServerInstances
+        actionParamList:
+          serverInstanceNoList:
+            type: string[]
+            required: true
+        responseName: stopServerInstancesResponse
+
