@@ -2,6 +2,7 @@ import {
   InterfaceIaaSServerGetServerImageProductListInput,
   InterfaceIaaSServerGetServerProductListInput,
   InterfaceCreateNasVolumeInstanceInput,
+  InterfaceDeleteNasVolumeInstanceInput,
 } from "./interfaceInputs";
 import {
   InterfaceGetServerImageProductListResponse,
@@ -31,4 +32,5 @@ export interface InterfaceNcloudIaaSServer {
   getZoneList(): Promise<InterfaceGetZoneListResponse>;
   getRegionList(): Promise<InterfaceGetRegionListResponse>;
   createNasVolumeInstance(input: InterfaceCreateNasVolumeInstanceInput): Promise<InterfaceCreateNasVolumeInstanceResponse>;
+  deleteNasVolumeInstance(input: InterfaceDeleteNasVolumeInstanceInput): Promise<InterfaceCreateNasVolumeInstanceResponse>; // same with createNasVolumeInstanceResponse
 }

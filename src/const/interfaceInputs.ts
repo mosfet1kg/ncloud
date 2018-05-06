@@ -21,3 +21,7 @@ export interface InterfaceCreateNasVolumeInstanceInput {
   regionNo?: string;
   zoneNo?: string;
 }
+
+export interface InterfaceDeleteNasVolumeInstanceInput {
+  nasVolumeInstanceNo: string;
+}

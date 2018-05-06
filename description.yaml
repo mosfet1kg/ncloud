@@ -14,6 +14,7 @@ apis:
           regionNo:
             type: string
         responseName: getServerImageProductListResponse
+
       getServerProductList:
         method: GET
         basePath: /server/v1/
@@ -27,16 +28,19 @@ apis:
           zoneNo:
             type: string
         responseName: getServerProductListResponse
+
       getZoneList:
         method: GET
         basePath: /server/v1/
         action: getZoneList
         responseName: getZoneListResponse
+
       getRegionList:
         method: GET
         basePath: /server/v1/
         action: getRegionList
         responseName: getRegionListResponse
+
       createNasVolumeInstance:
         method: GET
         basePath: /server/v1/
@@ -66,3 +70,13 @@ apis:
           zoneNo:
             type: string
         responseName: createNasVolumeInstanceResponse
+
+      deleteNasVolumeInstance:
+        method: GET
+        basePath: /server/v1/
+        action: deleteNasVolumeInstance
+        actionParamList:
+          nasVolumeInstanceNo:
+            type: string
+            required: true
+        responseName: deleteNasVolumeInstanceResponse

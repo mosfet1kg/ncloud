@@ -92,5 +92,22 @@ describe('Test IaaS Server Method', function( ){
       done.fail(e);
     }
   });
+
+  test('Test deleteNasVolumeInstance', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const deleteNasVolumeInstanceResponse = await server.deleteNasVolumeInstance({
+        nasVolumeInstanceNo: '768200',
+      });
+      
+      console.log( deleteNasVolumeInstanceResponse );
+
+      done();
+    } catch (e) {
+      console.log( e.response.data );
+      done.fail(e);
+    }
+  });
 });
 
