@@ -3,9 +3,11 @@ import {
   InterfaceNcloudIaaSServer,
 } from '../const/interface';
 import {
+  InterfaceCreateServerInstancesInput,
   InterfaceGetNasVolumeInstanceRatingListInput,
 } from '../const/interfaceInputs';
 import {
+  InterfaceCreateServerInstancesResponse,
   InterfaceGetNasVolumeInstanceRatingListResponse,
 } from '../const/interfaceResponses';
 import generateMethods from '../helpers/generateMethods';
@@ -61,7 +63,16 @@ export default class Server implements InterfaceNcloudIaaSServer {
   getAccessControlGroupServerInstanceList: InterfaceNcloudIaaSServer['getAccessControlGroupServerInstanceList'];
   getAccessControlRuleList: InterfaceNcloudIaaSServer['getAccessControlRuleList'];
   getServerInstanceList: InterfaceNcloudIaaSServer['getServerInstanceList'];
-  createServerInstances: InterfaceNcloudIaaSServer['createServerInstances'];
+  createServerInstances(input: InterfaceCreateServerInstancesInput): Promise<InterfaceCreateServerInstancesResponse> {
+    if ( get(input, 'userData', false) ) {
+      input = {
+        ...input,
+        userData: Buffer.from(input.userData).toString('base64')
+      }
+    } // end if
+
+    return (this as any).createServerInstancesProto(input);
+  };
 }
 
 Object

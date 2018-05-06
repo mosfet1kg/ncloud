@@ -340,9 +340,17 @@ describe('Test IaaS Server Method', function( ){
       const createServerInstancesResponse = await server.createServerInstances({
         serverImageProductCode: 'SPSW0LINUX000046',
         serverProductCode: 'SPSVRSTAND000003',
-        serverName: 'mytest',
-        serverCreateCount: 3,
-        accessControlGroupConfigurationNoList: ['42895']
+        serverName: 'mytesta',
+        // serverCreateCount: 3,
+        accessControlGroupConfigurationNoList: ['42895'],
+        userData: `#!/bin/bash
+        
+        echo hello world
+        
+        mkdir ~/hello
+        cd ~/hello
+        touch test
+        `
 
       });
 
