@@ -113,7 +113,7 @@ export interface InterfaceNcloudIaaSServer {
   getMemberServerImageList(input: InterfaceGetMemberServerImageListInput): Promise<InterfaceGetMemberServerImageListResponse>;
   createMemberServerImage(input: InterfaceCreateMemberServerImageInput): Promise<InterfaceCreateMemberServerImageResponse>;
   deleteMemberServerImages(input: InterfaceDeleteMemberServerImagesInput): Promise<InterfaceDeleteMemberServerImagesResponse>;
-  getBlockStorageInstanceList(input: InterfaceGetBlockStorageInstanceListInput): Promise<InterfaceGetBlockStorageInstanceListResponse>;
+  getBlockStorageInstanceList(input?: InterfaceGetBlockStorageInstanceListInput): Promise<InterfaceGetBlockStorageInstanceListResponse>;
   createBlockStorageInstance(input: InterfaceCreateBlockStorageInstanceInput): Promise<InterfaceCreateBlockStorageInstanceResponse>;
   deleteBlockStorageInstances(input: InterfaceDeleteBlockStorageInstancesInput): Promise<InterfaceDeleteBlockStorageInstancesResponse>;
   getBlockStorageSnapshotInstanceList(input: InterfaceGetBlockStorageSnapshotInstanceListInput): Promise<InterfaceGetBlockStorageSnapshotInstanceListResponse>;
