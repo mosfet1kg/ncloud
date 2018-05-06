@@ -479,3 +479,30 @@ apis:
               - ascending
               - descending
         responseName: getBlockStorageInstanceListResponse
+
+      createBlockStorageInstance:
+        method: GET
+        basePath: /server/v1/
+        action: createBlockStorageInstance
+        actionParamList:
+          blockStorageName:
+            type: string
+          blockStorageSize:
+            type: string
+            required: true
+          blockStorageDescription:
+            type: string
+          serverInstanceNo:
+            type: string
+            required: true
+        responseName: createBlockStorageInstanceResponse
+
+      deleteBlockStorageInstances:
+        method: GET
+        basePath: /server/v1/
+        action: deleteBlockStorageInstances
+        actionParamList:
+          blockStorageInstanceNoList:
+            type: string[]
+            required: true
+        responseName: deleteBlockStorageInstancesResponse

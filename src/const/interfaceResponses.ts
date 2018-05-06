@@ -426,3 +426,19 @@ export interface InterfaceGetBlockStorageInstanceListResponse {
   totalRows: number;
   blockStorageInstanceList: InterfaceBlockStorageInstance[];
 }
+
+export interface InterfaceCreateBlockStorageInstanceResponse {
+  requestId: string; // '66882489-edb1-48ac-8574-4d9c797d4290',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+  totalRows: number;
+  blockStorageInstanceList: InterfaceBlockStorageInstance[];
+}
+
+export interface InterfaceDeleteBlockStorageInstancesResponse {
+  requestId: string; // '66882489-edb1-48ac-8574-4d9c797d4290',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+  totalRows: number;
+  blockStorageInstanceList: InterfaceBlockStorageInstance[];
+}

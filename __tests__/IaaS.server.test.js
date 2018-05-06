@@ -528,5 +528,38 @@ describe('Test IaaS Server Method', function( ){
       done.fail(e);
     }
   });
+
+  test('Test createBlockStorageInstance', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const createBlockStorageInstanceResponse = await server.createBlockStorageInstance({
+        blockStorageSize: '50',
+        serverInstanceNo: '768416'
+      });
+
+      console.log( createBlockStorageInstanceResponse );
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
+  test('Test deleteBlockStorageInstances', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const deleteBlockStorageInstancesResponse = await server.deleteBlockStorageInstances({
+        blockStorageInstanceNoList: ['768433']
+      });
+
+      console.log( deleteBlockStorageInstancesResponse );
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
 });
 

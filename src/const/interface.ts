@@ -25,6 +25,7 @@ import {
   InterfaceCreateMemberServerImageInput,
   InterfaceDeleteMemberServerImagesInput,
   InterfaceGetBlockStorageInstanceListInput,
+  InterfaceCreateBlockStorageInstanceInput, InterfaceDeleteBlockStorageInstancesInput,
 } from "./interfaceInputs";
 import {
   InterfaceGetServerImageProductListResponse,
@@ -51,6 +52,8 @@ import {
   InterfaceCreateMemberServerImageResponse,
   InterfaceDeleteMemberServerImagesResponse,
   InterfaceGetBlockStorageInstanceListResponse,
+  InterfaceCreateBlockStorageInstanceResponse,
+  InterfaceDeleteBlockStorageInstancesResponse,
 } from './interfaceResponses';
 
 export interface InterfaceAuthParams {
@@ -98,4 +101,6 @@ export interface InterfaceNcloudIaaSServer {
   createMemberServerImage(input: InterfaceCreateMemberServerImageInput): Promise<InterfaceCreateMemberServerImageResponse>;
   deleteMemberServerImages(input: InterfaceDeleteMemberServerImagesInput): Promise<InterfaceDeleteMemberServerImagesResponse>;
   getBlockStorageInstanceList(input: InterfaceGetBlockStorageInstanceListInput): Promise<InterfaceGetBlockStorageInstanceListResponse>;
+  createBlockStorageInstance(input: InterfaceCreateBlockStorageInstanceInput): Promise<InterfaceCreateBlockStorageInstanceResponse>;
+  deleteBlockStorageInstances(input: InterfaceDeleteBlockStorageInstancesInput): Promise<InterfaceDeleteBlockStorageInstancesResponse>;
 }

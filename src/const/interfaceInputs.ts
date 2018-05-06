@@ -174,3 +174,14 @@ export interface InterfaceGetBlockStorageInstanceListInput {
   sortedBy?: string;
   sortingOrder?: string;
 }
+
+export interface InterfaceCreateBlockStorageInstanceInput {
+  blockStorageName?: string;
+  blockStorageSize: string;
+  blockStorageDescription?: string;
+  serverInstanceNo: string;
+}
+
+export interface InterfaceDeleteBlockStorageInstancesInput {
+  blockStorageInstanceNoList: string[];
+}
