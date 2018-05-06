@@ -9,7 +9,8 @@ import {
   InterfaceDeleteNasVolumeInstanceInput,
   InterfaceGetNasVolumeInstanceListInput,
   InterfaceChangeNasVolumeSizeInput,
-  InterfaceGetNasVolumeInstanceRatingListInput, InterfaceSetNasVolumeAccessControlInput,
+  InterfaceGetNasVolumeInstanceRatingListInput,
+  InterfaceNasVolumeAccessControlInput,
 } from '../const/interfaceInputs';
 import {
   InterfaceGetServerImageProductListResponse,
@@ -62,7 +63,9 @@ export default class Server implements InterfaceNcloudIaaSServer {
         return responseData;
       });
   }
-  setNasVolumeAccessControl: (input: InterfaceSetNasVolumeAccessControlInput) => Promise<InterfaceNasVolumeInstanceListResponse>;
+  setNasVolumeAccessControl: (input: InterfaceNasVolumeAccessControlInput) => Promise<InterfaceNasVolumeInstanceListResponse>;
+  addNasVolumeAccessControl: (input: InterfaceNasVolumeAccessControlInput) => Promise<InterfaceNasVolumeInstanceListResponse>;
+  removeNasVolumeAccessControl: (input: InterfaceNasVolumeAccessControlInput) => Promise<InterfaceNasVolumeInstanceListResponse>;
 }
 
 Object

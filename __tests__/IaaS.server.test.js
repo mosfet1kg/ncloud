@@ -193,5 +193,43 @@ describe('Test IaaS Server Method', function( ){
     }
   });
 
+  test('Test addNasVolumeAccessControl', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const addNasVolumeAccessControlResponse = await server.addNasVolumeAccessControl({
+        nasVolumeInstanceNo: '768213',
+        customIpList: ['10.41.0.121'],
+        // serverInstanceNoList: ['768254']
+      });
+      //
+      console.log( addNasVolumeAccessControlResponse );
+
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
+  test('Test removeNasVolumeAccessControl', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const removeNasVolumeAccessControlResponse = await server.removeNasVolumeAccessControl({
+        nasVolumeInstanceNo: '768213',
+        customIpList: ['10.41.0.121'],
+        // serverInstanceNoList: ['768254']
+      });
+      //
+      console.log( removeNasVolumeAccessControlResponse );
+
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
 });
 

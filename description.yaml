@@ -145,3 +145,31 @@ apis:
           customIpList:
             type: string[]
         responseName: setNasVolumeAccessControlResponse
+
+      addNasVolumeAccessControl:
+        method: GET
+        basePath: /server/v1/
+        action: addNasVolumeAccessControl
+        actionParamList:
+          nasVolumeInstanceNo:
+            type: string
+            required: true
+          serverInstanceNoList:
+            type: string[]
+          customIpList:
+            type: string[]
+        responseName: addNasVolumeAccessControlResponse
+
+      removeNasVolumeAccessControl:
+        method: GET
+        basePath: /server/v1/
+        action: removeNasVolumeAccessControl
+        actionParamList:
+          nasVolumeInstanceNo:
+            type: string
+            required: true
+          serverInstanceNoList:
+            type: string[]
+          customIpList:
+            type: string[]
+        responseName: removeNasVolumeAccessControlResponse
