@@ -3,21 +3,9 @@ import {
   InterfaceNcloudIaaSServer,
 } from '../const/interface';
 import {
-  InterfaceIaaSServerGetServerImageProductListInput,
-  InterfaceIaaSServerGetServerProductListInput,
-  InterfaceCreateNasVolumeInstanceInput,
-  InterfaceDeleteNasVolumeInstanceInput,
-  InterfaceGetNasVolumeInstanceListInput,
-  InterfaceChangeNasVolumeSizeInput,
   InterfaceGetNasVolumeInstanceRatingListInput,
-  InterfaceNasVolumeAccessControlInput,
 } from '../const/interfaceInputs';
 import {
-  InterfaceGetServerImageProductListResponse,
-  InterfaceGetServerProductListResponse,
-  InterfaceGetZoneListResponse,
-  InterfaceGetRegionListResponse,
-  InterfaceNasVolumeInstanceListResponse,
   InterfaceGetNasVolumeInstanceRatingListResponse,
 } from '../const/interfaceResponses';
 import generateMethods from '../helpers/generateMethods';
@@ -38,14 +26,14 @@ export default class Server implements InterfaceNcloudIaaSServer {
     this.authParams = authParamsInput;
   }
 
-  getServerImageProductList: (input?: InterfaceIaaSServerGetServerImageProductListInput) => Promise<InterfaceGetServerImageProductListResponse>;
-  getServerProductList: (input: InterfaceIaaSServerGetServerProductListInput) => Promise<InterfaceGetServerProductListResponse>;
-  getZoneList: () => Promise<InterfaceGetZoneListResponse>;
-  getRegionList: () => Promise<InterfaceGetRegionListResponse>;
-  createNasVolumeInstance: (input: InterfaceCreateNasVolumeInstanceInput) => Promise<InterfaceNasVolumeInstanceListResponse>;
-  deleteNasVolumeInstance: (input: InterfaceDeleteNasVolumeInstanceInput) => Promise<InterfaceNasVolumeInstanceListResponse>;
-  getNasVolumeInstanceList: (input?: InterfaceGetNasVolumeInstanceListInput) => Promise<InterfaceNasVolumeInstanceListResponse>;
-  changeNasVolumeSize: (input: InterfaceChangeNasVolumeSizeInput) => Promise<InterfaceNasVolumeInstanceListResponse>;
+  getServerImageProductList: InterfaceNcloudIaaSServer['getServerImageProductList'];
+  getServerProductList: InterfaceNcloudIaaSServer['getServerProductList'];
+  getZoneList: InterfaceNcloudIaaSServer['getZoneList'];
+  getRegionList: InterfaceNcloudIaaSServer['getRegionList'];
+  createNasVolumeInstance: InterfaceNcloudIaaSServer['createNasVolumeInstance'];
+  deleteNasVolumeInstance: InterfaceNcloudIaaSServer['deleteNasVolumeInstance'];
+  getNasVolumeInstanceList:  InterfaceNcloudIaaSServer['getNasVolumeInstanceList'];
+  changeNasVolumeSize: InterfaceNcloudIaaSServer['changeNasVolumeSize'];
   getNasVolumeInstanceRatingList(input: InterfaceGetNasVolumeInstanceRatingListInput): Promise<InterfaceGetNasVolumeInstanceRatingListResponse>{
     return (this as any).getNasVolumeInstanceRatingListProto(input)
       .then( responseData => {
@@ -55,7 +43,7 @@ export default class Server implements InterfaceNcloudIaaSServer {
             console.log( el.ratingTime );
             return {
               ...el,
-              ratingTime: moment( el.ratingTime ).tz('Asia/Seoul').format('YYYY-MM-DDTHH:mm:ssZZ'),
+              ratingTime: moment.tz( el.ratingTime , 'Asia/Seoul').format('YYYY-MM-DDTHH:mm:ssZZ'),
             }
           })
         };
@@ -63,9 +51,12 @@ export default class Server implements InterfaceNcloudIaaSServer {
         return responseData;
       });
   }
-  setNasVolumeAccessControl: (input: InterfaceNasVolumeAccessControlInput) => Promise<InterfaceNasVolumeInstanceListResponse>;
-  addNasVolumeAccessControl: (input: InterfaceNasVolumeAccessControlInput) => Promise<InterfaceNasVolumeInstanceListResponse>;
-  removeNasVolumeAccessControl: (input: InterfaceNasVolumeAccessControlInput) => Promise<InterfaceNasVolumeInstanceListResponse>;
+  setNasVolumeAccessControl: InterfaceNcloudIaaSServer['setNasVolumeAccessControl'];
+  addNasVolumeAccessControl: InterfaceNcloudIaaSServer['addNasVolumeAccessControl'];
+  removeNasVolumeAccessControl: InterfaceNcloudIaaSServer['removeNasVolumeAccessControl'];
+  getLoginKeyList: InterfaceNcloudIaaSServer['getLoginKeyList'];
+  createLoginKey: InterfaceNcloudIaaSServer['createLoginKey'];
+  deleteLoginKey: InterfaceNcloudIaaSServer['deleteLoginKey'];
 }
 
 Object

@@ -192,3 +192,27 @@ export interface InterfaceGetNasVolumeInstanceRatingListResponse {
     snapshotVolumeUseRatio: number; // 0
   }[]
 }
+export interface InterfaceGetLoginKeyListResponse {
+  requestId: string; // '66882489-edb1-48ac-8574-4d9c797d4290',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+  totalRows: number; // 3,
+  loginKeyList: {
+    fingerprint: string;
+    keyName: string;
+    createDate: string;
+  }[]
+}
+
+export interface InterfaceCreateLoginKeyResponse {
+  requestId: string; // '66882489-edb1-48ac-8574-4d9c797d4290',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+  privateKey: string;
+}
+
+export interface InterfaceDeleteLoginKeyResponse {
+  requestId: string; // '66882489-edb1-48ac-8574-4d9c797d4290',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+}

@@ -7,6 +7,9 @@ import {
   InterfaceChangeNasVolumeSizeInput,
   InterfaceGetNasVolumeInstanceRatingListInput,
   InterfaceNasVolumeAccessControlInput,
+  InterfaceGetLoginKeyListInput,
+  InterfaceCreateLoginKey,
+  InterfaceDeleteLoginKey,
 } from "./interfaceInputs";
 import {
   InterfaceGetServerImageProductListResponse,
@@ -15,6 +18,9 @@ import {
   InterfaceGetRegionListResponse,
   InterfaceNasVolumeInstanceListResponse,
   InterfaceGetNasVolumeInstanceRatingListResponse,
+  InterfaceGetLoginKeyListResponse,
+  InterfaceCreateLoginKeyResponse,
+  InterfaceDeleteLoginKeyResponse,
 } from './interfaceResponses';
 
 export interface InterfaceAuthParams {
@@ -43,5 +49,8 @@ export interface InterfaceNcloudIaaSServer {
   getNasVolumeInstanceRatingList(input: InterfaceGetNasVolumeInstanceRatingListInput): Promise<InterfaceGetNasVolumeInstanceRatingListResponse>;
   setNasVolumeAccessControl(input: InterfaceNasVolumeAccessControlInput): Promise<InterfaceNasVolumeInstanceListResponse>;
   addNasVolumeAccessControl(input: InterfaceNasVolumeAccessControlInput): Promise<InterfaceNasVolumeInstanceListResponse>;
-  removeNasVolumeAccessControl(input: InterfaceNasVolumeAccessControlInput): Promise<InterfaceNasVolumeInstanceListResponse>
+  removeNasVolumeAccessControl(input: InterfaceNasVolumeAccessControlInput): Promise<InterfaceNasVolumeInstanceListResponse>;
+  getLoginKeyList(input?: InterfaceGetLoginKeyListInput): Promise<InterfaceGetLoginKeyListResponse>;
+  createLoginKey(input: InterfaceCreateLoginKey): Promise<InterfaceCreateLoginKeyResponse>;
+  deleteLoginKey(input: InterfaceDeleteLoginKey): Promise<InterfaceDeleteLoginKeyResponse>;
 }

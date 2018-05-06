@@ -153,19 +153,14 @@ describe('Test IaaS Server Method', function( ){
       const startTime = moment(Date.now()).subtract(1, 'hour').startOf('hour').tz(timezone).format('YYYY-MM-DDTHH:mm:ssZZ');
       const endTime = moment(Date.now()).tz(timezone).format('YYYY-MM-DDTHH:mm:ssZZ');
 
-      console.log( {
-        nasVolumeInstanceNo: '768213',
-        startTime,
-        endTime,
-        interval: '5m'
-      } );
-
       const getNasVolumeInstanceRatingListResponse = await server.getNasVolumeInstanceRatingList({
         nasVolumeInstanceNo: '768213',
         startTime,
         endTime,
         interval: '5m'
       });
+
+      console.log( getNasVolumeInstanceRatingListResponse );
 
       done();
     } catch (e) {
@@ -221,9 +216,54 @@ describe('Test IaaS Server Method', function( ){
         customIpList: ['10.41.0.121'],
         // serverInstanceNoList: ['768254']
       });
-      //
+
       console.log( removeNasVolumeAccessControlResponse );
 
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
+  test('Test getLoginKeyList', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const getLoginKeyListResponse = await server.getLoginKeyList();
+      console.log( getLoginKeyListResponse );
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
+  test('Test createLoginKey', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const createLoginKeyResponse = await server.createLoginKey({
+        keyName: 'mytest2'
+      });
+
+      console.log( createLoginKeyResponse );
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
+  test('Test deleteLoginKey', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const deleteLoginKeyResponse = await server.deleteLoginKey({
+        keyName: 'mytest'
+      });
+
+      console.log( deleteLoginKeyResponse );
       done();
     } catch (e) {
       console.log( e.response );

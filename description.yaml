@@ -173,3 +173,36 @@ apis:
           customIpList:
             type: string[]
         responseName: removeNasVolumeAccessControlResponse
+
+      getLoginKeyList:
+        method: GET
+        basePath: /server/v1/
+        action: getLoginKeyList
+        actionParamList:
+          keyName:
+            type: string
+          pageNo:
+            type: number
+          pageSize:
+            type: number
+        responseName: getLoginKeyListResponse
+
+      createLoginKey:
+        method: GET
+        basePath: /server/v1/
+        action: createLoginKey
+        actionParamList:
+          keyName:
+            type: string
+            required: true
+        responseName: createLoginKeyResponse
+
+      deleteLoginKey:
+        method: GET
+        basePath: /server/v1/
+        action: deleteLoginKey
+        actionParamList:
+          keyName:
+            type: string
+            required: true
+        responseName: deleteLoginKeyResponse

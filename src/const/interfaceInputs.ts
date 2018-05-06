@@ -49,3 +49,17 @@ export interface InterfaceNasVolumeAccessControlInput {
   serverInstanceNoList?: string[];
   customIpList?: string[];
 }
+
+export interface InterfaceGetLoginKeyListInput {
+  keyName?: string;
+  pageNo?: number;
+  pageSize?: number;
+}
+
+export interface InterfaceCreateLoginKey {
+  keyName?: string;
+}
+
+export interface InterfaceDeleteLoginKey {
+  keyName?: string;
+}
