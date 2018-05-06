@@ -2,6 +2,21 @@ version: 0.2.0
 baseURL: https://ncloud.apigw.ntruss.com/
 
 apis:
+  PaaS:
+    GeoLocation:
+      geoLocation:
+        method: GET
+        basePath: /geolocation/v1/
+        action: geoLocation
+        actionParamList:
+          ip:
+            type: string
+            required: true
+          enc:
+            type: string
+          ent:
+            type: string
+
   IaaS:
     Server:
       getServerImageProductList:

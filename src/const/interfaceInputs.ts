@@ -191,3 +191,9 @@ export interface InterfaceGetBlockStorageSnapshotInstanceListInput {
   pageNo?: number;
   pageSize?: number;
 }
+
+export interface InterfaceGeoLocationInput {
+  ip: string;
+  enc?: string;
+  enx?: string;
+}

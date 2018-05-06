@@ -7,6 +7,7 @@ import {
   isNumber,
   isBolean,
   isArray,
+  isUndefined,
 } from 'lodash';
 import {
   InterfaceAuthParams,
@@ -57,7 +58,13 @@ export default function(
       authParams,
     })
       // .then(response=>{ console.log( response.data ); return response;})
-      .then(response => get(response.data, responseName));
+      .then(response => {
+        if ( isUndefined(responseName) ) {
+          return response.data;
+        } else {
+          return get(response.data, responseName)
+        }
+      });
   })
 };
 
@@ -102,7 +109,7 @@ function testInputParams(
 
             if ( expectedList && ! includes( expectedList, input[ inputKey ] ) ) {
               throw new Error(`Invalid Input Type: ${ inputKey } @${ action } method\n`+
-              `${ inputKey } must be one of items in ${ JSON.stringify( expectedList )}`);
+                `${ inputKey } must be one of items in ${ JSON.stringify( expectedList )}`);
             } // end if
 
             break;

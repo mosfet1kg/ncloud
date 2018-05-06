@@ -57,6 +57,7 @@ import {
   InterfaceCreateBlockStorageInstanceResponse,
   InterfaceDeleteBlockStorageInstancesResponse,
   InterfaceGetBlockStorageSnapshotInstanceListResponse,
+  InterfaceGeoLocationResponse,
 } from './interfaceResponses';
 
 export interface InterfaceAuthParams {
@@ -67,10 +68,19 @@ export interface InterfaceAuthParams {
 
 export interface InterfaceNcloud {
   IaaS: InterfaceNcloudIaaS;
+  PaaS: InterfaceNcloudPaaS;
 }
 
 export interface InterfaceNcloudIaaS {
   server(): InterfaceNcloudIaaSServer;
+}
+
+export interface InterfaceNcloudPaaS {
+  geoLocation(): InterfaceNcloudPaaSGeoLocation;
+}
+
+export interface InterfaceNcloudPaaSGeoLocation {
+  geoLocation(input): Promise<InterfaceGeoLocationResponse>;
 }
 
 export interface InterfaceNcloudIaaSServer {
