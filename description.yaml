@@ -441,3 +441,41 @@ apis:
             type: string[]
             required: true
         responseName: deleteMemberServerImagesResponse
+
+      getBlockStorageInstanceList:
+        method: GET
+        basePath: /server/v1/
+        action: getBlockStorageInstanceList
+        actionParamList:
+          serverInstanceNo:
+            type: string
+          blockStorageInstanceNoList:
+            type: string[]
+          searchFilterName:
+            type: string
+          searchFilterValue:
+            type: string
+          blockStorageTypeCodeList:
+            type: string[]
+          blockStorageInstanceStatusCode:
+            type: string
+          diskTypeCode:
+            type: string
+          diskDetailTypeCode:
+            type: string
+          regionNo:
+            type: string
+          zoneNo:
+            type: string
+          pageNo:
+            type: number
+          pageSize:
+            type: number
+          sortedBy:
+            type: string
+          sortingOrder:
+            type: string
+            enum:
+              - ascending
+              - descending
+        responseName: getBlockStorageInstanceListResponse

@@ -157,3 +157,20 @@ export interface InterfaceCreateMemberServerImageInput {
 export interface InterfaceDeleteMemberServerImagesInput {
   memberServerImageNoList: string[];
 }
+
+export interface InterfaceGetBlockStorageInstanceListInput {
+  serverInstanceNo?: string;
+  blockStorageInstanceNoList?: string[];
+  searchFilterName?: string;
+  searchFilterValue?: string;
+  blockStorageTypeCodeList?: string[];
+  blockStorageInstanceStatusCode?: string;
+  diskTypeCode?: string;
+  diskDetailTypeCode?: string;
+  regionNo?: string;
+  zoneNo?: string;
+  pageNo?: number;
+  pageSize?: number;
+  sortedBy?: string;
+  sortingOrder?: string;
+}

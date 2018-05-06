@@ -98,6 +98,41 @@ export interface InterfaceMemberServerImageItem {
   memberServerImageBlockStorageTotalSize: number; // 0
 }
 
+export interface InterfaceBlockStorageInstance {
+  blockStorageInstanceNo: string; // "768417",
+  serverInstanceNo: string; // "768416",
+  serverName: string; // "test",
+  blockStorageType: {
+    code: string; // "BASIC",
+    codeName: string; // "Basic BS"
+  },
+  blockStorageName: string; // "test",
+  blockStorageSize: number; // 53687091200,
+  deviceName: string; // "/dev/xvda",
+  blockStorageProductCode: string; // "SPBSTBSTBS000005",
+  blockStorageInstanceStatus: {
+    code: string; // "ATTAC",
+    codeName: string; //  "Block storage ATTACHED state"
+  },
+  blockStorageInstanceOperation: {
+    code: string; // "NULL",
+    codeName: string; // "Block Storage NULLOP"
+  },
+  blockStorageInstanceStatusName: string; // "attached",
+  createDate: string; // "2018-05-07T00:26:55+0900",
+  blockStorageInstanceDescription: string; // "test's basic storage",
+  diskType: {
+    code: string; // "NET",
+    codeName: string; // "Network Storage"
+  },
+  diskDetailType: {
+    code: string; // "SSD",
+    codeName: string; // "SSD"
+  },
+  maxIopsThroughput: number; // 4000,
+  zone: InterfaceZone;
+}
+
 export interface InterfaceGetServerImageProductListResponse {
   requestId: string;
   returnCode: string;
@@ -374,4 +409,20 @@ export interface InterfaceDeleteMemberServerImagesResponse {
   returnMessage: string; // 'success',
   totalRows: number;
   memberServerImageList: InterfaceMemberServerImageItem[];
+}
+
+export interface InterfaceGetBlockStorageInstanceListResponse {
+  requestId: string; // '66882489-edb1-48ac-8574-4d9c797d4290',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+  totalRows: number;
+  memberServerImageList: InterfaceMemberServerImageItem[];
+}
+
+export interface InterfaceGetBlockStorageInstanceListResponse {
+  requestId: string; // '66882489-edb1-48ac-8574-4d9c797d4290',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+  totalRows: number;
+  blockStorageInstanceList: InterfaceBlockStorageInstance[];
 }
