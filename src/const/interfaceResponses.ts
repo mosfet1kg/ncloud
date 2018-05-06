@@ -216,3 +216,43 @@ export interface InterfaceDeleteLoginKeyResponse {
   returnCode: string; // '0',
   returnMessage: string; // 'success',
 }
+
+export interface InterfaceGetAccessControlGroupListResponse {
+  requestId: string; // '66882489-edb1-48ac-8574-4d9c797d4290',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+  totalRows: number; // 7,
+  accessControlGroupList: {
+    accessControlGroupConfigurationNo: string; // '5475',
+    accessControlGroupName: string; // 'ncloud-default-acg',
+    accessControlGroupDescription: string; // 'Default AccessControlGroup',
+    isDefault: boolean; // true,
+    createDate: string; // '2017-04-14T10:07:06+0900'
+  }[]
+}
+
+export interface InterfaceGetAccessControlGroupServerInstanceListResponse {
+  requestId: string; // '66882489-edb1-48ac-8574-4d9c797d4290',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+  totalRows: number; // 7,
+  serverInstanceList: InterfaceServerInfo[];
+}
+
+export interface InterfaceGetAccessControlRuleListResponse {
+  requestId: string; // '66882489-edb1-48ac-8574-4d9c797d4290',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+  totalRows: number; // 7,
+  accessControlRuleList: {
+    accessControlRuleConfigurationNo: string;
+    accessControlRuleDescription: string;
+    protocolType: {
+      code: string; // "ICMP",
+      codeName: string; // "icmp"
+    },
+    sourceAccessControlRuleConfigurationNo: string;
+    sourceAccessControlRuleName: string;
+    sourceIp: string;
+  }[]
+}

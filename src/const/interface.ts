@@ -8,8 +8,11 @@ import {
   InterfaceGetNasVolumeInstanceRatingListInput,
   InterfaceNasVolumeAccessControlInput,
   InterfaceGetLoginKeyListInput,
-  InterfaceCreateLoginKey,
-  InterfaceDeleteLoginKey,
+  InterfaceCreateLoginKeyInput,
+  InterfaceDeleteLoginKeyInput,
+  InterfaceGetAccessControlGroupListInput,
+  InterfaceGetAccessControlGroupServerInstanceListInput,
+  InterfaceGetAccessControlRuleListInput,
 } from "./interfaceInputs";
 import {
   InterfaceGetServerImageProductListResponse,
@@ -21,6 +24,9 @@ import {
   InterfaceGetLoginKeyListResponse,
   InterfaceCreateLoginKeyResponse,
   InterfaceDeleteLoginKeyResponse,
+  InterfaceGetAccessControlGroupListResponse,
+  InterfaceGetAccessControlGroupServerInstanceListResponse,
+  InterfaceGetAccessControlRuleListResponse,
 } from './interfaceResponses';
 
 export interface InterfaceAuthParams {
@@ -51,6 +57,9 @@ export interface InterfaceNcloudIaaSServer {
   addNasVolumeAccessControl(input: InterfaceNasVolumeAccessControlInput): Promise<InterfaceNasVolumeInstanceListResponse>;
   removeNasVolumeAccessControl(input: InterfaceNasVolumeAccessControlInput): Promise<InterfaceNasVolumeInstanceListResponse>;
   getLoginKeyList(input?: InterfaceGetLoginKeyListInput): Promise<InterfaceGetLoginKeyListResponse>;
-  createLoginKey(input: InterfaceCreateLoginKey): Promise<InterfaceCreateLoginKeyResponse>;
-  deleteLoginKey(input: InterfaceDeleteLoginKey): Promise<InterfaceDeleteLoginKeyResponse>;
+  createLoginKey(input: InterfaceCreateLoginKeyInput): Promise<InterfaceCreateLoginKeyResponse>;
+  deleteLoginKey(input: InterfaceDeleteLoginKeyInput): Promise<InterfaceDeleteLoginKeyResponse>;
+  getAccessControlGroupList(input?: InterfaceGetAccessControlGroupListInput): Promise<InterfaceGetAccessControlGroupListResponse>;
+  getAccessControlGroupServerInstanceList(input: InterfaceGetAccessControlGroupServerInstanceListInput): Promise<InterfaceGetAccessControlGroupServerInstanceListResponse>;
+  getAccessControlRuleList(input: InterfaceGetAccessControlRuleListInput): Promise<InterfaceGetAccessControlRuleListResponse>
 }

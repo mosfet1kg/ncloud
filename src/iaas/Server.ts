@@ -57,6 +57,9 @@ export default class Server implements InterfaceNcloudIaaSServer {
   getLoginKeyList: InterfaceNcloudIaaSServer['getLoginKeyList'];
   createLoginKey: InterfaceNcloudIaaSServer['createLoginKey'];
   deleteLoginKey: InterfaceNcloudIaaSServer['deleteLoginKey'];
+  getAccessControlGroupList: InterfaceNcloudIaaSServer['getAccessControlGroupList'];
+  getAccessControlGroupServerInstanceList: InterfaceNcloudIaaSServer['getAccessControlGroupServerInstanceList'];
+  getAccessControlRuleList: InterfaceNcloudIaaSServer['getAccessControlRuleList'];
 }
 
 Object

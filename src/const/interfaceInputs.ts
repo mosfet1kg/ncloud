@@ -56,10 +56,25 @@ export interface InterfaceGetLoginKeyListInput {
   pageSize?: number;
 }
 
-export interface InterfaceCreateLoginKey {
+export interface InterfaceCreateLoginKeyInput {
   keyName?: string;
 }
 
-export interface InterfaceDeleteLoginKey {
+export interface InterfaceDeleteLoginKeyInput {
   keyName?: string;
+}
+
+export interface InterfaceGetAccessControlGroupListInput {
+  accessControlGroupConfigurationNoList?: string[];
+  isDefaultGroup?: boolean;
+  accessControlGroupName?: string;
+  pageNo?: number;
+}
+
+export interface InterfaceGetAccessControlGroupServerInstanceListInput {
+  accessControlGroupConfigurationNo: string;
+}
+
+export interface InterfaceGetAccessControlRuleListInput {
+  accessControlGroupConfigurationNo: string;
 }

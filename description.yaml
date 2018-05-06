@@ -206,3 +206,38 @@ apis:
             type: string
             required: true
         responseName: deleteLoginKeyResponse
+
+      getAccessControlGroupList:
+        method: GET
+        basePath: /server/v1/
+        action: getAccessControlGroupList
+        actionParamList:
+          accessControlGroupConfigurationNoList:
+            type: string[]
+          isDefaultGroup:
+            type: boolean
+          accessControlGroupName:
+            type: string
+          pageNo:
+            type: number
+        responseName: getAccessControlGroupListResponse
+
+      getAccessControlGroupServerInstanceList:
+        method: GET
+        basePath: /server/v1/
+        action: getAccessControlGroupServerInstanceList
+        actionParamList:
+          accessControlGroupConfigurationNo:
+            type: string
+            required: true
+        responseName: getAccessControlGroupServerInstanceListResponse
+
+      getAccessControlRuleList:
+        method: GET
+        basePath: /server/v1/
+        action: getAccessControlRuleList
+        actionParamList:
+          accessControlGroupConfigurationNo:
+            type: string
+            required: true
+        responseName: getAccessControlRuleListResponse

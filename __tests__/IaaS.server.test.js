@@ -271,5 +271,52 @@ describe('Test IaaS Server Method', function( ){
     }
   });
 
+  test('Test getAccessControlGroupList', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const getAccessControlGroupListResponse = await server.getAccessControlGroupList({
+        accessControlGroupConfigurationNoList: ['5475', '5521']
+      });
+
+      console.log( getAccessControlGroupListResponse );
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
+  test('Test getAccessControlGroupServerInstanceList', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const getAccessControlGroupServerInstanceListResponse = await server.getAccessControlGroupServerInstanceList({
+        accessControlGroupConfigurationNo: '42895'
+      });
+
+      console.log( getAccessControlGroupServerInstanceListResponse );
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
+  test('Test getAccessControlRuleList', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const getAccessControlRuleListResponse = await server.getAccessControlRuleList({
+        accessControlGroupConfigurationNo: '42895'
+      });
+
+      console.log( getAccessControlRuleListResponse );
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
 });
 
