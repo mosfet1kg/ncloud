@@ -43,3 +43,9 @@ export interface InterfaceGetNasVolumeInstanceRatingListInput {
   endTime: string;
   interval: string;
 }
+
+export interface InterfaceSetNasVolumeAccessControlInput {
+  nasVolumeInstanceNo: string;
+  serverInstanceNoList?: string[];
+  customIpList?: string[];
+}

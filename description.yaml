@@ -101,8 +101,10 @@ apis:
         actionParamList:
           nasVolumeInstanceNo:
             type: string
+            required: true
           volumeSize:
             type: string
+            required: true
         responseName: changeNasVolumeSizeResponse
 
       getNasVolumeInstanceRatingListProto:
@@ -129,3 +131,17 @@ apis:
               - 1d
               - 1M
         responseName: getNasVolumeInstanceRatingListResponse
+
+      setNasVolumeAccessControl:
+        method: GET
+        basePath: /server/v1/
+        action: setNasVolumeAccessControl
+        actionParamList:
+          nasVolumeInstanceNo:
+            type: string
+            required: true
+          serverInstanceNoList:
+            type: string[]
+          customIpList:
+            type: string[]
+        responseName: setNasVolumeAccessControlResponse

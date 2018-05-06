@@ -6,6 +6,7 @@ import {
   InterfaceGetNasVolumeInstanceListInput,
   InterfaceChangeNasVolumeSizeInput,
   InterfaceGetNasVolumeInstanceRatingListInput,
+  InterfaceSetNasVolumeAccessControlInput,
 } from "./interfaceInputs";
 import {
   InterfaceGetServerImageProductListResponse,
@@ -40,4 +41,5 @@ export interface InterfaceNcloudIaaSServer {
   getNasVolumeInstanceList(input?: InterfaceGetNasVolumeInstanceListInput): Promise<InterfaceNasVolumeInstanceListResponse>;
   changeNasVolumeSize(input: InterfaceChangeNasVolumeSizeInput): Promise<InterfaceNasVolumeInstanceListResponse>;
   getNasVolumeInstanceRatingList(input: InterfaceGetNasVolumeInstanceRatingListInput): Promise<InterfaceGetNasVolumeInstanceRatingListResponse>
+  setNasVolumeAccessControl(input: InterfaceSetNasVolumeAccessControlInput): Promise<InterfaceNasVolumeInstanceListResponse>
 }

@@ -10,6 +10,61 @@ export interface InterfaceZone {
   zoneDescription: string; // "가산 zone",
   regionNo: string; // "1"
 }
+export interface InterfaceServerInfo {
+  serverInstanceNo: string; // "768254",
+  serverName: string; // "test001",
+  serverDescription: string; // "",
+  cpuCount: number; // 1,
+  memorySize: number; // 2147483648,
+  baseBlockStorageSize: number; // 53687091200,
+  platformType: {
+    code: string; // "LNX64",
+    codeName: string; // "Linux 64 Bit"
+  },
+  loginKeyName: string; // "mygbcompany",
+  isFeeChargingMonitoring: boolean; // true,
+  publicIp: string; //  "",
+  privateIp: string; //  "10.41.0.121",
+  serverImageName: string; //  "centos-7.3-64",
+  serverInstanceStatus: {
+    code: string; // "RUN",
+    codeName: string; //  "Server run state"
+  },
+  serverInstanceOperation: {
+    code: string; //  "NULL",
+    codeName: string; //  "Server NULL OP"
+  },
+  serverInstanceStatusName: string; //  "running",
+  createDate: string; // "2018-05-06T19:30:13+0900",
+  uptime: string; //  "2018-05-06T19:32:52+0900",
+  serverImageProductCode: string; //  "SPSW0LINUX000046",
+  serverProductCode: string; //  "SPSVRSSD00000001",
+  isProtectServerTermination: boolean; // true,
+  portForwardingPublicIp: string; // "106.10.41.149",
+  zone: InterfaceZone,
+  region: InterfaceRegion,
+  baseBlockStorageDiskType: {
+    code: string; // "NET",
+    codeName: string; // "Network Storage"
+  },
+  baseBlockStorageDiskDetailType: {
+    code: string; //  "SSD",
+    codeName: string; //  "SSD"
+  },
+  internetLineType: {
+    code: string; //  "PUBLC",
+    codeName: string; //  "PUBLC"
+  },
+  userData: string; //  "",
+  accessControlGroupList: {
+    accessControlGroupConfigurationNo: string; //  "42879",
+    accessControlGroupName: string; //  "rabbit-mq-tMBq",
+    accessControlGroupDescription: string; // "Group for RabbitMQ service 'test' (automatically created)",
+    isDefault: boolean // false,
+    createDate: string; // "2018-05-06T19:30:12+0900"
+  }[]
+}
+
 
 export interface InterfaceGetServerImageProductListResponse {
   requestId: string;
@@ -116,8 +171,10 @@ export interface InterfaceNasVolumeInstanceListResponse {
     isEventConfiguration: boolean; // false,
     region: InterfaceRegion,
     zone: InterfaceZone,
-    nasVolumeInstanceCustomIpList: any[];  // TODO DECLARE TYPE
-    nasVolumeServerInstanceList: any[];
+    nasVolumeInstanceCustomIpList: {
+      customIp: string;
+    }[];
+    nasVolumeServerInstanceList: InterfaceServerInfo[];
   }[];
 }
 export interface InterfaceGetNasVolumeInstanceRatingListResponse {

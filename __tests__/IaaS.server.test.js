@@ -150,8 +150,8 @@ describe('Test IaaS Server Method', function( ){
 
       // const timezone = 'America/Los_Angeles';
       const timezone = 'Asia/Seoul';
-      const startTime = moment(Date.now()).subtract(1, 'hour').startOf('hour').tz(timezone).format();
-      const endTime = moment(Date.now()).tz(timezone).format();
+      const startTime = moment(Date.now()).subtract(1, 'hour').startOf('hour').tz(timezone).format('YYYY-MM-DDTHH:mm:ssZZ');
+      const endTime = moment(Date.now()).tz(timezone).format('YYYY-MM-DDTHH:mm:ssZZ');
 
       console.log( {
         nasVolumeInstanceNo: '768213',
@@ -166,10 +166,25 @@ describe('Test IaaS Server Method', function( ){
         endTime,
         interval: '5m'
       });
-      //
-      console.log( getNasVolumeInstanceRatingListResponse );
 
-      // const a = moment('2018-05-06T00:00:00-07:00').utcOffset('2018-05-06T00:00:00-07:00').format('Z');
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
+  test('Test setNasVolumeAccessControl', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const setNasVolumeAccessControlResponse = await server.setNasVolumeAccessControl({
+        nasVolumeInstanceNo: '768213',
+        // customIpList: ['10.41.0.121'],
+        serverInstanceNoList: ['768254']
+      });
+      //
+      console.log( setNasVolumeAccessControlResponse );
 
       done();
     } catch (e) {

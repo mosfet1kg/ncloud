@@ -9,7 +9,7 @@ import {
   InterfaceDeleteNasVolumeInstanceInput,
   InterfaceGetNasVolumeInstanceListInput,
   InterfaceChangeNasVolumeSizeInput,
-  InterfaceGetNasVolumeInstanceRatingListInput,
+  InterfaceGetNasVolumeInstanceRatingListInput, InterfaceSetNasVolumeAccessControlInput,
 } from '../const/interfaceInputs';
 import {
   InterfaceGetServerImageProductListResponse,
@@ -46,39 +46,23 @@ export default class Server implements InterfaceNcloudIaaSServer {
   getNasVolumeInstanceList: (input?: InterfaceGetNasVolumeInstanceListInput) => Promise<InterfaceNasVolumeInstanceListResponse>;
   changeNasVolumeSize: (input: InterfaceChangeNasVolumeSizeInput) => Promise<InterfaceNasVolumeInstanceListResponse>;
   getNasVolumeInstanceRatingList(input: InterfaceGetNasVolumeInstanceRatingListInput): Promise<InterfaceGetNasVolumeInstanceRatingListResponse>{
-    const {
-      startTime,
-      endTime
-    } = input;
-
-    // const timezone: string = moment(startTime).utcOffset(startTime).format('Z');
-    function convert2NcloudFormat( timeString ) {
-      return moment( timeString ).format('YYYY-MM-DDTHH:mm:ss') + moment( startTime ).format('Z').replace(':','');
-    }
-
-    input = {
-      ...input,
-      startTime: convert2NcloudFormat( startTime ),
-      endTime: convert2NcloudFormat( endTime )
-    };
-
     return (this as any).getNasVolumeInstanceRatingListProto(input)
       .then( responseData => {
-
         responseData = {
           ...responseData,
           NasVolumeInstanceRatingList: responseData.NasVolumeInstanceRatingList.map((el) => {
-            // console.log( el.ratingTime );
+            console.log( el.ratingTime );
             return {
               ...el,
-              ratingTime: moment( el.ratingTime ).format('YYYY-MM-DDTHH:mm:ss') + '+09:00',
+              ratingTime: moment( el.ratingTime ).tz('Asia/Seoul').format('YYYY-MM-DDTHH:mm:ssZZ'),
             }
           })
         };
 
         return responseData;
-      })
+      });
   }
+  setNasVolumeAccessControl: (input: InterfaceSetNasVolumeAccessControlInput) => Promise<InterfaceNasVolumeInstanceListResponse>;
 }
 
 Object
