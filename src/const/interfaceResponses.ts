@@ -120,3 +120,18 @@ export interface InterfaceNasVolumeInstanceListResponse {
     nasVolumeServerInstanceList: any[];
   }[];
 }
+export interface InterfaceGetNasVolumeInstanceRatingListResponse {
+  requestId: string; // 'd2a7f2da-1c16-48bf-8439-afc3a9979c3d',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+  totalRows: number; // 7,
+  NasVolumeInstanceRatingList: {
+    ratingTime: string; // '2018-05-06 13:23:10.101',
+    volumeSize: number; // 536870912000,
+    volumeUseSize: number; // 278528,
+    volumeUseRatio: number; // 0,
+    snapshotVolumeSize: number; // 0,
+    snapshotVolumeUseSize: number; // 0,
+    snapshotVolumeUseRatio: number; // 0
+  }[]
+}

@@ -42,7 +42,7 @@ export default function (
   actionParams = {...actionParams, responseFormatType: 'json'};
 
   for( const key of sortBy( Object.keys(actionParams) ) ) {
-    params.push(`${key}=${actionParams[key]}`);
+    params.push(`${key}=${encodeURIComponent(actionParams[key])}`);
   } // end for loop
 
   const paramsString = params.join('&');

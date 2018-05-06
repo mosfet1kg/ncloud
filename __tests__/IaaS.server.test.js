@@ -1,4 +1,5 @@
 const ncloud = require('../lib/');
+const moment = require('moment-timezone');
 
 const {
   accessKey,
@@ -142,5 +143,40 @@ describe('Test IaaS Server Method', function( ){
       done.fail(e);
     }
   });
+
+  test('Test getNasVolumeInstanceRatingList', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      // const timezone = 'America/Los_Angeles';
+      const timezone = 'Asia/Seoul';
+      const startTime = moment(Date.now()).subtract(1, 'hour').startOf('hour').tz(timezone).format();
+      const endTime = moment(Date.now()).tz(timezone).format();
+
+      console.log( {
+        nasVolumeInstanceNo: '768213',
+        startTime,
+        endTime,
+        interval: '5m'
+      } );
+
+      const getNasVolumeInstanceRatingListResponse = await server.getNasVolumeInstanceRatingList({
+        nasVolumeInstanceNo: '768213',
+        startTime,
+        endTime,
+        interval: '5m'
+      });
+      //
+      console.log( getNasVolumeInstanceRatingListResponse );
+
+      // const a = moment('2018-05-06T00:00:00-07:00').utcOffset('2018-05-06T00:00:00-07:00').format('Z');
+
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
 });
 

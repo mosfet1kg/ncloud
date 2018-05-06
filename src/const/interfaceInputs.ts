@@ -32,7 +32,14 @@ export interface InterfaceGetNasVolumeInstanceListInput {
   isSnapshotConfiguration?: boolean;
 }
 
-export interface InterfaceChangeNasVolumeSize {
+export interface InterfaceChangeNasVolumeSizeInput {
   nasVolumeInstanceNo: string;
   volumeSize: string;
+}
+
+export interface InterfaceGetNasVolumeInstanceRatingListInput {
+  nasVolumeInstanceNo: string;
+  startTime: string;
+  endTime: string;
+  interval: string;
 }

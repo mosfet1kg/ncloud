@@ -4,7 +4,8 @@ import {
   InterfaceCreateNasVolumeInstanceInput,
   InterfaceDeleteNasVolumeInstanceInput,
   InterfaceGetNasVolumeInstanceListInput,
-  InterfaceChangeNasVolumeSize,
+  InterfaceChangeNasVolumeSizeInput,
+  InterfaceGetNasVolumeInstanceRatingListInput,
 } from "./interfaceInputs";
 import {
   InterfaceGetServerImageProductListResponse,
@@ -12,6 +13,7 @@ import {
   InterfaceGetZoneListResponse,
   InterfaceGetRegionListResponse,
   InterfaceNasVolumeInstanceListResponse,
+  InterfaceGetNasVolumeInstanceRatingListResponse,
 } from './interfaceResponses';
 
 export interface InterfaceAuthParams {
@@ -36,5 +38,6 @@ export interface InterfaceNcloudIaaSServer {
   createNasVolumeInstance(input: InterfaceCreateNasVolumeInstanceInput): Promise<InterfaceNasVolumeInstanceListResponse>;
   deleteNasVolumeInstance(input: InterfaceDeleteNasVolumeInstanceInput): Promise<InterfaceNasVolumeInstanceListResponse>;
   getNasVolumeInstanceList(input?: InterfaceGetNasVolumeInstanceListInput): Promise<InterfaceNasVolumeInstanceListResponse>;
-  changeNasVolumeSize(input: InterfaceChangeNasVolumeSize): Promise<InterfaceNasVolumeInstanceListResponse>;
+  changeNasVolumeSize(input: InterfaceChangeNasVolumeSizeInput): Promise<InterfaceNasVolumeInstanceListResponse>;
+  getNasVolumeInstanceRatingList(input: InterfaceGetNasVolumeInstanceRatingListInput): Promise<InterfaceGetNasVolumeInstanceRatingListResponse>
 }

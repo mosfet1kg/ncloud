@@ -98,6 +98,13 @@ function testInputParams(
               throw new Error(`Invalid Input Type: ${ inputKey } @${ action } method`);
             } // end if
 
+            const expectedList = get(actionParamList, `${inputKey}.enum`, false);
+
+            if ( expectedList && ! includes( expectedList, input[ inputKey ] ) ) {
+              throw new Error(`Invalid Input Type: ${ inputKey } @${ action } method\n`+
+              `${ inputKey } must be one of items in ${ JSON.stringify( expectedList )}`);
+            } // end if
+
             break;
           }
           case 'string[]': {
