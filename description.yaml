@@ -241,3 +241,45 @@ apis:
             type: string
             required: true
         responseName: getAccessControlRuleListResponse
+
+
+      getServerInstanceList:
+        method: GET
+        basePath: /server/v1/
+        action: getServerInstanceList
+        actionParamList:
+          serverInstanceNoList:
+            type: string[]
+          searchFilterName:
+            type: string
+          searchFilterValue:
+            type: string
+          pageNo:
+            type: number
+          pageSize:
+            type: number
+          serverInstanceStatusCode:
+            type: string
+          internetLineTypeCode:
+            type: string
+          regionNo:
+            type: string
+          zoneNo:
+            type: string
+          baseBlockStorageDiskTypeCode:
+            type: string
+            enum:
+              - NET
+              - LOCAL
+          baseBlockStorageDiskDetailTypeCode:
+            type: string
+            enum:
+              - HDD
+              - SSD
+          sortedBy:
+            type: string
+          sortingOrder:
+            type: string
+            enum:
+              - ascending
+        responseName: getServerInstanceListResponse

@@ -60,6 +60,7 @@ export default class Server implements InterfaceNcloudIaaSServer {
   getAccessControlGroupList: InterfaceNcloudIaaSServer['getAccessControlGroupList'];
   getAccessControlGroupServerInstanceList: InterfaceNcloudIaaSServer['getAccessControlGroupServerInstanceList'];
   getAccessControlRuleList: InterfaceNcloudIaaSServer['getAccessControlRuleList'];
+  getServerInstanceList: InterfaceNcloudIaaSServer['getServerInstanceList'];
 }
 
 Object

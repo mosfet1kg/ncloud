@@ -78,3 +78,19 @@ export interface InterfaceGetAccessControlGroupServerInstanceListInput {
 export interface InterfaceGetAccessControlRuleListInput {
   accessControlGroupConfigurationNo: string;
 }
+
+export interface InterfaceGetServerInstanceListInput {
+  serverInstanceNoList?: string[];
+  searchFilterName?: string;
+  searchFilterValue?: string;
+  pageNo?: number;
+  pageSize?: number;
+  serverInstanceStatusCode?: string;
+  internetLineTypeCode?: string;
+  regionNo?: string;
+  zoneNo?: string;
+  baseBlockStorageDiskTypeCode?: string;
+  baseBlockStorageDiskDetailTypeCode?: string;
+  sortedBy?: string;
+  sortingOrder?: string;
+}

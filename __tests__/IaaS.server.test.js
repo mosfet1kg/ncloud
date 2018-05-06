@@ -318,5 +318,19 @@ describe('Test IaaS Server Method', function( ){
       done.fail(e);
     }
   });
+
+  test('Test getServerInstanceList', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const getServerInstanceListResponse = await server.getServerInstanceList();
+
+      console.log( getServerInstanceListResponse );
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
 });
 
