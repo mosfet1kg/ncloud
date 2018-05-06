@@ -41,10 +41,10 @@ describe('Test IaaS Server Method', function( ){
     try {
       const server = client.IaaS.server();
       const getServerProductListResponse = await server.getServerProductList({
-        serverImageProductCode: 'SPSW0LINUX000061',
+        serverImageProductCode: 'SPSW0LINUX000046',
       });
 
-      console.log( getServerProductListResponse.productList[0] );
+      console.log( getServerProductListResponse );
       done();
     } catch (e) {
       done.fail(e);
@@ -326,6 +326,27 @@ describe('Test IaaS Server Method', function( ){
       const getServerInstanceListResponse = await server.getServerInstanceList();
 
       console.log( getServerInstanceListResponse );
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
+  test('Test createServerInstances', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const createServerInstancesResponse = await server.createServerInstances({
+        serverImageProductCode: 'SPSW0LINUX000046',
+        serverProductCode: 'SPSVRSTAND000003',
+        serverName: 'mytest',
+        serverCreateCount: 3,
+        accessControlGroupConfigurationNoList: ['42895']
+
+      });
+
+      console.log( createServerInstancesResponse );
       done();
     } catch (e) {
       console.log( e.response );

@@ -14,6 +14,7 @@ import {
   InterfaceGetAccessControlGroupServerInstanceListInput,
   InterfaceGetAccessControlRuleListInput,
   InterfaceGetServerInstanceListInput,
+  InterfaceCreateServerInstancesInput,
 } from "./interfaceInputs";
 import {
   InterfaceGetServerImageProductListResponse,
@@ -29,6 +30,7 @@ import {
   InterfaceGetAccessControlGroupServerInstanceListResponse,
   InterfaceGetAccessControlRuleListResponse,
   InterfaceGetServerInstanceListResponse,
+  InterfaceCreateServerInstancesResponse,
 } from './interfaceResponses';
 
 export interface InterfaceAuthParams {
@@ -65,4 +67,5 @@ export interface InterfaceNcloudIaaSServer {
   getAccessControlGroupServerInstanceList(input: InterfaceGetAccessControlGroupServerInstanceListInput): Promise<InterfaceGetAccessControlGroupServerInstanceListResponse>;
   getAccessControlRuleList(input: InterfaceGetAccessControlRuleListInput): Promise<InterfaceGetAccessControlRuleListResponse>
   getServerInstanceList(input?: InterfaceGetServerInstanceListInput): Promise<InterfaceGetServerInstanceListResponse>;
+  createServerInstances(input: InterfaceCreateServerInstancesInput): Promise<InterfaceCreateServerInstancesResponse>;
 }

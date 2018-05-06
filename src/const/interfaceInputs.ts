@@ -94,3 +94,20 @@ export interface InterfaceGetServerInstanceListInput {
   sortedBy?: string;
   sortingOrder?: string;
 }
+
+export interface InterfaceCreateServerInstancesInput {
+  serverImageProductCode?: string;
+  serverProductCode?: string;
+  memberServerImageNo?: string;
+  serverName?: string;
+  serverDescription?: string;
+  loginKeyName?: string;
+  isProtectServerTermination?: boolean;
+  serverCreateCount?: number;
+  serverCreateStartNo?: number;
+  internetLineTypeCode?: string;
+  feeSystemTypeCode?: string;
+  zoneNo?: string;
+  accessControlGroupConfigurationNoList?: string[];
+  userData?: string;
+}

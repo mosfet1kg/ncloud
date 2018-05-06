@@ -262,6 +262,9 @@ apis:
             type: string
           internetLineTypeCode:
             type: string
+            enum:
+              - PUBLC
+              - GLBL
           regionNo:
             type: string
           zoneNo:
@@ -283,3 +286,44 @@ apis:
             enum:
               - ascending
         responseName: getServerInstanceListResponse
+
+      createServerInstances:
+        method: GET
+        basePath: /server/v1/
+        action: createServerInstances
+        actionParamList:
+          serverImageProductCode:
+            type: string
+          serverProductCode:
+            type: string
+          memberServerImageNo:
+            type: string
+          serverName:
+            type: string
+          serverDescription:
+            type: string
+          loginKeyName:
+            type: string
+          isProtectServerTermination:
+            type: boolean
+          serverCreateCount:
+            type: number
+          serverCreateStartNo:
+            type: number
+          internetLineTypeCode:
+            type: string
+            enum:
+              - PUBLC
+              - GLBL
+          feeSystemTypeCode:
+            type: string
+            enum:
+              - MTRAT
+              - FXSUM
+          zoneNo:
+            type: string
+          accessControlGroupConfigurationNoList:
+            type: string[]
+          userData:
+            type: string
+        responseName: createServerInstancesResponse
