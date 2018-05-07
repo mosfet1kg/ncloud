@@ -710,5 +710,27 @@ describe('Test IaaS Server Method', function( ){
     }
   });
 
+  test('Test addPortForwardingRules', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const addPortForwardingRulesResponse = await server.addPortForwardingRules({
+        portForwardingConfigurationNo: '23536',
+        portForwardingRuleList: [{
+          serverInstanceNo: '768416',
+          portForwardingExternalPort: '1024',
+          portForwardingInternalPort: '22'
+        }]
+      });
+
+      console.log( addPortForwardingRulesResponse );
+
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
 });
 

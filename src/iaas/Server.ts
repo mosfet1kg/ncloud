@@ -108,4 +108,5 @@ export default class Server implements InterfaceNcloudIaaSServer {
   disassociatePublicIpFromServerInstance: InterfaceNcloudIaaSServer['disassociatePublicIpFromServerInstance'];
   deletePublicIpInstances: InterfaceNcloudIaaSServer['deletePublicIpInstances'];
   getPortForwardingRuleList: InterfaceNcloudIaaSServer['getPortForwardingRuleList'];
+  addPortForwardingRules: InterfaceNcloudIaaSServer['addPortForwardingRules'];
 }

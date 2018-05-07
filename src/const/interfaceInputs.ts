@@ -240,6 +240,16 @@ export interface InterfaceGetPortForwardingRuleListInput {
   zoneNo?: string;
 }
 
+export interface InterfaceAddPortForwardingRulesInput {
+  portForwardingConfigurationNo: string;
+  portForwardingRuleList: {
+    serverInstanceNo: string;
+    portForwardingExternalPort: string;
+    portForwardingInternalPort: string;
+  }[];
+}
+
+
 /** PaaS **/
 export interface InterfaceGeoLocationInput {
   ip: string;

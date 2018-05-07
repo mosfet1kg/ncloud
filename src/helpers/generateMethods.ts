@@ -47,6 +47,7 @@ export default function(
   ).then(async () => {
     return await getActionParams({
       input,
+      actionParamList
     })
   }).then((actionParams) => {
     return fetchClient({
@@ -146,6 +147,14 @@ function testInputParams(
 
             break;
           }
+          case 'any[]': {
+            if ( ! isArray(input[ inputKey ]) ) {
+              throw new Error(`Invalid Input Type: ${ inputKey } @${ action } method.\n`+
+                `${ inputKey } must be an array.`);
+            } // end if
+
+            break;
+          }
         } // end switch
       }); // end forEach
 
@@ -159,6 +168,7 @@ function testInputParams(
 function getActionParams(
   {
     input,
+    actionParamList,
   }
 ) {
   return new Promise((resolve, reject) => {
@@ -167,9 +177,29 @@ function getActionParams(
         .keys( input )
         .reduce(( prev, key ) => {
           if ( isArray( input[key] )) {
-            input[key].forEach((el, idx) => {
-              prev = { ...prev, [`${ key }.${ idx + 1 }`]: el };
-            })
+
+            const format = get(actionParamList, `${key}.replace`, false);
+
+            if ( get(actionParamList, `${key}.type`) === 'any[]' && format ){
+              input[key].forEach((el, idx) => {
+
+                const items = Object.keys(el).reduce((innerPrev, innerObjItemKey) => {
+                  innerPrev = {
+                    ...innerPrev,
+                    [format.replace('%d', idx + 1).replace('%s', innerObjItemKey)]: el[innerObjItemKey],
+                  };
+
+                  return innerPrev;
+                }, {});
+
+                prev = { ...prev, ...items };
+                // return prev;
+              });
+            } else {
+              input[key].forEach((el, idx) => {
+                prev = { ...prev, [`${ key }.${ idx + 1 }`]: el };
+              });
+            } // end if
           } else {
             prev = { ...prev, [key]: input[key] }
           } // end if

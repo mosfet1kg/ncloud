@@ -656,3 +656,17 @@ apis:
           zoneNo:
             type: string
         responseName: getPortForwardingRuleListResponse
+
+      addPortForwardingRules:
+        method: GET
+        basePath: /server/v1/
+        action: addPortForwardingRules
+        actionParamList:
+          portForwardingConfigurationNo:
+            type: string
+            required: true
+          portForwardingRuleList:
+            type: any[]
+            replace: portForwardingRuleList.%d.%s
+            required: true
+        responseName: addPortForwardingRulesResponse

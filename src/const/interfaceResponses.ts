@@ -566,6 +566,25 @@ export interface InterfaceGetPortForwardingRuleListResponse {
   }[]
 }
 
+export interface InterfaceAddPortForwardingRulesResponse {
+  requestId: string; // "6931fbd5-f9c3-4864-9aa1-61bdee34f761",
+  returnCode: string; // "0",
+  returnMessage: string; // "success",
+  portForwardingConfigurationNo: string; // "23536",
+  portForwardingPublicIp: string; // "106.10.41.164",
+  zone: InterfaceZone,
+  internetLineType: {
+    code: string; // "PUBLC",
+    codeName: string; // "PUBLC"
+  },
+  totalRows: number; // 0,
+  portForwardingRuleList: {
+    portForwardingExternalPort: number;
+    portForwardingInternalPort: number;
+    serverInstance: InterfaceServerInfo;
+  }[]
+}
+
 /** PaaS **/
 export interface InterfaceGeoLocationResponse {
   returnCode: number;
