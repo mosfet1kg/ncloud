@@ -192,8 +192,52 @@ export interface InterfaceGetBlockStorageSnapshotInstanceListInput {
   pageSize?: number;
 }
 
+export interface InterfaceGetPublicIpInstanceListInput {
+  isAssociated?: string;
+  publicIpInstanceNoList?: string[];
+  publicIpList?: string[];
+  searchFilterName?: string;
+  searchFilterValue?: string;
+  internetLineTypeCode?: string;
+  regionNo?: string;
+  zoneNo?: string;
+  pageNo?: number;
+  pageSize?: number;
+  sortedBy?: string;
+  sortingOrder?: string;
+}
+
+export interface InterfaceGetPublicIpTargetServerInstanceListInput {
+  internetLineTypeCode?: string;
+  regionNo?: string;
+  zoneNo?: string;
+}
+
+export interface InterfaceCreatePublicIpInstanceInput {
+  serverInstanceNo?: string;
+  publicIpDescription?: string;
+  internetLineTypeCode?: string;
+  regionNo?: string;
+  zoneNo?: string;
+}
+
+export interface InterfaceAssociatePublicIpWithServerInstanceInput {
+  publicIpInstanceNo: string;
+  serverInstanceNo: string;
+}
+
+export interface InterfaceDisassociatePublicIpFromServerInstanceInput {
+  publicIpInstanceNo: string;
+}
+
+export interface InterfaceDeletePublicIpInstancesInput {
+  publicIpInstanceNoList: string[];
+}
+
+/** PaaS **/
 export interface InterfaceGeoLocationInput {
   ip: string;
   enc?: string;
   enx?: string;
 }
+

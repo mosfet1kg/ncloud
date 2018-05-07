@@ -28,6 +28,12 @@ import {
   InterfaceCreateBlockStorageInstanceInput,
   InterfaceDeleteBlockStorageInstancesInput,
   InterfaceGetBlockStorageSnapshotInstanceListInput,
+  InterfaceGetPublicIpInstanceListInput,
+  InterfaceGetPublicIpTargetServerInstanceListInput,
+  InterfaceCreatePublicIpInstanceInput,
+  InterfaceAssociatePublicIpWithServerInstanceInput,
+  InterfaceDisassociatePublicIpFromServerInstanceInput,
+  InterfaceDeletePublicIpInstancesInput,
 } from "./interfaceInputs";
 import {
   InterfaceGetServerImageProductListResponse,
@@ -58,6 +64,12 @@ import {
   InterfaceDeleteBlockStorageInstancesResponse,
   InterfaceGetBlockStorageSnapshotInstanceListResponse,
   InterfaceGeoLocationResponse,
+  InterfaceGetPublicIpInstanceListResponse,
+  InterfaceGetPublicIpTargetServerInstanceListResponse,
+  InterfaceCreatePublicIpInstanceResponse,
+  InterfaceAssociatePublicIpWithServerInstanceResponse,
+  InterfaceDisassociatePublicIpFromServerInstanceResponse,
+  InterfaceDeletePublicIpInstancesResponse,
 } from './interfaceResponses';
 
 export interface InterfaceAuthParams {
@@ -116,5 +128,11 @@ export interface InterfaceNcloudIaaSServer {
   getBlockStorageInstanceList(input?: InterfaceGetBlockStorageInstanceListInput): Promise<InterfaceGetBlockStorageInstanceListResponse>;
   createBlockStorageInstance(input: InterfaceCreateBlockStorageInstanceInput): Promise<InterfaceCreateBlockStorageInstanceResponse>;
   deleteBlockStorageInstances(input: InterfaceDeleteBlockStorageInstancesInput): Promise<InterfaceDeleteBlockStorageInstancesResponse>;
-  getBlockStorageSnapshotInstanceList(input: InterfaceGetBlockStorageSnapshotInstanceListInput): Promise<InterfaceGetBlockStorageSnapshotInstanceListResponse>;
+  getBlockStorageSnapshotInstanceList(input?: InterfaceGetBlockStorageSnapshotInstanceListInput): Promise<InterfaceGetBlockStorageSnapshotInstanceListResponse>;
+  getPublicIpInstanceList(input?: InterfaceGetPublicIpInstanceListInput): Promise<InterfaceGetPublicIpInstanceListResponse>;
+  getPublicIpTargetServerInstanceList(input?: InterfaceGetPublicIpTargetServerInstanceListInput): Promise<InterfaceGetPublicIpTargetServerInstanceListResponse>;
+  createPublicIpInstance(input?: InterfaceCreatePublicIpInstanceInput): Promise<InterfaceCreatePublicIpInstanceResponse>;
+  associatePublicIpWithServerInstance(input: InterfaceAssociatePublicIpWithServerInstanceInput): Promise<InterfaceAssociatePublicIpWithServerInstanceResponse>;
+  disassociatePublicIpFromServerInstance(input: InterfaceDisassociatePublicIpFromServerInstanceInput): Promise<InterfaceDisassociatePublicIpFromServerInstanceResponse>;
+  deletePublicIpInstances(input: InterfaceDeletePublicIpInstancesInput): Promise<InterfaceDeletePublicIpInstancesResponse>;
 }

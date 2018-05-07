@@ -57,7 +57,7 @@ export default function(
       actionParams,
       authParams,
     })
-      // .then(response=>{ console.log( response.data ); return response;})
+    // .then(response=>{ console.log( response.data ); return response;})
       .then(response => {
         if ( isUndefined(responseName) ) {
           return response.data;
@@ -102,13 +102,14 @@ function testInputParams(
         switch (type) {
           case 'string': {
             if ( !isString(input[ inputKey ]) ) {
-              throw new Error(`Invalid Input Type: ${ inputKey } @${ action } method`);
+              throw new Error(`Invalid Input Type: ${ inputKey } @${ action } method.\n`+
+                `${ inputKey } type must be a string.`);
             } // end if
 
             const expectedList = get(actionParamList, `${inputKey}.enum`, false);
 
             if ( expectedList && ! includes( expectedList, input[ inputKey ] ) ) {
-              throw new Error(`Invalid Input Type: ${ inputKey } @${ action } method\n`+
+              throw new Error(`Invalid Input Type: ${ inputKey } @${ action } method.\n`+
                 `${ inputKey } must be one of items in ${ JSON.stringify( expectedList )}`);
             } // end if
 
@@ -116,26 +117,31 @@ function testInputParams(
           }
           case 'string[]': {
             if ( ! isArray(input[ inputKey ]) ) {
-              throw new Error(`Invalid Input Type: ${ inputKey } @${ action } method`);
+              throw new Error(`Invalid Input Type: ${ inputKey } @${ action } method.\n`+
+                `${ inputKey } must be string[].`
+              );
             } // end if
 
             input[ inputKey ].forEach((el) => {
               if ( !isString(el) ) {
-                throw new Error(`Invalid Input Type: ${ inputKey } @${ action } method`);
+                throw new Error(`Invalid Input Type: ${ inputKey } @${ action } method.\n`+
+                  `${ inputKey } must be string[].`);
               } // end if
             });
             break;
           }
           case 'number': {
             if ( !isNumber(input[ inputKey ]) ) {
-              throw new Error(`Invalid Input Type: ${ inputKey } @${ action } method`);
+              throw new Error(`Invalid Input Type: ${ inputKey } @${ action } method.\n`+
+                `${ inputKey } must be number.`);
             } // end if
 
             break;
           }
           case 'boolean': {
             if ( !isBolean(input[ inputKey ]) ) {
-              throw new Error(`Invalid Input Type: ${ inputKey } @${ action } method`);
+              throw new Error(`Invalid Input Type: ${ inputKey } @${ action } method.\n`+
+                `${ inputKey } must be boolean.`);
             } // end if
 
             break;

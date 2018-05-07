@@ -591,5 +591,106 @@ describe('Test IaaS Server Method', function( ){
       done.fail(e);
     }
   });
+
+  test('Test getPublicIpInstanceList', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const getPublicIpInstanceListResponse = await server.getPublicIpInstanceList();
+
+      console.log( getPublicIpInstanceListResponse );
+
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
+  test('Test getPublicIpTargetServerInstanceList', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const getPublicIpTargetServerInstanceListResponse = await server.getPublicIpTargetServerInstanceList({
+        zoneNo: '3'
+      });
+
+      console.log( getPublicIpTargetServerInstanceListResponse );
+
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
+  test('Test createPublicIpInstance', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const createPublicIpInstanceResponse = await server.createPublicIpInstance({
+        zoneNo: '3'
+      });
+
+      console.log( createPublicIpInstanceResponse );
+
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
+  test('Test associatePublicIpWithServerInstance', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const associatePublicIpWithServerInstanceResponse = await server.associatePublicIpWithServerInstance({
+        publicIpInstanceNo: '768894',
+        serverInstanceNo: '768416'
+      });
+
+      console.log( associatePublicIpWithServerInstanceResponse );
+
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
+  test('Test disassociatePublicIpFromServerInstance', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const disassociatePublicIpFromServerInstanceResponse = await server.disassociatePublicIpFromServerInstance({
+        publicIpInstanceNo: '768894',
+      });
+
+      console.log( disassociatePublicIpFromServerInstanceResponse );
+
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
+  test('Test deletePublicIpInstances', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const deletePublicIpInstancesResponse = await server.deletePublicIpInstances({
+        publicIpInstanceNoList: ['768894'],
+      });
+
+      console.log( deletePublicIpInstancesResponse );
+
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
 });
 

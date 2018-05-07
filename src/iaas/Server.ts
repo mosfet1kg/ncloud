@@ -60,7 +60,7 @@ export default class Server implements InterfaceNcloudIaaSServer {
             console.log( el.ratingTime );
             return {
               ...el,
-              ratingTime: moment.tz(el.ratingTime , 'Asia/Seoul').format('YYYY-MM-DDTHH:mm:ssZZ'),
+              ratingTime: moment.tz(el.ratingTime, 'Asia/Seoul').format('YYYY-MM-DDTHH:mm:ssZZ'),
             }
           })
         };
@@ -101,4 +101,10 @@ export default class Server implements InterfaceNcloudIaaSServer {
   createBlockStorageInstance: InterfaceNcloudIaaSServer['createBlockStorageInstance'];
   deleteBlockStorageInstances: InterfaceNcloudIaaSServer['deleteBlockStorageInstances'];
   getBlockStorageSnapshotInstanceList: InterfaceNcloudIaaSServer['getBlockStorageSnapshotInstanceList'];
+  getPublicIpInstanceList: InterfaceNcloudIaaSServer['getPublicIpInstanceList'];
+  getPublicIpTargetServerInstanceList: InterfaceNcloudIaaSServer['getPublicIpTargetServerInstanceList'];
+  createPublicIpInstance: InterfaceNcloudIaaSServer['createPublicIpInstance'];
+  associatePublicIpWithServerInstance: InterfaceNcloudIaaSServer['associatePublicIpWithServerInstance'];
+  disassociatePublicIpFromServerInstance: InterfaceNcloudIaaSServer['disassociatePublicIpFromServerInstance'];
+  deletePublicIpInstances: InterfaceNcloudIaaSServer['deletePublicIpInstances'];
 }

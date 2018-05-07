@@ -65,7 +65,7 @@ export interface InterfaceServerInfo {
   }[]
 }
 
-export interface InterfaceMemberServerImageItem {
+export interface InterfaceMemberServerImage {
   memberServerImageNo: string; //  "7300",
   memberServerImageName: string; // "hello",
   memberServerImageDescription: string; // "hello test",
@@ -133,7 +133,7 @@ export interface InterfaceBlockStorageInstance {
   zone: InterfaceZone;
 }
 
-export interface InterfaceBlockStoageSnapshotInstance {
+export interface InterfaceBlockStorageSnapshotInstance {
   blockStorageSnapshotInstanceNo: string; // "768434",
   blockStorageSnapshotName: string; // "test",
   blockStorageSnapshotVolumeSize: number; // 53687091200,
@@ -154,9 +154,33 @@ export interface InterfaceBlockStoageSnapshotInstance {
   osInformation: string; // "CentOS 7.3 (64-bit)"
 }
 
-/////
+export interface InterfacePublicIpInstance {
+  publicIpInstanceNo: string; // "768872",
+  publicIp: string; // "106.10.41.178",
+  publicIpDescription: string; // "",
+  createDate: string; // "2018-05-07T11:22:31+0900",
+  internetLineType: {
+    code: string; // "PUBLC",
+    codeName: string; // "PUBLC"
+  },
+  publicIpInstanceStatusName: string; // "created",
+  publicIpInstanceStatus: {
+    code: string; // "CREAT",
+    codeName: string; // "NET CREATE state"
+  },
+  publicIpInstanceOperation: {
+    code: string; // "NULL",
+    codeName: string; // "NET NULL OP"
+  },
+  publicIpKindType: {
+    code: string; // "GEN",
+    codeName: string; // "General"
+  },
+  serverInstanceAssociatedWithPublicIp: InterfaceServerInfo; // {},
+  zone: InterfaceZone;
+}
 
-
+/** IaaS **/
 export interface InterfaceGetServerImageProductListResponse {
   requestId: string;
   returnCode: string;
@@ -416,7 +440,7 @@ export interface InterfaceGetMemberServerImageListResponse {
   returnCode: string; // '0',
   returnMessage: string; // 'success',
   totalRows: number;
-  memberServerImageList: InterfaceMemberServerImageItem[];
+  memberServerImageList: InterfaceMemberServerImage[];
 }
 
 export interface InterfaceCreateMemberServerImageResponse {
@@ -424,7 +448,7 @@ export interface InterfaceCreateMemberServerImageResponse {
   returnCode: string; // '0',
   returnMessage: string; // 'success',
   totalRows: number;
-  memberServerImageList: InterfaceMemberServerImageItem[];
+  memberServerImageList: InterfaceMemberServerImage[];
 }
 
 export interface InterfaceDeleteMemberServerImagesResponse {
@@ -432,7 +456,7 @@ export interface InterfaceDeleteMemberServerImagesResponse {
   returnCode: string; // '0',
   returnMessage: string; // 'success',
   totalRows: number;
-  memberServerImageList: InterfaceMemberServerImageItem[];
+  memberServerImageList: InterfaceMemberServerImage[];
 }
 
 export interface InterfaceGetBlockStorageInstanceListResponse {
@@ -440,7 +464,7 @@ export interface InterfaceGetBlockStorageInstanceListResponse {
   returnCode: string; // '0',
   returnMessage: string; // 'success',
   totalRows: number;
-  memberServerImageList: InterfaceMemberServerImageItem[];
+  memberServerImageList: InterfaceMemberServerImage[];
 }
 
 export interface InterfaceGetBlockStorageInstanceListResponse {
@@ -472,9 +496,58 @@ export interface InterfaceGetBlockStorageSnapshotInstanceListResponse {
   returnCode: string; // '0',
   returnMessage: string; // 'success',
   totalRows: number;
-  blockStorageSnapshotInstanceList: InterfaceBlockStoageSnapshotInstance[];
+  blockStorageSnapshotInstanceList: InterfaceBlockStorageSnapshotInstance[];
 }
 
+export interface InterfaceGetPublicIpInstanceListResponse {
+  requestId: string; // '66882489-edb1-48ac-8574-4d9c797d4290',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+  totalRows: number;
+  publicIpInstanceList: InterfacePublicIpInstance[];
+}
+
+export interface InterfaceGetPublicIpTargetServerInstanceListResponse {
+  requestId: string; // '66882489-edb1-48ac-8574-4d9c797d4290',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+  totalRows: number;
+  serverInstanceList: InterfaceServerInfo[];
+}
+
+export interface InterfaceCreatePublicIpInstanceResponse {
+  requestId: string; // '66882489-edb1-48ac-8574-4d9c797d4290',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+  totalRows: number;
+  publicIpInstanceList: InterfacePublicIpInstance[];
+}
+
+export interface InterfaceAssociatePublicIpWithServerInstanceResponse {
+  requestId: string; // '66882489-edb1-48ac-8574-4d9c797d4290',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+  totalRows: number;
+  publicIpInstanceList: InterfacePublicIpInstance[];
+}
+
+export interface InterfaceDisassociatePublicIpFromServerInstanceResponse {
+  requestId: string; // '66882489-edb1-48ac-8574-4d9c797d4290',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+  totalRows: number;
+  publicIpInstanceList: InterfacePublicIpInstance[];
+}
+
+export interface InterfaceDeletePublicIpInstancesResponse {
+  requestId: string; // '66882489-edb1-48ac-8574-4d9c797d4290',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+  totalRows: number;
+  publicIpInstanceList: InterfacePublicIpInstance[];
+}
+
+/** PaaS **/
 export interface InterfaceGeoLocationResponse {
   returnCode: number;
   requestId: string;
@@ -485,3 +558,4 @@ export interface InterfaceGeoLocationResponse {
     r2: string;
   }
 }
+

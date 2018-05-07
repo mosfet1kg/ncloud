@@ -534,3 +534,100 @@ apis:
           pageSize:
             type: string
         responseName: getBlockStorageSnapshotInstanceListResponse
+
+      getPublicIpInstanceList:
+        method: GET
+        basePath: /server/v1/
+        action: getPublicIpInstanceList
+        actionParamList:
+          isAssociated:
+            type: string
+          publicIpInstanceNoList:
+            type: string[]
+          publicIpList:
+            type: string[]
+          searchFilterName:
+            type: string
+          searchFilterValue:
+            type: string
+          internetLineTypeCode:
+            type: string
+          regionNo:
+            type: string
+          zoneNo:
+            type: string
+          pageNo:
+            type: number
+          pageSize:
+            type: number
+          sortedBy:
+            type: string
+          sortingOrder:
+            type: string
+            enum:
+              - ascending
+              - descending
+        responseName: getPublicIpInstanceListResponse
+
+      getPublicIpTargetServerInstanceList:
+        method: GET
+        basePath: /server/v1/
+        action: getPublicIpTargetServerInstanceList
+        actionParamList:
+          internetLineTypeCode:
+            type: string
+          regionNo:
+            type: string
+          zoneNo:
+            type: string
+        responseName: getPublicIpTargetServerInstanceListResponse
+
+      createPublicIpInstance:
+        method: GET
+        basePath: /server/v1/
+        action: createPublicIpInstance
+        actionParamList:
+          serverInstanceNo:
+            type: string
+          publicIpDescription:
+            type: string
+          internetLineTypeCode:
+            type: string
+          regionNo:
+            type: string
+          zoneNo:
+            type: string
+        responseName: createPublicIpInstanceResponse
+
+      associatePublicIpWithServerInstance:
+        method: GET
+        basePath: /server/v1/
+        action: associatePublicIpWithServerInstance
+        actionParamList:
+          publicIpInstanceNo:
+            type: string
+            required: true
+          serverInstanceNo:
+            type: string
+            required: true
+        responseName: associatePublicIpWithServerInstanceResponse
+
+      disassociatePublicIpFromServerInstance:
+        method: GET
+        basePath: /server/v1/
+        action: disassociatePublicIpFromServerInstance
+        actionParamList:
+          publicIpInstanceNo:
+            type: string
+            required: true
+        responseName: disassociatePublicIpFromServerInstanceResponse
+
+      deletePublicIpInstances:
+        method: GET
+        basePath: /server/v1/
+        action: deletePublicIpInstances
+        actionParamList:
+          publicIpInstanceNoList:
+            type: string[]
+            required: true
+        responseName: deletePublicIpInstancesResponse
