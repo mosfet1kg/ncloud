@@ -249,6 +249,14 @@ export interface InterfaceAddPortForwardingRulesInput {
   }[];
 }
 
+export interface InterfaceDeletePortForwardingRulesInput {
+  portForwardingConfigurationNo: string;
+  portForwardingRuleList: {
+    serverInstanceNo: string;
+    portForwardingExternalPort: string;
+    portForwardingInternalPort: string;
+  }[];
+}
 
 /** PaaS **/
 export interface InterfaceGeoLocationInput {

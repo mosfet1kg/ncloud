@@ -670,3 +670,17 @@ apis:
             replace: portForwardingRuleList.%d.%s
             required: true
         responseName: addPortForwardingRulesResponse
+
+      deletePortForwardingRules:
+        method: GET
+        basePath: /server/v1/
+        action: deletePortForwardingRules
+        actionParamList:
+          portForwardingConfigurationNo:
+            type: string
+            required: true
+          portForwardingRuleList:
+            type: any[]
+            replace: portForwardingRuleList.%d.%s
+            required: true
+        responseName: deletePortForwardingRulesResponse

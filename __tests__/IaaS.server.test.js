@@ -716,11 +716,18 @@ describe('Test IaaS Server Method', function( ){
 
       const addPortForwardingRulesResponse = await server.addPortForwardingRules({
         portForwardingConfigurationNo: '23536',
-        portForwardingRuleList: [{
-          serverInstanceNo: '768416',
-          portForwardingExternalPort: '1024',
-          portForwardingInternalPort: '22'
-        }]
+        portForwardingRuleList: [
+          {
+            serverInstanceNo: '768416',
+            portForwardingExternalPort: '1024',
+            portForwardingInternalPort: '22'
+          },
+          {
+            serverInstanceNo: '768967',
+            portForwardingExternalPort: '1025',
+            portForwardingInternalPort: '22'
+          }
+        ]
       });
 
       console.log( addPortForwardingRulesResponse );
@@ -732,5 +739,32 @@ describe('Test IaaS Server Method', function( ){
     }
   });
 
+  test('Test deletePortForwardingRules', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const deletePortForwardingRulesResponse = await server.deletePortForwardingRules({
+        portForwardingConfigurationNo: '23536',
+        portForwardingRuleList: [
+          {
+            serverInstanceNo: '768416',
+            portForwardingExternalPort: '1024',
+            portForwardingInternalPort: '22'
+          },
+          {
+            serverInstanceNo: '768967',
+            portForwardingExternalPort: '1025',
+            portForwardingInternalPort: '22'
+          }]
+      });
+
+      console.log( deletePortForwardingRulesResponse );
+
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
 });
 
