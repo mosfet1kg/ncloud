@@ -559,7 +559,11 @@ export interface InterfaceGetPortForwardingRuleListResponse {
     codeName: string; // "PUBLC"
   },
   totalRows: number; // 0,
-  portForwardingRuleList: any[]
+  portForwardingRuleList: {
+    portForwardingExternalPort: number;
+    portForwardingInternalPort: number;
+    serverInstance: InterfaceServerInfo;
+  }[]
 }
 
 /** PaaS **/
