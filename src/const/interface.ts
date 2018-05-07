@@ -33,7 +33,7 @@ import {
   InterfaceCreatePublicIpInstanceInput,
   InterfaceAssociatePublicIpWithServerInstanceInput,
   InterfaceDisassociatePublicIpFromServerInstanceInput,
-  InterfaceDeletePublicIpInstancesInput,
+  InterfaceDeletePublicIpInstancesInput, InterfaceGetPortForwardingRuleListInput,
 } from "./interfaceInputs";
 import {
   InterfaceGetServerImageProductListResponse,
@@ -69,7 +69,7 @@ import {
   InterfaceCreatePublicIpInstanceResponse,
   InterfaceAssociatePublicIpWithServerInstanceResponse,
   InterfaceDisassociatePublicIpFromServerInstanceResponse,
-  InterfaceDeletePublicIpInstancesResponse,
+  InterfaceDeletePublicIpInstancesResponse, InterfaceGetPortForwardingRuleListResponse,
 } from './interfaceResponses';
 
 export interface InterfaceAuthParams {
@@ -135,4 +135,5 @@ export interface InterfaceNcloudIaaSServer {
   associatePublicIpWithServerInstance(input: InterfaceAssociatePublicIpWithServerInstanceInput): Promise<InterfaceAssociatePublicIpWithServerInstanceResponse>;
   disassociatePublicIpFromServerInstance(input: InterfaceDisassociatePublicIpFromServerInstanceInput): Promise<InterfaceDisassociatePublicIpFromServerInstanceResponse>;
   deletePublicIpInstances(input: InterfaceDeletePublicIpInstancesInput): Promise<InterfaceDeletePublicIpInstancesResponse>;
+  getPortForwardingRuleList(input?: InterfaceGetPortForwardingRuleListInput): Promise<InterfaceGetPortForwardingRuleListResponse>;
 }

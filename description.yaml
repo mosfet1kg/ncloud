@@ -631,3 +631,16 @@ apis:
             type: string[]
             required: true
         responseName: deletePublicIpInstancesResponse
+
+      getPortForwardingRuleList:
+        method: GET
+        basePath: /server/v1/
+        action: getPortForwardingRuleList
+        actionParamList:
+          internetLineTypeCode:
+            type: string
+          regionNo:
+            type: string
+          zoneNo:
+            type: string
+        responseName: getPortForwardingRuleListResponse

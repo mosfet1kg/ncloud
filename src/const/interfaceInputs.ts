@@ -234,6 +234,12 @@ export interface InterfaceDeletePublicIpInstancesInput {
   publicIpInstanceNoList: string[];
 }
 
+export interface InterfaceGetPortForwardingRuleListInput {
+  internetLineTypeCode?: string;
+  regionNo?: string;
+  zoneNo?: string;
+}
+
 /** PaaS **/
 export interface InterfaceGeoLocationInput {
   ip: string;
