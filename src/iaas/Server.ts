@@ -26,7 +26,22 @@ export default class Server implements InterfaceNcloudIaaSServer {
     }: any) {
 
     this.authParams = authParamsInput;
-  }
+
+    Object
+      .keys( get(apiDescription, 'apis.IaaS.Server') )
+      .filter((action) => {
+        return get(apiDescription, `apis.IaaS.Server.${action}.autoCreate`, true);
+      })
+      .forEach( action => {
+        (Server as any).prototype[action] = function(input={}) {
+          return generateMethods({
+            actionPath: `apis.IaaS.Server.${action}`,
+            input,
+            authParams: this.authParams,
+          });
+        };
+      });
+  } // end constructor
 
   getServerImageProductList: InterfaceNcloudIaaSServer['getServerImageProductList'];
   getServerProductList: InterfaceNcloudIaaSServer['getServerProductList'];
@@ -45,7 +60,7 @@ export default class Server implements InterfaceNcloudIaaSServer {
             console.log( el.ratingTime );
             return {
               ...el,
-              ratingTime: moment.tz( el.ratingTime , 'Asia/Seoul').format('YYYY-MM-DDTHH:mm:ssZZ'),
+              ratingTime: moment.tz(el.ratingTime , 'Asia/Seoul').format('YYYY-MM-DDTHH:mm:ssZZ'),
             }
           })
         };
@@ -87,18 +102,3 @@ export default class Server implements InterfaceNcloudIaaSServer {
   deleteBlockStorageInstances: InterfaceNcloudIaaSServer['deleteBlockStorageInstances'];
   getBlockStorageSnapshotInstanceList: InterfaceNcloudIaaSServer['getBlockStorageSnapshotInstanceList'];
 }
-
-Object
-  .keys( get(apiDescription, 'apis.IaaS.Server') )
-  .filter((action) => {
-    return get(apiDescription, `apis.IaaS.Server.${action}.autoCreate`, true);
-  })
-  .forEach( action => {
-    (Server as any).prototype[action] = function(input={}) {
-      return generateMethods({
-        actionPath: `apis.IaaS.Server.${action}`,
-        input,
-        authParams: this.authParams,
-      });
-    };
-  });

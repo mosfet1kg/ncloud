@@ -17,19 +17,19 @@ export default class GeoLocation implements InterfaceNcloudPaaSGeoLocation {
     }: any) {
 
     this.authParams = authParamsInput;
-  }
+
+    Object
+      .keys( get(apiDescription, 'apis.PaaS.GeoLocation') )
+      .forEach( action => {
+        (GeoLocation as any).prototype[action] = function(input={}) {
+          return generateMethods({
+            actionPath: `apis.PaaS.GeoLocation.${action}`,
+            input,
+            authParams: this.authParams,
+          });
+        };
+      });
+  } // end constructor
 
   geoLocation: InterfaceNcloudPaaSGeoLocation['geoLocation'];
 }
-
-Object
-  .keys( get(apiDescription, 'apis.PaaS.GeoLocation') )
-  .forEach( action => {
-    (GeoLocation as any).prototype[action] = function(input={}) {
-      return generateMethods({
-        actionPath: `apis.PaaS.GeoLocation.${action}`,
-        input,
-        authParams: this.authParams,
-      });
-    };
-  });
