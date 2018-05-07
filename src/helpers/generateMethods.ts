@@ -181,19 +181,18 @@ function getActionParams(
             const format = get(actionParamList, `${key}.replace`, false);
 
             if ( get(actionParamList, `${key}.type`) === 'any[]' && format ){
-              input[key].forEach((el, idx) => {
+              input[key].forEach((innerObj, idx) => {
 
-                const items = Object.keys(el).reduce((innerPrev, innerObjItemKey) => {
+                const items = Object.keys(innerObj).reduce((innerPrev, innerObjItemKey) => {
                   innerPrev = {
                     ...innerPrev,
-                    [format.replace('%d', idx + 1).replace('%s', innerObjItemKey)]: el[innerObjItemKey],
+                    [format.replace('%d', idx + 1).replace('%s', innerObjItemKey)]: innerObj[innerObjItemKey],
                   };
 
                   return innerPrev;
                 }, {});
 
                 prev = { ...prev, ...items };
-                // return prev;
               });
             } else {
               input[key].forEach((el, idx) => {
@@ -203,6 +202,7 @@ function getActionParams(
           } else {
             prev = { ...prev, [key]: input[key] }
           } // end if
+
           return prev;
         }, {});
 
