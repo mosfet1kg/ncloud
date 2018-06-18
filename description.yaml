@@ -48,6 +48,10 @@ apis:
         method: GET
         basePath: /server/v1/
         action: getZoneList
+        actionParamList:
+          regionNo:
+            type: string
+            required: true
         responseName: getZoneListResponse
 
       getRegionList:

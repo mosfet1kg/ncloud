@@ -1,3 +1,8 @@
+export interface InterfaceGetZoneListInput {
+  regionNo?: string;
+}
+
+
 export interface InterfaceIaaSServerGetServerImageProductListInput {
   platformTypeCodeList?: string[];
   regionNo?: string;

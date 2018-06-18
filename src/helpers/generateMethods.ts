@@ -14,7 +14,8 @@ import {
 } from '../const/interface'
 import {
   getAuthParams,
-} from '../helpers/store';
+  getValues,
+} from './store';
 
 const {
   baseURL: apiGwBaseURL,
@@ -40,6 +41,11 @@ export default function(
     actionParamList={},
     responseName,
   } = get(apiDescription, actionPath);
+
+  input = {
+    ...input,
+    ...getValues(),
+  };
 
   return testInputParams(
     {

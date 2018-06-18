@@ -9,7 +9,6 @@ import {
   getValues
 } from '../helpers/store';
 
-
 export default class IaaS implements InterfaceNcloudIaaS {
   private authParams: InterfaceAuthParams;
 

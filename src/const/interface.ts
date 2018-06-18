@@ -37,6 +37,7 @@ import {
   InterfaceGetPortForwardingRuleListInput,
   InterfaceAddPortForwardingRulesInput,
   InterfaceDeletePortForwardingRulesInput,
+  InterfaceGetZoneListInput,
 } from "./interfaceInputs";
 import {
   InterfaceGetServerImageProductListResponse,
@@ -103,7 +104,7 @@ export interface InterfaceNcloudPaaSGeoLocation {
 export interface InterfaceNcloudIaaSServer extends InterfaceNcloudIaaSServerCustomMethods {
   getServerImageProductList(input?: InterfaceIaaSServerGetServerImageProductListInput): Promise<InterfaceGetServerImageProductListResponse>;
   getServerProductList(input: InterfaceIaaSServerGetServerProductListInput): Promise<InterfaceGetServerProductListResponse>;
-  getZoneList(): Promise<InterfaceGetZoneListResponse>;
+  getZoneList(input?: InterfaceGetZoneListInput): Promise<InterfaceGetZoneListResponse>;
   getRegionList(): Promise<InterfaceGetRegionListResponse>;
   createNasVolumeInstance(input: InterfaceCreateNasVolumeInstanceInput): Promise<InterfaceNasVolumeInstanceListResponse>;
   deleteNasVolumeInstance(input: InterfaceDeleteNasVolumeInstanceInput): Promise<InterfaceNasVolumeInstanceListResponse>;

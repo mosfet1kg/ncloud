@@ -1,5 +1,4 @@
 import {
-  InterfaceAuthParams,
   InterfaceNcloud,
   InterfaceNcloudIaaS,
   InterfaceNcloudPaaS,
@@ -16,8 +15,11 @@ export class Ncloud implements InterfaceNcloud {
   public IaaS: InterfaceNcloudIaaS;
   public PaaS: InterfaceNcloudPaaS;
 
-  private constructor( authParams: InterfaceAuthParams ) {
-    setValues( authParams );
+  private constructor( inputParams: any ) {
+    // TODO: throw errors regarding missing expected parameters.
+    // There are no expected values
+
+    setValues( inputParams );
 
     this.IaaS = new IaaS();
     this.PaaS = new PaaS();
@@ -28,6 +30,6 @@ export class Ncloud implements InterfaceNcloud {
   }
 }
 
-export function createClient( authParams: InterfaceAuthParams ) {
-  return Ncloud.createClient( authParams );
+export function createClient( inputParams: any ) {
+  return Ncloud.createClient( inputParams );
 }

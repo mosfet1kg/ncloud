@@ -22,6 +22,25 @@ describe('Test IaaS Server Method', function( ){
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 500000;
   });
 
+  test('Test global param test', async ( done ) => {
+    try {
+      const client = ncloud.createClient({
+        accessKey,
+        secretKey,
+        apiKey,
+        regionNo: "2",
+      });
+      const server = client.IaaS.server();
+      const zoneList = await server.getZoneList();
+
+      console.log( zoneList );
+
+      done();
+    } catch (e) {
+      done.fail(e);
+    }
+  });
+
   test('Test getServerImageProductListResponse', async ( done ) => {
     try {
       const server = client.IaaS.server();
