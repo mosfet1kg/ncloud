@@ -11,7 +11,10 @@ import {
 } from 'lodash';
 import {
   InterfaceAuthParams,
-} from "../const/interface";
+} from '../const/interface'
+import {
+  getAuthParams,
+} from '../helpers/store';
 
 const {
   baseURL: apiGwBaseURL,
@@ -22,14 +25,14 @@ export default function(
     baseURL=apiGwBaseURL,
     actionPath,
     input,
-    authParams,
   }: {
     baseURL?: string;
     actionPath: string;
     input: any;
-    authParams: InterfaceAuthParams;
   }
 ) {
+  const authParams: InterfaceAuthParams = getAuthParams();
+
   const {
     method,
     action,

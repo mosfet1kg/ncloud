@@ -25,7 +25,6 @@ export default class GeoLocation implements InterfaceNcloudPaaSGeoLocation {
           return generateMethods({
             actionPath: `apis.PaaS.GeoLocation.${action}`,
             input,
-            authParams: this.authParams,
           });
         };
       });

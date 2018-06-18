@@ -4,18 +4,16 @@ import {
   InterfaceNcloudPaaS,
   InterfaceNcloudPaaSGeoLocation,
 } from '../const/interface';
+import {
+  getValues
+} from '../helpers/store';
+
 
 export default class PaaS implements InterfaceNcloudPaaS {
   private authParams: InterfaceAuthParams;
 
-  constructor(
-    {
-      authParams: authParamsInput,
-    }: {
-      authParams: InterfaceAuthParams,
-    }) {
-
-    this.authParams = authParamsInput;
+  constructor() {
+    this.authParams = getValues() as any;
   } // end construct
 
   geoLocation(params?): InterfaceNcloudPaaSGeoLocation {

@@ -34,7 +34,6 @@ export default class Server implements InterfaceNcloudIaaSServer {
           return generateMethods({
             actionPath: `apis.IaaS.Server.${action}`,
             input,
-            authParams: authParamsInput,
           });
         };
       });
