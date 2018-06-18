@@ -100,7 +100,7 @@ export interface InterfaceNcloudPaaSGeoLocation {
   geoLocation(input): Promise<InterfaceGeoLocationResponse>;
 }
 
-export interface InterfaceNcloudIaaSServer {
+export interface InterfaceNcloudIaaSServer extends InterfaceNcloudIaaSServerCustomMethods {
   getServerImageProductList(input?: InterfaceIaaSServerGetServerImageProductListInput): Promise<InterfaceGetServerImageProductListResponse>;
   getServerProductList(input: InterfaceIaaSServerGetServerProductListInput): Promise<InterfaceGetServerProductListResponse>;
   getZoneList(): Promise<InterfaceGetZoneListResponse>;
@@ -143,4 +143,8 @@ export interface InterfaceNcloudIaaSServer {
   getPortForwardingRuleList(input?: InterfaceGetPortForwardingRuleListInput): Promise<InterfaceGetPortForwardingRuleListResponse>;
   addPortForwardingRules(input: InterfaceAddPortForwardingRulesInput): Promise<InterfaceAddPortForwardingRulesResponse>;
   deletePortForwardingRules(input: InterfaceDeletePortForwardingRulesInput ): Promise<InterfaceDeletePortForwardingRulesResponse>;
+}
+
+export interface InterfaceNcloudIaaSServerCustomMethods {
+  createVM(): void;
 }

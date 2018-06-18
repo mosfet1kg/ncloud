@@ -1,6 +1,7 @@
 import {
   InterfaceAuthParams,
   InterfaceNcloudIaaSServer,
+  InterfaceNcloudIaaSServerCustomMethods,
 } from '../const/interface';
 import {
   InterfaceCreateServerInstancesInput,
@@ -18,14 +19,10 @@ import {
 import * as moment from 'moment-timezone';
 
 export default class Server implements InterfaceNcloudIaaSServer {
-  private authParams: InterfaceAuthParams;
-
   constructor(
     {
       authParams: authParamsInput,
     }: any) {
-
-    this.authParams = authParamsInput;
 
     Object
       .keys( get(apiDescription, 'apis.IaaS.Server') )
@@ -37,7 +34,7 @@ export default class Server implements InterfaceNcloudIaaSServer {
           return generateMethods({
             actionPath: `apis.IaaS.Server.${action}`,
             input,
-            authParams: this.authParams,
+            authParams: authParamsInput,
           });
         };
       });
@@ -110,4 +107,8 @@ export default class Server implements InterfaceNcloudIaaSServer {
   getPortForwardingRuleList: InterfaceNcloudIaaSServer['getPortForwardingRuleList'];
   addPortForwardingRules: InterfaceNcloudIaaSServer['addPortForwardingRules'];
   deletePortForwardingRules: InterfaceNcloudIaaSServer['deletePortForwardingRules'];
+
+  createVM() {
+
+  }
 }
