@@ -335,8 +335,6 @@ apis:
             enum:
               - MTRAT
               - FXSUM
-          regionNo:
-            type: string
           zoneNo:
             type: string
           accessControlGroupConfigurationNoList:

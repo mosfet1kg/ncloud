@@ -56,7 +56,7 @@ describe('Test IaaS Server Method', function( ){
       const server = client.IaaS.server();
 
       const zoneList = await server.getZoneList({
-        regionNo: "2"
+        regionNo: "1"
       });
       console.log( zoneList );
       done();
@@ -347,7 +347,6 @@ describe('Test IaaS Server Method', function( ){
         serverImageProductCode: 'SPSW0LINUX000046',
         serverProductCode: 'SPSVRSTAND000003',
         zoneNo: "10",
-        regionNo: "2",
         serverName: 'mytestb1',
         // serverCreateCount: 3,
         accessControlGroupConfigurationNoList: ['5475'],
