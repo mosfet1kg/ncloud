@@ -1,5 +1,4 @@
 import {
-  InterfaceAuthParams,
   InterfaceNcloudIaaSServer,
   InterfaceNcloudIaaSServerCustomMethods,
 } from '../const/interface';
@@ -19,10 +18,7 @@ import {
 import * as moment from 'moment-timezone';
 
 export default class Server implements InterfaceNcloudIaaSServer {
-  constructor(
-    {
-      authParams: authParamsInput,
-    }: any) {
+  constructor() {
 
     Object
       .keys( get(apiDescription, 'apis.IaaS.Server') )

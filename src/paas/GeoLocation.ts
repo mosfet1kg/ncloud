@@ -9,15 +9,7 @@ import {
 } from 'lodash';
 
 export default class GeoLocation implements InterfaceNcloudPaaSGeoLocation {
-  private authParams: InterfaceAuthParams;
-
-  constructor(
-    {
-      authParams: authParamsInput,
-    }: any) {
-
-    this.authParams = authParamsInput;
-
+  constructor() {
     Object
       .keys( get(apiDescription, 'apis.PaaS.GeoLocation') )
       .forEach( action => {

@@ -17,10 +17,6 @@ export default class PaaS implements InterfaceNcloudPaaS {
   } // end construct
 
   geoLocation(params?): InterfaceNcloudPaaSGeoLocation {
-    return new GeoLocation(
-      {
-        authParams: this.authParams,
-        ...params,
-      });
+    return new GeoLocation();
   } // end server
 }
