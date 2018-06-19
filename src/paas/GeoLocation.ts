@@ -1,9 +1,8 @@
 import {
-  InterfaceAuthParams,
   InterfaceNcloudPaaSGeoLocation,
 } from '../const/interface';
 import apiDescription from "../helpers/apiDescription";
-import generateMethods from "../helpers/generateMethods";
+import generateMethods from '../helpers/generateMethods';
 import {
   get
 } from 'lodash';

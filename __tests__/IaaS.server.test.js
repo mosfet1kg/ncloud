@@ -597,22 +597,6 @@ describe('Test IaaS Server Method', function( ){
     }
   });
 
-  test('Test geoLocation', async ( done ) => {
-    try {
-      const geoLocation = client.PaaS.geoLocation();
-
-      const geolocationResponse = await geoLocation.geoLocation({
-        ip: '143.248.142.77'
-      });
-
-      console.log( geolocationResponse );
-      done();
-    } catch (e) {
-      console.log( e.response );
-      done.fail(e);
-    }
-  });
-
   test('Test getPublicIpInstanceList', async ( done ) => {
     try {
       const server = client.IaaS.server();

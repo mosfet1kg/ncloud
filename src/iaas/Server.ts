@@ -1,15 +1,14 @@
 import {
   InterfaceNcloudIaaSServer,
-  InterfaceNcloudIaaSServerCustomMethods,
 } from '../const/interface';
 import {
   InterfaceCreateServerInstancesInput,
   InterfaceGetNasVolumeInstanceRatingListInput,
-} from '../const/interfaceInputs';
+} from '../const/interfaceIaaSServerInputs';
 import {
   InterfaceCreateServerInstancesResponse,
   InterfaceGetNasVolumeInstanceRatingListResponse,
-} from '../const/interfaceResponses';
+} from '../const/interfaceIaaSServerResponses';
 import generateMethods from '../helpers/generateMethods';
 import apiDescription from '../helpers/apiDescription';
 import {

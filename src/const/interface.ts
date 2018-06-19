@@ -38,7 +38,7 @@ import {
   InterfaceAddPortForwardingRulesInput,
   InterfaceDeletePortForwardingRulesInput,
   InterfaceGetZoneListInput,
-} from "./interfaceInputs";
+} from './interfaceIaaSServerInputs';
 import {
   InterfaceGetServerImageProductListResponse,
   InterfaceGetServerProductListResponse,
@@ -67,7 +67,6 @@ import {
   InterfaceCreateBlockStorageInstanceResponse,
   InterfaceDeleteBlockStorageInstancesResponse,
   InterfaceGetBlockStorageSnapshotInstanceListResponse,
-  InterfaceGeoLocationResponse,
   InterfaceGetPublicIpInstanceListResponse,
   InterfaceGetPublicIpTargetServerInstanceListResponse,
   InterfaceCreatePublicIpInstanceResponse,
@@ -75,8 +74,21 @@ import {
   InterfaceDisassociatePublicIpFromServerInstanceResponse,
   InterfaceDeletePublicIpInstancesResponse,
   InterfaceGetPortForwardingRuleListResponse,
-  InterfaceAddPortForwardingRulesResponse, InterfaceDeletePortForwardingRulesResponse,
-} from './interfaceResponses';
+  InterfaceAddPortForwardingRulesResponse,
+  InterfaceDeletePortForwardingRulesResponse,
+} from './interfaceIaaSServerResponses';
+import {
+  InterfaceGetLoadBalancerInstanceListResponse,
+} from "./interfaceIaaSLoadBalancerResponses";
+import {
+  InterfaceGetLoadBalancerInstanceListInput,
+} from './interfaceIaasLoadBalancerInputs';
+import {
+  InterfaceGeoLocationResponse,
+} from './interfacePaaSRespones';
+import {
+  InterfaceGeoLocationInput,
+} from './interfacePaaSInputs';
 
 export interface InterfaceAuthParams {
   accessKey: string;
@@ -91,6 +103,7 @@ export interface InterfaceNcloud {
 
 export interface InterfaceNcloudIaaS {
   server(): InterfaceNcloudIaaSServer;
+  loadBalancer(): InterfaceNcloudIaaSLoadBalancer;
 }
 
 export interface InterfaceNcloudPaaS {
@@ -98,7 +111,7 @@ export interface InterfaceNcloudPaaS {
 }
 
 export interface InterfaceNcloudPaaSGeoLocation {
-  geoLocation(input): Promise<InterfaceGeoLocationResponse>;
+  geoLocation(input: InterfaceGeoLocationInput): Promise<InterfaceGeoLocationResponse>;
 }
 
 export interface InterfaceNcloudIaaSServer extends InterfaceNcloudIaaSServerCustomMethods {
@@ -148,4 +161,8 @@ export interface InterfaceNcloudIaaSServer extends InterfaceNcloudIaaSServerCust
 
 export interface InterfaceNcloudIaaSServerCustomMethods {
   createVM(): void;
+}
+
+export interface InterfaceNcloudIaaSLoadBalancer {
+  getLoadBalancerInstanceList(input?: InterfaceGetLoadBalancerInstanceListInput): Promise<InterfaceGetLoadBalancerInstanceListResponse>;
 }

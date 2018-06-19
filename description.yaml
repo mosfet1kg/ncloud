@@ -18,6 +18,33 @@ apis:
             type: string
 
   IaaS:
+    LoadBalancer:
+      getLoadBalancerInstanceList:
+        method: GET
+        basePath: /loadbalancer/v1/
+        action: getLoadBalancerInstanceList
+        actionParamList:
+          loadBalancerInstanceNoList:
+            type: string[]
+          internetLineTypeCode:
+            type: string
+          networkUsageTypeCode:
+            type: string
+          regionNo:
+            type: string
+          pageNo:
+            type: number
+          pageSize:
+            type: number
+          sortedBy:
+            type: string
+          sortingOrder:
+            type: string
+            enum:
+              - ascending
+              - descending
+        responseName: getLoadBalancerInstanceListResponse
+
     Server:
       getServerImageProductList:
         method: GET

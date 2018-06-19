@@ -1,13 +1,11 @@
 import Server from './Server';
+import LoadBalancer from './LoadBalancer';
 import {
   InterfaceAuthParams,
   InterfaceNcloudIaaS,
   InterfaceNcloudIaaSServer,
+  InterfaceNcloudIaaSLoadBalancer,
 } from '../const/interface';
-
-import {
-  getValues
-} from '../helpers/store';
 
 export default class IaaS implements InterfaceNcloudIaaS {
   private authParams: InterfaceAuthParams;
@@ -18,4 +16,8 @@ export default class IaaS implements InterfaceNcloudIaaS {
   server(params?): InterfaceNcloudIaaSServer {
     return new Server();
   } // end server
+
+  loadBalancer(params?): InterfaceNcloudIaaSLoadBalancer {
+    return new LoadBalancer();
+  }
 }

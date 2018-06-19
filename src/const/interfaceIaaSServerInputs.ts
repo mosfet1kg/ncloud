@@ -1,7 +1,7 @@
+/** IaaS: Server**/
 export interface InterfaceGetZoneListInput {
   regionNo?: string;
 }
-
 
 export interface InterfaceIaaSServerGetServerImageProductListInput {
   platformTypeCodeList?: string[];
@@ -263,10 +263,5 @@ export interface InterfaceDeletePortForwardingRulesInput {
   }[];
 }
 
-/** PaaS **/
-export interface InterfaceGeoLocationInput {
-  ip: string;
-  enc?: string;
-  enx?: string;
-}
+
 
