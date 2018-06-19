@@ -19,12 +19,8 @@ import * as moment from 'moment-timezone';
 
 export default class Server implements InterfaceNcloudIaaSServer {
   constructor() {
-
     Object
       .keys( get(apiDescription, 'apis.IaaS.Server') )
-      .filter((action) => {
-        return get(apiDescription, `apis.IaaS.Server.${action}.autoCreate`, true);
-      })
       .forEach( action => {
         (Server as any).prototype[action] = function(input={}) {
           return generateMethods({

@@ -127,7 +127,6 @@ apis:
         responseName: changeNasVolumeSizeResponse
 
       getNasVolumeInstanceRatingListProto:
-        #autoCreate: false
         method: GET
         basePath: /server/v1/
         action: getNasVolumeInstanceRatingList
