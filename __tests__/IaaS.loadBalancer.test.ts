@@ -1,5 +1,5 @@
-const ncloud = require('../lib/');
-const moment = require('moment-timezone');
+import * as ncloud from '../src'
+import * as moment from 'moment-timezone';
 
 const {
   accessKey,

@@ -10,7 +10,7 @@ export function setValues ( values: any ) {
     accessKey,
     secretKey,
     apiKey,
-    ...remains,
+    ...remains
   } = values;
 
   store = {
