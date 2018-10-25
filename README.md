@@ -7,6 +7,14 @@ ncloud
 [![NPM](https://nodei.co/npm/ncloud.png?compact=true)](https://nodei.co/npm/ncloud/)  
   
 ![](./docs/assets/ncloudicon-01.png)   
+
+
+> 네이버 클라우드 플랫폼 SDK입니다.  
+> 현재 최신 API 스펙 (v2)에 맞춰서 개선작업중에 있습니다.  
+> 이 저장소는 Ncloud의 Official 저장소가 아닙니다. 
+
+
+
 NAVER Cloud Platform(https://www.ncloud.com/) Library for Node.js  
 This project is inspired from [pkgcloud](https://github.com/pkgcloud/pkgcloud).  
 **Currently, this package supports geolocation only. The other functions are unstable.**
