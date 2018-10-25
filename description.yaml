@@ -14,7 +14,7 @@ apis:
             required: true
           enc:
             type: string
-          ent:
+          ext:
             type: string
 
   IaaS:

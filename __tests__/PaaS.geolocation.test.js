@@ -4,13 +4,11 @@ const moment = require('moment-timezone');
 const {
   accessKey,
   secretKey,
-  apiKey,
 } = require('./env.json');
 
 const client = ncloud.createClient({
   accessKey,
   secretKey,
-  apiKey,
 });
 
 describe('Test PaaS Geolocation Method', function( ){
@@ -27,7 +25,8 @@ describe('Test PaaS Geolocation Method', function( ){
       const geoLocation = client.PaaS.geoLocation();
 
       const geolocationResponse = await geoLocation.geoLocation({
-        ip: '143.248.142.77'
+        ip: '143.248.142.77',
+        ext: 't'
       });
 
       console.log( geolocationResponse );
