@@ -27,7 +27,6 @@ describe('Test IaaS Server Method', function( ){
       const client = ncloud.createClient({
         accessKey,
         secretKey,
-        apiKey,
         regionNo: "2",
       });
       const server = client.IaaS.server();
