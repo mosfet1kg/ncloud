@@ -1,0 +1,716 @@
+version: 0.2.0
+baseURL: https://ncloud.apigw.ntruss.com/
+
+apis:
+  PaaS:
+    GeoLocation:
+      geoLocation:
+        method: GET
+        basePath: /geolocation/v2/
+        action: geoLocation
+        actionParamList:
+          ip:
+            type: string
+            required: true
+          enc:
+            type: string
+          ent:
+            type: string
+
+  IaaS:
+    LoadBalancer:
+      getLoadBalancerInstanceList:
+        method: GET
+        basePath: /loadbalancer/v2/
+        action: getLoadBalancerInstanceList
+        actionParamList:
+          loadBalancerInstanceNoList:
+            type: string[]
+          internetLineTypeCode:
+            type: string
+          networkUsageTypeCode:
+            type: string
+          regionNo:
+            type: string
+          pageNo:
+            type: number
+          pageSize:
+            type: number
+          sortedBy:
+            type: string
+          sortingOrder:
+            type: string
+            enum:
+              - ascending
+              - descending
+        responseName: getLoadBalancerInstanceListResponse
+
+    Server:
+      getServerImageProductList:
+        method: GET
+        basePath: /server/v2/
+        action: getServerImageProductList
+        actionParamList:
+          platformTypeCodeList:
+            type: string[]
+          regionNo:
+            type: string
+        responseName: getServerImageProductListResponse
+
+      getServerProductList:
+        method: GET
+        basePath: /server/v2/
+        action: getServerProductList
+        actionParamList:
+          serverImageProductCode:
+            type: string
+            required: true
+          regionNo:
+            type: string
+          zoneNo:
+            type: string
+        responseName: getServerProductListResponse
+
+      getZoneList:
+        method: GET
+        basePath: /server/v2/
+        action: getZoneList
+        actionParamList:
+          regionNo:
+            type: string
+            required: true
+        responseName: getZoneListResponse
+
+      getRegionList:
+        method: GET
+        basePath: /server/v2/
+        action: getRegionList
+        responseName: getRegionListResponse
+
+      createNasVolumeInstance:
+        method: GET
+        basePath: /server/v2/
+        action: createNasVolumeInstance
+        actionParamList:
+          volumeName:
+            type: string
+            required: true
+          volumeSize:
+            type: string
+            required: true
+          volumeAllotmentProtocolTypeCode:
+            type: string
+            required: true
+          serverInstanceNoList:
+            type: string[]
+          customIpList:
+            type: string[]
+          cifsUserName:
+            type: string
+          cifsUserPassword:
+            type: string
+          nasVolumeDescription:
+            type: string
+          regionNo:
+            type: string
+          zoneNo:
+            type: string
+        responseName: createNasVolumeInstanceResponse
+
+      deleteNasVolumeInstance:
+        method: GET
+        basePath: /server/v2/
+        action: deleteNasVolumeInstance
+        actionParamList:
+          nasVolumeInstanceNo:
+            type: string
+            required: true
+        responseName: deleteNasVolumeInstanceResponse
+
+      getNasVolumeInstanceList:
+        method: GET
+        basePath: /server/v2/
+        action: getNasVolumeInstanceList
+        actionParamList:
+          volumeAllotmentProtocolTypeCode:
+            type: string
+          isEventConfiguration:
+            type: boolean
+          isSnapshotConfiguration:
+            type: bollean
+        responseName: getNasVolumeInstanceListResponse
+
+      changeNasVolumeSize:
+        method: GET
+        basePath: /server/v2/
+        action: changeNasVolumeSize
+        actionParamList:
+          nasVolumeInstanceNo:
+            type: string
+            required: true
+          volumeSize:
+            type: string
+            required: true
+        responseName: changeNasVolumeSizeResponse
+
+      getNasVolumeInstanceRatingListProto:
+        method: GET
+        basePath: /server/v2/
+        action: getNasVolumeInstanceRatingList
+        actionParamList:
+          nasVolumeInstanceNo:
+            type: string
+            required: true
+          startTime:
+            type: string
+            required: true
+          endTime:
+            type: string
+            required: true
+          interval:
+            type: string
+            required: true
+            enum:
+              - 5m
+              - 6h
+              - 1d
+              - 1M
+        responseName: getNasVolumeInstanceRatingListResponse
+
+      setNasVolumeAccessControl:
+        method: GET
+        basePath: /server/v2/
+        action: setNasVolumeAccessControl
+        actionParamList:
+          nasVolumeInstanceNo:
+            type: string
+            required: true
+          serverInstanceNoList:
+            type: string[]
+          customIpList:
+            type: string[]
+        responseName: setNasVolumeAccessControlResponse
+
+      addNasVolumeAccessControl:
+        method: GET
+        basePath: /server/v2/
+        action: addNasVolumeAccessControl
+        actionParamList:
+          nasVolumeInstanceNo:
+            type: string
+            required: true
+          serverInstanceNoList:
+            type: string[]
+          customIpList:
+            type: string[]
+        responseName: addNasVolumeAccessControlResponse
+
+      removeNasVolumeAccessControl:
+        method: GET
+        basePath: /server/v2/
+        action: removeNasVolumeAccessControl
+        actionParamList:
+          nasVolumeInstanceNo:
+            type: string
+            required: true
+          serverInstanceNoList:
+            type: string[]
+          customIpList:
+            type: string[]
+        responseName: removeNasVolumeAccessControlResponse
+
+      getLoginKeyList:
+        method: GET
+        basePath: /server/v2/
+        action: getLoginKeyList
+        actionParamList:
+          keyName:
+            type: string
+          pageNo:
+            type: number
+          pageSize:
+            type: number
+        responseName: getLoginKeyListResponse
+
+      createLoginKey:
+        method: GET
+        basePath: /server/v2/
+        action: createLoginKey
+        actionParamList:
+          keyName:
+            type: string
+            required: true
+        responseName: createLoginKeyResponse
+
+      deleteLoginKey:
+        method: GET
+        basePath: /server/v2/
+        action: deleteLoginKey
+        actionParamList:
+          keyName:
+            type: string
+            required: true
+        responseName: deleteLoginKeyResponse
+
+      getAccessControlGroupList:
+        method: GET
+        basePath: /server/v2/
+        action: getAccessControlGroupList
+        actionParamList:
+          accessControlGroupConfigurationNoList:
+            type: string[]
+          isDefaultGroup:
+            type: boolean
+          accessControlGroupName:
+            type: string
+          pageNo:
+            type: number
+        responseName: getAccessControlGroupListResponse
+
+      getAccessControlGroupServerInstanceList:
+        method: GET
+        basePath: /server/v2/
+        action: getAccessControlGroupServerInstanceList
+        actionParamList:
+          accessControlGroupConfigurationNo:
+            type: string
+            required: true
+        responseName: getAccessControlGroupServerInstanceListResponse
+
+      getAccessControlRuleList:
+        method: GET
+        basePath: /server/v2/
+        action: getAccessControlRuleList
+        actionParamList:
+          accessControlGroupConfigurationNo:
+            type: string
+            required: true
+        responseName: getAccessControlRuleListResponse
+
+
+      getServerInstanceList:
+        method: GET
+        basePath: /server/v2/
+        action: getServerInstanceList
+        actionParamList:
+          serverInstanceNoList:
+            type: string[]
+          searchFilterName:
+            type: string
+          searchFilterValue:
+            type: string
+          pageNo:
+            type: number
+          pageSize:
+            type: number
+          serverInstanceStatusCode:
+            type: string
+          internetLineTypeCode:
+            type: string
+            enum:
+              - PUBLC
+              - GLBL
+          regionNo:
+            type: string
+          zoneNo:
+            type: string
+          baseBlockStorageDiskTypeCode:
+            type: string
+            enum:
+              - NET
+              - LOCAL
+          baseBlockStorageDiskDetailTypeCode:
+            type: string
+            enum:
+              - HDD
+              - SSD
+          sortedBy:
+            type: string
+          sortingOrder:
+            type: string
+            enum:
+              - ascending
+        responseName: getServerInstanceListResponse
+
+      createServerInstancesProto:
+        method: GET
+        basePath: /server/v2/
+        action: createServerInstances
+        actionParamList:
+          serverImageProductCode:
+            type: string
+          serverProductCode:
+            type: string
+          memberServerImageNo:
+            type: string
+          serverName:
+            type: string
+          serverDescription:
+            type: string
+          loginKeyName:
+            type: string
+          isProtectServerTermination:
+            type: boolean
+          serverCreateCount:
+            type: number
+          serverCreateStartNo:
+            type: number
+          internetLineTypeCode:
+            type: string
+            enum:
+              - PUBLC
+              - GLBL
+          feeSystemTypeCode:
+            type: string
+            enum:
+              - MTRAT
+              - FXSUM
+          zoneNo:
+            type: string
+          accessControlGroupConfigurationNoList:
+            type: string[]
+          userData:
+            type: string
+        responseName: createServerInstancesResponse
+
+      terminateServerInstances:
+        method: GET
+        basePath: /server/v2/
+        action: terminateServerInstances
+        actionParamList:
+          serverInstanceNoList:
+            type: string[]
+            required: true
+        responseName: terminateServerInstancesResponse
+
+      changeServerInstanceSpec:
+        method: GET
+        basePath: /server/v2/
+        action: changeServerInstanceSpec
+        actionParamList:
+          serverInstanceNo:
+            type: string
+            required: true
+          serverProductCode:
+            type: string
+            required: true
+        responseName: changeServerInstanceSpecResponse
+
+      rebootServerInstances:
+        method: GET
+        basePath: /server/v2/
+        action: rebootServerInstances
+        actionParamList:
+          serverInstanceNoList:
+            type: string[]
+            required: true
+        responseName: rebootServerInstancesResponse
+
+      startServerInstances:
+        method: GET
+        basePath: /server/v2/
+        action: startServerInstances
+        actionParamList:
+          serverInstanceNoList:
+            type: string[]
+            required: true
+        responseName: startServerInstancesResponse
+
+      stopServerInstances:
+        method: GET
+        basePath: /server/v2/
+        action: stopServerInstances
+        actionParamList:
+          serverInstanceNoList:
+            type: string[]
+            required: true
+        responseName: stopServerInstancesResponse
+
+      getRootPassword:
+        method: GET
+        basePath: /server/v2/
+        action: getRootPassword
+        actionParamList:
+          serverInstanceNo:
+            type: string
+            required: true
+          privateKey:
+            type: string
+            required: true
+        responseName: getRootPasswordResponse
+
+      getMemberServerImageList:
+        method: GET
+        basePath: /server/v2/
+        action: getMemberServerImageList
+        actionParamList:
+          memberServerImageNoList:
+            type: string[]
+          platformTypeCodeList:
+            type: string[]
+          regionNo:
+            type: string
+          pageNo:
+            type: number
+          pageSize:
+            type: number
+          sortedBy:
+            type: string
+          sortingOrder:
+            type: string
+            enum:
+              - ascending
+              - descending
+        responseName: getMemberServerImageListResponse
+
+      createMemberServerImage:
+        method: GET
+        basePath: /server/v2/
+        action: createMemberServerImage
+        actionParamList:
+          memberServerImageName:
+            type: string
+          memberServerImageDescription:
+            type: string
+          serverInstanceNo:
+            type: string
+            required: true
+        responseName: createMemberServerImageResponse
+
+      deleteMemberServerImages:
+        method: GET
+        basePath: /server/v2/
+        action: deleteMemberServerImages
+        actionParamList:
+          memberServerImageNoList:
+            type: string[]
+            required: true
+        responseName: deleteMemberServerImagesResponse
+
+      getBlockStorageInstanceList:
+        method: GET
+        basePath: /server/v2/
+        action: getBlockStorageInstanceList
+        actionParamList:
+          serverInstanceNo:
+            type: string
+          blockStorageInstanceNoList:
+            type: string[]
+          searchFilterName:
+            type: string
+          searchFilterValue:
+            type: string
+          blockStorageTypeCodeList:
+            type: string[]
+          blockStorageInstanceStatusCode:
+            type: string
+          diskTypeCode:
+            type: string
+          diskDetailTypeCode:
+            type: string
+          regionNo:
+            type: string
+          zoneNo:
+            type: string
+          pageNo:
+            type: number
+          pageSize:
+            type: number
+          sortedBy:
+            type: string
+          sortingOrder:
+            type: string
+            enum:
+              - ascending
+              - descending
+        responseName: getBlockStorageInstanceListResponse
+
+      createBlockStorageInstance:
+        method: GET
+        basePath: /server/v2/
+        action: createBlockStorageInstance
+        actionParamList:
+          blockStorageName:
+            type: string
+          blockStorageSize:
+            type: string
+            required: true
+          blockStorageDescription:
+            type: string
+          serverInstanceNo:
+            type: string
+            required: true
+        responseName: createBlockStorageInstanceResponse
+
+      deleteBlockStorageInstances:
+        method: GET
+        basePath: /server/v2/
+        action: deleteBlockStorageInstances
+        actionParamList:
+          blockStorageInstanceNoList:
+            type: string[]
+            required: true
+        responseName: deleteBlockStorageInstancesResponse
+
+      getBlockStorageSnapshotInstanceList:
+        method: GET
+        basePath: /server/v2/
+        action: getBlockStorageSnapshotInstanceList
+        actionParamList:
+          regionNo:
+            type: string
+          pageNo:
+            type: string
+          pageSize:
+            type: string
+        responseName: getBlockStorageSnapshotInstanceListResponse
+
+      getPublicIpInstanceList:
+        method: GET
+        basePath: /server/v2/
+        action: getPublicIpInstanceList
+        actionParamList:
+          isAssociated:
+            type: string
+          publicIpInstanceNoList:
+            type: string[]
+          publicIpList:
+            type: string[]
+          searchFilterName:
+            type: string
+          searchFilterValue:
+            type: string
+          internetLineTypeCode:
+            type: string
+            enum:
+              - PUBLC
+              - GLBL
+          regionNo:
+            type: string
+          zoneNo:
+            type: string
+          pageNo:
+            type: number
+          pageSize:
+            type: number
+          sortedBy:
+            type: string
+          sortingOrder:
+            type: string
+            enum:
+              - ascending
+              - descending
+        responseName: getPublicIpInstanceListResponse
+
+      getPublicIpTargetServerInstanceList:
+        method: GET
+        basePath: /server/v2/
+        action: getPublicIpTargetServerInstanceList
+        actionParamList:
+          internetLineTypeCode:
+            type: string
+            enum:
+              - PUBLC
+              - GLBL
+          regionNo:
+            type: string
+          zoneNo:
+            type: string
+        responseName: getPublicIpTargetServerInstanceListResponse
+
+      createPublicIpInstance:
+        method: GET
+        basePath: /server/v2/
+        action: createPublicIpInstance
+        actionParamList:
+          serverInstanceNo:
+            type: string
+          publicIpDescription:
+            type: string
+          internetLineTypeCode:
+            type: string
+            enum:
+              - PUBLC
+              - GLBL
+          regionNo:
+            type: string
+          zoneNo:
+            type: string
+        responseName: createPublicIpInstanceResponse
+
+      associatePublicIpWithServerInstance:
+        method: GET
+        basePath: /server/v2/
+        action: associatePublicIpWithServerInstance
+        actionParamList:
+          publicIpInstanceNo:
+            type: string
+            required: true
+          serverInstanceNo:
+            type: string
+            required: true
+        responseName: associatePublicIpWithServerInstanceResponse
+
+      disassociatePublicIpFromServerInstance:
+        method: GET
+        basePath: /server/v2/
+        action: disassociatePublicIpFromServerInstance
+        actionParamList:
+          publicIpInstanceNo:
+            type: string
+            required: true
+        responseName: disassociatePublicIpFromServerInstanceResponse
+
+      deletePublicIpInstances:
+        method: GET
+        basePath: /server/v2/
+        action: deletePublicIpInstances
+        actionParamList:
+          publicIpInstanceNoList:
+            type: string[]
+            required: true
+        responseName: deletePublicIpInstancesResponse
+
+      getPortForwardingRuleList:
+        method: GET
+        basePath: /server/v2/
+        action: getPortForwardingRuleList
+        actionParamList:
+          internetLineTypeCode:
+            type: string
+            enum:
+              - PUBLC
+              - GLBL
+          regionNo:
+            type: string
+          zoneNo:
+            type: string
+        responseName: getPortForwardingRuleListResponse
+
+      addPortForwardingRules:
+        method: GET
+        basePath: /server/v2/
+        action: addPortForwardingRules
+        actionParamList:
+          portForwardingConfigurationNo:
+            type: string
+            required: true
+          portForwardingRuleList:
+            type: any[]
+            replace: portForwardingRuleList.%d.%s
+            required: true
+        responseName: addPortForwardingRulesResponse
+
+      deletePortForwardingRules:
+        method: GET
+        basePath: /server/v2/
+        action: deletePortForwardingRules
+        actionParamList:
+          portForwardingConfigurationNo:
+            type: string
+            required: true
+          portForwardingRuleList:
+            type: any[]
+            replace: portForwardingRuleList.%d.%s
+            required: true
+        responseName: deletePortForwardingRulesResponse

@@ -1,43 +1,35 @@
 import {
-  InterfaceOauthKey,
-  InterfaceOpenApi,
-  InterfaceCompute,
-  InterfaceManagement,
-  InterfaceStorage,
-  OpenApi,
-  Compute,
-  Management,
-  Storage
-} from './ncloud';
-export * from './ncloud';
+  InterfaceNcloud,
+  InterfaceNcloudIaaS,
+  InterfaceNcloudPaaS,
+} from './const/interface';
 
-export interface InterfaceClient {
-  openapi: InterfaceOpenApi;
-  compute: InterfaceCompute;
-  management: InterfaceManagement;
-  storage: InterfaceStorage;
-}
+import {
+  setValues
+} from './helpers/store';
 
-export class Ncloud implements InterfaceClient {
-  static baseUrl: string = 'https://api.ncloud.com';
+import IaaS from './iaas';
+import PaaS from './paas';
 
-  public openapi: InterfaceOpenApi;
-  public compute: InterfaceCompute;
-  public management: InterfaceManagement;
-  public storage: InterfaceStorage;
+export class Ncloud implements InterfaceNcloud {
+  public IaaS: InterfaceNcloudIaaS;
+  public PaaS: InterfaceNcloudPaaS;
 
-  private constructor( oauthKey: InterfaceOauthKey ) {
-    this.openapi = new OpenApi( oauthKey );
-    this.compute = new Compute( oauthKey );
-    this.management = new Management( oauthKey );
-    this.storage = new Storage( oauthKey );
+  private constructor( inputParams: any ) {
+    // TODO: throw errors regarding missing expected parameters.
+    // There are no expected values
+
+    setValues( inputParams );
+
+    this.IaaS = new IaaS();
+    this.PaaS = new PaaS();
   }
 
-  static createClient ( oauthKey: InterfaceOauthKey ): InterfaceClient {
-    return new Ncloud(oauthKey);
+  static createClient ( authParams ) {
+    return new Ncloud( authParams );
   }
 }
 
-export function createClient(  oauthKey: InterfaceOauthKey ): InterfaceClient {
-  return Ncloud.createClient( oauthKey );
+export function createClient( inputParams: any ) {
+  return Ncloud.createClient( inputParams );
 }

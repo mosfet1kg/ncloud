@@ -1,31 +1,30 @@
 {
   "name": "ncloud",
-  "version": "0.1.39",
+  "version": "1.0.0",
   "description": "NAVER Cloud Platform(https://www.ncloud.com/) Library for Node.js",
   "engineStrict": true,
   "engines": {
-    "node": ">= 7.10.1"
+    "node": ">= 8.9.4"
   },
   "main": "./lib/index.js",
   "devDependencies": {
-    "@types/jest": "~19.2.3",
-    "@types/node": "~6.0.73",
+    "@types/jest": "^23.3.7",
+    "@types/node": "^10.12.0",
     "gitbook-cli": "^2.3.2",
-    "jest": "~20.0.0",
-    "moment-timezone": "^0.5.13",
-    "rimraf": "~2.6.1",
-    "tslint": "~4.5.1",
-    "tslint-config-airbnb": "^5.1.2",
-    "tslint-microsoft-contrib": "~4.0.1",
-    "typescript": "^2.5.3"
+    "jest": "^23.6.0",
+    "rimraf": "^2.6.2",
+    "tslint": "^5.9.1",
+    "tslint-config-airbnb": "^5.8.0",
+    "typescript": "^3.1.3"
   },
   "scripts": {
     "clean": "rimraf coverage build tmp lib",
     "clean:lib": "rimraf lib",
     "prebuild": "npm run clean:lib",
-    "build": "tsc -p tsconfig.json",
-    "watch": "tsc -w -p tsconfig.json",
+    "build": "tsc -p tsconfig.release.json",
+    "watch": "tsc -w -p tsconfig.release.json",
     "lint": "tslint -t stylish '{src,__tests__}/**/*.{ts,tsx}'",
+    "pretest": "tsc -p tsconfig.json",
     "test": "npm run test-only",
     "test-only": "jest",
     "test:watch": "jest --watch",
@@ -34,7 +33,6 @@
     "gitbookBuild": "cd docs && rimraf docs && gitbook build && mv ./_book ./docs",
     "gitbookServe": "cd docs && gitbook serve"
   },
-  "author": "Gyubeom Choi <mosfet1kg@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -46,15 +44,30 @@
     "NAVER Cloud Platform"
   ],
   "dependencies": {
-    "axios": "^0.16.2",
+    "axios": "^0.18.0",
     "bytes": "^3.0.0",
     "crypto-js": "^3.1.9-1",
     "ip": "^1.1.5",
-    "lodash": "^4.17.4",
-    "mime-types": "^2.1.17",
-    "tslib": "^1.7.1",
-    "validator": "^7.0.0",
-    "xml2json": "^0.11.0"
+    "lodash": "^4.17.11",
+    "mime-types": "^2.1.18",
+    "moment-timezone": "^0.5.16",
+    "tslib": "^1.9.3",
+    "validator": "^9.4.1",
+    "xml2json": "^0.11.2",
+    "yamljs": "^0.3.0"
   },
-  "jest": { "testEnvironment": "node" }
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {
+      ".*": "./preprocessor.js"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "testRegex": "./__tests__/.*|(\\.|/)(test|spec)\\.(ts|js)x?$",
+    "verbose": true,
+    "collectCoverage": false
+  }
 }
