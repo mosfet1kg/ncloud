@@ -19,3 +19,4 @@ example
 docs
 .note
 **/**/env.json
+coverage/
