@@ -1,5 +1,4 @@
 import * as ncloud from '../src'
-import * as moment from 'moment-timezone';
 
 const {
   accessKey,
@@ -36,6 +35,7 @@ describe('Test IaaS LoadBalancer Method', function( ){
 
       done();
     } catch (e) {
+      console.log( e );
       done.fail(e);
     }
   });

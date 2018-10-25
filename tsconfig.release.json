@@ -18,13 +18,13 @@
     "sourceMap": true
   },
   "include": [
-    "src/**/*"
+    "src"
   ],
   "exclude": [
     "out",
     "lib",
     "node_modules",
     "example",
-    "__tests__/**/*"
+    "__tests__"
   ]
 }

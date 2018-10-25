@@ -1,3 +1,5 @@
+import * as path from 'path';
+
 describe('Test Feature', function() {
   beforeAll(function (){
     // Clears the database and adds some testing data.
@@ -8,7 +10,6 @@ describe('Test Feature', function() {
   });
 
   test('Test feature', ( done ) => {
-
     done();
   });
 });

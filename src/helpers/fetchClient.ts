@@ -54,8 +54,8 @@ export default function (
   message.push(newLine);
   message.push(timestamp);
   message.push(newLine);
-  message.push(apiKey);
-  message.push(newLine);
+  // message.push(apiKey);
+  // message.push(newLine);
   message.push(accessKey);
 
   const authSignature = Base64.stringify(CryptoJS.HmacSHA256(message.join(''), secretKey));
@@ -66,7 +66,7 @@ export default function (
     url,
     headers: {
       "x-ncp-apigw-timestamp" : timestamp,
-      "x-ncp-apigw-api-key" : apiKey,
+      // "x-ncp-apigw-api-key" : apiKey,
       "x-ncp-iam-access-key" : accessKey,
       "x-ncp-apigw-signature-v1" : authSignature,
     }

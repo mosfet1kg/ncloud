@@ -6,7 +6,7 @@ apis:
     GeoLocation:
       geoLocation:
         method: GET
-        basePath: /geolocation/v1/
+        basePath: /geolocation/v2/
         action: geoLocation
         actionParamList:
           ip:
@@ -21,7 +21,7 @@ apis:
     LoadBalancer:
       getLoadBalancerInstanceList:
         method: GET
-        basePath: /loadbalancer/v1/
+        basePath: /loadbalancer/v2/
         action: getLoadBalancerInstanceList
         actionParamList:
           loadBalancerInstanceNoList:
@@ -48,7 +48,7 @@ apis:
     Server:
       getServerImageProductList:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: getServerImageProductList
         actionParamList:
           platformTypeCodeList:
@@ -59,7 +59,7 @@ apis:
 
       getServerProductList:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: getServerProductList
         actionParamList:
           serverImageProductCode:
@@ -73,7 +73,7 @@ apis:
 
       getZoneList:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: getZoneList
         actionParamList:
           regionNo:
@@ -83,13 +83,13 @@ apis:
 
       getRegionList:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: getRegionList
         responseName: getRegionListResponse
 
       createNasVolumeInstance:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: createNasVolumeInstance
         actionParamList:
           volumeName:
@@ -119,7 +119,7 @@ apis:
 
       deleteNasVolumeInstance:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: deleteNasVolumeInstance
         actionParamList:
           nasVolumeInstanceNo:
@@ -129,7 +129,7 @@ apis:
 
       getNasVolumeInstanceList:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: getNasVolumeInstanceList
         actionParamList:
           volumeAllotmentProtocolTypeCode:
@@ -142,7 +142,7 @@ apis:
 
       changeNasVolumeSize:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: changeNasVolumeSize
         actionParamList:
           nasVolumeInstanceNo:
@@ -155,7 +155,7 @@ apis:
 
       getNasVolumeInstanceRatingListProto:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: getNasVolumeInstanceRatingList
         actionParamList:
           nasVolumeInstanceNo:
@@ -179,7 +179,7 @@ apis:
 
       setNasVolumeAccessControl:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: setNasVolumeAccessControl
         actionParamList:
           nasVolumeInstanceNo:
@@ -193,7 +193,7 @@ apis:
 
       addNasVolumeAccessControl:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: addNasVolumeAccessControl
         actionParamList:
           nasVolumeInstanceNo:
@@ -207,7 +207,7 @@ apis:
 
       removeNasVolumeAccessControl:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: removeNasVolumeAccessControl
         actionParamList:
           nasVolumeInstanceNo:
@@ -221,7 +221,7 @@ apis:
 
       getLoginKeyList:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: getLoginKeyList
         actionParamList:
           keyName:
@@ -234,7 +234,7 @@ apis:
 
       createLoginKey:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: createLoginKey
         actionParamList:
           keyName:
@@ -244,7 +244,7 @@ apis:
 
       deleteLoginKey:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: deleteLoginKey
         actionParamList:
           keyName:
@@ -254,7 +254,7 @@ apis:
 
       getAccessControlGroupList:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: getAccessControlGroupList
         actionParamList:
           accessControlGroupConfigurationNoList:
@@ -269,7 +269,7 @@ apis:
 
       getAccessControlGroupServerInstanceList:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: getAccessControlGroupServerInstanceList
         actionParamList:
           accessControlGroupConfigurationNo:
@@ -279,7 +279,7 @@ apis:
 
       getAccessControlRuleList:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: getAccessControlRuleList
         actionParamList:
           accessControlGroupConfigurationNo:
@@ -290,7 +290,7 @@ apis:
 
       getServerInstanceList:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: getServerInstanceList
         actionParamList:
           serverInstanceNoList:
@@ -334,7 +334,7 @@ apis:
 
       createServerInstancesProto:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: createServerInstances
         actionParamList:
           serverImageProductCode:
@@ -375,7 +375,7 @@ apis:
 
       terminateServerInstances:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: terminateServerInstances
         actionParamList:
           serverInstanceNoList:
@@ -385,7 +385,7 @@ apis:
 
       changeServerInstanceSpec:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: changeServerInstanceSpec
         actionParamList:
           serverInstanceNo:
@@ -398,7 +398,7 @@ apis:
 
       rebootServerInstances:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: rebootServerInstances
         actionParamList:
           serverInstanceNoList:
@@ -408,7 +408,7 @@ apis:
 
       startServerInstances:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: startServerInstances
         actionParamList:
           serverInstanceNoList:
@@ -418,7 +418,7 @@ apis:
 
       stopServerInstances:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: stopServerInstances
         actionParamList:
           serverInstanceNoList:
@@ -428,7 +428,7 @@ apis:
 
       getRootPassword:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: getRootPassword
         actionParamList:
           serverInstanceNo:
@@ -441,7 +441,7 @@ apis:
 
       getMemberServerImageList:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: getMemberServerImageList
         actionParamList:
           memberServerImageNoList:
@@ -465,7 +465,7 @@ apis:
 
       createMemberServerImage:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: createMemberServerImage
         actionParamList:
           memberServerImageName:
@@ -479,7 +479,7 @@ apis:
 
       deleteMemberServerImages:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: deleteMemberServerImages
         actionParamList:
           memberServerImageNoList:
@@ -489,7 +489,7 @@ apis:
 
       getBlockStorageInstanceList:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: getBlockStorageInstanceList
         actionParamList:
           serverInstanceNo:
@@ -527,7 +527,7 @@ apis:
 
       createBlockStorageInstance:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: createBlockStorageInstance
         actionParamList:
           blockStorageName:
@@ -544,7 +544,7 @@ apis:
 
       deleteBlockStorageInstances:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: deleteBlockStorageInstances
         actionParamList:
           blockStorageInstanceNoList:
@@ -554,7 +554,7 @@ apis:
 
       getBlockStorageSnapshotInstanceList:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: getBlockStorageSnapshotInstanceList
         actionParamList:
           regionNo:
@@ -567,7 +567,7 @@ apis:
 
       getPublicIpInstanceList:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: getPublicIpInstanceList
         actionParamList:
           isAssociated:
@@ -604,7 +604,7 @@ apis:
 
       getPublicIpTargetServerInstanceList:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: getPublicIpTargetServerInstanceList
         actionParamList:
           internetLineTypeCode:
@@ -620,7 +620,7 @@ apis:
 
       createPublicIpInstance:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: createPublicIpInstance
         actionParamList:
           serverInstanceNo:
@@ -640,7 +640,7 @@ apis:
 
       associatePublicIpWithServerInstance:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: associatePublicIpWithServerInstance
         actionParamList:
           publicIpInstanceNo:
@@ -653,7 +653,7 @@ apis:
 
       disassociatePublicIpFromServerInstance:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: disassociatePublicIpFromServerInstance
         actionParamList:
           publicIpInstanceNo:
@@ -663,7 +663,7 @@ apis:
 
       deletePublicIpInstances:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: deletePublicIpInstances
         actionParamList:
           publicIpInstanceNoList:
@@ -673,7 +673,7 @@ apis:
 
       getPortForwardingRuleList:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: getPortForwardingRuleList
         actionParamList:
           internetLineTypeCode:
@@ -689,7 +689,7 @@ apis:
 
       addPortForwardingRules:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: addPortForwardingRules
         actionParamList:
           portForwardingConfigurationNo:
@@ -703,7 +703,7 @@ apis:
 
       deletePortForwardingRules:
         method: GET
-        basePath: /server/v1/
+        basePath: /server/v2/
         action: deletePortForwardingRules
         actionParamList:
           portForwardingConfigurationNo:
