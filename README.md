@@ -46,8 +46,8 @@ $ yarn add ncloud
 ```javascript
 var ncloud = require('ncloud');
 var client = ncloud.createClient({
-    oauth_consumer_key:'%YOUR_CONSUMER_KEY%',
-    oauth_consumer_secret:'%YOUR_CONSUMER_SECRET%'
+        accessKey: "$ACCESS_KEY_ID$",
+        secretKey: "$SECRET_KEY$",
 });
 ```
 **ES6 or above**
@@ -55,8 +55,8 @@ var client = ncloud.createClient({
 import * as ncloud from 'ncloud';
 
 const client = ncloud.createClient({
-    oauth_consumer_key:'%YOUR_CONSUMER_KEY%',
-    oauth_consumer_secret:'%YOUR_CONSUMER_SECRET%'
+     accessKey: "$ACCESS_KEY_ID$",
+     secretKey: "$SECRET_KEY$",
 });
 ```
 

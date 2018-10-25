@@ -3,13 +3,11 @@ import * as ncloud from '../src'
 const {
   accessKey,
   secretKey,
-  apiKey,
 } = require('./env.json');
 
 const client = ncloud.createClient({
   accessKey,
   secretKey,
-  apiKey,
 });
 
 describe('Test IaaS LoadBalancer Method', function( ){
@@ -26,7 +24,6 @@ describe('Test IaaS LoadBalancer Method', function( ){
       const client = ncloud.createClient({
         accessKey,
         secretKey,
-        apiKey,
         regionNo: "1",
       });
       const loadBalancer = client.IaaS.loadBalancer();
