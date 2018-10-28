@@ -53,6 +53,8 @@ apis:
         actionParamList:
           platformTypeCodeList:
             type: string[]
+          infraResourceDetailTypeCode:
+            type: string
           regionNo:
             type: string
         responseName: getServerImageProductListResponse
@@ -69,7 +71,15 @@ apis:
             type: string
           zoneNo:
             type: string
+          internetLineTypeCode:
+            type: string
         responseName: getServerProductListResponse
+
+      getRaidList:
+        method: GET
+        basePath: /server/v2/
+        action: getRaidList
+        responseName: getRaidListResponse
 
       getZoneList:
         method: GET
@@ -125,6 +135,10 @@ apis:
           nasVolumeInstanceNo:
             type: string
             required: true
+          regionNo:
+            type: string
+          zoneNo:
+            type: string
         responseName: deleteNasVolumeInstanceResponse
 
       getNasVolumeInstanceList:
@@ -138,6 +152,10 @@ apis:
             type: boolean
           isSnapshotConfiguration:
             type: bollean
+          regionNo:
+            type: string
+          zoneNo:
+            type: string
         responseName: getNasVolumeInstanceListResponse
 
       changeNasVolumeSize:

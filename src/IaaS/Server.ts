@@ -23,11 +23,10 @@ const Server: () => InterfaceNcloudIaaSServer = function () {
     ...defaultMethods,
     getNasVolumeInstanceRatingList(input: InterfaceGetNasVolumeInstanceRatingListInput): Promise<InterfaceGetNasVolumeInstanceRatingListResponse>{
       return (this as any).getNasVolumeInstanceRatingListProto(input)
-        .then( responseData => {
+        .then((responseData) => {
           responseData = {
             ...responseData,
-            NasVolumeInstanceRatingList: responseData.NasVolumeInstanceRatingList.map((el) => {
-              console.log( el.ratingTime );
+            nasVolumeInstanceRatingList: responseData.nasVolumeInstanceRatingList.map((el) => {
               return {
                 ...el,
                 ratingTime: moment.tz(el.ratingTime, 'Asia/Seoul').format('YYYY-MM-DDTHH:mm:ssZZ'),

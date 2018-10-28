@@ -5,6 +5,13 @@ export default class MyStore implements InterfaceMyStore {
     this.data = values;
   }
 
+  setData(values: any = {}): void {
+    this.data = {
+      ...this.data,
+      ...values,
+    };
+  }
+
   getAuthParams(): InterfaceAuthParams {
     const {
       accessKey,

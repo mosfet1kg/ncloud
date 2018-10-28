@@ -14,6 +14,11 @@ export class Ncloud implements InterfaceNcloud {
     this.store = new MyStore(inputParams);
   }
 
+  setConfig(inputParams: any): InterfaceNcloud {
+    this.store.setData(inputParams);
+    return this;
+  }
+
   get IaaS(): InterfaceNcloudIaaS {
     if ( isNull(this.mIaaS) ) {
       this.mIaaS = new IaaS({ store: this.store });
@@ -30,8 +35,8 @@ export class Ncloud implements InterfaceNcloud {
     return this.mPaaS;
   }
 
-  static createClient ( authParams ) {
-    return new Ncloud( authParams );
+  static createClient ( inputParams ) {
+    return new Ncloud( inputParams );
   }
 }
 

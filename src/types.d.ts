@@ -5,6 +5,7 @@ interface InterfaceAuthParams {
 }
 
 interface InterfaceMyStore {
+  setData: (input: any) => void;
   getAuthParams: () => InterfaceAuthParams;
   getValues: () => ({ [key: string]: any });
 }
@@ -15,8 +16,8 @@ interface InterfaceNcloud {
 }
 
 interface InterfaceNcloudIaaS {
-  server(): InterfaceNcloudIaaSServer;
-  loadBalancer(): InterfaceNcloudIaaSLoadBalancer;
+  server: () => InterfaceNcloudIaaSServer;
+  loadBalancer: () => InterfaceNcloudIaaSLoadBalancer;
 }
 
 interface InterfaceNcloudPaaS {
@@ -28,6 +29,7 @@ interface InterfaceNcloudIaaSServer extends InterfaceNcloudIaaSServerCustomMetho
   getServerProductList(input: InterfaceIaaSServerGetServerProductListInput): Promise<InterfaceGetServerProductListResponse>;
   getZoneList(input?: InterfaceGetZoneListInput): Promise<InterfaceGetZoneListResponse>;
   getRegionList(): Promise<InterfaceGetRegionListResponse>;
+  getRaidList(): Promise<InterfaceGetRaidListResponse>;
   createNasVolumeInstance(input: InterfaceCreateNasVolumeInstanceInput): Promise<InterfaceNasVolumeInstanceListResponse>;
   deleteNasVolumeInstance(input: InterfaceDeleteNasVolumeInstanceInput): Promise<InterfaceNasVolumeInstanceListResponse>;
   getNasVolumeInstanceList(input?: InterfaceGetNasVolumeInstanceListInput): Promise<InterfaceNasVolumeInstanceListResponse>;
@@ -50,7 +52,7 @@ interface InterfaceNcloudIaaSServer extends InterfaceNcloudIaaSServerCustomMetho
   startServerInstances(input: InterfaceStartServerInstancesInput): Promise<InterfaceStartServerInstancesResponse>;
   stopServerInstances(input: InterfaceStopServerInstancesInput): Promise<InterfaceStopServerInstancesResponse>;
   getRootPassword(input: InterfaceGetRootPasswordInput): Promise<InterfaceGetRootPasswordResponse>;
-  getMemberServerImageList(input: InterfaceGetMemberServerImageListInput): Promise<InterfaceGetMemberServerImageListResponse>;
+  getMemberServerImageList(input?: InterfaceGetMemberServerImageListInput): Promise<InterfaceGetMemberServerImageListResponse>;
   createMemberServerImage(input: InterfaceCreateMemberServerImageInput): Promise<InterfaceCreateMemberServerImageResponse>;
   deleteMemberServerImages(input: InterfaceDeleteMemberServerImagesInput): Promise<InterfaceDeleteMemberServerImagesResponse>;
   getBlockStorageInstanceList(input?: InterfaceGetBlockStorageInstanceListInput): Promise<InterfaceGetBlockStorageInstanceListResponse>;
@@ -83,6 +85,7 @@ interface InterfaceGetZoneListInput {
 
 interface InterfaceIaaSServerGetServerImageProductListInput {
   platformTypeCodeList?: string[];
+  infraResourceDetailTypeCode?: string;
   regionNo?: string;
 }
 
@@ -90,6 +93,7 @@ interface InterfaceIaaSServerGetServerProductListInput {
   serverImageProductCode: string;
   regionNo?: string;
   zoneNo?: string;
+  internetLineTypeCode?: string;
 }
 
 interface InterfaceCreateNasVolumeInstanceInput {
@@ -107,12 +111,16 @@ interface InterfaceCreateNasVolumeInstanceInput {
 
 interface InterfaceDeleteNasVolumeInstanceInput {
   nasVolumeInstanceNo: string;
+  regionNo?: string;
+  zoneNo?: string;
 }
 
 interface InterfaceGetNasVolumeInstanceListInput {
   volumeAllotmentProtocolTypeCode?: string;
   isEventConfiguration?: boolean;
   isSnapshotConfiguration?: boolean;
+  regionNo?: string;
+  zoneNo?: string;
 }
 
 interface InterfaceChangeNasVolumeSizeInput {
@@ -595,6 +603,17 @@ interface InterfaceGetRegionListResponse {
   totalRows: number; // 7,
   regionList: InterfaceRegion[]
 }
+interface InterfaceGetRaidListResponse {
+  requestId: string;
+  returnCode: string;
+  returnMessage: string;
+  totalRows: number;
+  raidList: {
+    raidTypeName: string;
+    raidName: string;
+  }[];
+}
+
 interface InterfaceNasVolumeInstanceListResponse {
   requestId: string; // 'd2a7f2da-1c16-48bf-8439-afc3a9979c3d',
   returnCode: string; // '0',
