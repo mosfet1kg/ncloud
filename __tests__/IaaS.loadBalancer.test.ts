@@ -1,14 +1,9 @@
-import * as ncloud from '../src'
+import * as ncloud from '../lib'
 
 const {
   accessKey,
   secretKey,
 } = require('./env.json');
-
-const client = ncloud.createClient({
-  accessKey,
-  secretKey,
-});
 
 describe('Test IaaS LoadBalancer Method', function( ){
   beforeAll(function (){
@@ -26,6 +21,7 @@ describe('Test IaaS LoadBalancer Method', function( ){
         secretKey,
         regionNo: "1",
       });
+
       const loadBalancer = client.IaaS.loadBalancer();
       const loadBalancerList = await loadBalancer.getLoadBalancerInstanceList();
       console.log( loadBalancerList.loadBalancerInstanceList[0].loadBalancerName );

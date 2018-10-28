@@ -41,9 +41,10 @@ lib/**/**
 package-lock.json
 
 #type
-src/**/*.d.ts
+**/*.d.ts
 **/*.js
 **/*.js.map
 
+!**/*/types.d.ts
 !jest.config.js
 !preprocessor.js

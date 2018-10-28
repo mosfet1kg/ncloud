@@ -4,9 +4,6 @@ import {
   sortBy,
 } from 'lodash';
 import axios from 'axios';
-import {
-  InterfaceAuthParams,
-} from '../const/interface'
 
 const space = " ";
 const newLine = "\n";

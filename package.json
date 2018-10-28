@@ -21,7 +21,7 @@
     "clean": "rimraf coverage build tmp lib",
     "clean:lib": "rimraf lib",
     "prebuild": "npm run clean:lib",
-    "build": "tsc -p tsconfig.release.json",
+    "build": "tsc -p tsconfig.release.json && cp src/types.d.ts lib/types.d.ts",
     "watch": "tsc -w -p tsconfig.release.json",
     "lint": "tslint -t stylish '{src,__tests__}/**/*.{ts,tsx}'",
     "pretest": "tsc -p tsconfig.json",
