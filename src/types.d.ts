@@ -41,6 +41,7 @@ interface InterfaceNcloudIaaSServer extends InterfaceNcloudIaaSServerCustomMetho
   getLoginKeyList(input?: InterfaceGetLoginKeyListInput): Promise<InterfaceGetLoginKeyListResponse>;
   createLoginKey(input: InterfaceCreateLoginKeyInput): Promise<InterfaceCreateLoginKeyResponse>;
   deleteLoginKey(input: InterfaceDeleteLoginKeyInput): Promise<InterfaceDeleteLoginKeyResponse>;
+  importLoginKey(input: InterfaceImportLoginKeyInput): Promise<InterfaceImportLoginKeyResponse>;
   getAccessControlGroupList(input?: InterfaceGetAccessControlGroupListInput): Promise<InterfaceGetAccessControlGroupListResponse>;
   getAccessControlGroupServerInstanceList(input: InterfaceGetAccessControlGroupServerInstanceListInput): Promise<InterfaceGetAccessControlGroupServerInstanceListResponse>;
   getAccessControlRuleList(input: InterfaceGetAccessControlRuleListInput): Promise<InterfaceGetAccessControlRuleListResponse>
@@ -148,11 +149,28 @@ interface InterfaceGetLoginKeyListInput {
 }
 
 interface InterfaceCreateLoginKeyInput {
-  keyName?: string;
+  keyName: string;
 }
 
 interface InterfaceDeleteLoginKeyInput {
-  keyName?: string;
+  keyName: string;
+}
+
+interface InterfaceImportLoginKeyInput {
+  keyName: string;
+  publicKey: string;
+}
+
+interface InterfaceImportLoginKeyResponse {
+  requestId: string;
+  returnCode: string;
+  returnMessage: string;
+  totalRows: number;
+  loginKeyList: {
+    fingerprint: string;
+    keyName: string;
+    createDate: string;
+  }[];
 }
 
 interface InterfaceGetAccessControlGroupListInput {

@@ -270,6 +270,19 @@ apis:
             required: true
         responseName: deleteLoginKeyResponse
 
+      importLoginKey:
+        method: GET
+        basePath: /server/v2/
+        action: importLoginKey
+        actionParamList:
+          keyName:
+            type: string
+            required: true
+          publicKey:
+            type: string
+            required: true
+        responseName: importLoginKeyResponse
+
       getAccessControlGroupList:
         method: GET
         basePath: /server/v2/

@@ -38,6 +38,7 @@ lib/**/**
 
 #pem
 */**/*.pem
+*/**/*.pub
 package-lock.json
 
 #type

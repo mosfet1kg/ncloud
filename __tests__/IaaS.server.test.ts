@@ -305,6 +305,27 @@ describe('Test IaaS Server Method', function( ){
     }
   });
 
+  test('Test importLoginKey', async ( done ) => {
+    try {
+      const fs = require('fs');
+      const path = require('path');
+      const publicKey = fs.readFileSync( path.join(__dirname, './testPublicKey.pub'), { encoding: 'utf8'});
+
+      const server = client.IaaS.server();
+
+      const importLoginKeyResponse = await server.importLoginKey({
+        keyName: 'mytest',
+        publicKey,
+      });
+
+      console.log( importLoginKeyResponse );
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
   test('Test getAccessControlGroupList', async ( done ) => {
     try {
       const server = client.IaaS.server();

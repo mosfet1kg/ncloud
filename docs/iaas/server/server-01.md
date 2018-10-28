@@ -1217,30 +1217,31 @@ const deleteLoginKeyResponse = await server.deleteLoginKey({
   - ssh-keygen -t rsa -C "my-key" -f ~/.ssh/my-key로 생성한 public 키.
 
 - Example
+```javascript
+const fs = require('fs');
+const path = require('path');
+const publicKey = fs.readFileSync( path.join(__dirname, './testPublicKey.pub'), { encoding: 'utf8'});
 
-  - 요청
+const server = client.IaaS.server();
 
-    ```
-    ${SERVER_API_URL}/importLoginKey
-    ?keyName=ncloudTest
-    &publicKey=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCfE6pQTOpsdQNsFtZpIzqDMyb8gH2XUUGe+9s8b36OO0i1SXkO8+u3/4EXYdujjIH+EKb9LzMiAXOtEUX0hI+zAlJemE+sBKPTORBb+YjLvBYb99ts3pdd7x1S/dgksyxdC6ru8KNS7heU0fARZGhCXmzI9Z6PhSqFMNQcUq14UYLNHUJYshuqHv/sjCBt3QgpMLcaBmgl6TLfdq7ZW0G/iz6V1a2q200A+Fq8Yuc0JLz6Q/xQqWi1+ehKs5y3Ow3D08NLwj8Ay/7eIXqk40oo+GqkQSVWIFV3lzJXB4Po10ZRC67RdCnyf8fYbZYzYP6trr/hItvmXDryEKFUnJgZ
-    ```
+const importLoginKeyResponse = await server.importLoginKey({
+    keyName: 'mytest',
+    publicKey,
+});
 
-  - 응답
+/** Return **/
+{ 
+    requestId: 'a84ac502-3b83-4aa6-b492-666e4e2dbeca',
+    returnCode: '0',
+    returnMessage: 'success',
+    totalRows: 1,
+    loginKeyList: 
+    [ { fingerprint: '-',
+        keyName: 'mytest',
+        createDate: '2018-10-28T22:47:33+0900' } ] 
+}
+```
 
-    ```xml
-	<importLoginKeyResponse>
-		<requestId>7f7c33d6-ce42-40c0-81a8-7df102c71d41</requestId>
-		<returnCode>0</returnCode>
-		<returnMessage>success</returnMessage>
-		<totalRows>1</totalRows>
-		<loginKeyList>
-			<fingerprint>-</fingerprint>
-			<keyName>ncloudTest</keyName>
-			<createDate>2018-06-28T16:13:13+0900</createDate>
-		</loginKeyList>
-	</importLoginKeyResponse>
-    ```
 
 ### AccessControlGroup
 
