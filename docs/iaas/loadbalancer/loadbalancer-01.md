@@ -14,6 +14,7 @@ var client = ncloud.createClient({
         secretKey: "$SECRET_KEY$",
 });
 ```
+
 **ES6 or above**
 ```javascript
 import * as ncloud from 'ncloud';

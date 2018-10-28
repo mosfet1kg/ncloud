@@ -229,8 +229,8 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="iaas--server">IaaS &gt; Server</h2>
-<p>&#xBCF8; &#xBB38;&#xC11C;&#xB294; IaaS &#xBD84;&#xB958;&#xC758; Server &#xBA54;&#xC11C;&#xB4DC;&#xC5D0; &#xB300;&#xD574; &#xB2E4;&#xB8F9;&#xB2C8;&#xB2E4;.</p>
+                                <h2 id="server-api">Server API</h2>
+<p>&#xBCF8; &#xBB38;&#xC11C;&#xB294; IaaS &#xBD84;&#xB958;&#xC758; Server &#xBA54;&#xC11C;&#xB4DC;&#xB4E4;&#xC5D0; &#xB300;&#xD574; &#xB2E4;&#xB8F9;&#xB2C8;&#xB2E4;.</p>
 <h3 id="&#xACF5;&#xD1B5;&#xC124;&#xC815;">&#xACF5;&#xD1B5;&#xC124;&#xC815;</h3>
 <p>ncloud Client&#xB97C; &#xC0DD;&#xC131; &#xC2DC;, &#xC544;&#xB798;&#xC640; &#xAC19;&#xC774; API &#xC778;&#xC99D;&#xD0A4;&#xAC00; &#xD544;&#xC694;&#xD569;&#xB2C8;&#xB2E4;.</p>
 <p><strong>ES5</strong></p>
@@ -1176,147 +1176,190 @@
 <li>500GB &#xC774;&#xC0C1; | 10000GB &#xC774;&#xD558;</li>
 </ul>
 </li>
-<li><p>Example
-```javascript
-const server = client.IaaS.server();
-const changeNasVolumeSizeResponse = await server.changeNasVolumeSize({
-  nasVolumeInstanceNo: &apos;1029901&apos;,
-  volumeSize: &apos;600&apos; // GB
-});</p>
+<li><p>Example</p>
 </li>
 </ul>
-<p>/<strong> Return </strong>/
-{ 
-    requestId: &apos;6b0b4ada-a7f5-4219-a183-946ac97c6512&apos;,
-    returnCode: &apos;0&apos;,
-    returnMessage: &apos;success&apos;,
-    totalRows: 1,
-    nasVolumeInstanceList: 
-    [ { nasVolumeInstanceNo: &apos;1029901&apos;,
-        nasVolumeInstanceStatus: [Object],
-        nasVolumeInstanceOperation: [Object],
-        nasVolumeInstanceStatusName: &apos;created&apos;,
-        createDate: &apos;2018-10-28T21:36:26+0900&apos;,
-        nasVolumeDescription: &apos;&apos;,
-        mountInformation: &apos;10.250.53.73:/n780247_testVol&apos;,
-        volumeAllotmentProtocolType: [Object],
-        volumeName: &apos;n780247_testVol&apos;,
-        volumeTotalSize: 644245094400,
-        volumeSize: 644245094400,
-        volumeUseSize: 286720,
-        volumeUseRatio: 0,
-        snapshotVolumeConfigurationRatio: 0,
-        snapshotVolumeSize: 0,
-        snapshotVolumeUseSize: 0,
-        snapshotVolumeUseRatio: 0,
-        isSnapshotConfiguration: false,
-        isEventConfiguration: false,
-        region: [Object],
-        zone: [Object],
-        nasVolumeInstanceCustomIpList: [],
-        nasVolumeServerInstanceList: [] } ] 
-}</p>
-<pre><code>
-#### getNasVolumeInstanceRatingList
-
-- API&#xBA85;
-
-  NAS&#xBCFC;&#xB968;&#xC778;&#xC2A4;&#xD134;&#xC2A4;&#xCE21;&#xC815;&#xB9AC;&#xC2A4;&#xD2B8;&#xC870;&#xD68C;
-
-- action
-
-  getNasVolumeInstanceRatingList
-
-- &#xC124;&#xBA85;
-
-  &#xC77C;/&#xC2DC;&#xAC04;/&#xBD84;/&#xCD08; &#xB2E8;&#xC704;&#xB85C; NAS &#xBCFC;&#xB968;&#xC758; &#xC778;&#xC2A4;&#xD134;&#xC2A4;&#xC758; &#xD06C;&#xAE30;&#xB97C; &#xC870;&#xD68C;&#xD569;&#xB2C8;&#xB2E4;.
-
-- &#xC694;&#xCCAD; &#xD30C;&#xB77C;&#xBBF8;&#xD130;
-
-| &#xD30C;&#xB77C;&#xBBF8;&#xD130;&#xBA85;               | &#xAC04;&#xB7B5; &#xC124;&#xBA85;       | &#xD0C0;&#xC785;     | &#xC81C;&#xC57D;                        | &#xD544;&#xC218;&#xC5EC;&#xBD80; |
-| ------------------- | ----------- | ------ | ------------------------- | ---- |
-| nasVolumeInstanceNo | NAS&#xBCFC;&#xB968;&#xC778;&#xC2A4;&#xD134;&#xC2A4;&#xBC88;&#xD638; | String |                           | Yes  |
-| startTime           | &#xCE21;&#xC815;&#xC2DC;&#xC791;&#xC2DC;&#xAC04;      | String | yyyy-MM-dd&apos;T&apos;HH:mm:ssZ &#xD3EC;&#xB9F7; | Yes  |
-| endTime             | &#xCE21;&#xC815;&#xC885;&#xB8CC;&#xC2DC;&#xAC04;      | String | yyyy-MM-dd&apos;T&apos;HH:mm:ssZ &#xD3EC;&#xB9F7; | Yes  |
-| interval            | &#xCE21;&#xC815;&#xAC04;&#xACA9;        | String | 5m / 6h / 1d / 1M         | Yes  |
-
-- nasVolumeInstanceNo
-  - NAS&#xBCFC;&#xB968;&#xC778;&#xC2A4;&#xD134;&#xC2A4;&#xBC88;&#xD638;
-  - getNasVolumeInstanceList &#xC561;&#xC158;&#xC744; &#xD1B5;&#xD574;&#xC11C; &#xD68D;&#xB4DD;&#xD558;&#xC2E4;&#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.
-- startTime
-  - &#xCE21;&#xC815;&#xC2DC;&#xC791;&#xC2DC;&#xAC04;
-  - yyyy-MM-dd&apos;T&apos;HH:mm:ssZ &#xD3EC;&#xB9F7; (GMT)
-  - eg) 2017-07-20T00:00:00+0900 (&#xD55C;&#xAD6D;&#xAE30;&#xC900;)
-  - &#xB370;&#xC774;&#xD130; &#xBCF4;&#xAD00;&#xC8FC;&#xAE30; : 5&#xBD84; : 3&#xC77C; | 6&#xC2DC;&#xAC04; : 1&#xB2EC; | 1&#xC77C; : 2&#xB144; | 1&#xB2EC; : 5&#xB144;
-- endTime
-  - &#xCE21;&#xC815;&#xC885;&#xB8CC;&#xC2DC;&#xAC04;
-  - yyyy-MM-dd&apos;T&apos;HH:mm:ssZ &#xD3EC;&#xB9F7; (GMT)
-  - eg) 2017-07-20T00:00:00+0900 (&#xD55C;&#xAD6D;&#xAE30;&#xC900;)
-  - &#xB370;&#xC774;&#xD130; &#xBCF4;&#xAD00;&#xC8FC;&#xAE30; : 5&#xBD84; : 3&#xC77C; | 6&#xC2DC;&#xAC04; : 1&#xB2EC; | 1&#xC77C; : 2&#xB144; | 1&#xB2EC; : 5&#xB144;
-- interval
-  - &#xCE21;&#xC815;&#xAC04;&#xACA9;
-  - 5&#xBD84;(5m) | 6&#xC2DC;&#xAC04;(6h) | 1&#xC77C;(1d) | 1&#xB2EC;(1M)
-
-- Example
-```javascript
-const server = client.IaaS.server();
-
-// const timezone = &apos;America/Los_Angeles&apos;;
-const timezone = &apos;Asia/Seoul&apos;;
-const startTime = moment(Date.now()).subtract(1, &apos;hour&apos;).startOf(&apos;hour&apos;).tz(timezone).format(&apos;YYYY-MM-DDTHH:mm:ssZZ&apos;);
-const endTime = moment(Date.now()).tz(timezone).format(&apos;YYYY-MM-DDTHH:mm:ssZZ&apos;);
-
-const getNasVolumeInstanceRatingListResponse = await server.getNasVolumeInstanceRatingList({
-    nasVolumeInstanceNo: &apos;1029901&apos;,
-    startTime,
-    endTime,
-    interval: &apos;5m&apos;
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> server = client.IaaS.server();
+<span class="hljs-keyword">const</span> changeNasVolumeSizeResponse = <span class="hljs-keyword">await</span> server.changeNasVolumeSize({
+    nasVolumeInstanceNo: <span class="hljs-string">&apos;1029901&apos;</span>,
+    volumeSize: <span class="hljs-string">&apos;600&apos;</span> <span class="hljs-comment">// GB</span>
 });
 
-/** Results **/
-{
-    requestId: &apos;1d0b906c-5c9a-402f-8170-8b1ed62810b7&apos;,
-    returnCode: &apos;0&apos;,
-    returnMessage: &apos;success&apos;,
-    totalRows: 5,
-    nasVolumeInstanceRatingList: 
-    [ { ratingTime: &apos;2018-10-28T21:36:26+0900&apos;,
-        volumeSize: 536870912000,
-        volumeUseSize: 278528,
-        volumeUseRatio: 0,
-        snapshotVolumeSize: 0,
-        snapshotVolumeUseSize: 0,
-        snapshotVolumeUseRatio: 0 },
-        { ratingTime: &apos;2018-10-28T21:42:15+0900&apos;,
-        volumeSize: 536870912000,
-        volumeUseSize: 286720,
-        volumeUseRatio: 0,
-        snapshotVolumeSize: 0,
-        snapshotVolumeUseSize: 0,
-        snapshotVolumeUseRatio: 0 },
-        { ratingTime: &apos;2018-10-28T21:45:51+0900&apos;,
-        volumeSize: 644245094400,
-        volumeUseSize: 286720,
-        volumeUseRatio: 0,
-        snapshotVolumeSize: 0,
-        snapshotVolumeUseSize: 0,
-        snapshotVolumeUseRatio: 0 },
-        { ratingTime: &apos;2018-10-28T21:47:15+0900&apos;,
-        volumeSize: 644245094400,
-        volumeUseSize: 294912,
-        volumeUseRatio: 0,
-        snapshotVolumeSize: 0,
-        snapshotVolumeUseSize: 0,
-        snapshotVolumeUseRatio: 0 },
-        { ratingTime: &apos;2018-10-28T21:52:14+0900&apos;,
-        volumeSize: 644245094400,
-        volumeUseSize: 294912,
-        volumeUseRatio: 0,
-        snapshotVolumeSize: 0,
-        snapshotVolumeUseSize: 0,
-        snapshotVolumeUseRatio: 0 } ] 
+<span class="hljs-comment">/** Return **/</span>
+{ 
+    requestId: <span class="hljs-string">&apos;6b0b4ada-a7f5-4219-a183-946ac97c6512&apos;</span>,
+    returnCode: <span class="hljs-string">&apos;0&apos;</span>,
+    returnMessage: <span class="hljs-string">&apos;success&apos;</span>,
+    totalRows: <span class="hljs-number">1</span>,
+    nasVolumeInstanceList: 
+    [ { nasVolumeInstanceNo: <span class="hljs-string">&apos;1029901&apos;</span>,
+        nasVolumeInstanceStatus: [<span class="hljs-built_in">Object</span>],
+        nasVolumeInstanceOperation: [<span class="hljs-built_in">Object</span>],
+        nasVolumeInstanceStatusName: <span class="hljs-string">&apos;created&apos;</span>,
+        createDate: <span class="hljs-string">&apos;2018-10-28T21:36:26+0900&apos;</span>,
+        nasVolumeDescription: <span class="hljs-string">&apos;&apos;</span>,
+        mountInformation: <span class="hljs-string">&apos;10.250.53.73:/n780247_testVol&apos;</span>,
+        volumeAllotmentProtocolType: [<span class="hljs-built_in">Object</span>],
+        volumeName: <span class="hljs-string">&apos;n780247_testVol&apos;</span>,
+        volumeTotalSize: <span class="hljs-number">644245094400</span>,
+        volumeSize: <span class="hljs-number">644245094400</span>,
+        volumeUseSize: <span class="hljs-number">286720</span>,
+        volumeUseRatio: <span class="hljs-number">0</span>,
+        snapshotVolumeConfigurationRatio: <span class="hljs-number">0</span>,
+        snapshotVolumeSize: <span class="hljs-number">0</span>,
+        snapshotVolumeUseSize: <span class="hljs-number">0</span>,
+        snapshotVolumeUseRatio: <span class="hljs-number">0</span>,
+        isSnapshotConfiguration: <span class="hljs-literal">false</span>,
+        isEventConfiguration: <span class="hljs-literal">false</span>,
+        region: [<span class="hljs-built_in">Object</span>],
+        zone: [<span class="hljs-built_in">Object</span>],
+        nasVolumeInstanceCustomIpList: [],
+        nasVolumeServerInstanceList: [] } ] 
 }
-</code></pre><h4 id="setnasvolumeaccesscontrol">setNasVolumeAccessControl</h4>
+</code></pre>
+<h4 id="getnasvolumeinstanceratinglist">getNasVolumeInstanceRatingList</h4>
+<ul>
+<li><p>API&#xBA85;</p>
+<p>NAS&#xBCFC;&#xB968;&#xC778;&#xC2A4;&#xD134;&#xC2A4;&#xCE21;&#xC815;&#xB9AC;&#xC2A4;&#xD2B8;&#xC870;&#xD68C;</p>
+</li>
+<li><p>action</p>
+<p>getNasVolumeInstanceRatingList</p>
+</li>
+<li><p>&#xC124;&#xBA85;</p>
+<p>&#xC77C;/&#xC2DC;&#xAC04;/&#xBD84;/&#xCD08; &#xB2E8;&#xC704;&#xB85C; NAS &#xBCFC;&#xB968;&#xC758; &#xC778;&#xC2A4;&#xD134;&#xC2A4;&#xC758; &#xD06C;&#xAE30;&#xB97C; &#xC870;&#xD68C;&#xD569;&#xB2C8;&#xB2E4;.</p>
+</li>
+<li><p>&#xC694;&#xCCAD; &#xD30C;&#xB77C;&#xBBF8;&#xD130;</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>&#xD30C;&#xB77C;&#xBBF8;&#xD130;&#xBA85;</th>
+<th>&#xAC04;&#xB7B5; &#xC124;&#xBA85;</th>
+<th>&#xD0C0;&#xC785;</th>
+<th>&#xC81C;&#xC57D;</th>
+<th>&#xD544;&#xC218;&#xC5EC;&#xBD80;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nasVolumeInstanceNo</td>
+<td>NAS&#xBCFC;&#xB968;&#xC778;&#xC2A4;&#xD134;&#xC2A4;&#xBC88;&#xD638;</td>
+<td>String</td>
+<td></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>startTime</td>
+<td>&#xCE21;&#xC815;&#xC2DC;&#xC791;&#xC2DC;&#xAC04;</td>
+<td>String</td>
+<td>yyyy-MM-dd&apos;T&apos;HH:mm:ssZ &#xD3EC;&#xB9F7;</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>&#xCE21;&#xC815;&#xC885;&#xB8CC;&#xC2DC;&#xAC04;</td>
+<td>String</td>
+<td>yyyy-MM-dd&apos;T&apos;HH:mm:ssZ &#xD3EC;&#xB9F7;</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>interval</td>
+<td>&#xCE21;&#xC815;&#xAC04;&#xACA9;</td>
+<td>String</td>
+<td>5m / 6h / 1d / 1M</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>nasVolumeInstanceNo<ul>
+<li>NAS&#xBCFC;&#xB968;&#xC778;&#xC2A4;&#xD134;&#xC2A4;&#xBC88;&#xD638;</li>
+<li>getNasVolumeInstanceList &#xC561;&#xC158;&#xC744; &#xD1B5;&#xD574;&#xC11C; &#xD68D;&#xB4DD;&#xD558;&#xC2E4;&#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</li>
+</ul>
+</li>
+<li>startTime<ul>
+<li>&#xCE21;&#xC815;&#xC2DC;&#xC791;&#xC2DC;&#xAC04;</li>
+<li>yyyy-MM-dd&apos;T&apos;HH:mm:ssZ &#xD3EC;&#xB9F7; (GMT)</li>
+<li>eg) 2017-07-20T00:00:00+0900 (&#xD55C;&#xAD6D;&#xAE30;&#xC900;)</li>
+<li>&#xB370;&#xC774;&#xD130; &#xBCF4;&#xAD00;&#xC8FC;&#xAE30; : 5&#xBD84; : 3&#xC77C; | 6&#xC2DC;&#xAC04; : 1&#xB2EC; | 1&#xC77C; : 2&#xB144; | 1&#xB2EC; : 5&#xB144;</li>
+</ul>
+</li>
+<li>endTime<ul>
+<li>&#xCE21;&#xC815;&#xC885;&#xB8CC;&#xC2DC;&#xAC04;</li>
+<li>yyyy-MM-dd&apos;T&apos;HH:mm:ssZ &#xD3EC;&#xB9F7; (GMT)</li>
+<li>eg) 2017-07-20T00:00:00+0900 (&#xD55C;&#xAD6D;&#xAE30;&#xC900;)</li>
+<li>&#xB370;&#xC774;&#xD130; &#xBCF4;&#xAD00;&#xC8FC;&#xAE30; : 5&#xBD84; : 3&#xC77C; | 6&#xC2DC;&#xAC04; : 1&#xB2EC; | 1&#xC77C; : 2&#xB144; | 1&#xB2EC; : 5&#xB144;</li>
+</ul>
+</li>
+<li><p>interval</p>
+<ul>
+<li>&#xCE21;&#xC815;&#xAC04;&#xACA9;</li>
+<li>5&#xBD84;(5m) | 6&#xC2DC;&#xAC04;(6h) | 1&#xC77C;(1d) | 1&#xB2EC;(1M)</li>
+</ul>
+</li>
+<li><p>Example</p>
+</li>
+</ul>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> server = client.IaaS.server();
+
+<span class="hljs-comment">// const timezone = &apos;America/Los_Angeles&apos;;</span>
+<span class="hljs-keyword">const</span> timezone = <span class="hljs-string">&apos;Asia/Seoul&apos;</span>;
+<span class="hljs-keyword">const</span> startTime = moment(<span class="hljs-built_in">Date</span>.now()).subtract(<span class="hljs-number">1</span>, <span class="hljs-string">&apos;hour&apos;</span>).startOf(<span class="hljs-string">&apos;hour&apos;</span>).tz(timezone).format(<span class="hljs-string">&apos;YYYY-MM-DDTHH:mm:ssZZ&apos;</span>);
+<span class="hljs-keyword">const</span> endTime = moment(<span class="hljs-built_in">Date</span>.now()).tz(timezone).format(<span class="hljs-string">&apos;YYYY-MM-DDTHH:mm:ssZZ&apos;</span>);
+
+<span class="hljs-keyword">const</span> getNasVolumeInstanceRatingListResponse = <span class="hljs-keyword">await</span> server.getNasVolumeInstanceRatingList({
+    nasVolumeInstanceNo: <span class="hljs-string">&apos;1029901&apos;</span>,
+    startTime,
+    endTime,
+    interval: <span class="hljs-string">&apos;5m&apos;</span>
+});
+
+<span class="hljs-comment">/** Results **/</span>
+{
+    requestId: <span class="hljs-string">&apos;1d0b906c-5c9a-402f-8170-8b1ed62810b7&apos;</span>,
+    returnCode: <span class="hljs-string">&apos;0&apos;</span>,
+    returnMessage: <span class="hljs-string">&apos;success&apos;</span>,
+    totalRows: <span class="hljs-number">5</span>,
+    nasVolumeInstanceRatingList: 
+    [ { ratingTime: <span class="hljs-string">&apos;2018-10-28T21:36:26+0900&apos;</span>,
+        volumeSize: <span class="hljs-number">536870912000</span>,
+        volumeUseSize: <span class="hljs-number">278528</span>,
+        volumeUseRatio: <span class="hljs-number">0</span>,
+        snapshotVolumeSize: <span class="hljs-number">0</span>,
+        snapshotVolumeUseSize: <span class="hljs-number">0</span>,
+        snapshotVolumeUseRatio: <span class="hljs-number">0</span> },
+        { ratingTime: <span class="hljs-string">&apos;2018-10-28T21:42:15+0900&apos;</span>,
+        volumeSize: <span class="hljs-number">536870912000</span>,
+        volumeUseSize: <span class="hljs-number">286720</span>,
+        volumeUseRatio: <span class="hljs-number">0</span>,
+        snapshotVolumeSize: <span class="hljs-number">0</span>,
+        snapshotVolumeUseSize: <span class="hljs-number">0</span>,
+        snapshotVolumeUseRatio: <span class="hljs-number">0</span> },
+        { ratingTime: <span class="hljs-string">&apos;2018-10-28T21:45:51+0900&apos;</span>,
+        volumeSize: <span class="hljs-number">644245094400</span>,
+        volumeUseSize: <span class="hljs-number">286720</span>,
+        volumeUseRatio: <span class="hljs-number">0</span>,
+        snapshotVolumeSize: <span class="hljs-number">0</span>,
+        snapshotVolumeUseSize: <span class="hljs-number">0</span>,
+        snapshotVolumeUseRatio: <span class="hljs-number">0</span> },
+        { ratingTime: <span class="hljs-string">&apos;2018-10-28T21:47:15+0900&apos;</span>,
+        volumeSize: <span class="hljs-number">644245094400</span>,
+        volumeUseSize: <span class="hljs-number">294912</span>,
+        volumeUseRatio: <span class="hljs-number">0</span>,
+        snapshotVolumeSize: <span class="hljs-number">0</span>,
+        snapshotVolumeUseSize: <span class="hljs-number">0</span>,
+        snapshotVolumeUseRatio: <span class="hljs-number">0</span> },
+        { ratingTime: <span class="hljs-string">&apos;2018-10-28T21:52:14+0900&apos;</span>,
+        volumeSize: <span class="hljs-number">644245094400</span>,
+        volumeUseSize: <span class="hljs-number">294912</span>,
+        volumeUseRatio: <span class="hljs-number">0</span>,
+        snapshotVolumeSize: <span class="hljs-number">0</span>,
+        snapshotVolumeUseSize: <span class="hljs-number">0</span>,
+        snapshotVolumeUseRatio: <span class="hljs-number">0</span> } ] 
+}
+</code></pre>
+<h4 id="setnasvolumeaccesscontrol">setNasVolumeAccessControl</h4>
 <ul>
 <li><p>API&#xBA85;</p>
 <p>NAS&#xBCFC;&#xB968;&#xC778;&#xC2A4;&#xD134;&#xC2A4;&#xC811;&#xADFC;&#xC81C;&#xC5B4;&#xC124;&#xC815;</p>
@@ -1381,119 +1424,155 @@ const getNasVolumeInstanceRatingListResponse = await server.getNasVolumeInstance
 <li>&#xC0AC;&#xC124; IP&#xB9CC; &#xC124;&#xC815;&#xAC00;&#xB2A5; (&#xACF5;&#xC778; IP &#xC124;&#xC815;&#xBD88;&#xAC00;)</li>
 </ul>
 </li>
-<li><p>Example
-```javascript
-const server = client.IaaS.server();</p>
+<li><p>Example</p>
 </li>
 </ul>
-<p>const setNasVolumeAccessControlResponse = await server.setNasVolumeAccessControl({
-    nasVolumeInstanceNo: &apos;1029901&apos;,
-    serverInstanceNoList: [&apos;978300&apos;, &apos;978303&apos;]
-});</p>
-<p>/<strong> Result </strong>/
-{ 
-requestId: &apos;3fbaad72-d5cf-45b6-a81a-d888aa7cba87&apos;,
-returnCode: &apos;0&apos;,
-returnMessage: &apos;success&apos;,
-totalRows: 1,
-nasVolumeInstanceList: 
-[ { nasVolumeInstanceNo: &apos;1029901&apos;,
-    nasVolumeInstanceStatus: [Object],
-    nasVolumeInstanceOperation: [Object],
-    nasVolumeInstanceStatusName: &apos;created&apos;,
-    createDate: &apos;2018-10-28T21:36:26+0900&apos;,
-    nasVolumeDescription: &apos;&apos;,
-    mountInformation: &apos;10.250.53.73:/n780247_testVol&apos;,
-    volumeAllotmentProtocolType: [Object],
-    volumeName: &apos;n780247_testVol&apos;,
-    volumeTotalSize: 644245094400,
-    volumeSize: 644245094400,
-    volumeUseSize: 294912,
-    volumeUseRatio: 0,
-    snapshotVolumeConfigurationRatio: 0,
-    snapshotVolumeSize: 0,
-    snapshotVolumeUseSize: 0,
-    snapshotVolumeUseRatio: 0,
-    isSnapshotConfiguration: false,
-    isEventConfiguration: false,
-    region: [Object],
-    zone: [Object],
-    nasVolumeInstanceCustomIpList: [],
-    nasVolumeServerInstanceList: [Array] } ] 
-}</p>
-<pre><code>
-#### addNasVolumeAccessControl
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> server = client.IaaS.server();
 
-- API&#xBA85;
-
-  NAS&#xBCFC;&#xB968;&#xC778;&#xC2A4;&#xD134;&#xC2A4;&#xC811;&#xADFC;&#xC81C;&#xC5B4;&#xCD94;&#xAC00;
-
-- action
-
-  addNasVolumeAccessControl
-
-- &#xC124;&#xBA85;
-
-  NAS&#xC758; &#xC811;&#xADFC;&#xC81C;&#xC5B4;&#xB97C; &#xCD94;&#xAC00;&#xD569;&#xB2C8;&#xB2E4;.
-
-- &#xC694;&#xCCAD; &#xD30C;&#xB77C;&#xBBF8;&#xD130;
-
-| &#xD30C;&#xB77C;&#xBBF8;&#xD130;&#xBA85;                | &#xAC04;&#xB7B5; &#xC124;&#xBA85;       | &#xD0C0;&#xC785;     | &#xC81C;&#xC57D;   | &#xD544;&#xC218;&#xC5EC;&#xBD80; |
-| -------------------- | ----------- | ------ | ---- | ---- |
-| nasVolumeInstanceNo  | NAS&#xBCFC;&#xB968;&#xC778;&#xC2A4;&#xD134;&#xC2A4;&#xBC88;&#xD638; | String |      | Yes  |
-| serverInstanceNoList | &#xC11C;&#xBC84;&#xC778;&#xC2A4;&#xD134;&#xC2A4;&#xBC88;&#xD638;&#xB9AC;&#xC2A4;&#xD2B8; | List&lt;String&gt; | &#xC911;&#xBCF5;&#xBD88;&#xAC00; | No   |
-| customIpList         | &#xCEE4;&#xC2A4;&#xD140;IP&#xB9AC;&#xC2A4;&#xD2B8;    | List&lt;String&gt; | &#xC911;&#xBCF5;&#xBD88;&#xAC00; | No   |
-
-- nasVolumeInstanceNo
-  - NAS&#xBCFC;&#xB968;&#xC778;&#xC2A4;&#xD134;&#xC2A4;&#xBC88;&#xD638;
-  - nasVolumeInstanceNo&#xB294; getNasVolumeInstanceList&#xC561;&#xC158;&#xC744; &#xD1B5;&#xD574;&#xC11C; &#xC5BB;&#xC73C;&#xC2E4; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.
-- serverInstanceNoList
-  - &#xC911;&#xBCF5;&#xBD88;&#xAC00;
-  - &#xC0AC;&#xC6A9;&#xC790;&#xAC00; &#xC18C;&#xC720;&#xD558;&#xACE0; &#xC788;&#xB294; &#xC11C;&#xBC84;&#xC758; &#xC778;&#xC2A4;&#xD134;&#xC2A4;&#xBC88;&#xD638;&#xB9CC; &#xC785;&#xB825;&#xAC00;&#xB2A5;
-- customIpList
-  - &#xC911;&#xBCF5;&#xBD88;&#xAC00;
-  - &#xC0AC;&#xC124; IP&#xB9CC; &#xC124;&#xC815;&#xAC00;&#xB2A5; (&#xACF5;&#xC778; IP &#xC124;&#xC815;&#xBD88;&#xAC00;)
-
-- Example
-```javascript
-const server = client.IaaS.server();
-const addNasVolumeAccessControlResponse = await server.addNasVolumeAccessControl({
-    nasVolumeInstanceNo: &apos;1029901&apos;,
-    serverInstanceNoList: [&apos;978306&apos;]
+<span class="hljs-keyword">const</span> setNasVolumeAccessControlResponse = <span class="hljs-keyword">await</span> server.setNasVolumeAccessControl({
+    nasVolumeInstanceNo: <span class="hljs-string">&apos;1029901&apos;</span>,
+    serverInstanceNoList: [<span class="hljs-string">&apos;978300&apos;</span>, <span class="hljs-string">&apos;978303&apos;</span>]
 });
 
-/** Return **/
+<span class="hljs-comment">/** Result **/</span>
 { 
-    requestId: &apos;6b0ddc11-5f84-4145-928c-20dad9a6b9ce&apos;,
-    returnCode: &apos;0&apos;,
-    returnMessage: &apos;success&apos;,
-    totalRows: 1,
-    nasVolumeInstanceList: 
-    [ { nasVolumeInstanceNo: &apos;1029901&apos;,
-        nasVolumeInstanceStatus: [Object],
-        nasVolumeInstanceOperation: [Object],
-        nasVolumeInstanceStatusName: &apos;created&apos;,
-        createDate: &apos;2018-10-28T21:36:26+0900&apos;,
-        nasVolumeDescription: &apos;&apos;,
-        mountInformation: &apos;10.250.53.73:/n780247_testVol&apos;,
-        volumeAllotmentProtocolType: [Object],
-        volumeName: &apos;n780247_testVol&apos;,
-        volumeTotalSize: 644245094400,
-        volumeSize: 644245094400,
-        volumeUseSize: 294912,
-        volumeUseRatio: 0,
-        snapshotVolumeConfigurationRatio: 0,
-        snapshotVolumeSize: 0,
-        snapshotVolumeUseSize: 0,
-        snapshotVolumeUseRatio: 0,
-        isSnapshotConfiguration: false,
-        isEventConfiguration: false,
-        region: [Object],
-        zone: [Object],
-        nasVolumeInstanceCustomIpList: [],
-        nasVolumeServerInstanceList: [Array] } ] 
+requestId: <span class="hljs-string">&apos;3fbaad72-d5cf-45b6-a81a-d888aa7cba87&apos;</span>,
+returnCode: <span class="hljs-string">&apos;0&apos;</span>,
+returnMessage: <span class="hljs-string">&apos;success&apos;</span>,
+totalRows: <span class="hljs-number">1</span>,
+nasVolumeInstanceList: 
+[ { nasVolumeInstanceNo: <span class="hljs-string">&apos;1029901&apos;</span>,
+    nasVolumeInstanceStatus: [<span class="hljs-built_in">Object</span>],
+    nasVolumeInstanceOperation: [<span class="hljs-built_in">Object</span>],
+    nasVolumeInstanceStatusName: <span class="hljs-string">&apos;created&apos;</span>,
+    createDate: <span class="hljs-string">&apos;2018-10-28T21:36:26+0900&apos;</span>,
+    nasVolumeDescription: <span class="hljs-string">&apos;&apos;</span>,
+    mountInformation: <span class="hljs-string">&apos;10.250.53.73:/n780247_testVol&apos;</span>,
+    volumeAllotmentProtocolType: [<span class="hljs-built_in">Object</span>],
+    volumeName: <span class="hljs-string">&apos;n780247_testVol&apos;</span>,
+    volumeTotalSize: <span class="hljs-number">644245094400</span>,
+    volumeSize: <span class="hljs-number">644245094400</span>,
+    volumeUseSize: <span class="hljs-number">294912</span>,
+    volumeUseRatio: <span class="hljs-number">0</span>,
+    snapshotVolumeConfigurationRatio: <span class="hljs-number">0</span>,
+    snapshotVolumeSize: <span class="hljs-number">0</span>,
+    snapshotVolumeUseSize: <span class="hljs-number">0</span>,
+    snapshotVolumeUseRatio: <span class="hljs-number">0</span>,
+    isSnapshotConfiguration: <span class="hljs-literal">false</span>,
+    isEventConfiguration: <span class="hljs-literal">false</span>,
+    region: [<span class="hljs-built_in">Object</span>],
+    zone: [<span class="hljs-built_in">Object</span>],
+    nasVolumeInstanceCustomIpList: [],
+    nasVolumeServerInstanceList: [<span class="hljs-built_in">Array</span>] } ] 
 }
-</code></pre><h4 id="removenasvolumeaccesscontrol">removeNasVolumeAccessControl</h4>
+</code></pre>
+<h4 id="addnasvolumeaccesscontrol">addNasVolumeAccessControl</h4>
+<ul>
+<li><p>API&#xBA85;</p>
+<p>NAS&#xBCFC;&#xB968;&#xC778;&#xC2A4;&#xD134;&#xC2A4;&#xC811;&#xADFC;&#xC81C;&#xC5B4;&#xCD94;&#xAC00;</p>
+</li>
+<li><p>action</p>
+<p>addNasVolumeAccessControl</p>
+</li>
+<li><p>&#xC124;&#xBA85;</p>
+<p>NAS&#xC758; &#xC811;&#xADFC;&#xC81C;&#xC5B4;&#xB97C; &#xCD94;&#xAC00;&#xD569;&#xB2C8;&#xB2E4;.</p>
+</li>
+<li><p>&#xC694;&#xCCAD; &#xD30C;&#xB77C;&#xBBF8;&#xD130;</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>&#xD30C;&#xB77C;&#xBBF8;&#xD130;&#xBA85;</th>
+<th>&#xAC04;&#xB7B5; &#xC124;&#xBA85;</th>
+<th>&#xD0C0;&#xC785;</th>
+<th>&#xC81C;&#xC57D;</th>
+<th>&#xD544;&#xC218;&#xC5EC;&#xBD80;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nasVolumeInstanceNo</td>
+<td>NAS&#xBCFC;&#xB968;&#xC778;&#xC2A4;&#xD134;&#xC2A4;&#xBC88;&#xD638;</td>
+<td>String</td>
+<td></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>serverInstanceNoList</td>
+<td>&#xC11C;&#xBC84;&#xC778;&#xC2A4;&#xD134;&#xC2A4;&#xBC88;&#xD638;&#xB9AC;&#xC2A4;&#xD2B8;</td>
+<td>List<string></string></td>
+<td>&#xC911;&#xBCF5;&#xBD88;&#xAC00;</td>
+<td>No</td>
+</tr>
+<tr>
+<td>customIpList</td>
+<td>&#xCEE4;&#xC2A4;&#xD140;IP&#xB9AC;&#xC2A4;&#xD2B8;</td>
+<td>List<string></string></td>
+<td>&#xC911;&#xBCF5;&#xBD88;&#xAC00;</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>nasVolumeInstanceNo<ul>
+<li>NAS&#xBCFC;&#xB968;&#xC778;&#xC2A4;&#xD134;&#xC2A4;&#xBC88;&#xD638;</li>
+<li>nasVolumeInstanceNo&#xB294; getNasVolumeInstanceList&#xC561;&#xC158;&#xC744; &#xD1B5;&#xD574;&#xC11C; &#xC5BB;&#xC73C;&#xC2E4; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</li>
+</ul>
+</li>
+<li>serverInstanceNoList<ul>
+<li>&#xC911;&#xBCF5;&#xBD88;&#xAC00;</li>
+<li>&#xC0AC;&#xC6A9;&#xC790;&#xAC00; &#xC18C;&#xC720;&#xD558;&#xACE0; &#xC788;&#xB294; &#xC11C;&#xBC84;&#xC758; &#xC778;&#xC2A4;&#xD134;&#xC2A4;&#xBC88;&#xD638;&#xB9CC; &#xC785;&#xB825;&#xAC00;&#xB2A5;</li>
+</ul>
+</li>
+<li><p>customIpList</p>
+<ul>
+<li>&#xC911;&#xBCF5;&#xBD88;&#xAC00;</li>
+<li>&#xC0AC;&#xC124; IP&#xB9CC; &#xC124;&#xC815;&#xAC00;&#xB2A5; (&#xACF5;&#xC778; IP &#xC124;&#xC815;&#xBD88;&#xAC00;)</li>
+</ul>
+</li>
+<li><p>Example</p>
+</li>
+</ul>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> server = client.IaaS.server();
+<span class="hljs-keyword">const</span> addNasVolumeAccessControlResponse = <span class="hljs-keyword">await</span> server.addNasVolumeAccessControl({
+    nasVolumeInstanceNo: <span class="hljs-string">&apos;1029901&apos;</span>,
+    serverInstanceNoList: [<span class="hljs-string">&apos;978306&apos;</span>]
+});
+
+<span class="hljs-comment">/** Return **/</span>
+{ 
+    requestId: <span class="hljs-string">&apos;6b0ddc11-5f84-4145-928c-20dad9a6b9ce&apos;</span>,
+    returnCode: <span class="hljs-string">&apos;0&apos;</span>,
+    returnMessage: <span class="hljs-string">&apos;success&apos;</span>,
+    totalRows: <span class="hljs-number">1</span>,
+    nasVolumeInstanceList: 
+    [ { nasVolumeInstanceNo: <span class="hljs-string">&apos;1029901&apos;</span>,
+        nasVolumeInstanceStatus: [<span class="hljs-built_in">Object</span>],
+        nasVolumeInstanceOperation: [<span class="hljs-built_in">Object</span>],
+        nasVolumeInstanceStatusName: <span class="hljs-string">&apos;created&apos;</span>,
+        createDate: <span class="hljs-string">&apos;2018-10-28T21:36:26+0900&apos;</span>,
+        nasVolumeDescription: <span class="hljs-string">&apos;&apos;</span>,
+        mountInformation: <span class="hljs-string">&apos;10.250.53.73:/n780247_testVol&apos;</span>,
+        volumeAllotmentProtocolType: [<span class="hljs-built_in">Object</span>],
+        volumeName: <span class="hljs-string">&apos;n780247_testVol&apos;</span>,
+        volumeTotalSize: <span class="hljs-number">644245094400</span>,
+        volumeSize: <span class="hljs-number">644245094400</span>,
+        volumeUseSize: <span class="hljs-number">294912</span>,
+        volumeUseRatio: <span class="hljs-number">0</span>,
+        snapshotVolumeConfigurationRatio: <span class="hljs-number">0</span>,
+        snapshotVolumeSize: <span class="hljs-number">0</span>,
+        snapshotVolumeUseSize: <span class="hljs-number">0</span>,
+        snapshotVolumeUseRatio: <span class="hljs-number">0</span>,
+        isSnapshotConfiguration: <span class="hljs-literal">false</span>,
+        isEventConfiguration: <span class="hljs-literal">false</span>,
+        region: [<span class="hljs-built_in">Object</span>],
+        zone: [<span class="hljs-built_in">Object</span>],
+        nasVolumeInstanceCustomIpList: [],
+        nasVolumeServerInstanceList: [<span class="hljs-built_in">Array</span>] } ] 
+}
+</code></pre>
+<h4 id="removenasvolumeaccesscontrol">removeNasVolumeAccessControl</h4>
 <ul>
 <li><p>API&#xBA85;</p>
 <p>NAS&#xBCFC;&#xB968;&#xC778;&#xC2A4;&#xD134;&#xC2A4;&#xC811;&#xADFC;&#xC81C;&#xC5B4;&#xC81C;&#xAC70;</p>
@@ -1558,91 +1637,106 @@ const addNasVolumeAccessControlResponse = await server.addNasVolumeAccessControl
 <li>&#xC0AC;&#xC124; IP&#xB9CC; &#xC124;&#xC815;&#xAC00;&#xB2A5; (&#xACF5;&#xC778; IP &#xC124;&#xC815;&#xBD88;&#xAC00;)</li>
 </ul>
 </li>
-<li><p>Example
-```javascript
-const server = client.IaaS.server();
-const removeNasVolumeAccessControlResponse = await server.removeNasVolumeAccessControl({
-  nasVolumeInstanceNo: &apos;1029901&apos;,
-  serverInstanceNoList: [&apos;978306&apos;]
-});</p>
+<li><p>Example</p>
 </li>
 </ul>
-<p>/<strong> Return </strong>/
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> server = client.IaaS.server();
+<span class="hljs-keyword">const</span> removeNasVolumeAccessControlResponse = <span class="hljs-keyword">await</span> server.removeNasVolumeAccessControl({
+    nasVolumeInstanceNo: <span class="hljs-string">&apos;1029901&apos;</span>,
+    serverInstanceNoList: [<span class="hljs-string">&apos;978306&apos;</span>]
+});
+
+<span class="hljs-comment">/** Return **/</span>
 { 
-    requestId: &apos;f92f078f-9aa1-4aac-9bd8-3c0335b7e3d0&apos;,
-    returnCode: &apos;0&apos;,
-    returnMessage: &apos;success&apos;,
-    totalRows: 1,
+    requestId: <span class="hljs-string">&apos;f92f078f-9aa1-4aac-9bd8-3c0335b7e3d0&apos;</span>,
+    returnCode: <span class="hljs-string">&apos;0&apos;</span>,
+    returnMessage: <span class="hljs-string">&apos;success&apos;</span>,
+    totalRows: <span class="hljs-number">1</span>,
     nasVolumeInstanceList: 
-    [ { nasVolumeInstanceNo: &apos;1029901&apos;,
-        nasVolumeInstanceStatus: [Object],
-        nasVolumeInstanceOperation: [Object],
-        nasVolumeInstanceStatusName: &apos;created&apos;,
-        createDate: &apos;2018-10-28T21:36:26+0900&apos;,
-        nasVolumeDescription: &apos;&apos;,
-        mountInformation: &apos;10.250.53.73:/n780247_testVol&apos;,
-        volumeAllotmentProtocolType: [Object],
-        volumeName: &apos;n780247_testVol&apos;,
-        volumeTotalSize: 644245094400,
-        volumeSize: 644245094400,
-        volumeUseSize: 294912,
-        volumeUseRatio: 0,
-        snapshotVolumeConfigurationRatio: 0,
-        snapshotVolumeSize: 0,
-        snapshotVolumeUseSize: 0,
-        snapshotVolumeUseRatio: 0,
-        isSnapshotConfiguration: false,
-        isEventConfiguration: false,
-        region: [Object],
-        zone: [Object],
+    [ { nasVolumeInstanceNo: <span class="hljs-string">&apos;1029901&apos;</span>,
+        nasVolumeInstanceStatus: [<span class="hljs-built_in">Object</span>],
+        nasVolumeInstanceOperation: [<span class="hljs-built_in">Object</span>],
+        nasVolumeInstanceStatusName: <span class="hljs-string">&apos;created&apos;</span>,
+        createDate: <span class="hljs-string">&apos;2018-10-28T21:36:26+0900&apos;</span>,
+        nasVolumeDescription: <span class="hljs-string">&apos;&apos;</span>,
+        mountInformation: <span class="hljs-string">&apos;10.250.53.73:/n780247_testVol&apos;</span>,
+        volumeAllotmentProtocolType: [<span class="hljs-built_in">Object</span>],
+        volumeName: <span class="hljs-string">&apos;n780247_testVol&apos;</span>,
+        volumeTotalSize: <span class="hljs-number">644245094400</span>,
+        volumeSize: <span class="hljs-number">644245094400</span>,
+        volumeUseSize: <span class="hljs-number">294912</span>,
+        volumeUseRatio: <span class="hljs-number">0</span>,
+        snapshotVolumeConfigurationRatio: <span class="hljs-number">0</span>,
+        snapshotVolumeSize: <span class="hljs-number">0</span>,
+        snapshotVolumeUseSize: <span class="hljs-number">0</span>,
+        snapshotVolumeUseRatio: <span class="hljs-number">0</span>,
+        isSnapshotConfiguration: <span class="hljs-literal">false</span>,
+        isEventConfiguration: <span class="hljs-literal">false</span>,
+        region: [<span class="hljs-built_in">Object</span>],
+        zone: [<span class="hljs-built_in">Object</span>],
         nasVolumeInstanceCustomIpList: [],
-        nasVolumeServerInstanceList: [Array] } ]
-}</p>
-<pre><code>
+        nasVolumeServerInstanceList: [<span class="hljs-built_in">Array</span>] } ]
+}
+</code></pre>
+<h3 id="&#xB85C;&#xADF8;&#xC778;&#xD0A4;">&#xB85C;&#xADF8;&#xC778;&#xD0A4;</h3>
+<h4 id="getloginkeylist">getLoginKeyList</h4>
+<ul>
+<li><p>API&#xBA85;</p>
+<p>&#xB85C;&#xADF8;&#xC778;&#xD0A4;&#xB9AC;&#xC2A4;&#xD2B8;&#xC870;&#xD68C;</p>
+</li>
+<li><p>action</p>
+<p>getLoginKeyList</p>
+</li>
+<li><p>&#xC124;&#xBA85;</p>
+<p>&#xC11C;&#xBC84;&#xC778;&#xC2A4;&#xD134;&#xC2A4;(VM)&#xB97C; &#xC0DD;&#xC131;&#xD558;&#xACE0;, &#xC0DD;&#xC131;&#xB41C; &#xC11C;&#xBC84;&#xC778;&#xC2A4;&#xD134;&#xC2A4;(VM)&#xC5D0; &#xC811;&#xC18D; &#xC2DC;, &#xB85C;&#xADF8;&#xC778;&#xD0A4;&#xB97C; &#xC774;&#xC6A9;&#xD558;&#xC5EC; &#xBE44;&#xBC00;&#xBC88;&#xD638;&#xB97C; &#xC554;&#xD638;&#xD654;&#xD558;&#xACE0; &#xBCF5;&#xD638;&#xD654;&#xD558;&#xB294; &#xD0A4;&#xB97C; &#xC870;&#xD68C;&#xD569;&#xB2C8;&#xB2E4;.</p>
+</li>
+<li><p>&#xC694;&#xCCAD; &#xD30C;&#xB77C;&#xBBF8;&#xD130;</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>&#xD30C;&#xB77C;&#xBBF8;&#xD130;&#xBA85;</th>
+<th>&#xAC04;&#xB7B5; &#xC124;&#xBA85;</th>
+<th>&#xD0C0;&#xC785;</th>
+<th>&#xD544;&#xC218;&#xC5EC;&#xBD80;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>keyName</td>
+<td>&#xD0A4;&#xBA85;</td>
+<td>String</td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>keyName</p>
+<ul>
+<li>&#xC870;&#xD68C;&#xD560; &#xD0A4; &#xBA85;</li>
+</ul>
+</li>
+<li><p>Example</p>
+</li>
+</ul>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> server = client.IaaS.server();
+<span class="hljs-keyword">const</span> getLoginKeyListResponse = <span class="hljs-keyword">await</span> server.getLoginKeyList();
 
-### &#xB85C;&#xADF8;&#xC778;&#xD0A4;
-
-#### getLoginKeyList
-
-- API&#xBA85;
-
-  &#xB85C;&#xADF8;&#xC778;&#xD0A4;&#xB9AC;&#xC2A4;&#xD2B8;&#xC870;&#xD68C;
-
-- action
-
-  getLoginKeyList
-
-- &#xC124;&#xBA85;
-
-  &#xC11C;&#xBC84;&#xC778;&#xC2A4;&#xD134;&#xC2A4;(VM)&#xB97C; &#xC0DD;&#xC131;&#xD558;&#xACE0;, &#xC0DD;&#xC131;&#xB41C; &#xC11C;&#xBC84;&#xC778;&#xC2A4;&#xD134;&#xC2A4;(VM)&#xC5D0; &#xC811;&#xC18D; &#xC2DC;, &#xB85C;&#xADF8;&#xC778;&#xD0A4;&#xB97C; &#xC774;&#xC6A9;&#xD558;&#xC5EC; &#xBE44;&#xBC00;&#xBC88;&#xD638;&#xB97C; &#xC554;&#xD638;&#xD654;&#xD558;&#xACE0; &#xBCF5;&#xD638;&#xD654;&#xD558;&#xB294; &#xD0A4;&#xB97C; &#xC870;&#xD68C;&#xD569;&#xB2C8;&#xB2E4;.
-
-- &#xC694;&#xCCAD; &#xD30C;&#xB77C;&#xBBF8;&#xD130;
-
-| &#xD30C;&#xB77C;&#xBBF8;&#xD130;&#xBA85;    | &#xAC04;&#xB7B5; &#xC124;&#xBA85;  | &#xD0C0;&#xC785;    | &#xD544;&#xC218;&#xC5EC;&#xBD80; |
-| -------- | ------ | ------- |  ---- |
-| keyName  | &#xD0A4;&#xBA85;     | String  |  No   |
-
-- keyName
-  - &#xC870;&#xD68C;&#xD560; &#xD0A4; &#xBA85;
-
-- Example
-```javascript
-const server = client.IaaS.server();
-const getLoginKeyListResponse = await server.getLoginKeyList();
-
-/** Return **/
+<span class="hljs-comment">/** Return **/</span>
 { 
-    requestId: &apos;d5d37501-9649-4f12-b4d2-41dd4b9e62ac&apos;,
-    returnCode: &apos;0&apos;,
-    returnMessage: &apos;success&apos;,
-    totalRows: 1,
+    requestId: <span class="hljs-string">&apos;d5d37501-9649-4f12-b4d2-41dd4b9e62ac&apos;</span>,
+    returnCode: <span class="hljs-string">&apos;0&apos;</span>,
+    returnMessage: <span class="hljs-string">&apos;success&apos;</span>,
+    totalRows: <span class="hljs-number">1</span>,
     loginKeyList: 
     [ {  
-        fingerprint: &apos;0b:0c:df:00:10:8b:09:fc:ee:28:cc:21:ad:76:ae:52&apos;,
-        keyName: &apos;mygbtest&apos;,
-        createDate: &apos;2017-12-29T18:27:12+0900&apos; } ] 
+        fingerprint: <span class="hljs-string">&apos;0b:0c:df:00:10:8b:09:fc:ee:28:cc:21:ad:76:ae:52&apos;</span>,
+        keyName: <span class="hljs-string">&apos;mygbtest&apos;</span>,
+        createDate: <span class="hljs-string">&apos;2017-12-29T18:27:12+0900&apos;</span> } ] 
 }
-</code></pre><h4 id="createloginkey">createLoginKey</h4>
+</code></pre>
+<h4 id="createloginkey">createLoginKey</h4>
 <ul>
 <li><p>API&#xBA85;</p>
 <p>&#xB85C;&#xADF8;&#xC778;&#xD0A4;&#xC0DD;&#xC131;</p>
@@ -1746,73 +1840,100 @@ fs.writeFileSync( path.join(__dirname, <span class="hljs-string">&apos;./loginKe
 <li>&#xD0A4;&#xBA85;&#xC774; &#xC874;&#xC7AC;&#xD558;&#xC9C0; &#xC54A;&#xC744; &#xACBD;&#xC6B0; &#xC624;&#xB958;&#xAC00; &#xBC1C;&#xC0DD;&#xB429;&#xB2C8;&#xB2E4;.</li>
 </ul>
 </li>
-<li><p>Example
-```javascript
-const server = client.IaaS.server();
-const deleteLoginKeyResponse = await server.deleteLoginKey({
-  keyName: &apos;mytest&apos;
-});</p>
+<li><p>Example</p>
 </li>
 </ul>
-<p>/<strong> Result </strong>/
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> server = client.IaaS.server();
+<span class="hljs-keyword">const</span> deleteLoginKeyResponse = <span class="hljs-keyword">await</span> server.deleteLoginKey({
+    keyName: <span class="hljs-string">&apos;mytest&apos;</span>
+});
+
+<span class="hljs-comment">/** Result **/</span>
 { 
-    requestId: &apos;dac7ba6f-0051-4305-a924-b015c83fcdd2&apos;,
-    returnCode: &apos;0&apos;,
-    returnMessage: &apos;success&apos; }</p>
-<pre><code>
-#### importLoginKey
+    requestId: <span class="hljs-string">&apos;dac7ba6f-0051-4305-a924-b015c83fcdd2&apos;</span>,
+    returnCode: <span class="hljs-string">&apos;0&apos;</span>,
+    returnMessage: <span class="hljs-string">&apos;success&apos;</span> }
+</code></pre>
+<h4 id="importloginkey">importLoginKey</h4>
+<ul>
+<li><p>API&#xBA85;</p>
+<p>&#xB85C;&#xADF8;&#xC778;&#xD0A4; import</p>
+</li>
+<li><p>action</p>
+<p>importLoginKey</p>
+</li>
+<li><p>&#xC124;&#xBA85;</p>
+<p>&#xC11C;&#xBC84;&#xC778;&#xC2A4;&#xD134;&#xC2A4;(VM)&#xB97C; &#xC0DD;&#xC131;&#xD558;&#xACE0;, &#xC0DD;&#xC131;&#xB41C; &#xC11C;&#xBC84;&#xC778;&#xC2A4;&#xD134;&#xC2A4;(VM)&#xC5D0; &#xC811;&#xC18D; &#xC2DC; &#xB85C;&#xADF8;&#xC778;&#xD0A4;&#xB97C; &#xC774;&#xC6A9;&#xD558;&#xC5EC; &#xBE44;&#xBC00;&#xBC88;&#xD638;&#xB97C; &#xC554;&#xD638;&#xD654; &#xD558;&#xACE0; &#xBCF5;&#xD638;&#xD654; &#xD558;&#xB294; &#xD0A4;&#xB97C; &#xC0DD;&#xC131;&#xD569;&#xB2C8;&#xB2E4;. &#xC0AC;&#xC6A9;&#xC790;&#xAC00; &#xC9C1;&#xC811; ssh-keygen &#xC73C;&#xB85C; &#xC0DD;&#xC131;&#xD55C; public key&#xB97C; import &#xD569;&#xB2C8;&#xB2E4;.</p>
+</li>
+<li><p>&#xC694;&#xCCAD; &#xD30C;&#xB77C;&#xBBF8;&#xD130;</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>&#xD30C;&#xB77C;&#xBBF8;&#xD130;&#xBA85;</th>
+<th>&#xAC04;&#xB7B5; &#xC124;&#xBA85;</th>
+<th>&#xD0C0;&#xC785;</th>
+<th>&#xC81C;&#xC57D;</th>
+<th>&#xD544;&#xC218;&#xC5EC;&#xBD80;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>keyName</td>
+<td>&#xD0A4;&#xBA85;</td>
+<td>String</td>
+<td>Min:3, Max:30</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>publicKey</td>
+<td>&#xACF5;&#xAC1C;&#xD0A4;</td>
+<td>String</td>
+<td></td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>keyName<ul>
+<li>&#xC0DD;&#xC131;&#xD560; &#xD0A4; &#xBA85;</li>
+<li>&#xC774;&#xBBF8; &#xC0DD;&#xC131;&#xB41C; &#xD0A4;&#xBA85;&#xC774; &#xC874;&#xC7AC;&#xD560; &#xACBD;&#xC6B0; &#xC624;&#xB958;&#xAC00; &#xBC1C;&#xC0DD;&#xB429;&#xB2C8;&#xB2E4;.</li>
+</ul>
+</li>
+<li><p>publicKey</p>
+<ul>
+<li>import &#xD560; &#xACF5;&#xAC1C;&#xD0A4;</li>
+<li>ssh-keygen -t rsa -C &quot;my-key&quot; -f ~/.ssh/my-key&#xB85C; &#xC0DD;&#xC131;&#xD55C; public &#xD0A4;.</li>
+</ul>
+</li>
+<li><p>Example</p>
+</li>
+</ul>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;fs&apos;</span>);
+<span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;path&apos;</span>);
+<span class="hljs-keyword">const</span> publicKey = fs.readFileSync( path.join(__dirname, <span class="hljs-string">&apos;./testPublicKey.pub&apos;</span>), { encoding: <span class="hljs-string">&apos;utf8&apos;</span>});
 
-- API&#xBA85;
+<span class="hljs-keyword">const</span> server = client.IaaS.server();
 
-  &#xB85C;&#xADF8;&#xC778;&#xD0A4; import
-
-- action
-
-  importLoginKey
-
-- &#xC124;&#xBA85;
-
-  &#xC11C;&#xBC84;&#xC778;&#xC2A4;&#xD134;&#xC2A4;(VM)&#xB97C; &#xC0DD;&#xC131;&#xD558;&#xACE0;, &#xC0DD;&#xC131;&#xB41C; &#xC11C;&#xBC84;&#xC778;&#xC2A4;&#xD134;&#xC2A4;(VM)&#xC5D0; &#xC811;&#xC18D; &#xC2DC; &#xB85C;&#xADF8;&#xC778;&#xD0A4;&#xB97C; &#xC774;&#xC6A9;&#xD558;&#xC5EC; &#xBE44;&#xBC00;&#xBC88;&#xD638;&#xB97C; &#xC554;&#xD638;&#xD654; &#xD558;&#xACE0; &#xBCF5;&#xD638;&#xD654; &#xD558;&#xB294; &#xD0A4;&#xB97C; &#xC0DD;&#xC131;&#xD569;&#xB2C8;&#xB2E4;. &#xC0AC;&#xC6A9;&#xC790;&#xAC00; &#xC9C1;&#xC811; ssh-keygen &#xC73C;&#xB85C; &#xC0DD;&#xC131;&#xD55C; public key&#xB97C; import &#xD569;&#xB2C8;&#xB2E4;.
-
-- &#xC694;&#xCCAD; &#xD30C;&#xB77C;&#xBBF8;&#xD130;
-
-| &#xD30C;&#xB77C;&#xBBF8;&#xD130;&#xBA85;   | &#xAC04;&#xB7B5; &#xC124;&#xBA85; | &#xD0C0;&#xC785;     | &#xC81C;&#xC57D;            | &#xD544;&#xC218;&#xC5EC;&#xBD80; |
-| ------- | ----- | ------ | ------------- | ---- |
-| keyName | &#xD0A4;&#xBA85;    | String | Min:3, Max:30 | Yes   |
-| publicKey    | &#xACF5;&#xAC1C;&#xD0A4;    | String   |               | Yes      |
-
-- keyName
-  - &#xC0DD;&#xC131;&#xD560; &#xD0A4; &#xBA85;
-  - &#xC774;&#xBBF8; &#xC0DD;&#xC131;&#xB41C; &#xD0A4;&#xBA85;&#xC774; &#xC874;&#xC7AC;&#xD560; &#xACBD;&#xC6B0; &#xC624;&#xB958;&#xAC00; &#xBC1C;&#xC0DD;&#xB429;&#xB2C8;&#xB2E4;.
-- publicKey
-  - import &#xD560; &#xACF5;&#xAC1C;&#xD0A4;
-  - ssh-keygen -t rsa -C &quot;my-key&quot; -f ~/.ssh/my-key&#xB85C; &#xC0DD;&#xC131;&#xD55C; public &#xD0A4;.
-
-- Example
-```javascript
-const fs = require(&apos;fs&apos;);
-const path = require(&apos;path&apos;);
-const publicKey = fs.readFileSync( path.join(__dirname, &apos;./testPublicKey.pub&apos;), { encoding: &apos;utf8&apos;});
-
-const server = client.IaaS.server();
-
-const importLoginKeyResponse = await server.importLoginKey({
-    keyName: &apos;mytest&apos;,
+<span class="hljs-keyword">const</span> importLoginKeyResponse = <span class="hljs-keyword">await</span> server.importLoginKey({
+    keyName: <span class="hljs-string">&apos;mytest&apos;</span>,
     publicKey,
 });
 
-/** Return **/
+<span class="hljs-comment">/** Return **/</span>
 { 
-    requestId: &apos;a84ac502-3b83-4aa6-b492-666e4e2dbeca&apos;,
-    returnCode: &apos;0&apos;,
-    returnMessage: &apos;success&apos;,
-    totalRows: 1,
+    requestId: <span class="hljs-string">&apos;a84ac502-3b83-4aa6-b492-666e4e2dbeca&apos;</span>,
+    returnCode: <span class="hljs-string">&apos;0&apos;</span>,
+    returnMessage: <span class="hljs-string">&apos;success&apos;</span>,
+    totalRows: <span class="hljs-number">1</span>,
     loginKeyList: 
-    [ { fingerprint: &apos;-&apos;,
-        keyName: &apos;mytest&apos;,
-        createDate: &apos;2018-10-28T22:47:33+0900&apos; } ] 
+    [ { fingerprint: <span class="hljs-string">&apos;-&apos;</span>,
+        keyName: <span class="hljs-string">&apos;mytest&apos;</span>,
+        createDate: <span class="hljs-string">&apos;2018-10-28T22:47:33+0900&apos;</span> } ] 
 }
-</code></pre><h3 id="accesscontrolgroup">AccessControlGroup</h3>
+</code></pre>
+<h3 id="accesscontrolgroup">AccessControlGroup</h3>
 <h4 id="getaccesscontrolgrouplist">getAccessControlGroupList</h4>
 <ul>
 <li><p>API&#xBA85;</p>
@@ -6824,7 +6945,7 @@ C:\Windows\Temp\naver_download.ps1<span class="hljs-tag">&lt;/<span class="hljs-
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Server","level":"1.2.1","depth":2,"next":{"title":"LoadBalancer","level":"1.2.2","depth":2,"path":"iaas/loadbalancer/loadbalancer-01.md","ref":"./iaas/loadbalancer/loadbalancer-01.md","articles":[]},"previous":{"title":"IaaS","level":"1.2","depth":1,"ref":"","articles":[{"title":"Server","level":"1.2.1","depth":2,"path":"iaas/server/server-01.md","ref":"./iaas/server/server-01.md","articles":[]},{"title":"LoadBalancer","level":"1.2.2","depth":2,"path":"iaas/loadbalancer/loadbalancer-01.md","ref":"./iaas/loadbalancer/loadbalancer-01.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"iaas/server/server-01.md","mtime":"2018-10-28T16:46:06.616Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-10-28T16:57:39.732Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Server","level":"1.2.1","depth":2,"next":{"title":"LoadBalancer","level":"1.2.2","depth":2,"path":"iaas/loadbalancer/loadbalancer-01.md","ref":"./iaas/loadbalancer/loadbalancer-01.md","articles":[]},"previous":{"title":"IaaS","level":"1.2","depth":1,"ref":"","articles":[{"title":"Server","level":"1.2.1","depth":2,"path":"iaas/server/server-01.md","ref":"./iaas/server/server-01.md","articles":[]},{"title":"LoadBalancer","level":"1.2.2","depth":2,"path":"iaas/loadbalancer/loadbalancer-01.md","ref":"./iaas/loadbalancer/loadbalancer-01.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"iaas/server/server-01.md","mtime":"2018-10-28T17:05:52.145Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-10-28T17:10:26.878Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
