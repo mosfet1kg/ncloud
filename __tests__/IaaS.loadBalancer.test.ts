@@ -132,5 +132,27 @@ describe('Test IaaS LoadBalancer Method', function( ){
       done.fail(e);
     }
   });
+
+  test('Test changeLoadBalancedServerInstances', async ( done ) => {
+    try {
+      const client = ncloud.createClient({
+        accessKey,
+        secretKey,
+        regionNo: "1",
+      });
+
+      const loadBalancer = client.IaaS.loadBalancer();
+      const getLoadBalancedServerInstanceListResponse = await loadBalancer.changeLoadBalancedServerInstances({
+        loadBalancerInstanceNo: '1030011',
+        serverInstanceNoList: ['979072'],
+      });
+      console.log( getLoadBalancedServerInstanceListResponse );
+
+      done();
+    } catch (e) {
+      console.log( e );
+      done.fail(e);
+    }
+  });
 });
 

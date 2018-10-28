@@ -486,10 +486,7 @@ const getLoadBalancedServerInstanceListResponse = await loadBalancer.getLoadBala
         instanceTagList: [] },
     ]
 }
-
-
 ```
-
 
 #### changeLoadBalancedServerInstances
 
@@ -509,7 +506,7 @@ const getLoadBalancedServerInstanceListResponse = await loadBalancer.getLoadBala
 | 파라미터명                  | 간략 설명       | 타입     | 제약   | 필수여부 |
 | ---------------------- | ----------- | ------ | ---- | ---- |
 | loadBalancerInstanceNo | 로드밸런서인스턴스번호 | String |      | Yes  |
-| serverInstanceNoList.N | 서버인스턴스번호리스트 | String | 중복불가 | Yes  |
+| serverInstanceNoList | 서버인스턴스번호리스트 | List<String> | 중복불가 | Yes  |
 
 - loadBalancerInstanceNo
   - 변경할 로드밸런서인스턴스 번호
@@ -517,128 +514,47 @@ const getLoadBalancedServerInstanceListResponse = await loadBalancer.getLoadBala
   - 로드밸런서에 바인드할 서버인스턴스번호리스트
 
 - Example
+```javascript
+const client = ncloud.createClient({
+    accessKey,
+    secretKey,
+    regionNo: "1",
+});
 
-  - 요청
+const loadBalancer = client.IaaS.loadBalancer();
+const getLoadBalancedServerInstanceListResponse = await loadBalancer.changeLoadBalancedServerInstances({
+    loadBalancerInstanceNo: '1030011',
+    serverInstanceNoList: ['979072'],
+});
 
-    ```
-    ${LOADBALANCER_API_URL}/changeLoadBalancedServerInstances
-    ?loadBalancerInstanceNo=68017
-    &serverInstanceNoList.1=67953
-    ```
+/** Return **/
+{ 
+    requestId: 'cd01fe5a-f488-4a28-ab81-3d51ad3ce3e4',
+    returnCode: '0',
+    returnMessage: 'success',
+    totalRows: 1,
+    loadBalancerInstanceList: 
+    [ { loadBalancerInstanceNo: '1030011',
+        virtualIp: '49.236.151.168,49.236.150.50',
+        loadBalancerName: 'my-lb',
+        loadBalancerAlgorithmType: [Object],
+        loadBalancerDescription: '',
+        createDate: '2018-10-29T00:30:38+0900',
+        domainName: 'slb-1030011.ncloudslb.com',
+        internetLineType: [Object],
+        loadBalancerInstanceStatusName: 'used',
+        loadBalancerInstanceStatus: [Object],
+        loadBalancerInstanceOperation: [Object],
+        networkUsageType: [Object],
+        isHttpKeepAlive: false,
+        connectionTimeout: 60,
+        certificateName: '',
+        loadBalancerRuleList: [Array],
+        loadBalancedServerInstanceList: [Array] } ] 
+}
 
-  - 응답
 
-    ```xml
-    <changeLoadBalancedServerInstancesResponse>
-    	<requestId>4a4e4ef0-d125-4760-ab69-4afec00bd19f</requestId>
-    	<returnCode>0</returnCode>
-    	<returnMessage>success</returnMessage>
-    	<totalRows>1</totalRows>
-    	<loadBalancerInstanceList>
-    		<loadBalancerInstance>
-    			<loadBalancerInstanceNo>68017</loadBalancerInstanceNo>
-    			<virtualIp />
-    			<loadBalancerName>loadb-7f87189e14fa43f</loadBalancerName>
-    			<loadBalancerAlgorithmType>
-    				<code>RR</code>
-    				<codeName>Round Robin</codeName>
-    			</loadBalancerAlgorithmType>
-    			<loadBalancerDescription />
-    			<createDate>2014-02-18T21:03:26+0900</createDate>
-    			<domainName>slb-68017.sl2.ncloud.com</domainName>
-    			<internetLineType>
-    				<code>PUBLC</code>
-    				<codeName>Public</codeName>
-    			</internetLineType>
-    			<loadBalancerInstanceStatusName>changing</loadBalancerInstanceStatusName>
-    			<loadBalancerInstanceStatus>
-    				<code>USED</code>
-    				<codeName>NET USED state</codeName>
-    			</loadBalancerInstanceStatus>
-    			<loadBalancerInstanceOperation>
-    				<code>CHANG</code>
-    				<codeName>NET CHANGE OP</codeName>
-    			</loadBalancerInstanceOperation>
-    			<networkUsageType>
-    				<code>PBLIP</code>
-    				<codeName>Public</codeName>
-    			</networkUsageType>
-    			<loadBalancerRuleList>
-    				<loadBalancerRule>
-    					<protocolType>
-    						<code>HTTP</code>
-    						<codeName>http</codeName>
-    					</protocolType>
-    					<loadBalancerPort>88</loadBalancerPort>
-    					<serverPort>88</serverPort>
-    					<l7HealthCheckPath>/l7check.html</l7HealthCheckPath>
-    					<certificateName />
-    				</loadBalancerRule>
-    			</loadBalancerRuleList>
-    			<loadBalancedServerInstanceList>
-    				<loadBalancedServerInstance>
-    					<serverInstance>
-    						<serverInstanceNo>67953</serverInstanceNo>
-    						<serverName>myserver</serverName>
-    						<serverDescription />
-    						<cpuCount>2</cpuCount>
-    						<memorySize>4294967296</memorySize>
-    						<baseBlockStorageSize>53687091200</baseBlockStorageSize>
-    						<platformType>
-    							<code>LNX32</code>
-    							<codeName>Linux 32 Bit</codeName>
-    						</platformType>
-    						<loginKeyName>hkey-0217</loginKeyName>
-    						<isFeeChargingMonitoring>false</isFeeChargingMonitoring>
-    						<publicIp />
-    						<privateIp>10.101.5.105</privateIp>
-    						<serverImageName>centos-6.3-32</serverImageName>
-    						<serverInstanceStatus>
-    							<code>NSTOP</code>
-    							<codeName>Server normal stopped state</codeName>
-    						</serverInstanceStatus>
-    						<serverInstanceOperation>
-    							<code>NULL</code>
-    							<codeName>Server NULL OP</codeName>
-    						</serverInstanceOperation>
-    						<serverInstanceStatusName>stopped</serverInstanceStatusName>
-    						<createDate>2014-02-17T18:04:49+0900</createDate>
-    						<uptime>2014-02-18T14:58:26+0900</uptime>
-    						<serverImageProductCode>SPSW0LINUX000032</serverImageProductCode>
-    						<serverProductCode>SPSVRSTAND000043</serverProductCode>
-    						<isProtectServerTermination>false</isProtectServerTermination>
-    						<portForwardingPublicIp />
-    						<zone>
-    							<zoneNo>3</zoneNo>
-    							<zoneName>zone3</zoneName>
-    							<zoneDescription>nang zone2</zoneDescription>
-    						</zone>
-    						<baseBlockStorageDiskType>
-    							<code>LOCAL</code>
-    							<codeName>Local storage</codeName>
-    						</baseBlockStorageDiskType>
-    						<userData />
-    						<accessControlGroupList>
-    							<accessControlGroup>
-    								<accessControlGroupConfigurationNo>1038</accessControlGroupConfigurationNo>
-    								<accessControlGroupName>ncloud-default-acg</accessControlGroupName>
-    								<accessControlGroupDescription>Default AccessControlGroup</accessControlGroupDescription>
-    								<isDefault>true</isDefault>
-    								<createDate>2013-12-03T10:37:39+0900</createDate>
-    							</accessControlGroup>
-    						</accessControlGroupList>
-    					</serverInstance>
-    					<serverHealthCheckStatusList>
-    						<serverHealthCheckStatus>
-    							<serverPort>88</serverPort>
-    							<serverStatus>false</serverStatus>
-    						</serverHealthCheckStatus>
-    					</serverHealthCheckStatusList>
-    				</loadBalancedServerInstance>
-    			</loadBalancedServerInstanceList>
-    		</loadBalancerInstance>
-    	</loadBalancerInstanceList>
-    ```
+```
 
 #### deleteLoadBalancerInstances
 

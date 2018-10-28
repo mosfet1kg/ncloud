@@ -81,6 +81,7 @@ interface InterfaceNcloudIaaSLoadBalancer {
   createLoadBalancerInstance(input: InterfaceCreateLoadBalancerInstanceInput): Promise<InterfaceCreateLoadBalancerInstanceResponse>;
   changeLoadBalancerInstanceConfiguration(input: InterfaceChangeLoadBalancerInstanceConfigurationInput): Promise<InterfaceChangeLoadBalancerInstanceConfigurationResponse>;
   getLoadBalancedServerInstanceList(input: InterfaceGetLoadBalancedServerInstanceListInput): Promise<InterfaceGetLoadBalancedServerInstanceListResponse>;
+  changeLoadBalancedServerInstances(input: InterfaceChangeLoadBalancedServerInstancesInput): Promise<InterfaceChangeLoadBalancedServerInstancesResponse>;
 }
 
 /** IaaS: interfaceIaaSServerInputs**/
@@ -1187,6 +1188,20 @@ interface InterfaceGetLoadBalancedServerInstanceListResponse {
   returnMessage: string; // 'success',
   totalRows: number; // 7,
   serverInstanceList: InterfaceServerInfo[];
+}
+
+interface InterfaceChangeLoadBalancedServerInstancesInput {
+  loadBalancerInstanceNo: string;
+  serverInstanceNoList: string[];
+  regionNo?: string
+}
+
+interface InterfaceChangeLoadBalancedServerInstancesResponse {
+  requestId: string;
+  returnCode: string;
+  returnMessage: string;
+  totalRows: number;
+  loadBalancerInstanceList: LoadBalancerInstanceList[];
 }
 
 interface LoadBalancerInstanceList {
