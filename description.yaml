@@ -129,6 +129,18 @@ apis:
             type: string
         responseName: changeLoadBalancedServerInstancesResponse
 
+      deleteLoadBalancerInstances:
+        method: GET
+        basePath: /loadbalancer/v2/
+        action: deleteLoadBalancerInstances
+        actionParamList:
+          loadBalancerInstanceNoList:
+            type: string[]
+            required: true
+          regionNo:
+            type: string
+        responseName: deleteLoadBalancerInstancesResponse
+
     Server:
       getServerImageProductList:
         method: GET
