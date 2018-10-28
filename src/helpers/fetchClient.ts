@@ -4,9 +4,6 @@ import {
   sortBy,
 } from 'lodash';
 import axios from 'axios';
-import {
-  InterfaceAuthParams,
-} from '../const/interface'
 
 const space = " ";
 const newLine = "\n";
@@ -33,7 +30,7 @@ export default function (
   const {
     accessKey,
     secretKey,
-    apiKey,
+    // apiKey,
   } = authParams;
   const timestamp = Date.now();
   const message = [];

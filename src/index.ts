@@ -1,32 +1,42 @@
-import {
-  InterfaceNcloud,
-  InterfaceNcloudIaaS,
-  InterfaceNcloudPaaS,
-} from './const/interface';
+import { isNull } from 'lodash';
+import MyStore from './helpers/MyStore';
 
-import {
-  setValues
-} from './helpers/store';
-
-import IaaS from './iaas';
-import PaaS from './paas';
+import IaaS from './IaaS';
+import PaaS from './PaaS';
 
 export class Ncloud implements InterfaceNcloud {
-  public IaaS: InterfaceNcloudIaaS;
-  public PaaS: InterfaceNcloudPaaS;
+  private mIaaS: InterfaceNcloudIaaS = null;
+  private mPaaS: InterfaceNcloudPaaS = null;
+  private store: InterfaceMyStore;
 
   private constructor( inputParams: any ) {
     // TODO: throw errors regarding missing expected parameters.
-    // There are no expected values
-
-    setValues( inputParams );
-
-    this.IaaS = new IaaS();
-    this.PaaS = new PaaS();
+    this.store = new MyStore(inputParams);
   }
 
-  static createClient ( authParams ) {
-    return new Ncloud( authParams );
+  setConfig(inputParams: any): InterfaceNcloud {
+    this.store.setData(inputParams);
+    return this;
+  }
+
+  get IaaS(): InterfaceNcloudIaaS {
+    if ( isNull(this.mIaaS) ) {
+      this.mIaaS = new IaaS({ store: this.store });
+    } // end if
+
+    return this.mIaaS;
+  }
+
+  get PaaS(): InterfaceNcloudPaaS {
+    if ( isNull(this.mPaaS) ) {
+      this.mPaaS = new PaaS({ store: this.store });
+    } // end if
+
+    return this.mPaaS;
+  }
+
+  static createClient ( inputParams ) {
+    return new Ncloud( inputParams );
   }
 }
 

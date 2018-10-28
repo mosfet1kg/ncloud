@@ -45,6 +45,102 @@ apis:
               - descending
         responseName: getLoadBalancerInstanceListResponse
 
+      getLoadBalancerTargetServerInstanceList:
+        method: GET
+        basePath: /loadbalancer/v2/
+        action: getLoadBalancerTargetServerInstanceList
+        actionParamList:
+          internetLineTypeCode:
+            type: string
+          regionNo:
+            type: string
+        responseName: getLoadBalancerTargetServerInstanceListResponse
+
+      createLoadBalancerInstance:
+        method: GET
+        basePath: /loadbalancer/v2/
+        action: createLoadBalancerInstance
+        actionParamList:
+          loadBalancerName:
+            type: string
+          loadBalancerAlgorithmTypeCode:
+            type: string
+          loadBalancerDescription:
+            type: string
+          internetLineTypeCode:
+            type: string
+          networkUsageTypeCode:
+            type: string
+          serverInstanceNoList:
+            type: string[]
+          loadBalancerRuleList:
+            type: any[]
+            replace: loadBalancerRuleList.%d.%s
+            required: true
+          regionNo:
+            type: string
+        responseName: createLoadBalancerInstanceResponse
+
+      changeLoadBalancerInstanceConfiguration:
+        method: GET
+        basePath: /loadbalancer/v2/
+        action: changeLoadBalancerInstanceConfiguration
+        actionParamList:
+          loadBalancerInstanceNo:
+            type: string
+            required: true
+          loadBalancerAlgorithmTypeCode:
+            type: string
+            required: true
+          loadBalancerDescription:
+            type: string
+          loadBalancerRuleList:
+            type: any[]
+            replace: loadBalancerRuleList.%d.%s
+            required: true
+          regionNo:
+            type: string
+        responseName: changeLoadBalancerInstanceConfigurationResponse
+
+      getLoadBalancedServerInstanceList:
+        method: GET
+        basePath: /loadbalancer/v2/
+        action: getLoadBalancedServerInstanceList
+        actionParamList:
+          loadBalancerInstanceNo:
+            type: string
+            required: true
+          regionNo:
+            type: string
+        responseName: getLoadBalancedServerInstanceListResponse
+
+      changeLoadBalancedServerInstances:
+        method: GET
+        basePath: /loadbalancer/v2/
+        action: changeLoadBalancedServerInstances
+        actionParamList:
+          loadBalancerInstanceNo:
+            type: string
+            required: true
+          serverInstanceNoList:
+            type: string[]
+            required: true
+          regionNo:
+            type: string
+        responseName: changeLoadBalancedServerInstancesResponse
+
+      deleteLoadBalancerInstances:
+        method: GET
+        basePath: /loadbalancer/v2/
+        action: deleteLoadBalancerInstances
+        actionParamList:
+          loadBalancerInstanceNoList:
+            type: string[]
+            required: true
+          regionNo:
+            type: string
+        responseName: deleteLoadBalancerInstancesResponse
+
     Server:
       getServerImageProductList:
         method: GET
@@ -53,6 +149,8 @@ apis:
         actionParamList:
           platformTypeCodeList:
             type: string[]
+          infraResourceDetailTypeCode:
+            type: string
           regionNo:
             type: string
         responseName: getServerImageProductListResponse
@@ -69,7 +167,15 @@ apis:
             type: string
           zoneNo:
             type: string
+          internetLineTypeCode:
+            type: string
         responseName: getServerProductListResponse
+
+      getRaidList:
+        method: GET
+        basePath: /server/v2/
+        action: getRaidList
+        responseName: getRaidListResponse
 
       getZoneList:
         method: GET
@@ -125,6 +231,10 @@ apis:
           nasVolumeInstanceNo:
             type: string
             required: true
+          regionNo:
+            type: string
+          zoneNo:
+            type: string
         responseName: deleteNasVolumeInstanceResponse
 
       getNasVolumeInstanceList:
@@ -138,6 +248,10 @@ apis:
             type: boolean
           isSnapshotConfiguration:
             type: bollean
+          regionNo:
+            type: string
+          zoneNo:
+            type: string
         responseName: getNasVolumeInstanceListResponse
 
       changeNasVolumeSize:
@@ -251,6 +365,19 @@ apis:
             type: string
             required: true
         responseName: deleteLoginKeyResponse
+
+      importLoginKey:
+        method: GET
+        basePath: /server/v2/
+        action: importLoginKey
+        actionParamList:
+          keyName:
+            type: string
+            required: true
+          publicKey:
+            type: string
+            required: true
+        responseName: importLoginKeyResponse
 
       getAccessControlGroupList:
         method: GET

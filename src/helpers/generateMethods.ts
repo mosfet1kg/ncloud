@@ -9,13 +9,6 @@ import {
   isArray,
   isUndefined,
 } from 'lodash';
-import {
-  InterfaceAuthParams,
-} from '../const/interface'
-import {
-  getAuthParams,
-  getValues,
-} from './store';
 
 const {
   baseURL: apiGwBaseURL,
@@ -26,13 +19,15 @@ export default function(
     baseURL=apiGwBaseURL,
     actionPath,
     input,
+    store,
   }: {
     baseURL?: string;
     actionPath: string;
     input: any;
+    store: InterfaceMyStore;
   }
 ) {
-  const authParams: InterfaceAuthParams = getAuthParams();
+  const authParams: InterfaceAuthParams = store.getAuthParams();
 
   const {
     method,
@@ -43,8 +38,8 @@ export default function(
   } = get(apiDescription, actionPath);
 
   input = {
+    ...store.getValues(),  // regionNo가 overwrite되지 않도록 앞에 위치
     ...input,
-    ...getValues(),
   };
 
   return testInputParams(
