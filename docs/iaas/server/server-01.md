@@ -1073,45 +1073,31 @@ const removeNasVolumeAccessControlResponse = await server.removeNasVolumeAccessC
 
 - 요청 파라미터
 
-| 파라미터명    | 간략 설명  | 타입      | 제약                    | 필수여부 |
-| -------- | ------ | ------- | --------------------- | ---- |
-| keyName  | 키명     | String  | Min:3, Max:30         | No   |
-| pageNo   | 페이지번호  | Integer | Min:0, Max:2147483647 | No   |
-| pageSize | 페이지사이즈 | Integer | Min:0, Max:2147483647 | No   |
+| 파라미터명    | 간략 설명  | 타입    | 필수여부 |
+| -------- | ------ | ------- |  ---- |
+| keyName  | 키명     | String  |  No   |
 
 - keyName
   - 조회할 키 명
-- pageNo
-  - 건수가 많을 경우 페이지 사이즈에 해당하는 페이지 번호
-- pageSize
-  - 한 페이지에서 조회할 페이지 사이즈
 
 - Example
+```javascript
+const server = client.IaaS.server();
+const getLoginKeyListResponse = await server.getLoginKeyList();
 
-  - 요청
-
-    ```
-    ${SERVER_API_URL}/getLoginKeyList
-    ```
-
-  - 응답
-
-    ```xml
-    <getLoginKeyListResponse>
-    <requestId>23c7e367-4d17-403a-beb9-8e4644624bf0</requestId>
-    <returnCode>0</returnCode>
-    <returnMessage>success</returnMessage>
-    <totalRows>18</totalRows>
-    <loginKeyList>
-    	<loginKey>
-    	<fingerprint>0e:d4:3e:ce:4b:18:75:d3:2a:03:ae:2a:df:ea:7a:e8</fingerprint>
-    	<keyName>yh-nang-test</keyName>
-    	<createDate>2014-02-03T11:33:53+0900</createDate>
-    	</loginKey>
-    	…
-    </loginKeyList>
-    </getLoginKeyListResponse>
-    ```
+/** Return **/
+{ 
+    requestId: 'd5d37501-9649-4f12-b4d2-41dd4b9e62ac',
+    returnCode: '0',
+    returnMessage: 'success',
+    totalRows: 1,
+    loginKeyList: 
+    [ {  
+        fingerprint: '0b:0c:df:00:10:8b:09:fc:ee:28:cc:21:ad:76:ae:52',
+        keyName: 'mygbtest',
+        createDate: '2017-12-29T18:27:12+0900' } ] 
+}
+```
 
 #### createLoginKey
 
@@ -1131,7 +1117,7 @@ const removeNasVolumeAccessControlResponse = await server.removeNasVolumeAccessC
 
 | 파라미터명   | 간략 설명 | 타입     | 제약            | 필수여부 |
 | ------- | ----- | ------ | ------------- | ---- |
-| keyName | 키명    | String | Min:3, Max:30 | Yes   |
+| keyName | 키명    | String | String length Min:3, Max:30 | Yes   |
 
 - keyName
   - 생성할 키 명
@@ -1139,26 +1125,30 @@ const removeNasVolumeAccessControlResponse = await server.removeNasVolumeAccessC
 
 - Example
 
-  - 요청
+> **NOTE**  
+> 반환된 로그인키는 가상 인스턴스(VM)에 최초 접속을 위한 패스워드를 조회하는데 사용됩니다.  
+> 추후 이용을 위해서, 디스크에 저장하는 것이 좋습니다. 아래의 예제를 참고하세요.
 
-    ```
-    ${SERVER_API_URL}/createLoginKey
-    ?keyName=mykey
-    ```
 
-  - 응답
+```javascript
+const fs = require('fs');
+const path = require('path');
+const server = client.IaaS.server();
 
-    ```xml
-    <createLoginKeyResponse>
-    <requestId>2f4b95a0-555c-4e64-a47f-cb5aa289e1d7</requestId>
-    <returnCode>0</returnCode>
-    <returnMessage>success</returnMessage>
-    <privateKey>
-    -----BEGIN RSA PRIVATE KEY----- MIIEpAIBAAKCAQEAtNkTS9cHBLXQcDY0s02KqaLb8GGupaeCLvWzNDM3aVZxUDFo kZYaEKFXbWhR1oZ4HyZnwo4y1VDxV1m35Ltq/HRCHP8+caNHaM6n2rivfHT8nMxg KvzsXjopWIVp+8oHvmi0TO+zcEusoNOv/jb7LcJwfeZ0WQvianQ7j6ppaXgHfZSX Tdqwyuf9UmzppUa8f2wLslDOlcYQW6VQ9S5f9cx9HgTXbc4vlb+NDLwdx0E+AIjw p5PgWCjbEqGKz2Myw4X7HJ06619BScwXSkyG+G3g0VjtL7WnEhhdmfGLCUE/BcKv Fz9KeRXIQAx8NrAW4c0Vq+CPyBgz5EWWMpTUXQIDAQABAoIBABn7AXmot3pmwD4O m32SyzPZkK0060kjCmHCrG74WKKKZ5b0sigQH0h6VTwDe5ZNFR6sfsWFdioNCc7Z tcBnaFRCQ2k1Bfx/T3fwEE8srxE7ITtJZRtn4HEc++maqQIiIQCqvBQ9b1LXnEIy hxsHPQhy4YREwjw0p99ROWlHOwOKm6KWbc4YFbDKmEc9v+NLxxNjf2KF7jNuQK0l VjeJEzBa02sFBGhMeLAMvhmHj9u1NbAFUn/uC4MrMFiQMoCnx2qBSoUPxuvL6WXH NpUoLT/rJrlqKUCffS3RIVt+lwjU6vVXlrxuYNTLDH4c+XJHkFprYDdq/lZktuRM f9uYa4ECgYEA75xeol7dvFGe6Es8pcNrdZUMEwkVR16DER+nfndl3fJMNu1YIBaf XKnDZLjS505pP+a0alwq0aQdXY8FIik9O9ugqpnd1EfI2fMlrVynUOcBIhVbvYip PNFg+tIuz37f3vMms7NCQ5W3SlincB63ptl2tovkOjXKbo1r1sZaGf0CgYEAwTfB wqvGm1GpMv8jrCFGNS7FXxZy5VcP/APXqfQb6Lpwe4rarxfb8nnap5KYOn0qSbY7 BOoidV6QysT9Xm3pDjNUoeH9CujK0mx3sL/4utZiCqmVhGljGq9D4A7PsCnT4X4+ Akvk9L9RS+xNs9NsK8jTz9zthaJRUzhAHcWSAeECgYEA7rUvqj8sVBJUZ0OdFd8L zUZBky03X7SOip6odNtqRqS+vPHTG5SuCtitakifBAUf4aNrFZLgrZ38C1sSWCgR cvKoq41Ca9tgA5GydXWa0oRwoo34qWfeglJtdTOzos/ZI/nFEr2BRGeBBLYxiQdx Gu4G0HGpWzx/gYeuaXeOB9kCgYBEKznPRu+RSORbO60IQ80TYmb8P11WELtw/KIQ MjHOkEizLbAt6ksNZ3R/frb6m8JZs1NrTnfN1QlcoNeLg1egTPflDWhLewpj5yTr VS+aK5z3ihFYYB45AfD+kfswefFpMzMJeGFVAFLcaIiZk1QstnQUeCvM5BGxPL1S Q6xZwQKBgQCSeU8FRIa0jUxN7hx5R1+IAIBPl2JUM7bMME9T3eX3Qh6wNCMjTxse NU70sp2m+8sv7Bq4QY5P13Cajo/+fwI1BSa83mF2kXnyEpXsrfw+4FM74YTrX0JA FlSDMaL95g7fCSSMuM8sOqMuIBn7d7DiK2nbrez/iRsZFH2qOqusOA==
-    -----END RSA PRIVATE KEY-----
-    </privateKey>
-    </createLoginKeyResponse>
-    ```
+const createLoginKeyResponse = await server.createLoginKey({
+    keyName: 'mytest'
+});
+
+fs.writeFileSync( path.join(__dirname, './loginKey.pem'), createLoginKeyResponse.privateKey, { encoding: 'utf8'});
+
+/** Result **/
+{ 
+    requestId: 'cbf44516-9e04-4e27-ada0-d040d70320a6',
+    returnCode: '0',
+    returnMessage: 'success',
+    privateKey: '-----BEGIN RSA PRIVATE KEY-----\nMIIEowIBAAKCAQEAjc3Auz70GgK8josrh2vi/gykWDU2suNZ98gQhOR6lKgu4f5m\nvfhn5SufebqzdNxPKrzS6mhB8ILQ9oBFzswtSu/WrSY2fSY+gb4X7Ah\nZ0KbqFxlIh7MuU4zlU84HNb074oq8SjSafLYh0LbUt5Oi2t3T8wb\n-----END RSA PRIVATE KEY-----\n'
+}
+```
 
 #### deleteLoginKey
 
@@ -1176,32 +1166,27 @@ const removeNasVolumeAccessControlResponse = await server.removeNasVolumeAccessC
 
 - 요청 파라미터
 
-| 파라미터명   | 간략 설명 | 타입     | 제약            | 필수여부 |
-| ------- | ----- | ------ | ------------- | ---- |
-| keyName | 키명    | String | Min:3, Max:30 | Yes   |
+| 파라미터명   | 간략 설명 | 타입     |  필수여부 |
+| ------- | ----- | ------ |  ---- |
+| keyName | 키명    | String | Yes   |
 
 - keyName
   - 삭제할 키 명
   - 키명이 존재하지 않을 경우 오류가 발생됩니다.
 
 - Example
+```javascript
+const server = client.IaaS.server();
+const deleteLoginKeyResponse = await server.deleteLoginKey({
+    keyName: 'mytest'
+});
 
-  - 요청
-
-    ```
-    ${SERVER_API_URL}/deleteLoginKey
-    ?keyName=abc123456
-    ```
-
-  - 응답
-
-    ```xml
-    <deleteLoginKeyResponse>
-    <requestId>34b26878-fe42-4d8c-8061-bd74b699afb1</requestId>
-    <returnCode>0</returnCode>
-    <returnMessage>success</returnMessage>
-    </deleteLoginKeyResponse>
-    ```
+/** Result **/
+{ 
+    requestId: 'dac7ba6f-0051-4305-a924-b015c83fcdd2',
+    returnCode: '0',
+    returnMessage: 'success' }
+```
 
 #### importLoginKey
 

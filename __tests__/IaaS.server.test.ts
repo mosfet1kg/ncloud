@@ -114,7 +114,7 @@ describe('Test IaaS Server Method', function( ){
         volumeName: 'testVol',
         volumeSize: '500', // GB
         volumeAllotmentProtocolTypeCode: 'NFS',
-        zoneNo: '3' // KR-2
+        zoneNo: '2' // KR-2
       });
 
       console.log( createNasVolumeInstanceResponse );
@@ -129,7 +129,7 @@ describe('Test IaaS Server Method', function( ){
     try {
       const server = client.IaaS.server();
       const deleteNasVolumeInstanceResponse = await server.deleteNasVolumeInstance({
-        nasVolumeInstanceNo: '1029922',
+        nasVolumeInstanceNo: '1029928'
       });
 
       console.log( deleteNasVolumeInstanceResponse );
