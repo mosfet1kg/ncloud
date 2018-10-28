@@ -81,6 +81,28 @@ apis:
             type: string
         responseName: createLoadBalancerInstanceResponse
 
+      changeLoadBalancerInstanceConfiguration:
+        method: GET
+        basePath: /loadbalancer/v2/
+        action: changeLoadBalancerInstanceConfiguration
+        actionParamList:
+          loadBalancerInstanceNo:
+            type: string
+            required: true
+          loadBalancerAlgorithmTypeCode:
+            type: string
+            required: true
+          loadBalancerDescription:
+            type: string
+          loadBalancerRuleList:
+            type: any[]
+            replace: loadBalancerRuleList.%d.%s
+            required: true
+          regionNo:
+            type: string
+        responseName: changeLoadBalancerInstanceConfigurationResponse
+
+
     Server:
       getServerImageProductList:
         method: GET

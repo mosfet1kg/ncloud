@@ -53,6 +53,35 @@ describe('Test IaaS LoadBalancer Method', function( ){
     }
   });
 
+  test('Test changeLoadBalancerInstanceConfiguration', async ( done ) => {
+    try {
+      const client = ncloud.createClient({
+        accessKey,
+        secretKey,
+        regionNo: "1",
+      });
+
+      const loadBalancer = client.IaaS.loadBalancer();
+      const changeLoadBalancerInstanceConfigurationResponse = await loadBalancer.changeLoadBalancerInstanceConfiguration({
+        loadBalancerInstanceNo: '1030011',
+        loadBalancerAlgorithmTypeCode: 'RR',
+        loadBalancerRuleList: [
+          {
+            protocolTypeCode: 'TCP',
+            loadBalancerPort: '23306',
+            serverPort: '3306',
+          }
+        ]
+      });
+      console.log( changeLoadBalancerInstanceConfigurationResponse );
+
+      done();
+    } catch (e) {
+      console.log( e );
+      done.fail(e);
+    }
+  });
+
   test('Test createLoadBalancerInstance', async ( done ) => {
     try {
       const client = ncloud.createClient({

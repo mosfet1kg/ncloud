@@ -336,11 +336,11 @@ const createLoadBalancerInstanceResponse = await loadBalancer.createLoadBalancer
 | loadBalancerInstanceNo                   | 로드밸런서인스턴스번호             | String  |                     | Yes         |
 | loadBalancerAlgorithmTypeCode            | 로드밸런서알고리즘구분코드           | String  | Min : 1,Max : 5     | Yes         |
 | loadBalancerDescription                  | 로드밸런서설명                 | String  | Min : 1,Max : 1000  | No          |
-| loadBalancerRuleList.N.protocolTypeCode  | 로드밸런서RULE리스트.N.프로토콜구분코드 | String  | Min : 1,Max : 5     | Yes         |
-| loadBalancerRuleList.N.loadBalancerPort  | 로드밸런서RULE리스트.N.로드밸런서포트  | Integer | Min : 1,Max : 65534 | Yes         |
-| loadBalancerRuleList.N.serverPort        | 로드밸런서RULE리스트.N.서버포트     | Integer | Min : 1,Max : 65534 | Yes         |
-| loadBalancerRuleList.N.l7HealthCheckPath | 로드밸런서RULE리스트.N.핼스체크경로   | String  | Min : 1,Max : 600   | Conditional |
-| loadBalancerRuleList.N.certificateName   | 로드밸런서RULE리스트.N.인증서명     | String  | Min : 1,Max : 300   | Conditional |
+| loadBalancerRuleList[N].protocolTypeCode  | 로드밸런서RULE리스트.N.프로토콜구분코드 | String  | Min : 1,Max : 5     | Yes         |
+| loadBalancerRuleList[N].loadBalancerPort  | 로드밸런서RULE리스트.N.로드밸런서포트  | Integer | Min : 1,Max : 65534 | Yes         |
+| loadBalancerRuleList[N].serverPort        | 로드밸런서RULE리스트.N.서버포트     | Integer | Min : 1,Max : 65534 | Yes         |
+| loadBalancerRuleList[N].l7HealthCheckPath | 로드밸런서RULE리스트.N.핼스체크경로   | String  | Min : 1,Max : 600   | Conditional |
+| loadBalancerRuleList[N].certificateName   | 로드밸런서RULE리스트.N.인증서명     | String  | Min : 1,Max : 300   | Conditional |
 
 - loadBalancerInstanceNo
   - 설정을 변경할 로드밸런서인스턴스번호
@@ -351,94 +351,70 @@ const createLoadBalancerInstanceResponse = await loadBalancer.createLoadBalancer
   - ROUND ROBIN (RR), LEAST_CONNECTION (LC)
 - loadBalancerDescription
   - 수정할 로드밸런서 설명
-- loadBalancerRuleList.N.protocolTypeCode
-  - 로드밸런서RULE의 프로토콜구분코드
-  - 아래의 코드가 입력될 수 있습니다.
-  - HTTP | TCP
-- loadBalancerRuleList.N.loadBalancerPort
-  - 로드밸런서RULE의 로드밸런서포트
-- loadBalancerRuleList.N.serverPort
-  - 로드밸런서RULE의 서버포트
-- loadBalancerRuleList.N.l7HealthCheckPath
-  - 로드밸런서RULE의 헬스체크경로
-  - loadBalancerRuleList.N.protocolTypeCode 값이 HTTP인 경우에는 필수 항목입니다.
-- loadBalancerRuleList.N.certificateName
-  - 로드밸런서 생성 시 로드밸런서 RULE을 입력해야 합니다.
-  - 로드밸런서 SSL 공인인증서
-  - loadBalancerRuleList.N.protocloTypeCode 값이 SSL/HTTPS인 경우에는 필수 항목입니다.
+- loadBalancerRuleList
+    - protocolTypeCode
+        - 로드밸런서RULE의 프로토콜구분코드
+        - 아래의 코드가 입력될 수 있습니다.
+        - HTTP | TCP
+    - loadBalancerPort
+        - 로드밸런서RULE의 로드밸런서포트
+    - serverPort
+        - 로드밸런서RULE의 서버포트
+    - l7HealthCheckPath
+        - 로드밸런서RULE의 헬스체크경로
+        - protocolTypeCode 값이 HTTP인 경우에는 필수 항목입니다.
+    - certificateName
+        - 로드밸런서 생성 시 로드밸런서 RULE을 입력해야 합니다.
+        - 로드밸런서 SSL 공인인증서
+        - protocloTypeCode 값이 SSL/HTTPS인 경우에는 필수 항목입니다.
 
 - Example
+```javascript
+const client = ncloud.createClient({
+    accessKey,
+    secretKey,
+    regionNo: '1',
+});
 
-  - 요청
+const loadBalancer = client.IaaS.loadBalancer();
+const changeLoadBalancerInstanceConfigurationResponse = await loadBalancer.changeLoadBalancerInstanceConfiguration({
+    loadBalancerInstanceNo: '1030011',
+    loadBalancerAlgorithmTypeCode: 'RR',
+    loadBalancerRuleList: [
+        {
+            protocolTypeCode: 'TCP',
+            loadBalancerPort: '23306',
+            serverPort: '3306',
+        }
+    ]
+});
 
-    ```
-    ${LOADBALANCER_API_URL}/changeLoadBalancerInstanceConfiguration
-    ?loadBalancerAlgorithmTypeCode=RR
-    &loadBalancerInstanceNo=68017
-    &loadBalancerRuleList.1.l7HealthCheckPath=%2Fl7check.html
-    &loadBalancerRuleList.1.loadBalancerPort=88
-    &loadBalancerRuleList.1.protocolTypeCode=HTTP
-    &loadBalancerRuleList.1.serverPort=88
-    ```
-
-  - 응답
-
-    ```xml
-    <changeLoadBalancerInstanceConfigurationResponse>
-    	<requestId>5de70304-95b4-478f-9627-b82a313659f8</requestId>
-    	<returnCode>0</returnCode>
-    	<returnMessage>success</returnMessage>
-    	<totalRows>1</totalRows>
-    	<loadBalancerInstanceList>
-    		<loadBalancerInstance>
-    			<loadBalancerInstanceNo>339953</loadBalancerInstanceNo>
-    			<virtualIp>10.99.136.26</virtualIp>
-    			<loadBalancerName>loadb-9b44aa7892e12b8</loadBalancerName>
-    			<loadBalancerAlgorithmType>
-    				<code>RR</code>
-    				<codeName>Round Robin</codeName>
-    			</loadBalancerAlgorithmType>
-    			<loadBalancerDescription />
-    			<createDate>0247-07-19T22:33:18+0900</createDate>
-    			<domainName>slb-339953.ncloudslb.com</domainName>
-    			<internetLineType>
-    				<code>PUBLC</code>
-    				<codeName>Public</codeName>
-    			</internetLineType>
-    			<loadBalancerInstanceStatusName>changing</loadBalancerInstanceStatusName>
-    			<loadBalancerInstanceStatus>
-    				<code>USED</code>
-    				<codeName>NET USED state</codeName>
-    			</loadBalancerInstanceStatus>
-    			<loadBalancerInstanceOperation>
-    				<code>CHANG</code>
-    				<codeName>NET CHANGE OP</codeName>
-    			</loadBalancerInstanceOperation>
-    			<networkUsageType>
-    				<code>PBLIP</code>
-    				<codeName>Public</codeName>
-    			</networkUsageType>
-    			<isHttpKeepAlive>false</isHttpKeepAlive>
-    			<connectionTimeout>60</connectionTimeout>
-    			<certificateName />
-    			<loadBalancerRuleList>
-    				<loadBalancerRule>
-    					<protocolType>
-    						<code>TCP</code>
-    						<codeName>tcp</codeName>
-    					</protocolType>
-    					<loadBalancerPort>25252</loadBalancerPort>
-    					<serverPort>3333</serverPort>
-    					<l7HealthCheckPath />
-    					<certificateName />
-    					<proxyProtocolUseYn>N</proxyProtocolUseYn>
-    				</loadBalancerRule>
-    			</loadBalancerRuleList>
-    			<loadBalancedServerInstanceList />
-    		</loadBalancerInstance>
-    	</loadBalancerInstanceList>
-    </changeLoadBalancerInstanceConfigurationResponse>
-    ```
+/** Result **/
+{ 
+    requestId: '7c01a76b-eacd-48d9-b33f-bc8720ffffb5',
+    returnCode: '0',
+    returnMessage: 'success',
+    totalRows: 1,
+    loadBalancerInstanceList: 
+    [ { loadBalancerInstanceNo: '1030011',
+        virtualIp: '49.236.151.168,49.236.150.50',
+        loadBalancerName: 'my-lb',
+        loadBalancerAlgorithmType: [Object],
+        loadBalancerDescription: '',
+        createDate: '2018-10-29T00:30:38+0900',
+        domainName: 'slb-1030011.ncloudslb.com',
+        internetLineType: [Object],
+        loadBalancerInstanceStatusName: 'changing',
+        loadBalancerInstanceStatus: [Object],
+        loadBalancerInstanceOperation: [Object],
+        networkUsageType: [Object],
+        isHttpKeepAlive: false,
+        connectionTimeout: 60,
+        certificateName: '',
+        loadBalancerRuleList: [Array],
+        loadBalancedServerInstanceList: [Array] } ]
+}
+```
 
 #### getLoadBalancedServerInstanceList
 
