@@ -102,6 +102,17 @@ apis:
             type: string
         responseName: changeLoadBalancerInstanceConfigurationResponse
 
+      getLoadBalancedServerInstanceList:
+        method: GET
+        basePath: /loadbalancer/v2/
+        action: getLoadBalancedServerInstanceList
+        actionParamList:
+          loadBalancerInstanceNo:
+            type: string
+            required: true
+          regionNo:
+            type: string
+        responseName: getLoadBalancedServerInstanceListResponse
 
     Server:
       getServerImageProductList:

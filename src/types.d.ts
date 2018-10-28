@@ -80,6 +80,7 @@ interface InterfaceNcloudIaaSLoadBalancer {
   getLoadBalancerTargetServerInstanceList(input?: InterfaceGetLoadBalancerTargetServerInstanceListInput): Promise<InterfaceGetLoadBalancerTargetServerInstanceListResponse>;
   createLoadBalancerInstance(input: InterfaceCreateLoadBalancerInstanceInput): Promise<InterfaceCreateLoadBalancerInstanceResponse>;
   changeLoadBalancerInstanceConfiguration(input: InterfaceChangeLoadBalancerInstanceConfigurationInput): Promise<InterfaceChangeLoadBalancerInstanceConfigurationResponse>;
+  getLoadBalancedServerInstanceList(input: InterfaceGetLoadBalancedServerInstanceListInput): Promise<InterfaceGetLoadBalancedServerInstanceListResponse>;
 }
 
 /** IaaS: interfaceIaaSServerInputs**/
@@ -130,6 +131,7 @@ interface InterfaceGetNasVolumeInstanceListInput {
 interface InterfaceChangeNasVolumeSizeInput {
   nasVolumeInstanceNo: string;
   volumeSize: string;
+  regionNo?: string;
 }
 
 interface InterfaceGetNasVolumeInstanceRatingListInput {
@@ -137,31 +139,37 @@ interface InterfaceGetNasVolumeInstanceRatingListInput {
   startTime: string;
   endTime: string;
   interval: string;
+  regionNo?: string;
 }
 
 interface InterfaceNasVolumeAccessControlInput {
   nasVolumeInstanceNo: string;
   serverInstanceNoList?: string[];
   customIpList?: string[];
+  regionNo?: string;
 }
 
 interface InterfaceGetLoginKeyListInput {
   keyName?: string;
   pageNo?: number;
   pageSize?: number;
+  regionNo?: string;
 }
 
 interface InterfaceCreateLoginKeyInput {
   keyName: string;
+  regionNo?: string;
 }
 
 interface InterfaceDeleteLoginKeyInput {
   keyName: string;
+  regionNo?: string;
 }
 
 interface InterfaceImportLoginKeyInput {
   keyName: string;
   publicKey: string;
+  regionNo?: string;
 }
 
 interface InterfaceImportLoginKeyResponse {
@@ -181,14 +189,17 @@ interface InterfaceGetAccessControlGroupListInput {
   isDefaultGroup?: boolean;
   accessControlGroupName?: string;
   pageNo?: number;
+  regionNo?: string;
 }
 
 interface InterfaceGetAccessControlGroupServerInstanceListInput {
   accessControlGroupConfigurationNo: string;
+  regionNo?: string;
 }
 
 interface InterfaceGetAccessControlRuleListInput {
   accessControlGroupConfigurationNo: string;
+  regionNo?: string;
 }
 
 interface InterfaceGetServerInstanceListInput {
@@ -219,6 +230,7 @@ interface InterfaceCreateServerInstancesInput {
   serverCreateStartNo?: number;
   internetLineTypeCode?: string;
   feeSystemTypeCode?: string;
+  regionNo?: string;
   zoneNo?: string;
   accessControlGroupConfigurationNoList?: string[];
   userData?: string;
@@ -226,28 +238,34 @@ interface InterfaceCreateServerInstancesInput {
 
 interface InterfaceTerminateServerInstancesInput {
   serverInstanceNoList: string[];
+  regionNo?: string;
 }
 
 interface InterfaceChangeServerInstanceSpecInput {
   serverInstanceNo: string;
   serverProductCode: string;
+  regionNo?: string;
 }
 
 interface InterfaceRebootServerInstancesInput {
   serverInstanceNoList: string[];
+  regionNo?: string;
 }
 
 interface InterfaceStartServerInstancesInput {
   serverInstanceNoList: string[];
+  regionNo?: string;
 }
 
 interface InterfaceStopServerInstancesInput {
   serverInstanceNoList: string[];
+  regionNo?: string;
 }
 
 interface InterfaceGetRootPasswordInput {
   serverInstanceNo: string;
   privateKey: string;
+  regionNo?: string;
 }
 
 interface InterfaceGetMemberServerImageListInput {
@@ -264,10 +282,12 @@ interface InterfaceCreateMemberServerImageInput {
   memberServerImageName?: string;
   memberServerImageDescription?: string;
   serverInstanceNo: string;
+  regionNo?: string;
 }
 
 interface InterfaceDeleteMemberServerImagesInput {
   memberServerImageNoList: string[];
+  regionNo?: string;
 }
 
 interface InterfaceGetBlockStorageInstanceListInput {
@@ -292,10 +312,12 @@ interface InterfaceCreateBlockStorageInstanceInput {
   blockStorageSize: string;
   blockStorageDescription?: string;
   serverInstanceNo: string;
+  regionNo?: string;
 }
 
 interface InterfaceDeleteBlockStorageInstancesInput {
   blockStorageInstanceNoList: string[];
+  regionNo?: string;
 }
 
 interface InterfaceGetBlockStorageSnapshotInstanceListInput {
@@ -336,14 +358,17 @@ interface InterfaceCreatePublicIpInstanceInput {
 interface InterfaceAssociatePublicIpWithServerInstanceInput {
   publicIpInstanceNo: string;
   serverInstanceNo: string;
+  regionNo?: string;
 }
 
 interface InterfaceDisassociatePublicIpFromServerInstanceInput {
   publicIpInstanceNo: string;
+  regionNo?: string;
 }
 
 interface InterfaceDeletePublicIpInstancesInput {
   publicIpInstanceNoList: string[];
+  regionNo?: string;
 }
 
 interface InterfaceGetPortForwardingRuleListInput {
@@ -359,6 +384,7 @@ interface InterfaceAddPortForwardingRulesInput {
     portForwardingExternalPort: string;
     portForwardingInternalPort: string;
   }[];
+  regionNo?: string;
 }
 
 interface InterfaceDeletePortForwardingRulesInput {
@@ -368,6 +394,7 @@ interface InterfaceDeletePortForwardingRulesInput {
     portForwardingExternalPort: string;
     portForwardingInternalPort: string;
   }[];
+  regionNo?: string;
 }
 
 
@@ -1138,6 +1165,7 @@ interface InterfaceChangeLoadBalancerInstanceConfigurationInput {
     l7HealthCheckPath?: string;
     certificateName?: string;
   }[];
+  regionNo?: string;
 }
 
 interface InterfaceChangeLoadBalancerInstanceConfigurationResponse {
@@ -1146,6 +1174,19 @@ interface InterfaceChangeLoadBalancerInstanceConfigurationResponse {
   returnMessage: string;
   totalRows: number;
   loadBalancerInstanceList: LoadBalancerInstanceList[];
+}
+
+interface InterfaceGetLoadBalancedServerInstanceListInput {
+  loadBalancerInstanceNo: string;
+  regionNo?: string;
+}
+
+interface InterfaceGetLoadBalancedServerInstanceListResponse {
+  requestId: string; // '66882489-edb1-48ac-8574-4d9c797d4290',
+  returnCode: string; // '0',
+  returnMessage: string; // 'success',
+  totalRows: number; // 7,
+  serverInstanceList: InterfaceServerInfo[];
 }
 
 interface LoadBalancerInstanceList {

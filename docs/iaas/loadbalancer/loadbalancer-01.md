@@ -432,99 +432,64 @@ const changeLoadBalancerInstanceConfigurationResponse = await loadBalancer.chang
 
 - 요청 파라미터
 
-| 파라미터명                  | 간략 설명       | 타입     | 제약   | 필수여부 |
-| ---------------------- | ----------- | ------ | ---- | ---- |
-| loadBalancerInstanceNo | 로드밸런서인스턴스번호 | String |      | Yes  |
+| 파라미터명                  | 간략 설명       | 타입    | 필수여부 |
+| ---------------------- | ----------- | ------ | ---- |
+| loadBalancerInstanceNo | 로드밸런서인스턴스번호 | String |   Yes  |
 
 - loadBalancerInstanceNo
   - 바인드 대상이 되는 로드밸런서 인스턴스 번호
   - getLoadBalancerInstanceList 액션을 통해 인스턴스 번호를 알 수 있습니다.
 
 - Example
+```javascript
+const loadBalancer = client.IaaS.loadBalancer();
+const getLoadBalancedServerInstanceListResponse = await loadBalancer.getLoadBalancedServerInstanceList({
+    loadBalancerInstanceNo: '1030011',
+});
 
-  - 요청
+/** Return **/
+{ 
+    requestId: '38e1be7d-c5b4-4d60-9261-94f85cf1424b',
+    returnCode: '0',
+    returnMessage: 'success',
+    totalRows: 1,
+    serverInstanceList: 
+    [ { serverInstanceNo: '979326',
+        serverName: 'akube-worker',
+        serverDescription: '',
+        cpuCount: 2,
+        memorySize: 4294967296,
+        baseBlockStorageSize: 53687091200,
+        platformType: [Object],
+        loginKeyName: 'mykey',
+        isFeeChargingMonitoring: false,
+        publicIp: '',
+        privateIp: '10.41.5.6',
+        serverImageName: 'centos-7.3-64',
+        serverInstanceStatus: [Object],
+        serverInstanceOperation: [Object],
+        serverInstanceStatusName: 'running',
+        createDate: '2018-09-30T13:41:32+0900',
+        uptime: '2018-09-30T13:44:28+0900',
+        serverImageProductCode: 'SPSW0LINUX000046',
+        serverProductCode: 'SPSVRSSD00000003',
+        isProtectServerTermination: false,
+        portForwardingPublicIp: '106.10.57.132',
+        zone: [Object],
+        region: [Object],
+        baseBlockStorageDiskType: [Object],
+        baseBlockStorageDiskDetailType: [Object],
+        internetLineType: [Object],
+        serverInstanceType: [Object],
+        userData: '',
+        accessControlGroupList: [Array],
+        instanceTagList: [] },
+    ]
+}
 
-    ```
-    ${LOADBALANCER_API_URL}/getLoadBalancedServerInstanceList
-    ?loadBalancerInstanceNo=340497&
-    ```
 
-  - 응답
+```
 
-    ```xml
-    <getLoadBalancedServerInstanceListResponse>
-       <requestId>79621233-600e-407e-8422-5d44b44f8965</requestId>
-       <returnCode>0</returnCode>
-       <returnMessage>success</returnMessage>
-       <totalRows>1</totalRows>
-       <serverInstanceList>
-          <serverInstance>
-             <serverInstanceNo>339805</serverInstanceNo>
-             <serverName>hd-testserver-08</serverName>
-             <serverDescription />
-             <cpuCount>2</cpuCount>
-             <memorySize>2147483648</memorySize>
-             <baseBlockStorageSize>53687091200</baseBlockStorageSize>
-             <platformType>
-                <code>WND64</code>
-                <codeName>Windows 64 Bit</codeName>
-             </platformType>
-             <loginKeyName>hd-test-08</loginKeyName>
-             <isFeeChargingMonitoring>false</isFeeChargingMonitoring>
-             <publicIp />
-             <privateIp>10.113.178.242</privateIp>
-             <serverImageName>win-2016-64</serverImageName>
-             <serverInstanceStatus>
-                <code>RUN</code>
-                <codeName>Server run state</codeName>
-             </serverInstanceStatus>
-             <serverInstanceOperation>
-                <code>NULL</code>
-                <codeName>Server NULL OP</codeName>
-             </serverInstanceOperation>
-             <serverInstanceStatusName>running</serverInstanceStatusName>
-             <createDate>2017-07-19T11:52:46+0900</createDate>
-             <uptime>2017-07-19T12:07:41+0900</uptime>
-             <serverImageProductCode>SPSW0WINNT000016</serverImageProductCode>
-             <serverProductCode>SPSVRSTAND000049</serverProductCode>
-             <isProtectServerTermination>false</isProtectServerTermination>
-             <portForwardingPublicIp>192.168.120.111</portForwardingPublicIp>
-             <zone>
-                <zoneNo>2</zoneNo>
-                <zoneName>KR-1</zoneName>
-                <zoneDescription>KR-1 zone</zoneDescription>
-             </zone>
-             <region>
-                <regionNo>1</regionNo>
-                <regionCode>KR</regionCode>
-                <regionName>KOREA</regionName>
-             </region>
-             <baseBlockStorageDiskType>
-                <code>NET</code>
-                <codeName>Network Storage</codeName>
-             </baseBlockStorageDiskType>
-             <baseBlockStroageDiskDetailType>
-                <code>HDD</code>
-                <codeName>HDD</codeName>
-             </baseBlockStroageDiskDetailType>
-             <internetLineType>
-                <code>PUBLC</code>
-                <codeName>PUBLC</codeName>
-             </internetLineType>
-             <userData />
-             <accessControlGroupList>
-                <accessControlGroup>
-                   <accessControlGroupConfigurationNo>1038</accessControlGroupConfigurationNo>
-                   <accessControlGroupName>ncloud-default-acg</accessControlGroupName>
-                   <accessControlGroupDescription>Default AccessControlGroup</accessControlGroupDescription>
-                   <isDefaultGroup>true</isDefaultGroup>
-                   <createDate>2013-12-03T10:37:39+0900</createDate>
-                </accessControlGroup>
-             </accessControlGroupList>
-          </serverInstance>
-       </serverInstanceList>
-    </getLoadBalancedServerInstanceListResponse>
-    ```
 
 #### changeLoadBalancedServerInstances
 

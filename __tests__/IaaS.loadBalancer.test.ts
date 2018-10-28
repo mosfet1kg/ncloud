@@ -1,4 +1,4 @@
-import * as ncloud from '../lib'
+import * as ncloud from '../src'
 
 const {
   accessKey,
@@ -104,6 +104,27 @@ describe('Test IaaS LoadBalancer Method', function( ){
         ]
       });
       console.log( createLoadBalancerInstanceResponse );
+
+      done();
+    } catch (e) {
+      console.log( e );
+      done.fail(e);
+    }
+  });
+
+  test('Test getLoadBalancedServerInstanceList', async ( done ) => {
+    try {
+      const client = ncloud.createClient({
+        accessKey,
+        secretKey,
+        regionNo: "1",
+      });
+
+      const loadBalancer = client.IaaS.loadBalancer();
+      const getLoadBalancedServerInstanceListResponse = await loadBalancer.getLoadBalancedServerInstanceList({
+        loadBalancerInstanceNo: '1030011',
+      });
+      console.log( getLoadBalancedServerInstanceListResponse );
 
       done();
     } catch (e) {
