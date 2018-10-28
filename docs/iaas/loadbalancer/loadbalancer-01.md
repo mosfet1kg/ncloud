@@ -1,11 +1,27 @@
-## Load Balancer API 개요
+## Load Balancer API
+
+본 문서는 IaaS 분류의 LoadBalancer 메서드들에 대해 다룹니다.
 
 ### 공통설정
 
-* {LOADBALANCER_API_URL}
+ncloud Client를 생성 시, 아래와 같이 API 인증키가 필요합니다.
 
+**ES5**
+```javascript
+var ncloud = require('ncloud');
+var client = ncloud.createClient({
+        accessKey: "$ACCESS_KEY_ID$",
+        secretKey: "$SECRET_KEY$",
+});
 ```
-https://ncloud.apigw.ntruss.com/loadbalancer/v1
+**ES6 or above**
+```javascript
+import * as ncloud from 'ncloud';
+
+const client = ncloud.createClient({
+     accessKey: "$ACCESS_KEY_ID$",
+     secretKey: "$SECRET_KEY$",
+});
 ```
 
 ### API References
@@ -76,6 +92,7 @@ https://ncloud.apigw.ntruss.com/loadbalancer/v1
   - default : 오름차순(ascending)
 
 - Example
+  
 ```javascript
 const client = ncloud.createClient({
     accessKey,
@@ -269,6 +286,7 @@ const loadBalancerTargetServerInstanceList = await loadBalancer.getLoadBalancerT
   - 입력가능한 상태는 getRegionList 액션을 통해서 획득할 수 있습니다.
 
 - Example
+  
 ```javascript
 const client = ncloud.createClient({
     accessKey,
@@ -369,6 +387,7 @@ const createLoadBalancerInstanceResponse = await loadBalancer.createLoadBalancer
         - protocloTypeCode 값이 SSL/HTTPS인 경우에는 필수 항목입니다.
 
 - Example
+  
 ```javascript
 const client = ncloud.createClient({
     accessKey,
@@ -514,6 +533,7 @@ const getLoadBalancedServerInstanceListResponse = await loadBalancer.getLoadBala
   - 로드밸런서에 바인드할 서버인스턴스번호리스트
 
 - Example
+  
 ```javascript
 const client = ncloud.createClient({
     accessKey,
@@ -579,6 +599,7 @@ const getLoadBalancedServerInstanceListResponse = await loadBalancer.changeLoadB
   - getLoadBalancerInstanceList 액션을 통해서 획득할 수 있습니다.
 
 - Example
+  
 ```javascript
 const client = ncloud.createClient({
     accessKey,
@@ -616,7 +637,6 @@ const getLoadBalancedServerInstanceListResponse = await loadBalancer.deleteLoadB
         loadBalancerRuleList: [Array],
         loadBalancedServerInstanceList: [Array] } ]
 }
-
 ```
 
 #### getLoadBalancerSslCertificateList

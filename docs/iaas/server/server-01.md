@@ -1,6 +1,6 @@
-## IaaS > Server
+## Server API
 
-본 문서는 IaaS 분류의 Server 메서드에 대해 다룹니다.
+본 문서는 IaaS 분류의 Server 메서드들에 대해 다룹니다.
 
 ### 공통설정
 
@@ -14,6 +14,7 @@ var client = ncloud.createClient({
         secretKey: "$SECRET_KEY$",
 });
 ```
+
 **ES6 or above**
 ```javascript
 import * as ncloud from 'ncloud';
@@ -692,6 +693,7 @@ const getNasVolumeInstanceListResponse = await server.getNasVolumeInstanceList()
   - 500GB 이상 | 10000GB 이하
 
 - Example
+  
 ```javascript
 const server = client.IaaS.server();
 const changeNasVolumeSizeResponse = await server.changeNasVolumeSize({
@@ -773,6 +775,7 @@ const changeNasVolumeSizeResponse = await server.changeNasVolumeSize({
   - 5분(5m) | 6시간(6h) | 1일(1d) | 1달(1M)
 
 - Example
+  
 ```javascript
 const server = client.IaaS.server();
 
@@ -867,6 +870,7 @@ const getNasVolumeInstanceRatingListResponse = await server.getNasVolumeInstance
   - 사설 IP만 설정가능 (공인 IP 설정불가)
 
 - Example
+  
 ```javascript
 const server = client.IaaS.server();
 
@@ -941,6 +945,7 @@ nasVolumeInstanceList:
   - 사설 IP만 설정가능 (공인 IP 설정불가)
 
 - Example
+  
 ```javascript
 const server = client.IaaS.server();
 const addNasVolumeAccessControlResponse = await server.addNasVolumeAccessControl({
@@ -1014,6 +1019,7 @@ const addNasVolumeAccessControlResponse = await server.addNasVolumeAccessControl
   - 사설 IP만 설정가능 (공인 IP 설정불가)
 
 - Example
+  
 ```javascript
 const server = client.IaaS.server();
 const removeNasVolumeAccessControlResponse = await server.removeNasVolumeAccessControl({
@@ -1081,6 +1087,7 @@ const removeNasVolumeAccessControlResponse = await server.removeNasVolumeAccessC
   - 조회할 키 명
 
 - Example
+  
 ```javascript
 const server = client.IaaS.server();
 const getLoginKeyListResponse = await server.getLoginKeyList();
@@ -1175,6 +1182,7 @@ fs.writeFileSync( path.join(__dirname, './loginKey.pem'), createLoginKeyResponse
   - 키명이 존재하지 않을 경우 오류가 발생됩니다.
 
 - Example
+  
 ```javascript
 const server = client.IaaS.server();
 const deleteLoginKeyResponse = await server.deleteLoginKey({
@@ -1217,6 +1225,7 @@ const deleteLoginKeyResponse = await server.deleteLoginKey({
   - ssh-keygen -t rsa -C "my-key" -f ~/.ssh/my-key로 생성한 public 키.
 
 - Example
+  
 ```javascript
 const fs = require('fs');
 const path = require('path');

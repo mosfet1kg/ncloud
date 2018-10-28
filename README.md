@@ -67,41 +67,13 @@ Refer to the following link
 
 
 # Release Note
-v0.1.31
-  - Add new features ( management/storage )
-
-v0.1.28
-  - Add new features ( management/monitoring )
-
-v0.1.18
-  - Add new features ( publicIpInstance, portForwarding, region )
-
-v0.1.17
-  - Add `rebootServer` method(action `rebootServerInstances`)
-  - Add `stopServer` method(action `stopServerInstances`)
-  - Add `startServer` method(action `startServerInstances`)
-  - Add `rebuildServer` method(action `changeServerInstanceSpec`)
-  - Add `destroyServer` method(action `terminateServerInstances`)
-  - Add `findRootPassword` method(action `getRootPassword`)  
-  - Add `createLoginKey` method(action `createLoginKey`)  
-        
-v0.1.16
-  - Add `createServer` method(action `createServerInstances`)
-  
-v0.1.12
-  - Add `destroyPrivateImages` method(action `deleteMemberServerImages`)
-   
-v0.1.11
-  - Add `createPrivateImage` method(action `createMemberServerImage`) 
-  
-v0.1.10
-  - Add `findPrivateImages` method(action `getMemberServerImageList`) 
-
+v1.0.1
+  - ncloud api gateway spec v2 지원
 
 # Usage Example
 See following descriptions.
-# OpenAPI : Geolocation
-## `findLocation`, action `getLocation`
+# PaaS : Geolocation
+## action `getLocation`
 ### Arguments
 | Name | Data Type | Required | Description                | Default |
 |------|-----------|----------|----------------------------|---------|
