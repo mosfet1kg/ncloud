@@ -78,6 +78,7 @@ interface InterfaceNcloudIaaSServerCustomMethods {
 interface InterfaceNcloudIaaSLoadBalancer {
   getLoadBalancerInstanceList(input?: InterfaceGetLoadBalancerInstanceListInput): Promise<InterfaceGetLoadBalancerInstanceListResponse>;
   getLoadBalancerTargetServerInstanceList(input?: InterfaceGetLoadBalancerTargetServerInstanceListInput): Promise<InterfaceGetLoadBalancerTargetServerInstanceListResponse>;
+  createLoadBalancerInstance(input: InterfaceCreateLoadBalancerInstanceInput): Promise<InterfaceCreateLoadBalancerInstanceResponse>;
 }
 
 /** IaaS: interfaceIaaSServerInputs**/
@@ -1100,14 +1101,63 @@ interface InterfaceGetLoadBalancerTargetServerInstanceListResponse {
   serverInstanceList: InterfaceServerInfo[];
 }
 
-/** ACG **/
+interface InterfaceCreateLoadBalancerInstanceInput {
+  loadBalancerName?: string;
+  loadBalancerAlgorithmTypeCode?: string;
+  loadBalancerDescription?: string;
+  internetLineTypeCode?: string;
+  networkUsageTypeCode?: string;
+  serverInstanceNoList?: string[];
+  loadBalancerRuleList: {
+    protocolTypeCode: string;
+    loadBalancerPort: string;
+    serverPort: string;
+    l7HealthCheckPath?: string;
+    certificateName?: string;
+  }[];
+  regionNo?: string;
+}
 
-interface AccessControlGroupList {
-  accessControlGroupConfigurationNo: string;
-  accessControlGroupName: string;
-  accessControlGroupDescription: string;
-  isDefault: boolean;
-  createDate: Date;
+interface InterfaceCreateLoadBalancerInstanceResponse {
+  requestId: string;
+  returnCode: string;
+  returnMessage: string;
+  totalRows: number;
+  loadBalancerInstanceList: LoadBalancerInstanceList[];
+}
+
+interface LoadBalancerInstanceList {
+  loadBalancerInstanceNo: string;
+  virtualIp: string;
+  loadBalancerName: string;
+  loadBalancerAlgorithmType: LoadBalancerAlgorithmType;
+  loadBalancerDescription: string;
+  createDate: string;
+  domainName: string;
+  internetLineType: LoadBalancerAlgorithmType;
+  loadBalancerInstanceStatusName: string;
+  loadBalancerInstanceStatus: LoadBalancerAlgorithmType;
+  loadBalancerInstanceOperation: LoadBalancerAlgorithmType;
+  networkUsageType: LoadBalancerAlgorithmType;
+  isHttpKeepAlive: boolean;
+  connectionTimeout: number;
+  certificateName: string;
+  loadBalancerRuleList: LoadBalancerRuleList[];
+  loadBalancedServerInstanceList: LoadBalancedServerInstanceList[];
+}
+
+interface LoadBalancedServerInstanceList {
+  serverInstance: ServerInstance;
+  serverHealthCheckStatusList: ServerHealthCheckStatusList[];
+}
+
+interface ServerHealthCheckStatusList {
+  protocolType: LoadBalancerAlgorithmType;
+  loadBalancerPort: number;
+  serverPort: number;
+  l7HealthCheckPath: string;
+  proxyProtocolUseYn: string;
+  serverStatus: boolean;
 }
 
 interface ServerInstance {
@@ -1117,70 +1167,71 @@ interface ServerInstance {
   cpuCount: number;
   memorySize: number;
   baseBlockStorageSize: number;
-  platformType: PlatformType;
+  platformType: LoadBalancerAlgorithmType;
   loginKeyName: string;
   isFeeChargingMonitoring: boolean;
   publicIp: string;
   privateIp: string;
   serverImageName: string;
-  serverInstanceStatus: ServerInstanceStatus;
-  serverInstanceOperation: ServerInstanceOperation;
+  serverInstanceStatus: LoadBalancerAlgorithmType;
+  serverInstanceOperation: LoadBalancerAlgorithmType;
   serverInstanceStatusName: string;
-  createDate: Date;
-  uptime: Date;
+  createDate: string;
+  uptime: string;
   serverImageProductCode: string;
   serverProductCode: string;
   isProtectServerTermination: boolean;
   portForwardingPublicIp: string;
-  portForwardingExternalPort: number;
-  portForwardingInternalPort: number;
   zone: Zone;
   region: Region;
-  baseBlockStorageDiskType: BaseBlockStorageDiskType;
-  baseBlockStorageDiskDetailType: BaseBlockStorageDiskDetailType;
-  internetLineType: InternetLineType2;
-  serverInstanceType: ServerInstanceType;
+  baseBlockStorageDiskType: LoadBalancerAlgorithmType;
+  baseBlockStorageDiskDetailType: LoadBalancerAlgorithmType;
+  internetLineType: LoadBalancerAlgorithmType;
+  serverInstanceType: LoadBalancerAlgorithmType;
   userData: string;
   accessControlGroupList: AccessControlGroupList[];
+  instanceTagList: any[];
+}
+
+interface AccessControlGroupList {
+  accessControlGroupConfigurationNo: string;
+  accessControlGroupName: string;
+  accessControlGroupDescription: string;
+  isDefault: boolean;
+  createDate: string;
+}
+
+interface Region {
+  regionNo: string;
+  regionCode: string;
+  regionName: string;
+}
+
+interface Zone {
+  zoneNo: string;
+  zoneName: string;
+  zoneCode: string;
+  zoneDescription: string;
+  regionNo: string;
+}
+
+interface LoadBalancerRuleList {
+  protocolType: LoadBalancerAlgorithmType;
+  loadBalancerPort: number;
+  serverPort: number;
+  l7HealthCheckPath: string;
+  certificateName: string;
+  proxyProtocolUseYn: string;
+}
+
+interface LoadBalancerAlgorithmType {
+  code: string;
+  codeName: string;
 }
 
 interface ProtocolType2 {
   code: string;
   codeName: string;
-}
-
-interface ServerHealthCheckStatusList {
-  protocolType: ProtocolType2;
-  loadBalancerPort: number;
-  serverPort: number;
-  l7HealthCheckPath: string;
-  proxyProtocolUseYn: string;
-  serverStatus: boolean;
-}
-
-interface LoadBalancedServerInstanceList {
-  serverInstance: ServerInstance;
-  serverHealthCheckStatusList: ServerHealthCheckStatusList[];
-}
-
-interface LoadBalancerInstanceList {
-  loadBalancerInstanceNo: string;
-  virtualIp: string;
-  loadBalancerName: string;
-  loadBalancerAlgorithmType: LoadBalancerAlgorithmType;
-  loadBalancerDescription: string;
-  createDate: Date;
-  domainName: string;
-  internetLineType: InternetLineType;
-  loadBalancerInstanceStatusName: string;
-  loadBalancerInstanceStatus: LoadBalancerInstanceStatus;
-  loadBalancerInstanceOperation: LoadBalancerInstanceOperation;
-  networkUsageType: NetworkUsageType;
-  isHttpKeepAlive: boolean;
-  connectionTimeout: number;
-  certificateName: string;
-  loadBalancerRuleList: LoadBalancerRuleList[];
-  loadBalancedServerInstanceList: LoadBalancedServerInstanceList[];
 }
 
 interface InterfaceGetLoadBalancerInstanceListResponse {

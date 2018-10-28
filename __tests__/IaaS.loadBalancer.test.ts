@@ -62,8 +62,19 @@ describe('Test IaaS LoadBalancer Method', function( ){
       });
 
       const loadBalancer = client.IaaS.loadBalancer();
-      const loadBalancerTargetServerInstanceList = await loadBalancer.getLoadBalancerTargetServerInstanceList();
-      console.log( loadBalancerTargetServerInstanceList );
+      const createLoadBalancerInstanceResponse = await loadBalancer.createLoadBalancerInstance({
+        loadBalancerName: 'my-lb',
+        loadBalancerAlgorithmTypeCode: 'RR',
+        serverInstanceNoList: ['979326', '979323'],
+        loadBalancerRuleList: [
+          {
+            protocolTypeCode: 'TCP',
+            loadBalancerPort: '13306',
+            serverPort: '3306',
+          }
+        ]
+      });
+      console.log( createLoadBalancerInstanceResponse );
 
       done();
     } catch (e) {

@@ -56,6 +56,31 @@ apis:
             type: string
         responseName: getLoadBalancerTargetServerInstanceListResponse
 
+      createLoadBalancerInstance:
+        method: GET
+        basePath: /loadbalancer/v2/
+        action: createLoadBalancerInstance
+        actionParamList:
+          loadBalancerName:
+            type: string
+          loadBalancerAlgorithmTypeCode:
+            type: string
+          loadBalancerDescription:
+            type: string
+          internetLineTypeCode:
+            type: string
+          networkUsageTypeCode:
+            type: string
+          serverInstanceNoList:
+            type: string[]
+          loadBalancerRuleList:
+            type: any[]
+            replace: loadBalancerRuleList.%d.%s
+            required: true
+          regionNo:
+            type: string
+        responseName: createLoadBalancerInstanceResponse
+
     Server:
       getServerImageProductList:
         method: GET
