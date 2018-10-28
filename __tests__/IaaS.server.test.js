@@ -118,7 +118,7 @@ describe('Test IaaS Server Method', function( ){
       const server = client.IaaS.server();
 
       const deleteNasVolumeInstanceResponse = await server.deleteNasVolumeInstance({
-        nasVolumeInstanceNo: '768200',
+        nasVolumeInstanceNo: '1029901',
       });
 
       console.log( deleteNasVolumeInstanceResponse );
@@ -133,14 +133,13 @@ describe('Test IaaS Server Method', function( ){
   test('Test getNasVolumeInstanceList', async ( done ) => {
     try {
       const server = client.IaaS.server();
-
       const getNasVolumeInstanceListResponse = await server.getNasVolumeInstanceList();
 
       console.log( getNasVolumeInstanceListResponse );
 
       done();
     } catch (e) {
-      console.log( e.response.data );
+      console.log( e );
       done.fail(e);
     }
   });
