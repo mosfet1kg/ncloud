@@ -1,43 +1,45 @@
-import {
-  InterfaceOauthKey,
-  InterfaceOpenApi,
-  InterfaceCompute,
-  InterfaceManagement,
-  InterfaceStorage,
-  OpenApi,
-  Compute,
-  Management,
-  Storage
-} from './ncloud';
-export * from './ncloud';
+import { isNull } from 'lodash';
+import MyStore from './helpers/MyStore';
 
-export interface InterfaceClient {
-  openapi: InterfaceOpenApi;
-  compute: InterfaceCompute;
-  management: InterfaceManagement;
-  storage: InterfaceStorage;
-}
+import IaaS from './IaaS';
+import PaaS from './PaaS';
 
-export class Ncloud implements InterfaceClient {
-  static baseUrl: string = 'https://api.ncloud.com';
+export class Ncloud implements InterfaceNcloud {
+  private mIaaS: InterfaceNcloudIaaS = null;
+  private mPaaS: InterfaceNcloudPaaS = null;
+  private store: InterfaceMyStore;
 
-  public openapi: InterfaceOpenApi;
-  public compute: InterfaceCompute;
-  public management: InterfaceManagement;
-  public storage: InterfaceStorage;
-
-  private constructor( oauthKey: InterfaceOauthKey ) {
-    this.openapi = new OpenApi( oauthKey );
-    this.compute = new Compute( oauthKey );
-    this.management = new Management( oauthKey );
-    this.storage = new Storage( oauthKey );
+  private constructor( inputParams: any ) {
+    // TODO: throw errors regarding missing expected parameters.
+    this.store = new MyStore(inputParams);
   }
 
-  static createClient ( oauthKey: InterfaceOauthKey ): InterfaceClient {
-    return new Ncloud(oauthKey);
+  setConfig(inputParams: any): InterfaceNcloud {
+    this.store.setData(inputParams);
+    return this;
+  }
+
+  get IaaS(): InterfaceNcloudIaaS {
+    if ( isNull(this.mIaaS) ) {
+      this.mIaaS = new IaaS({ store: this.store });
+    } // end if
+
+    return this.mIaaS;
+  }
+
+  get PaaS(): InterfaceNcloudPaaS {
+    if ( isNull(this.mPaaS) ) {
+      this.mPaaS = new PaaS({ store: this.store });
+    } // end if
+
+    return this.mPaaS;
+  }
+
+  static createClient ( inputParams ) {
+    return new Ncloud( inputParams );
   }
 }
 
-export function createClient(  oauthKey: InterfaceOauthKey ): InterfaceClient {
-  return Ncloud.createClient( oauthKey );
+export function createClient( inputParams: any ) {
+  return Ncloud.createClient( inputParams );
 }

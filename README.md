@@ -7,6 +7,15 @@ ncloud
 [![NPM](https://nodei.co/npm/ncloud.png?compact=true)](https://nodei.co/npm/ncloud/)  
   
 ![](./docs/assets/ncloudicon-01.png)   
+
+
+> 네이버 클라우드 플랫폼 SDK입니다.  
+> 현재 최신 API 스펙 (v2)에 맞춰서 개선작업중에 있습니다.  
+> 이 저장소는 Ncloud의 Official 저장소가 아닙니다.   
+> 문의하실 내용이 있다면, 이슈에 등록해주세요. 
+
+
+
 NAVER Cloud Platform(https://www.ncloud.com/) Library for Node.js  
 This project is inspired from [pkgcloud](https://github.com/pkgcloud/pkgcloud).  
 **Currently, this package supports geolocation only. The other functions are unstable.**
@@ -38,8 +47,8 @@ $ yarn add ncloud
 ```javascript
 var ncloud = require('ncloud');
 var client = ncloud.createClient({
-    oauth_consumer_key:'%YOUR_CONSUMER_KEY%',
-    oauth_consumer_secret:'%YOUR_CONSUMER_SECRET%'
+        accessKey: "$ACCESS_KEY_ID$",
+        secretKey: "$SECRET_KEY$",
 });
 ```
 **ES6 or above**
@@ -47,8 +56,8 @@ var client = ncloud.createClient({
 import * as ncloud from 'ncloud';
 
 const client = ncloud.createClient({
-    oauth_consumer_key:'%YOUR_CONSUMER_KEY%',
-    oauth_consumer_secret:'%YOUR_CONSUMER_SECRET%'
+     accessKey: "$ACCESS_KEY_ID$",
+     secretKey: "$SECRET_KEY$",
 });
 ```
 
@@ -103,35 +112,38 @@ See following descriptions.
 
 #### Examples
 ```javascript
-client.openapi.geolocation.findLocation({ ip: '143.248.142.77'}, function( error, reply ){
-    if(error){
-        console.log( error );
-    }else{
-        console.log( reply );
-        // expected Result =>
-        // { country: 'KR', code: '3020054000', r1: '대전광역시', r2: '유성구' }
+const geoLocation = client.PaaS.geoLocation();
 
-    }
+const geolocationResponse = await geoLocation.geoLocation({
+  ip: '143.248.142.77'
 });
+
+console.log(geolocationResponse);
+//  { returnCode: 0,
+//   requestId: 'e03c4779-0740-45dc-9462-9cc0620ea597',
+//   geoLocation: { country: 'KR', code: '3020054000', r1: '대전광역시', r2: '유성구' } }
 ```
+
+
 ```javascript
-client.openapi.geolocation.findLocation({ ip: '143.248.142.77', ext: 't'}, function( error, reply ){
-    if(error){
-        console.log( error );
-    }else{
-        console.log( reply );
-        // expected Result =>
-        // { country: 'KR',
-        //   code: '3020054000',
-        //   r1: '대전광역시',
-        //   r2: '유성구',
-        //   r3: '구성동',
-        //   lat: 36.370724,
-        //   long: 127.3661,
-        //   net: 'Korea Advanced Institute of Science and Technology' }
-    }
+const geoLocation = client.PaaS.geoLocation();
+
+const geolocationResponse = await geoLocation.geoLocation({
+  ip: '143.248.142.77',
+  ext: 't'
 });
-```  
+
+console.log(geolocationResponse);
+// expected Result =>
+// { country: 'KR',
+//   code: '3020054000',
+//   r1: '대전광역시',
+//   r2: '유성구',
+//   r3: '구성동',
+//   lat: 36.370724,
+//   long: 127.3661,
+//   net: 'Korea Advanced Institute of Science and Technology' }
+```
 
 Other functions are being prepared.
 

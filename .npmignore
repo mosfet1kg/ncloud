@@ -3,11 +3,6 @@
 .idea
 .example
 .docs
-tsconfig.json
-tsconfig.release.json
-tslint.json
-preprocessor.js
-jest.config.js
 .editorconfig
 mytest.js
 src
@@ -19,3 +14,4 @@ example
 docs
 .note
 **/**/env.json
+coverage/

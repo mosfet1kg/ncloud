@@ -35,3 +35,17 @@ build/
 #lib
 lib
 lib/**/**
+
+#pem
+*/**/*.pem
+*/**/*.pub
+package-lock.json
+
+#type
+**/*.d.ts
+**/*.js
+**/*.js.map
+
+!**/*/types.d.ts
+!jest.config.js
+!preprocessor.js
