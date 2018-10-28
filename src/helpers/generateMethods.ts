@@ -38,8 +38,8 @@ export default function(
   } = get(apiDescription, actionPath);
 
   input = {
+    ...store.getValues(),  // regionNo가 overwrite되지 않도록 앞에 위치
     ...input,
-    ...store.getValues(),
   };
 
   return testInputParams(

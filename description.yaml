@@ -45,6 +45,17 @@ apis:
               - descending
         responseName: getLoadBalancerInstanceListResponse
 
+      getLoadBalancerTargetServerInstanceList:
+        method: GET
+        basePath: /loadbalancer/v2/
+        action: getLoadBalancerTargetServerInstanceList
+        actionParamList:
+          internetLineTypeCode:
+            type: string
+          regionNo:
+            type: string
+        responseName: getLoadBalancerTargetServerInstanceListResponse
+
     Server:
       getServerImageProductList:
         method: GET

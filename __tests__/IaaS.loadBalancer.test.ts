@@ -24,7 +24,46 @@ describe('Test IaaS LoadBalancer Method', function( ){
 
       const loadBalancer = client.IaaS.loadBalancer();
       const loadBalancerList = await loadBalancer.getLoadBalancerInstanceList();
-      console.log( loadBalancerList.loadBalancerInstanceList[0].loadBalancerName );
+      console.log( loadBalancerList );
+
+      done();
+    } catch (e) {
+      console.log( e );
+      done.fail(e);
+    }
+  });
+
+
+  test('Test getLoadBalancerTargetServerInstanceList', async ( done ) => {
+    try {
+      const client = ncloud.createClient({
+        accessKey,
+        secretKey,
+        regionNo: "1",
+      });
+
+      const loadBalancer = client.IaaS.loadBalancer();
+      const loadBalancerTargetServerInstanceList = await loadBalancer.getLoadBalancerTargetServerInstanceList();
+      console.log( loadBalancerTargetServerInstanceList );
+
+      done();
+    } catch (e) {
+      console.log( e );
+      done.fail(e);
+    }
+  });
+
+  test('Test createLoadBalancerInstance', async ( done ) => {
+    try {
+      const client = ncloud.createClient({
+        accessKey,
+        secretKey,
+        regionNo: "1",
+      });
+
+      const loadBalancer = client.IaaS.loadBalancer();
+      const loadBalancerTargetServerInstanceList = await loadBalancer.getLoadBalancerTargetServerInstanceList();
+      console.log( loadBalancerTargetServerInstanceList );
 
       done();
     } catch (e) {

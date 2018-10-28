@@ -77,6 +77,7 @@ interface InterfaceNcloudIaaSServerCustomMethods {
 
 interface InterfaceNcloudIaaSLoadBalancer {
   getLoadBalancerInstanceList(input?: InterfaceGetLoadBalancerInstanceListInput): Promise<InterfaceGetLoadBalancerInstanceListResponse>;
+  getLoadBalancerTargetServerInstanceList(input?: InterfaceGetLoadBalancerTargetServerInstanceListInput): Promise<InterfaceGetLoadBalancerTargetServerInstanceListResponse>;
 }
 
 /** IaaS: interfaceIaaSServerInputs**/
@@ -1085,6 +1086,21 @@ interface ServerInstanceType {
   code: string;
   codeName: string;
 }
+
+interface InterfaceGetLoadBalancerTargetServerInstanceListInput {
+  internetLineTypeCode?: string;
+  regionNo?: string;
+}
+
+interface InterfaceGetLoadBalancerTargetServerInstanceListResponse {
+  requestId: string; //  'b90bb68d-cff1-49a8-af72-75c1f58eac38',
+  returnCode: string; // '0',
+  returnMessage: string; //'success',
+  totalRows: number; // 13,
+  serverInstanceList: InterfaceServerInfo[];
+}
+
+/** ACG **/
 
 interface AccessControlGroupList {
   accessControlGroupConfigurationNo: string;

@@ -30,7 +30,7 @@ export default function (
   const {
     accessKey,
     secretKey,
-    apiKey,
+    // apiKey,
   } = authParams;
   const timestamp = Date.now();
   const message = [];
