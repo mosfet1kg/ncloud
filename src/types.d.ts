@@ -83,6 +83,8 @@ interface InterfaceNcloudIaaSLoadBalancer {
   getLoadBalancedServerInstanceList(input: InterfaceGetLoadBalancedServerInstanceListInput): Promise<InterfaceGetLoadBalancedServerInstanceListResponse>;
   changeLoadBalancedServerInstances(input: InterfaceChangeLoadBalancedServerInstancesInput): Promise<InterfaceChangeLoadBalancedServerInstancesResponse>;
   deleteLoadBalancerInstances(input: InterfaceDeleteLoadBalancerInstancesInput): Promise<InterfaceDeleteLoadBalancerInstancesResponse>;
+  getLoadBalancerSslCertificateList(input?: InterfacegetLoadBalancerSslCertificateListInput): Promise<InterfaceGetLoadBalancerSslCertificateListResponse>;
+  addLoadBalancerSslCertificate(input: InterfaceAddLoadBalancerSslCertificateInput): Promise<any>;
 }
 
 /** IaaS: interfaceIaaSServerInputs**/
@@ -1333,6 +1335,33 @@ interface InterfaceGetLoadBalancerInstanceListResponse {
   totalRows: number;
   loadBalancerInstanceList: LoadBalancerInstanceList[];
 }
+
+interface InterfacegetLoadBalancerSslCertificateListInput {
+  certificateName?: string;
+}
+
+interface InterfaceGetLoadBalancerSslCertificateListResponse {
+  requestId: string;
+  returnCode: string;
+  returnMessage: string;
+  totalRows: number;
+  sslCertificateList: SslCertificateList[];
+}
+
+interface SslCertificateList {
+  certificateName: string;
+  privateKey: string;
+  publicKeyCertificate: string;
+  certificateChain?: string;
+}
+
+interface InterfaceAddLoadBalancerSslCertificateInput {
+  certificateName: string;
+  privateKey: string;
+  publicKeyCertificate: string;
+  certificateChain?: string;
+}
+
 
 /** PaaS **/
 interface InterfaceNcloudPaaSGeoLocation {

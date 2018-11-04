@@ -141,6 +141,37 @@ apis:
             type: string
         responseName: deleteLoadBalancerInstancesResponse
 
+      getLoadBalancerSslCertificateList:
+        method: GET
+        basePath: /loadbalancer/v2/
+        action: getLoadBalancerSslCertificateList
+        actionParamList:
+          certificateName:
+            type: string
+          regionNo:
+            type: string
+        responseName: getLoadBalancerSslCertificateListResponse
+
+      addLoadBalancerSslCertificate:
+        method: GET
+        basePath: /loadbalancer/v2/
+        action: addLoadBalancerSslCertificate
+        actionParamList:
+          certificateName:
+            type: string
+            required: true
+          privateKey:
+            type: string
+            required: true
+          publicKeyCertificate:
+            type: string
+            required: true
+          certificateChain:
+            type: string
+          regionNo:
+            type: string
+        responseName: addLoadBalancerSslCertificateResponse
+
     Server:
       getServerImageProductList:
         method: GET

@@ -5,6 +5,8 @@ const {
   secretKey,
 } = require('./env.json');
 
+const sslCert = require('./sslCert.json');
+
 describe('Test IaaS LoadBalancer Method', function( ){
   beforeAll(function (){
     // Clears the database and adds some testing data.
@@ -168,6 +170,38 @@ describe('Test IaaS LoadBalancer Method', function( ){
         loadBalancerInstanceNoList: ['1030011'],
       });
       console.log( getLoadBalancedServerInstanceListResponse );
+
+      done();
+    } catch (e) {
+      console.log( e );
+      done.fail(e);
+    }
+  });
+
+  test('Test addLoadBalancerSslCertificate', async ( done ) => {
+    try {
+      const client = ncloud.createClient({
+        accessKey,
+        secretKey,
+        regionNo: "1",
+      });
+
+      const certificateName = 'my-test';
+      const {
+        privateKey,
+        publicKeyCertificate,
+        certificateChain,
+      } = sslCert;
+
+      const loadBalancer = client.IaaS.loadBalancer();
+      const addLoadBalancerSslCertificateResponse = await loadBalancer.addLoadBalancerSslCertificate({
+        certificateName,
+        privateKey,
+        publicKeyCertificate,
+        certificateChain
+      });
+
+      console.log( addLoadBalancerSslCertificateResponse );
 
       done();
     } catch (e) {
