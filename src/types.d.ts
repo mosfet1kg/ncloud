@@ -84,7 +84,7 @@ interface InterfaceNcloudIaaSLoadBalancer {
   changeLoadBalancedServerInstances(input: InterfaceChangeLoadBalancedServerInstancesInput): Promise<InterfaceChangeLoadBalancedServerInstancesResponse>;
   deleteLoadBalancerInstances(input: InterfaceDeleteLoadBalancerInstancesInput): Promise<InterfaceDeleteLoadBalancerInstancesResponse>;
   getLoadBalancerSslCertificateList(input?: InterfacegetLoadBalancerSslCertificateListInput): Promise<InterfaceGetLoadBalancerSslCertificateListResponse>;
-  addLoadBalancerSslCertificate(input: InterfaceAddLoadBalancerSslCertificateInput): Promise<any>;
+  addLoadBalancerSslCertificate(input: InterfaceAddLoadBalancerSslCertificateInput): Promise<InterfaceAddLoadBalancerSslCertificateResponse>;
 }
 
 /** IaaS: interfaceIaaSServerInputs**/
@@ -1360,6 +1360,13 @@ interface InterfaceAddLoadBalancerSslCertificateInput {
   certificateChain?: string;
 }
 
+interface InterfaceAddLoadBalancerSslCertificateResponse {
+  requestId: string;
+  returnCode: string;
+  returnMessage: string;
+  totalRows: number;
+  sslCertificateList: SslCertificateList[];
+}
 
 /** PaaS **/
 interface InterfaceNcloudPaaSGeoLocation {
