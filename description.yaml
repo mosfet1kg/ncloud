@@ -20,7 +20,7 @@ apis:
   IaaS:
     LoadBalancer:
       getLoadBalancerInstanceList:
-        method: GET
+        method: POST
         basePath: /loadbalancer/v2/
         action: getLoadBalancerInstanceList
         actionParamList:

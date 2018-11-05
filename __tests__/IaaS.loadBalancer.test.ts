@@ -1,64 +1,63 @@
-import * as ncloud from '../src'
+import * as ncloud from '../src';
 
 const {
   accessKey,
   secretKey,
 } = require('./env.json');
 
-describe('Test IaaS LoadBalancer Method', function( ){
-  beforeAll(function (){
+describe('Test IaaS LoadBalancer Method', function ( ) {
+  beforeAll(() => {
     // Clears the database and adds some testing data.
     // Jest will wait for this promise to resolve before running tests.
     // jest.setTimeout = 50000;
-    console.log('set Interval');
+    // console.log('set Interval');
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 500000;
   });
 
-  test('Test getLoadBalancerInstanceList', async ( done ) => {
+  test('Test getLoadBalancerInstanceList', async (done) => {
     try {
       const client = ncloud.createClient({
         accessKey,
         secretKey,
-        regionNo: "1",
+        regionNo: '1',
       });
 
       const loadBalancer = client.IaaS.loadBalancer();
       const loadBalancerList = await loadBalancer.getLoadBalancerInstanceList();
-      console.log( loadBalancerList );
+      console.log(loadBalancerList);
 
       done();
     } catch (e) {
-      console.log( e );
+      console.log(e);
       done.fail(e);
     }
   });
 
-
-  test('Test getLoadBalancerTargetServerInstanceList', async ( done ) => {
+  test('Test getLoadBalancerTargetServerInstanceList', async (done) => {
     try {
       const client = ncloud.createClient({
         accessKey,
         secretKey,
-        regionNo: "1",
+        regionNo: '1',
       });
 
       const loadBalancer = client.IaaS.loadBalancer();
       const loadBalancerTargetServerInstanceList = await loadBalancer.getLoadBalancerTargetServerInstanceList();
-      console.log( loadBalancerTargetServerInstanceList );
+      console.log(loadBalancerTargetServerInstanceList);
 
       done();
     } catch (e) {
-      console.log( e );
+      console.log(e);
       done.fail(e);
     }
   });
 
-  test('Test changeLoadBalancerInstanceConfiguration', async ( done ) => {
+  test('Test changeLoadBalancerInstanceConfiguration', async (done) => {
     try {
       const client = ncloud.createClient({
         accessKey,
         secretKey,
-        regionNo: "1",
+        regionNo: '1',
       });
 
       const loadBalancer = client.IaaS.loadBalancer();
@@ -70,24 +69,24 @@ describe('Test IaaS LoadBalancer Method', function( ){
             protocolTypeCode: 'TCP',
             loadBalancerPort: '23306',
             serverPort: '3306',
-          }
-        ]
+          },
+        ],
       });
-      console.log( changeLoadBalancerInstanceConfigurationResponse );
+      console.log(changeLoadBalancerInstanceConfigurationResponse);
 
       done();
     } catch (e) {
-      console.log( e );
+      console.log(e);
       done.fail(e);
     }
   });
 
-  test('Test createLoadBalancerInstance', async ( done ) => {
+  test('Test createLoadBalancerInstance', async (done) => {
     try {
       const client = ncloud.createClient({
         accessKey,
         secretKey,
-        regionNo: "1",
+        regionNo: '1',
       });
 
       const loadBalancer = client.IaaS.loadBalancer();
@@ -100,45 +99,45 @@ describe('Test IaaS LoadBalancer Method', function( ){
             protocolTypeCode: 'TCP',
             loadBalancerPort: '13306',
             serverPort: '3306',
-          }
-        ]
+          },
+        ],
       });
-      console.log( createLoadBalancerInstanceResponse );
+      console.log(createLoadBalancerInstanceResponse);
 
       done();
     } catch (e) {
-      console.log( e );
+      console.log(e);
       done.fail(e);
     }
   });
 
-  test('Test getLoadBalancedServerInstanceList', async ( done ) => {
+  test('Test getLoadBalancedServerInstanceList', async (done) => {
     try {
       const client = ncloud.createClient({
         accessKey,
         secretKey,
-        regionNo: "1",
+        regionNo: '1',
       });
 
       const loadBalancer = client.IaaS.loadBalancer();
       const getLoadBalancedServerInstanceListResponse = await loadBalancer.getLoadBalancedServerInstanceList({
         loadBalancerInstanceNo: '1030011',
       });
-      console.log( getLoadBalancedServerInstanceListResponse );
+      console.log(getLoadBalancedServerInstanceListResponse);
 
       done();
     } catch (e) {
-      console.log( e );
+      console.log(e);
       done.fail(e);
     }
   });
 
-  test('Test changeLoadBalancedServerInstances', async ( done ) => {
+  test('Test changeLoadBalancedServerInstances', async (done) => {
     try {
       const client = ncloud.createClient({
         accessKey,
         secretKey,
-        regionNo: "1",
+        regionNo: '1',
       });
 
       const loadBalancer = client.IaaS.loadBalancer();
@@ -146,34 +145,33 @@ describe('Test IaaS LoadBalancer Method', function( ){
         loadBalancerInstanceNo: '1030011',
         serverInstanceNoList: ['979072'],
       });
-      console.log( getLoadBalancedServerInstanceListResponse );
+      console.log(getLoadBalancedServerInstanceListResponse);
 
       done();
     } catch (e) {
-      console.log( e );
+      console.log(e);
       done.fail(e);
     }
   });
 
-  test('Test deleteLoadBalancerInstances', async ( done ) => {
+  test('Test deleteLoadBalancerInstances', async (done) => {
     try {
       const client = ncloud.createClient({
         accessKey,
         secretKey,
-        regionNo: "1",
+        regionNo: '1',
       });
 
       const loadBalancer = client.IaaS.loadBalancer();
       const getLoadBalancedServerInstanceListResponse = await loadBalancer.deleteLoadBalancerInstances({
         loadBalancerInstanceNoList: ['1030011'],
       });
-      console.log( getLoadBalancedServerInstanceListResponse );
+      console.log(getLoadBalancedServerInstanceListResponse);
 
       done();
     } catch (e) {
-      console.log( e );
+      console.log(e);
       done.fail(e);
     }
   });
 });
-

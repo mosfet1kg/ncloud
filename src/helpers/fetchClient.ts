@@ -1,12 +1,12 @@
-import * as CryptoJS from "crypto-js";
+import * as CryptoJS from 'crypto-js';
 import * as Base64 from 'crypto-js/enc-base64';
 import {
   sortBy,
 } from 'lodash';
 import axios from 'axios';
 
-const space = " ";
-const newLine = "\n";
+const space = ' ';
+const newLine = '\n';
 
 // const basePath = '/server/v1/';
 // const action = 'getZoneList';
@@ -17,7 +17,7 @@ export default function (
     baseURL,
     basePath,
     action,
-    actionParams={},
+    actionParams= {},
     authParams,
   }: {
     method: string;
@@ -32,18 +32,18 @@ export default function (
     secretKey,
     // apiKey,
   } = authParams;
+
   const timestamp = Date.now();
   const message = [];
-  let params = [];
+  const params = [];
 
-  actionParams = {...actionParams, responseFormatType: 'json'};
+  actionParams = { ...actionParams, responseFormatType: 'json' };
 
-  for( const key of sortBy( Object.keys(actionParams) ) ) {
+  for (const key of sortBy(Object.keys(actionParams))) {
     params.push(`${key}=${encodeURIComponent(actionParams[key])}`);
   } // end for loop
 
-  const paramsString = params.join('&');
-  const url = basePath + action + '?' + paramsString;
+  const url =  basePath + action;
 
   message.push(method);
   message.push(space);
@@ -57,15 +57,19 @@ export default function (
 
   const authSignature = Base64.stringify(CryptoJS.HmacSHA256(message.join(''), secretKey));
 
+  const headers = {
+    'x-ncp-apigw-timestamp' : timestamp,
+    // "x-ncp-apigw-api-key" : apiKey,
+    'x-ncp-iam-access-key' : accessKey,
+    'x-ncp-apigw-signature-v1' : authSignature,
+    'content-type': 'application/x-www-form-urlencoded',
+  };
+
   return axios.request({
     method,
     baseURL,
     url,
-    headers: {
-      "x-ncp-apigw-timestamp" : timestamp,
-      // "x-ncp-apigw-api-key" : apiKey,
-      "x-ncp-iam-access-key" : accessKey,
-      "x-ncp-apigw-signature-v1" : authSignature,
-    }
+    headers,
+    data: params.join('&'),
   });
-};
+}
