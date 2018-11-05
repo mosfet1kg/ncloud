@@ -43,7 +43,13 @@ export default function (
     params.push(`${key}=${encodeURIComponent(actionParams[key])}`);
   } // end for loop
 
-  const url =  basePath + action;
+  let url = null;
+
+  if (method.toLowerCase() === 'get') {
+    url = basePath + action + '?' + params.join('&');
+  } else {
+    url = basePath + action;
+  } // end if
 
   message.push(method);
   message.push(space);
@@ -57,11 +63,26 @@ export default function (
 
   const authSignature = Base64.stringify(CryptoJS.HmacSHA256(message.join(''), secretKey));
 
+  if (method.toLowerCase() === 'get') {
+    return axios.request({
+      method,
+      baseURL,
+      url,
+      headers: {
+        'x-ncp-apigw-timestamp' : timestamp,
+        // "x-ncp-apigw-api-key" : apiKey,
+        'x-ncp-iam-access-key' : accessKey,
+        'x-ncp-apigw-signature-v1' : authSignature,
+      },
+    });
+  } // end if
+
+  /** POST **/
   const headers = {
-    'x-ncp-apigw-timestamp' : timestamp,
+    'x-ncp-apigw-timestamp': timestamp,
     // "x-ncp-apigw-api-key" : apiKey,
-    'x-ncp-iam-access-key' : accessKey,
-    'x-ncp-apigw-signature-v1' : authSignature,
+    'x-ncp-iam-access-key': accessKey,
+    'x-ncp-apigw-signature-v1': authSignature,
     'content-type': 'application/x-www-form-urlencoded',
   };
 
