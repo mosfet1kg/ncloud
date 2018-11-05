@@ -178,6 +178,26 @@ describe('Test IaaS LoadBalancer Method', function( ){
     }
   });
 
+  test('Test getLoadBalancerSslCertificateList', async ( done ) => {
+    try {
+      const client = ncloud.createClient({
+        accessKey,
+        secretKey,
+        regionNo: "1",
+      });
+
+      const loadBalancer = client.IaaS.loadBalancer();
+      const getLoadBalancerSslCertificateListResponse = await loadBalancer.getLoadBalancerSslCertificateList({
+      });
+      console.log( getLoadBalancerSslCertificateListResponse );
+
+      done();
+    } catch (e) {
+      console.log( e );
+      done.fail(e);
+    }
+  });
+
   test('Test addLoadBalancerSslCertificate', async ( done ) => {
     try {
       const client = ncloud.createClient({
@@ -186,7 +206,7 @@ describe('Test IaaS LoadBalancer Method', function( ){
         regionNo: "1",
       });
 
-      const certificateName = 'my-test';
+      const certificateName = 'my-test1';
       const {
         privateKey,
         publicKeyCertificate,

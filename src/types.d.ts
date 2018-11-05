@@ -44,7 +44,7 @@ interface InterfaceNcloudIaaSServer extends InterfaceNcloudIaaSServerCustomMetho
   importLoginKey(input: InterfaceImportLoginKeyInput): Promise<InterfaceImportLoginKeyResponse>;
   getAccessControlGroupList(input?: InterfaceGetAccessControlGroupListInput): Promise<InterfaceGetAccessControlGroupListResponse>;
   getAccessControlGroupServerInstanceList(input: InterfaceGetAccessControlGroupServerInstanceListInput): Promise<InterfaceGetAccessControlGroupServerInstanceListResponse>;
-  getAccessControlRuleList(input: InterfaceGetAccessControlRuleListInput): Promise<InterfaceGetAccessControlRuleListResponse>
+  getAccessControlRuleList(input: InterfaceGetAccessControlRuleListInput): Promise<InterfaceGetAccessControlRuleListResponse>;
   getServerInstanceList(input?: InterfaceGetServerInstanceListInput): Promise<InterfaceGetServerInstanceListResponse>;
   createServerInstances(input: InterfaceCreateServerInstancesInput): Promise<InterfaceCreateServerInstancesResponse>;
   terminateServerInstances(input: InterfaceTerminateServerInstancesInput): Promise<InterfaceTerminateServerInstancesResponse>;
@@ -68,7 +68,7 @@ interface InterfaceNcloudIaaSServer extends InterfaceNcloudIaaSServerCustomMetho
   deletePublicIpInstances(input: InterfaceDeletePublicIpInstancesInput): Promise<InterfaceDeletePublicIpInstancesResponse>;
   getPortForwardingRuleList(input?: InterfaceGetPortForwardingRuleListInput): Promise<InterfaceGetPortForwardingRuleListResponse>;
   addPortForwardingRules(input: InterfaceAddPortForwardingRulesInput): Promise<InterfaceAddPortForwardingRulesResponse>;
-  deletePortForwardingRules(input: InterfaceDeletePortForwardingRulesInput ): Promise<InterfaceDeletePortForwardingRulesResponse>;
+  deletePortForwardingRules(input: InterfaceDeletePortForwardingRulesInput): Promise<InterfaceDeletePortForwardingRulesResponse>;
 }
 
 interface InterfaceNcloudIaaSServerCustomMethods {
@@ -401,8 +401,6 @@ interface InterfaceDeletePortForwardingRulesInput {
   regionNo?: string;
 }
 
-
-
 interface InterfaceRegion {
   regionNo: string; // "1",
   regionCode: string; // "KR",
@@ -425,7 +423,7 @@ interface InterfaceServerInfo {
   platformType: {
     code: string; // "LNX64",
     codeName: string; // "Linux 64 Bit"
-  },
+  };
   loginKeyName: string; // "mygbcompany",
   isFeeChargingMonitoring: boolean; // true,
   publicIp: string; //  "",
@@ -434,11 +432,11 @@ interface InterfaceServerInfo {
   serverInstanceStatus: {
     code: string; // "RUN",
     codeName: string; //  "Server run state"
-  },
+  };
   serverInstanceOperation: {
     code: string; //  "NULL",
     codeName: string; //  "Server NULL OP"
-  },
+  };
   serverInstanceStatusName: string; //  "running",
   createDate: string; // "2018-05-06T19:30:13+0900",
   uptime: string; //  "2018-05-06T19:32:52+0900",
@@ -446,20 +444,20 @@ interface InterfaceServerInfo {
   serverProductCode: string; //  "SPSVRSSD00000001",
   isProtectServerTermination: boolean; // true,
   portForwardingPublicIp: string; // "106.10.41.149",
-  zone: InterfaceZone,
-  region: InterfaceRegion,
+  zone: InterfaceZone;
+  region: InterfaceRegion;
   baseBlockStorageDiskType: {
     code: string; // "NET",
     codeName: string; // "Network Storage"
-  },
+  };
   baseBlockStorageDiskDetailType: {
     code: string; //  "SSD",
     codeName: string; //  "SSD"
-  },
+  };
   internetLineType: {
     code: string; //  "PUBLC",
     codeName: string; //  "PUBLC"
-  },
+  };
   userData: string; //  "",
   accessControlGroupList: {
     accessControlGroupConfigurationNo: string; //  "42879",
@@ -467,7 +465,7 @@ interface InterfaceServerInfo {
     accessControlGroupDescription: string; // "Group for RabbitMQ service 'test' (automatically created)",
     isDefault: boolean // false,
     createDate: string; // "2018-05-06T19:30:12+0900"
-  }[]
+  }[];
 }
 
 interface InterfaceMemberServerImage {
@@ -480,7 +478,7 @@ interface InterfaceMemberServerImage {
   originalBaseBlockStorageDiskType: {
     code: string; // "NET",
     codeName: string; // "Network Storage"
-  },
+  };
   originalServerImageProductCode: string; // "SPSW0LINUX000046",
   originalOsInformation: string; // "CentOS 7.3 (64-bit)",
   originalServerImageName: string; // "centos-7.3-64",
@@ -488,17 +486,17 @@ interface InterfaceMemberServerImage {
   memberServerImageStatus: {
     code: string; // "INIT",
     codeName: string; // "NSI INIT state"
-  },
+  };
   memberServerImageOperation: {
     code: string; // "CREAT",
     codeName: string; // "NSI CREAT OP"
-  },
+  };
   memberServerImagePlatformType: {
     code: string; // "LNX64",
     codeName: string; // "Linux 64 Bit"
-  },
+  };
   createDate: string; // "2018-05-07T00:38:40+0900",
-  region: InterfaceRegion,
+  region: InterfaceRegion;
   memberServerImageBlockStorageTotalRows: number; // 0,
   memberServerImageBlockStorageTotalSize: number; // 0
 }
@@ -510,7 +508,7 @@ interface InterfaceBlockStorageInstance {
   blockStorageType: {
     code: string; // "BASIC",
     codeName: string; // "Basic BS"
-  },
+  };
   blockStorageName: string; // "test",
   blockStorageSize: number; // 53687091200,
   deviceName: string; // "/dev/xvda",
@@ -518,22 +516,22 @@ interface InterfaceBlockStorageInstance {
   blockStorageInstanceStatus: {
     code: string; // "ATTAC",
     codeName: string; //  "Block storage ATTACHED state"
-  },
+  };
   blockStorageInstanceOperation: {
     code: string; // "NULL",
     codeName: string; // "Block Storage NULLOP"
-  },
+  };
   blockStorageInstanceStatusName: string; // "attached",
   createDate: string; // "2018-05-07T00:26:55+0900",
   blockStorageInstanceDescription: string; // "test's basic storage",
   diskType: {
     code: string; // "NET",
     codeName: string; // "Network Storage"
-  },
+  };
   diskDetailType: {
     code: string; // "SSD",
     codeName: string; // "SSD"
-  },
+  };
   maxIopsThroughput: number; // 4000,
   zone: InterfaceZone;
 }
@@ -547,11 +545,11 @@ interface InterfaceBlockStorageSnapshotInstance {
   blockStorageSnapshotInstanceStatus: {
     code: string; // "INIT",
     codeName: string; // "Block storage INIT state"
-  },
+  };
   blockStorageSnapshotInstanceOperation: {
     code: string; // "NULL",
     codeName: string; // "Block Storage NULLOP"
-  },
+  };
   blockStorageSnapshotInstanceStatusName: string; // "initialized",
   createDate: string; // "2018-05-07T01:17:40+0900",
   blockStorageSnapshotInstanceDescription: string; // "",
@@ -567,20 +565,20 @@ interface InterfacePublicIpInstance {
   internetLineType: {
     code: string; // "PUBLC",
     codeName: string; // "PUBLC"
-  },
+  };
   publicIpInstanceStatusName: string; // "created",
   publicIpInstanceStatus: {
     code: string; // "CREAT",
     codeName: string; // "NET CREATE state"
-  },
+  };
   publicIpInstanceOperation: {
     code: string; // "NULL",
     codeName: string; // "NET NULL OP"
-  },
+  };
   publicIpKindType: {
     code: string; // "GEN",
     codeName: string; // "General"
-  },
+  };
   serverInstanceAssociatedWithPublicIp: InterfaceServerInfo; // {},
   zone: InterfaceZone;
 }
@@ -612,7 +610,7 @@ interface InterfaceGetServerImageProductListResponse {
       codeName: string; // "Network Storage"
     },
     addBlockStorageSize: number; // 0
-  }[]
+  }[];
 }
 interface InterfaceGetServerProductListResponse {
   requestId: string;
@@ -640,20 +638,20 @@ interface InterfaceGetServerProductListResponse {
       codeName: string; // "Network Storage"
     },
     addBlockStorageSize: string; // 0
-  }[]
+  }[];
 }
 interface InterfaceGetZoneListResponse {
   requestId: string;
   returnCode: string;
   returnMessage: string;
-  zoneList: InterfaceZone[]
+  zoneList: InterfaceZone[];
 }
 interface InterfaceGetRegionListResponse {
   requestId: string; // 'd2a7f2da-1c16-48bf-8439-afc3a9979c3d',
   returnCode: string; // '0',
   returnMessage: string; // 'success',
   totalRows: number; // 7,
-  regionList: InterfaceRegion[]
+  regionList: InterfaceRegion[];
 }
 interface InterfaceGetRaidListResponse {
   requestId: string;
@@ -721,7 +719,7 @@ interface InterfaceGetNasVolumeInstanceRatingListResponse {
     snapshotVolumeSize: number; // 0,
     snapshotVolumeUseSize: number; // 0,
     snapshotVolumeUseRatio: number; // 0
-  }[]
+  }[];
 }
 interface InterfaceGetLoginKeyListResponse {
   requestId: string; // '66882489-edb1-48ac-8574-4d9c797d4290',
@@ -732,7 +730,7 @@ interface InterfaceGetLoginKeyListResponse {
     fingerprint: string;
     keyName: string;
     createDate: string;
-  }[]
+  }[];
 }
 
 interface InterfaceCreateLoginKeyResponse {
@@ -759,7 +757,7 @@ interface InterfaceGetAccessControlGroupListResponse {
     accessControlGroupDescription: string; // 'Default AccessControlGroup',
     isDefault: boolean; // true,
     createDate: string; // '2017-04-14T10:07:06+0900'
-  }[]
+  }[];
 }
 
 interface InterfaceGetAccessControlGroupServerInstanceListResponse {
@@ -785,7 +783,7 @@ interface InterfaceGetAccessControlRuleListResponse {
     sourceAccessControlRuleConfigurationNo: string;
     sourceAccessControlRuleName: string;
     sourceIp: string;
-  }[]
+  }[];
 }
 
 interface InterfaceGetServerInstanceListResponse {
@@ -969,17 +967,17 @@ interface InterfaceGetPortForwardingRuleListResponse {
   returnMessage: string; // "success",
   portForwardingConfigurationNo: string; // "23536",
   portForwardingPublicIp: string; // "106.10.41.164",
-  zone: InterfaceZone,
+  zone: InterfaceZone;
   internetLineType: {
     code: string; // "PUBLC",
     codeName: string; // "PUBLC"
-  },
+  };
   totalRows: number; // 0,
   portForwardingRuleList: {
     portForwardingExternalPort: number;
     portForwardingInternalPort: number;
     serverInstance: InterfaceServerInfo;
-  }[]
+  }[];
 }
 
 interface InterfaceAddPortForwardingRulesResponse {
@@ -988,17 +986,17 @@ interface InterfaceAddPortForwardingRulesResponse {
   returnMessage: string; // "success",
   portForwardingConfigurationNo: string; // "23536",
   portForwardingPublicIp: string; // "106.10.41.164",
-  zone: InterfaceZone,
+  zone: InterfaceZone;
   internetLineType: {
     code: string; // "PUBLC",
     codeName: string; // "PUBLC"
-  },
+  };
   totalRows: number; // 0,
   portForwardingRuleList: {
     portForwardingExternalPort: number;
     portForwardingInternalPort: number;
     serverInstance: InterfaceServerInfo;
-  }[]
+  }[];
 }
 
 interface InterfaceDeletePortForwardingRulesResponse {
@@ -1007,17 +1005,17 @@ interface InterfaceDeletePortForwardingRulesResponse {
   returnMessage: string; // "success",
   portForwardingConfigurationNo: string; // "23536",
   portForwardingPublicIp: string; // "106.10.41.164",
-  zone: InterfaceZone,
+  zone: InterfaceZone;
   internetLineType: {
     code: string; // "PUBLC",
     codeName: string; // "PUBLC"
-  },
+  };
   totalRows: number; // 0,
   portForwardingRuleList: {
     portForwardingExternalPort: number;
     portForwardingInternalPort: number;
     serverInstance: InterfaceServerInfo;
-  }[]
+  }[];
 }
 
 /** IaaS: LoadBalancer**/
@@ -1128,7 +1126,7 @@ interface InterfaceGetLoadBalancerTargetServerInstanceListInput {
 interface InterfaceGetLoadBalancerTargetServerInstanceListResponse {
   requestId: string; //  'b90bb68d-cff1-49a8-af72-75c1f58eac38',
   returnCode: string; // '0',
-  returnMessage: string; //'success',
+  returnMessage: string; // 'success',
   totalRows: number; // 13,
   serverInstanceList: InterfaceServerInfo[];
 }
@@ -1196,7 +1194,7 @@ interface InterfaceGetLoadBalancedServerInstanceListResponse {
 interface InterfaceChangeLoadBalancedServerInstancesInput {
   loadBalancerInstanceNo: string;
   serverInstanceNoList: string[];
-  regionNo?: string
+  regionNo?: string;
 }
 
 interface InterfaceChangeLoadBalancedServerInstancesResponse {
@@ -1209,7 +1207,7 @@ interface InterfaceChangeLoadBalancedServerInstancesResponse {
 
 interface InterfaceDeleteLoadBalancerInstancesInput {
   loadBalancerInstanceNoList: string[];
-  regionNo?: string
+  regionNo?: string;
 }
 
 interface InterfaceDeleteLoadBalancerInstancesResponse {
@@ -1382,6 +1380,5 @@ interface InterfaceGeoLocationResponse {
     code: string;
     r1: string;
     r2: string;
-  }
+  };
 }
-
