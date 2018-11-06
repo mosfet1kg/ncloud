@@ -50,3 +50,5 @@ package-lock.json
 !**/*/types.d.ts
 !jest.config.js
 !preprocessor.js
+
+**/*.pem
