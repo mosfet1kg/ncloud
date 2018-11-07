@@ -1,6 +1,6 @@
 {
   "name": "ncloud",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "NAVER Cloud Platform(https://www.ncloud.com/) Library for Node.js",
   "engineStrict": true,
   "engines": {
@@ -21,7 +21,7 @@
     "clean": "rimraf coverage build tmp lib",
     "clean:lib": "rimraf lib",
     "prebuild": "npm run clean:lib",
-    "build": "tsc -p tsconfig.release.json && cp src/types.d.ts lib/types.d.ts",
+    "build": "tsc -p tsconfig.release.json && cp src/types.d.ts lib/types.d.ts && printf \"import './types';\n$(cat ./lib/index.d.ts)\" > ./lib/index.d.ts",
     "watch": "tsc -w -p tsconfig.release.json",
     "lint": "tslint -t stylish '{src,__tests__}/**/*.{ts,tsx}'",
     "pretest": "tsc -p tsconfig.json",

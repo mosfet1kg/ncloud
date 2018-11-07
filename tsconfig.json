@@ -10,10 +10,10 @@
   },
   "include": [
     "src",
-    "__tests__"
+    "__tests__",
+    "lib"
   ],
   "exclude": [
-    "node_modules",
-    "lib"
+    "node_modules"
   ]
 }

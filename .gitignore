@@ -6,6 +6,7 @@ npm-debug.log*
 **/**/mytest.js
 **/**/reset.js
 **/**/env.json
+**/**/sslCert.json
 
 # Dependencies
 node_modules/
@@ -49,3 +50,7 @@ package-lock.json
 !**/*/types.d.ts
 !jest.config.js
 !preprocessor.js
+
+**/*.pem
+
+__tests__/Internal.test.*
