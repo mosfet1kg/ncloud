@@ -52,3 +52,5 @@ package-lock.json
 !preprocessor.js
 
 **/*.pem
+
+__tests__/Internal.test.*

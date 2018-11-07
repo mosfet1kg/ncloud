@@ -27,8 +27,6 @@ export default function (
     store: InterfaceMyStore;
   },
 ) {
-  const authParams: InterfaceAuthParams = store.getAuthParams();
-
   const {
     method,
     action,
@@ -55,6 +53,24 @@ export default function (
     input,
     actionParamList,
   });
+
+  const {
+    fetchClient: fetch,
+    ...remain
+  } = store.getValues();
+
+  if (fetch) {
+    return fetch({
+      method,
+      baseURL,
+      action,
+      basePath,
+      actionParams,
+      ...remain,
+    });
+  } // end if
+
+  const authParams: InterfaceAuthParams = store.getAuthParams();
 
   return fetchClient({
     method,
@@ -95,7 +111,9 @@ function testInputParams(
 
   inputObjectKeys.forEach((inputKey) => {
     if (! includes(actionParamsListObjectKeys, inputKey)) {
-      throw new Error(`Invalid Input: ${ inputKey } @${ action } method`);
+      console.log(`Warning: Invalid Input: ${ inputKey } @${ action } method`);
+      return;
+      // throw new Error(`Invalid Input: ${ inputKey } @${ action } method`);
     } // end if
 
     const type = get(actionParamList, `${inputKey}.type`);

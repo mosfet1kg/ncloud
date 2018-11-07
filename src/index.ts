@@ -9,7 +9,7 @@ export class Ncloud implements InterfaceNcloud {
   private mPaaS: InterfaceNcloudPaaS = null;
   private store: InterfaceMyStore;
 
-  private constructor( inputParams: any ) {
+  private constructor(inputParams: any) {
     // TODO: throw errors regarding missing expected parameters.
     this.store = new MyStore(inputParams);
   }
@@ -20,7 +20,7 @@ export class Ncloud implements InterfaceNcloud {
   }
 
   get IaaS(): InterfaceNcloudIaaS {
-    if ( isNull(this.mIaaS) ) {
+    if (isNull(this.mIaaS)) {
       this.mIaaS = new IaaS({ store: this.store });
     } // end if
 
@@ -28,18 +28,18 @@ export class Ncloud implements InterfaceNcloud {
   }
 
   get PaaS(): InterfaceNcloudPaaS {
-    if ( isNull(this.mPaaS) ) {
+    if (isNull(this.mPaaS)) {
       this.mPaaS = new PaaS({ store: this.store });
     } // end if
 
     return this.mPaaS;
   }
 
-  static createClient ( inputParams ) {
-    return new Ncloud( inputParams );
+  static createClient (inputParams) {
+    return new Ncloud(inputParams);
   }
 }
 
-export function createClient( inputParams: any ) {
-  return Ncloud.createClient( inputParams );
+export function createClient(inputParams: any) {
+  return Ncloud.createClient(inputParams);
 }

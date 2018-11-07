@@ -6,6 +6,7 @@
     "object-shorthand-properties-first": false,
     "no-parameter-reassignment": false,
     "variable-name": false,
-    "prefer-template": false
+    "prefer-template": false,
+    "space-in-parens": false
   }
 }
