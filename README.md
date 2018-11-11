@@ -6,7 +6,7 @@ ncloud
   
 [![NPM](https://nodei.co/npm/ncloud.png?compact=true)](https://nodei.co/npm/ncloud/)  
   
-![](./docs/assets/ncloudicon-01.png)   
+![](docs/assets/ncloudicon-01.png)   
 
 
 > 네이버 클라우드 플랫폼 SDK입니다.  
