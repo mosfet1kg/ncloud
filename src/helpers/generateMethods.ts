@@ -104,7 +104,7 @@ function testInputParams(
   actionParamsListObjectKeys.forEach((actionParamKey) => {
     const required = get(actionParamList[actionParamKey], 'required', false);
 
-    if (required && ! get(input, actionParamKey, false)) {
+    if (required && ! get({...input, ...actionParamList}, actionParamKey, false)) {
       throw new Error(`Parameter Missing: ${ actionParamKey } @${ action } method`);
     } // end if
   });
