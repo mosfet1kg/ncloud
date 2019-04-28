@@ -110,7 +110,7 @@ function testInputParams(
   });
 
   inputObjectKeys.forEach((inputKey) => {
-    if (! includes(actionParamsListObjectKeys, inputKey)) {
+    if (! includes(actionParamsListObjectKeys, inputKey) && get(process, 'env.SHOW_WARNING', 'false') === 'true' ) {
       console.log(`Warning: Invalid Input: ${ inputKey } @${ action } method`);
       return;
       // throw new Error(`Invalid Input: ${ inputKey } @${ action } method`);
