@@ -104,13 +104,13 @@ function testInputParams(
   actionParamsListObjectKeys.forEach((actionParamKey) => {
     const required = get(actionParamList[actionParamKey], 'required', false);
 
-    if (required && ! get(input, actionParamKey, false)) {
+    if (required && ! get({...input, ...actionParamList}, actionParamKey, false)) {
       throw new Error(`Parameter Missing: ${ actionParamKey } @${ action } method`);
     } // end if
   });
 
   inputObjectKeys.forEach((inputKey) => {
-    if (! includes(actionParamsListObjectKeys, inputKey)) {
+    if (! includes(actionParamsListObjectKeys, inputKey) && get(process, 'env.SHOW_WARNING', 'false') === 'true' ) {
       console.log(`Warning: Invalid Input: ${ inputKey } @${ action } method`);
       return;
       // throw new Error(`Invalid Input: ${ inputKey } @${ action } method`);
