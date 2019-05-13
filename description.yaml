@@ -723,6 +723,26 @@ apis:
             type: string
         responseName: getBlockStorageSnapshotInstanceListResponse
 
+      attachBlockStorageInstance:
+        method: GET
+        basePath: /server/v2
+        action: attachBlockStorageInstance
+        actionParamList:
+          serverInstanceNo:
+            type: string
+          blockStorageInstanceNo:
+            type: string
+        responseName: attachBlockStorageInstanceResponse
+
+      detachBlockStorageInstances:
+        method: POST
+        basePath: /server/v2
+        action: detachBlockStorageInstances
+        actionParamList:
+          blockStorageInstanceNoList:
+            type: string[]
+        responseName: detachBlockStorageInstancesResponse
+
       getPublicIpInstanceList:
         method: GET
         basePath: /server/v2/

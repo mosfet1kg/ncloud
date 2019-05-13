@@ -25,50 +25,100 @@ interface InterfaceNcloudPaaS {
 }
 
 interface InterfaceNcloudIaaSServer extends InterfaceNcloudIaaSServerCustomMethods {
-  getServerImageProductList(input?: InterfaceIaaSServerGetServerImageProductListInput): Promise<InterfaceGetServerImageProductListResponse>;
-  getServerProductList(input: InterfaceIaaSServerGetServerProductListInput): Promise<InterfaceGetServerProductListResponse>;
-  getZoneList(input?: InterfaceGetZoneListInput): Promise<InterfaceGetZoneListResponse>;
-  getRegionList(): Promise<InterfaceGetRegionListResponse>;
-  getRaidList(): Promise<InterfaceGetRaidListResponse>;
-  createNasVolumeInstance(input: InterfaceCreateNasVolumeInstanceInput): Promise<InterfaceNasVolumeInstanceListResponse>;
-  deleteNasVolumeInstance(input: InterfaceDeleteNasVolumeInstanceInput): Promise<InterfaceNasVolumeInstanceListResponse>;
-  getNasVolumeInstanceList(input?: InterfaceGetNasVolumeInstanceListInput): Promise<InterfaceNasVolumeInstanceListResponse>;
-  changeNasVolumeSize(input: InterfaceChangeNasVolumeSizeInput): Promise<InterfaceNasVolumeInstanceListResponse>;
-  getNasVolumeInstanceRatingList(input: InterfaceGetNasVolumeInstanceRatingListInput): Promise<InterfaceGetNasVolumeInstanceRatingListResponse>;
-  setNasVolumeAccessControl(input: InterfaceNasVolumeAccessControlInput): Promise<InterfaceNasVolumeInstanceListResponse>;
-  addNasVolumeAccessControl(input: InterfaceNasVolumeAccessControlInput): Promise<InterfaceNasVolumeInstanceListResponse>;
-  removeNasVolumeAccessControl(input: InterfaceNasVolumeAccessControlInput): Promise<InterfaceNasVolumeInstanceListResponse>;
-  getLoginKeyList(input?: InterfaceGetLoginKeyListInput): Promise<InterfaceGetLoginKeyListResponse>;
-  createLoginKey(input: InterfaceCreateLoginKeyInput): Promise<InterfaceCreateLoginKeyResponse>;
-  deleteLoginKey(input: InterfaceDeleteLoginKeyInput): Promise<InterfaceDeleteLoginKeyResponse>;
-  importLoginKey(input: InterfaceImportLoginKeyInput): Promise<InterfaceImportLoginKeyResponse>;
-  getAccessControlGroupList(input?: InterfaceGetAccessControlGroupListInput): Promise<InterfaceGetAccessControlGroupListResponse>;
-  getAccessControlGroupServerInstanceList(input: InterfaceGetAccessControlGroupServerInstanceListInput): Promise<InterfaceGetAccessControlGroupServerInstanceListResponse>;
-  getAccessControlRuleList(input: InterfaceGetAccessControlRuleListInput): Promise<InterfaceGetAccessControlRuleListResponse>;
-  getServerInstanceList(input?: InterfaceGetServerInstanceListInput): Promise<InterfaceGetServerInstanceListResponse>;
-  createServerInstances(input: InterfaceCreateServerInstancesInput): Promise<InterfaceCreateServerInstancesResponse>;
-  terminateServerInstances(input: InterfaceTerminateServerInstancesInput): Promise<InterfaceTerminateServerInstancesResponse>;
-  changeServerInstanceSpec(input: InterfaceChangeServerInstanceSpecInput): Promise<InterfaceChangeServerInstanceSpecResponse>;
-  rebootServerInstances(input: InterfaceRebootServerInstancesInput): Promise<InterfaceRebootServerInstancesResponse>;
-  startServerInstances(input: InterfaceStartServerInstancesInput): Promise<InterfaceStartServerInstancesResponse>;
-  stopServerInstances(input: InterfaceStopServerInstancesInput): Promise<InterfaceStopServerInstancesResponse>;
-  getRootPassword(input: InterfaceGetRootPasswordInput): Promise<InterfaceGetRootPasswordResponse>;
-  getMemberServerImageList(input?: InterfaceGetMemberServerImageListInput): Promise<InterfaceGetMemberServerImageListResponse>;
-  createMemberServerImage(input: InterfaceCreateMemberServerImageInput): Promise<InterfaceCreateMemberServerImageResponse>;
-  deleteMemberServerImages(input: InterfaceDeleteMemberServerImagesInput): Promise<InterfaceDeleteMemberServerImagesResponse>;
-  getBlockStorageInstanceList(input?: InterfaceGetBlockStorageInstanceListInput): Promise<InterfaceGetBlockStorageInstanceListResponse>;
-  createBlockStorageInstance(input: InterfaceCreateBlockStorageInstanceInput): Promise<InterfaceCreateBlockStorageInstanceResponse>;
-  deleteBlockStorageInstances(input: InterfaceDeleteBlockStorageInstancesInput): Promise<InterfaceDeleteBlockStorageInstancesResponse>;
-  getBlockStorageSnapshotInstanceList(input?: InterfaceGetBlockStorageSnapshotInstanceListInput): Promise<InterfaceGetBlockStorageSnapshotInstanceListResponse>;
-  getPublicIpInstanceList(input?: InterfaceGetPublicIpInstanceListInput): Promise<InterfaceGetPublicIpInstanceListResponse>;
-  getPublicIpTargetServerInstanceList(input?: InterfaceGetPublicIpTargetServerInstanceListInput): Promise<InterfaceGetPublicIpTargetServerInstanceListResponse>;
-  createPublicIpInstance(input?: InterfaceCreatePublicIpInstanceInput): Promise<InterfaceCreatePublicIpInstanceResponse>;
-  associatePublicIpWithServerInstance(input: InterfaceAssociatePublicIpWithServerInstanceInput): Promise<InterfaceAssociatePublicIpWithServerInstanceResponse>;
-  disassociatePublicIpFromServerInstance(input: InterfaceDisassociatePublicIpFromServerInstanceInput): Promise<InterfaceDisassociatePublicIpFromServerInstanceResponse>;
-  deletePublicIpInstances(input: InterfaceDeletePublicIpInstancesInput): Promise<InterfaceDeletePublicIpInstancesResponse>;
-  getPortForwardingRuleList(input?: InterfaceGetPortForwardingRuleListInput): Promise<InterfaceGetPortForwardingRuleListResponse>;
-  addPortForwardingRules(input: InterfaceAddPortForwardingRulesInput): Promise<InterfaceAddPortForwardingRulesResponse>;
-  deletePortForwardingRules(input: InterfaceDeletePortForwardingRulesInput): Promise<InterfaceDeletePortForwardingRulesResponse>;
+  getServerImageProductList(input?: InterfaceIaaSServerGetServerImageProductListInput)
+    : Promise<InterfaceGetServerImageProductListResponse>;
+  getServerProductList(input: InterfaceIaaSServerGetServerProductListInput)
+    : Promise<InterfaceGetServerProductListResponse>;
+  getZoneList(input?: InterfaceGetZoneListInput)
+    : Promise<InterfaceGetZoneListResponse>;
+  getRegionList()
+    : Promise<InterfaceGetRegionListResponse>;
+  getRaidList()
+    : Promise<InterfaceGetRaidListResponse>;
+  createNasVolumeInstance(input: InterfaceCreateNasVolumeInstanceInput)
+    : Promise<InterfaceNasVolumeInstanceListResponse>;
+  deleteNasVolumeInstance(input: InterfaceDeleteNasVolumeInstanceInput)
+    : Promise<InterfaceNasVolumeInstanceListResponse>;
+  getNasVolumeInstanceList(input?: InterfaceGetNasVolumeInstanceListInput)
+    : Promise<InterfaceNasVolumeInstanceListResponse>;
+  changeNasVolumeSize(input: InterfaceChangeNasVolumeSizeInput)
+    : Promise<InterfaceNasVolumeInstanceListResponse>;
+  getNasVolumeInstanceRatingList(input: InterfaceGetNasVolumeInstanceRatingListInput)
+    : Promise<InterfaceGetNasVolumeInstanceRatingListResponse>;
+  setNasVolumeAccessControl(input: InterfaceNasVolumeAccessControlInput)
+    : Promise<InterfaceNasVolumeInstanceListResponse>;
+  addNasVolumeAccessControl(input: InterfaceNasVolumeAccessControlInput)
+    : Promise<InterfaceNasVolumeInstanceListResponse>;
+  removeNasVolumeAccessControl(input: InterfaceNasVolumeAccessControlInput)
+    : Promise<InterfaceNasVolumeInstanceListResponse>;
+  getLoginKeyList(input?: InterfaceGetLoginKeyListInput)
+    : Promise<InterfaceGetLoginKeyListResponse>;
+  createLoginKey(input: InterfaceCreateLoginKeyInput)
+    : Promise<InterfaceCreateLoginKeyResponse>;
+  deleteLoginKey(input: InterfaceDeleteLoginKeyInput)
+    : Promise<InterfaceDeleteLoginKeyResponse>;
+  importLoginKey(input: InterfaceImportLoginKeyInput)
+    : Promise<InterfaceImportLoginKeyResponse>;
+  getAccessControlGroupList(input?: InterfaceGetAccessControlGroupListInput)
+    : Promise<InterfaceGetAccessControlGroupListResponse>;
+  getAccessControlGroupServerInstanceList(input: InterfaceGetAccessControlGroupServerInstanceListInput)
+    : Promise<InterfaceGetAccessControlGroupServerInstanceListResponse>;
+  getAccessControlRuleList(input: InterfaceGetAccessControlRuleListInput)
+    : Promise<InterfaceGetAccessControlRuleListResponse>;
+  getServerInstanceList(input?: InterfaceGetServerInstanceListInput)
+    : Promise<InterfaceGetServerInstanceListResponse>;
+  createServerInstances(input: InterfaceCreateServerInstancesInput)
+    : Promise<InterfaceCreateServerInstancesResponse>;
+  terminateServerInstances(input: InterfaceTerminateServerInstancesInput)
+    : Promise<InterfaceTerminateServerInstancesResponse>;
+  changeServerInstanceSpec(input: InterfaceChangeServerInstanceSpecInput)
+    : Promise<InterfaceChangeServerInstanceSpecResponse>;
+  rebootServerInstances(input: InterfaceRebootServerInstancesInput)
+    : Promise<InterfaceRebootServerInstancesResponse>;
+  startServerInstances(input: InterfaceStartServerInstancesInput)
+    : Promise<InterfaceStartServerInstancesResponse>;
+  stopServerInstances(input: InterfaceStopServerInstancesInput)
+    : Promise<InterfaceStopServerInstancesResponse>;
+  getRootPassword(input: InterfaceGetRootPasswordInput)
+    : Promise<InterfaceGetRootPasswordResponse>;
+  getMemberServerImageList(input?: InterfaceGetMemberServerImageListInput)
+    : Promise<InterfaceGetMemberServerImageListResponse>;
+  createMemberServerImage(input: InterfaceCreateMemberServerImageInput)
+    : Promise<InterfaceCreateMemberServerImageResponse>;
+  deleteMemberServerImages(input: InterfaceDeleteMemberServerImagesInput)
+    : Promise<InterfaceDeleteMemberServerImagesResponse>;
+  getBlockStorageInstanceList(input?: InterfaceGetBlockStorageInstanceListInput)
+    : Promise<InterfaceGetBlockStorageInstanceListResponse>;
+  createBlockStorageInstance(input: InterfaceCreateBlockStorageInstanceInput)
+    : Promise<InterfaceCreateBlockStorageInstanceResponse>;
+  deleteBlockStorageInstances(input: InterfaceDeleteBlockStorageInstancesInput)
+    : Promise<InterfaceDeleteBlockStorageInstancesResponse>;
+  getBlockStorageSnapshotInstanceList(input?: InterfaceGetBlockStorageSnapshotInstanceListInput)
+    : Promise<InterfaceGetBlockStorageSnapshotInstanceListResponse>;
+
+  attachBlockStorageInstance(input: InterfaceGetBlockStorageSnapshotInstanceListInput )
+    : Promise<InterfaceGetBlockStorageSnapshotInstanceListResponse>;
+  detachBlockStorageInstances(input: InterfaceDetachBlockStorageInstancesInput)
+    : Promise<InterfaceDetachBlockStorageInstancesResponse>;
+
+  getPublicIpInstanceList(input?: InterfaceGetPublicIpInstanceListInput)
+    : Promise<InterfaceGetPublicIpInstanceListResponse>;
+  getPublicIpTargetServerInstanceList(input?: InterfaceGetPublicIpTargetServerInstanceListInput)
+    : Promise<InterfaceGetPublicIpTargetServerInstanceListResponse>;
+  createPublicIpInstance(input?: InterfaceCreatePublicIpInstanceInput)
+    : Promise<InterfaceCreatePublicIpInstanceResponse>;
+  associatePublicIpWithServerInstance(input: InterfaceAssociatePublicIpWithServerInstanceInput)
+    : Promise<InterfaceAssociatePublicIpWithServerInstanceResponse>;
+  disassociatePublicIpFromServerInstance(input: InterfaceDisassociatePublicIpFromServerInstanceInput)
+    : Promise<InterfaceDisassociatePublicIpFromServerInstanceResponse>;
+  deletePublicIpInstances(input: InterfaceDeletePublicIpInstancesInput)
+    : Promise<InterfaceDeletePublicIpInstancesResponse>;
+  getPortForwardingRuleList(input?: InterfaceGetPortForwardingRuleListInput)
+    : Promise<InterfaceGetPortForwardingRuleListResponse>;
+  addPortForwardingRules(input: InterfaceAddPortForwardingRulesInput)
+    : Promise<InterfaceAddPortForwardingRulesResponse>;
+  deletePortForwardingRules(input: InterfaceDeletePortForwardingRulesInput)
+    : Promise<InterfaceDeletePortForwardingRulesResponse>;
 }
 
 interface InterfaceNcloudIaaSServerCustomMethods {
@@ -76,15 +126,24 @@ interface InterfaceNcloudIaaSServerCustomMethods {
 }
 
 interface InterfaceNcloudIaaSLoadBalancer {
-  getLoadBalancerInstanceList(input?: InterfaceGetLoadBalancerInstanceListInput): Promise<InterfaceGetLoadBalancerInstanceListResponse>;
-  getLoadBalancerTargetServerInstanceList(input?: InterfaceGetLoadBalancerTargetServerInstanceListInput): Promise<InterfaceGetLoadBalancerTargetServerInstanceListResponse>;
-  createLoadBalancerInstance(input: InterfaceCreateLoadBalancerInstanceInput): Promise<InterfaceCreateLoadBalancerInstanceResponse>;
-  changeLoadBalancerInstanceConfiguration(input: InterfaceChangeLoadBalancerInstanceConfigurationInput): Promise<InterfaceChangeLoadBalancerInstanceConfigurationResponse>;
-  getLoadBalancedServerInstanceList(input: InterfaceGetLoadBalancedServerInstanceListInput): Promise<InterfaceGetLoadBalancedServerInstanceListResponse>;
-  changeLoadBalancedServerInstances(input: InterfaceChangeLoadBalancedServerInstancesInput): Promise<InterfaceChangeLoadBalancedServerInstancesResponse>;
-  deleteLoadBalancerInstances(input: InterfaceDeleteLoadBalancerInstancesInput): Promise<InterfaceDeleteLoadBalancerInstancesResponse>;
-  getLoadBalancerSslCertificateList(input?: InterfacegetLoadBalancerSslCertificateListInput): Promise<InterfaceGetLoadBalancerSslCertificateListResponse>;
-  addLoadBalancerSslCertificate(input: InterfaceAddLoadBalancerSslCertificateInput): Promise<InterfaceAddLoadBalancerSslCertificateResponse>;
+  getLoadBalancerInstanceList(input?: InterfaceGetLoadBalancerInstanceListInput)
+    : Promise<InterfaceGetLoadBalancerInstanceListResponse>;
+  getLoadBalancerTargetServerInstanceList(input?: InterfaceGetLoadBalancerTargetServerInstanceListInput)
+    : Promise<InterfaceGetLoadBalancerTargetServerInstanceListResponse>;
+  createLoadBalancerInstance(input: InterfaceCreateLoadBalancerInstanceInput)
+    : Promise<InterfaceCreateLoadBalancerInstanceResponse>;
+  changeLoadBalancerInstanceConfiguration(input: InterfaceChangeLoadBalancerInstanceConfigurationInput)
+    : Promise<InterfaceChangeLoadBalancerInstanceConfigurationResponse>;
+  getLoadBalancedServerInstanceList(input: InterfaceGetLoadBalancedServerInstanceListInput)
+    : Promise<InterfaceGetLoadBalancedServerInstanceListResponse>;
+  changeLoadBalancedServerInstances(input: InterfaceChangeLoadBalancedServerInstancesInput)
+    : Promise<InterfaceChangeLoadBalancedServerInstancesResponse>;
+  deleteLoadBalancerInstances(input: InterfaceDeleteLoadBalancerInstancesInput)
+    : Promise<InterfaceDeleteLoadBalancerInstancesResponse>;
+  getLoadBalancerSslCertificateList(input?: InterfacegetLoadBalancerSslCertificateListInput)
+    : Promise<InterfaceGetLoadBalancerSslCertificateListResponse>;
+  addLoadBalancerSslCertificate(input: InterfaceAddLoadBalancerSslCertificateInput)
+    : Promise<InterfaceAddLoadBalancerSslCertificateResponse>;
 }
 
 /** IaaS: interfaceIaaSServerInputs**/
@@ -328,6 +387,163 @@ interface InterfaceGetBlockStorageSnapshotInstanceListInput {
   regionNo?: string;
   pageNo?: number;
   pageSize?: number;
+}
+
+interface InterfaceAttachBlockStorageInstanceInput {
+  serverInstanceNo: string;
+  blockStorageInstanceNo: string;
+}
+
+interface InterfaceAttachBlockStorageInstanceResponseResponse {
+  requestId: string;
+  returnCode: string;
+  returnMessage: string;
+  totalRows: number;
+  blockStorageInstanceList: BlockStorageInstance[];
+}
+
+interface CommonCode {
+  /**
+   * 코드
+   * @type {string}
+   * @memberof CommonCode
+   */
+  code?: string;
+  /**
+   * 코드명
+   * @type {string}
+   * @memberof CommonCode
+   */
+  codeName?: string;
+}
+
+interface BlockStorageInstance {
+  /**
+   * 블록스토리지인스턴스번호
+   * @type {string}
+   * @memberof BlockStorageInstance
+   */
+  blockStorageInstanceNo?: string;
+  /**
+   * 서버인스턴스번호
+   * @type {string}
+   * @memberof BlockStorageInstance
+   */
+  serverInstanceNo?: string;
+  /**
+   * 서버명
+   * @type {string}
+   * @memberof BlockStorageInstance
+   */
+  serverName?: string;
+  /**
+   *
+   * @type {CommonCode}
+   * @memberof BlockStorageInstance
+   */
+  blockStorageType?: CommonCode;
+  /**
+   * 블록스토리지명
+   * @type {string}
+   * @memberof BlockStorageInstance
+   */
+  blockStorageName?: string;
+  /**
+   * 블록스토리지사이즈
+   * @type {number}
+   * @memberof BlockStorageInstance
+   */
+  blockStorageSize?: number;
+  /**
+   * 디바이스명
+   * @type {string}
+   * @memberof BlockStorageInstance
+   */
+  deviceName?: string;
+  /**
+   * 회원서버이미지번호
+   * @type {string}
+   * @memberof BlockStorageInstance
+   */
+  memberServerImageNo?: string;
+  /**
+   * 블록스토리지상품코드
+   * @type {string}
+   * @memberof BlockStorageInstance
+   */
+  blockStorageProductCode?: string;
+  /**
+   *
+   * @type {CommonCode}
+   * @memberof BlockStorageInstance
+   */
+  blockStorageInstanceStatus?: CommonCode;
+  /**
+   *
+   * @type {CommonCode}
+   * @memberof BlockStorageInstance
+   */
+  blockStorageInstanceOperation?: CommonCode;
+  /**
+   * 블록스토리지인스턴스상태명
+   * @type {string}
+   * @memberof BlockStorageInstance
+   */
+  blockStorageInstanceStatusName?: string;
+  /**
+   * 생성일시
+   * @type {string}
+   * @memberof BlockStorageInstance
+   */
+  createDate?: string;
+  /**
+   * 블록스토리지인스턴스설명
+   * @type {string}
+   * @memberof BlockStorageInstance
+   */
+  blockStorageInstanceDescription?: string;
+  /**
+   *
+   * @type {CommonCode}
+   * @memberof BlockStorageInstance
+   */
+  diskType?: CommonCode;
+  /**
+   *
+   * @type {CommonCode}
+   * @memberof BlockStorageInstance
+   */
+  diskDetailType?: CommonCode;
+  /**
+   * 최대 IOPS
+   * @type {number}
+   * @memberof BlockStorageInstance
+   */
+  maxIopsThroughput?: number;
+  /**
+   *
+   * @type {Region}
+   * @memberof BlockStorageInstance
+   */
+  region?: Region;
+  /**
+   *
+   * @type {Zone}
+   * @memberof BlockStorageInstance
+   */
+  zone?: Zone;
+}
+
+interface InterfaceDetachBlockStorageInstancesInput {
+  blockStorageInstanceNoList: string[];
+}
+
+interface InterfaceDetachBlockStorageInstancesResponse {
+  requestId:	string;
+  returnCode:	string;
+  returnMessage:	string;
+  totalRows: number;
+  blockStorageInstanceList: BlockStorageInstance[];
 }
 
 interface InterfaceGetPublicIpInstanceListInput {

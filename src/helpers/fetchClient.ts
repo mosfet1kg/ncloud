@@ -72,7 +72,7 @@ export default function (
         'x-ncp-apigw-timestamp' : timestamp,
         // "x-ncp-apigw-api-key" : apiKey,
         'x-ncp-iam-access-key' : accessKey,
-        'x-ncp-apigw-signature-v1' : authSignature,
+        'x-ncp-apigw-signature-v2' : authSignature,
       },
     });
   } // end if
@@ -82,7 +82,7 @@ export default function (
     'x-ncp-apigw-timestamp': timestamp,
     // "x-ncp-apigw-api-key" : apiKey,
     'x-ncp-iam-access-key': accessKey,
-    'x-ncp-apigw-signature-v1': authSignature,
+    'x-ncp-apigw-signature-v2': authSignature,
     'content-type': 'application/x-www-form-urlencoded',
   };
 

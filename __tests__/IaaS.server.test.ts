@@ -6,13 +6,13 @@ const {
   secretKey,
 } = require('./env.json');
 
-let client = ncloud.createClient({
+const client = ncloud.createClient({
   accessKey,
   secretKey,
 });
 
-describe('Test IaaS Server Method', function( ){
-  beforeAll(function (){
+describe('Test IaaS Server Method', function ( ) {
+  beforeAll(function () {
     // Clears the database and adds some testing data.
     // Jest will wait for this promise to resolve before running tests.
     // jest.setTimeout = 50000;
@@ -25,7 +25,7 @@ describe('Test IaaS Server Method', function( ){
       client.setConfig({
         accessKey,
         secretKey,
-        regionNo: "2",
+        regionNo: '1',
       });
 
       const server = client.IaaS.server();
@@ -44,7 +44,7 @@ describe('Test IaaS Server Method', function( ){
       const server = client.IaaS.server();
       const getServerImageProductListResponse = await server.getServerImageProductList({
         platformTypeCodeList: ['LNX64'],
-        regionNo: '1'
+        regionNo: '1',
       });
 
       console.log( getServerImageProductListResponse );
@@ -73,7 +73,7 @@ describe('Test IaaS Server Method', function( ){
       const server = client.IaaS.server();
 
       const zoneList = await server.getZoneList({
-        regionNo: "1"
+        regionNo: '1',
       });
       console.log( zoneList );
       done();
@@ -114,7 +114,7 @@ describe('Test IaaS Server Method', function( ){
         volumeName: 'testVol',
         volumeSize: '500', // GB
         volumeAllotmentProtocolTypeCode: 'NFS',
-        zoneNo: '2' // KR-2
+        zoneNo: '2', // KR-2
       });
 
       console.log( createNasVolumeInstanceResponse );
@@ -129,7 +129,7 @@ describe('Test IaaS Server Method', function( ){
     try {
       const server = client.IaaS.server();
       const deleteNasVolumeInstanceResponse = await server.deleteNasVolumeInstance({
-        nasVolumeInstanceNo: '1029928'
+        nasVolumeInstanceNo: '1029928',
       });
 
       console.log( deleteNasVolumeInstanceResponse );
@@ -162,7 +162,7 @@ describe('Test IaaS Server Method', function( ){
 
       const changeNasVolumeSizeResponse = await server.changeNasVolumeSize({
         nasVolumeInstanceNo: '1029901',
-        volumeSize: '600' // GB
+        volumeSize: '600', // GB
       });
 
       console.log( changeNasVolumeSizeResponse );
@@ -187,7 +187,7 @@ describe('Test IaaS Server Method', function( ){
         nasVolumeInstanceNo: '1029901',
         startTime,
         endTime,
-        interval: '5m'
+        interval: '5m',
       });
 
       console.log( getNasVolumeInstanceRatingListResponse );
@@ -205,7 +205,7 @@ describe('Test IaaS Server Method', function( ){
 
       const setNasVolumeAccessControlResponse = await server.setNasVolumeAccessControl({
         nasVolumeInstanceNo: '1029901',
-        serverInstanceNoList: ['978300', '978303']
+        serverInstanceNoList: ['978300', '978303'],
       });
       //
       console.log( setNasVolumeAccessControlResponse );
@@ -224,7 +224,7 @@ describe('Test IaaS Server Method', function( ){
       const addNasVolumeAccessControlResponse = await server.addNasVolumeAccessControl({
         nasVolumeInstanceNo: '1029901',
         // customIpList: ['10.41.0.121'],
-        serverInstanceNoList: ['978306']
+        serverInstanceNoList: ['978306'],
       });
       //
       console.log( addNasVolumeAccessControlResponse );
@@ -243,7 +243,7 @@ describe('Test IaaS Server Method', function( ){
       const removeNasVolumeAccessControlResponse = await server.removeNasVolumeAccessControl({
         nasVolumeInstanceNo: '1029901',
         // customIpList: ['10.41.0.121'],
-        serverInstanceNoList: ['978306']
+        serverInstanceNoList: ['978306'],
       });
 
       console.log( removeNasVolumeAccessControlResponse );
@@ -275,12 +275,12 @@ describe('Test IaaS Server Method', function( ){
       const server = client.IaaS.server();
 
       const createLoginKeyResponse = await server.createLoginKey({
-        keyName: 'mytest'
+        keyName: 'mytest',
       });
 
       console.log( createLoginKeyResponse );
 
-      fs.writeFileSync( path.join(__dirname, './loginKey.pem'), createLoginKeyResponse.privateKey, { encoding: 'utf8'});
+      fs.writeFileSync( path.join(__dirname, './loginKey.pem'), createLoginKeyResponse.privateKey, { encoding: 'utf8' });
 
       done();
     } catch (e) {
@@ -294,7 +294,7 @@ describe('Test IaaS Server Method', function( ){
       const server = client.IaaS.server();
 
       const deleteLoginKeyResponse = await server.deleteLoginKey({
-        keyName: 'mytest'
+        keyName: 'mytest',
       });
 
       console.log( deleteLoginKeyResponse );
@@ -309,7 +309,7 @@ describe('Test IaaS Server Method', function( ){
     try {
       const fs = require('fs');
       const path = require('path');
-      const publicKey = fs.readFileSync( path.join(__dirname, './testPublicKey.pub'), { encoding: 'utf8'});
+      const publicKey = fs.readFileSync( path.join(__dirname, './testPublicKey.pub'), { encoding: 'utf8' });
 
       const server = client.IaaS.server();
 
@@ -331,7 +331,7 @@ describe('Test IaaS Server Method', function( ){
       const server = client.IaaS.server();
 
       const getAccessControlGroupListResponse = await server.getAccessControlGroupList({
-        accessControlGroupConfigurationNoList: ['5475', '5521']
+        accessControlGroupConfigurationNoList: ['5475', '5521'],
       });
 
       console.log( getAccessControlGroupListResponse );
@@ -347,7 +347,7 @@ describe('Test IaaS Server Method', function( ){
       const server = client.IaaS.server();
 
       const getAccessControlGroupServerInstanceListResponse = await server.getAccessControlGroupServerInstanceList({
-        accessControlGroupConfigurationNo: '42895'
+        accessControlGroupConfigurationNo: '42895',
       });
 
       console.log( getAccessControlGroupServerInstanceListResponse );
@@ -363,7 +363,7 @@ describe('Test IaaS Server Method', function( ){
       const server = client.IaaS.server();
 
       const getAccessControlRuleListResponse = await server.getAccessControlRuleList({
-        accessControlGroupConfigurationNo: '42895'
+        accessControlGroupConfigurationNo: '42895',
       });
 
       console.log( getAccessControlRuleListResponse );
@@ -395,7 +395,7 @@ describe('Test IaaS Server Method', function( ){
       const createServerInstancesResponse = await server.createServerInstances({
         serverImageProductCode: 'SPSW0LINUX000046',
         serverProductCode: 'SPSVRSTAND000003',
-        zoneNo: "10",
+        zoneNo: '10',
         serverName: 'mytestb1',
         // serverCreateCount: 3,
         accessControlGroupConfigurationNoList: ['5475'],
@@ -407,7 +407,7 @@ describe('Test IaaS Server Method', function( ){
         mkdir ~/hello
         cd ~/hello
         touch test
-        `
+        `,
       });
 
       console.log( createServerInstancesResponse );
@@ -423,7 +423,7 @@ describe('Test IaaS Server Method', function( ){
       const server = client.IaaS.server();
 
       const stopServerInstancesInputResponse = await server.stopServerInstances({
-        serverInstanceNoList: ['768370']
+        serverInstanceNoList: ['768370'],
       });
 
       console.log( stopServerInstancesInputResponse );
@@ -439,7 +439,7 @@ describe('Test IaaS Server Method', function( ){
       const server = client.IaaS.server();
 
       const terminateServerInstancesResponse = await server.terminateServerInstances({
-        serverInstanceNoList: ['768370']
+        serverInstanceNoList: ['768370'],
       });
 
       console.log( terminateServerInstancesResponse );
@@ -456,7 +456,7 @@ describe('Test IaaS Server Method', function( ){
 
       const changeServerInstanceSpecResponse = await server.changeServerInstanceSpec({
         serverInstanceNo: '768364',
-        serverProductCode: 'SPSVRSTAND000005'
+        serverProductCode: 'SPSVRSTAND000005',
       });
 
       console.log( changeServerInstanceSpecResponse );
@@ -507,7 +507,7 @@ describe('Test IaaS Server Method', function( ){
 
       const getRootPasswordResponse = await server.getRootPassword({
         serverInstanceNo: '768407',
-        privateKey: fs.readFileSync(path.join(__dirname, './loginKey.pem'), 'utf8')
+        privateKey: fs.readFileSync(path.join(__dirname, './loginKey.pem'), 'utf8'),
       });
 
       console.log( getRootPasswordResponse );
@@ -539,7 +539,7 @@ describe('Test IaaS Server Method', function( ){
       const createMemberServerImageResponse = await server.createMemberServerImage({
         memberServerImageName: 'hello',
         memberServerImageDescription:'hello test',
-        serverInstanceNo: '768416'
+        serverInstanceNo: '768416',
       });
 
       console.log( createMemberServerImageResponse );
@@ -555,7 +555,7 @@ describe('Test IaaS Server Method', function( ){
       const server = client.IaaS.server();
 
       const deleteMemberServerImagesResponse = await server.deleteMemberServerImages({
-        memberServerImageNoList: ['7300']
+        memberServerImageNoList: ['7300'],
       });
 
       console.log( deleteMemberServerImagesResponse );
@@ -570,9 +570,11 @@ describe('Test IaaS Server Method', function( ){
     try {
       const server = client.IaaS.server();
 
-      const getBlockStorageInstanceListResponse = await server.getBlockStorageInstanceList();
+      const getBlockStorageInstanceListResponse = await server.getBlockStorageInstanceList({
+        // blockStorageInstanceNoList: ['1060114'],
+      });
 
-      console.log( getBlockStorageInstanceListResponse );
+      console.log( JSON.stringify(getBlockStorageInstanceListResponse) );
       done();
     } catch (e) {
       console.log( e.response );
@@ -586,7 +588,7 @@ describe('Test IaaS Server Method', function( ){
 
       const createBlockStorageInstanceResponse = await server.createBlockStorageInstance({
         blockStorageSize: '50',
-        serverInstanceNo: '768416'
+        serverInstanceNo: '768416',
       });
 
       console.log( createBlockStorageInstanceResponse );
@@ -602,7 +604,7 @@ describe('Test IaaS Server Method', function( ){
       const server = client.IaaS.server();
 
       const deleteBlockStorageInstancesResponse = await server.deleteBlockStorageInstances({
-        blockStorageInstanceNoList: ['768433']
+        blockStorageInstanceNoList: ['768433'],
       });
 
       console.log( deleteBlockStorageInstancesResponse );
@@ -647,7 +649,7 @@ describe('Test IaaS Server Method', function( ){
       const server = client.IaaS.server();
 
       const getPublicIpTargetServerInstanceListResponse = await server.getPublicIpTargetServerInstanceList({
-        zoneNo: '3'
+        zoneNo: '3',
       });
 
       console.log( getPublicIpTargetServerInstanceListResponse );
@@ -664,7 +666,7 @@ describe('Test IaaS Server Method', function( ){
       const server = client.IaaS.server();
 
       const createPublicIpInstanceResponse = await server.createPublicIpInstance({
-        zoneNo: '3'
+        zoneNo: '3',
       });
 
       console.log( createPublicIpInstanceResponse );
@@ -682,7 +684,7 @@ describe('Test IaaS Server Method', function( ){
 
       const associatePublicIpWithServerInstanceResponse = await server.associatePublicIpWithServerInstance({
         publicIpInstanceNo: '768894',
-        serverInstanceNo: '768416'
+        serverInstanceNo: '768416',
       });
 
       console.log( associatePublicIpWithServerInstanceResponse );
@@ -755,14 +757,14 @@ describe('Test IaaS Server Method', function( ){
           {
             serverInstanceNo: '768416',
             portForwardingExternalPort: '1024',
-            portForwardingInternalPort: '22'
+            portForwardingInternalPort: '22',
           },
           {
             serverInstanceNo: '768967',
             portForwardingExternalPort: '1025',
-            portForwardingInternalPort: '22'
-          }
-        ]
+            portForwardingInternalPort: '22',
+          },
+        ],
       });
 
       console.log( addPortForwardingRulesResponse );
@@ -784,13 +786,13 @@ describe('Test IaaS Server Method', function( ){
           {
             serverInstanceNo: '768416',
             portForwardingExternalPort: '1024',
-            portForwardingInternalPort: '22'
+            portForwardingInternalPort: '22',
           },
           {
             serverInstanceNo: '768967',
             portForwardingExternalPort: '1025',
-            portForwardingInternalPort: '22'
-          }]
+            portForwardingInternalPort: '22',
+          }],
       });
 
       console.log( deletePortForwardingRulesResponse );
@@ -802,4 +804,3 @@ describe('Test IaaS Server Method', function( ){
     }
   });
 });
-
