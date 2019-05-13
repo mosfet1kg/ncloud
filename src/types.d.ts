@@ -372,7 +372,7 @@ interface InterfaceGetBlockStorageInstanceListInput {
 
 interface InterfaceCreateBlockStorageInstanceInput {
   blockStorageName?: string;
-  blockStorageSize: string;
+  blockStorageSize: number;
   blockStorageDescription?: string;
   serverInstanceNo: string;
   diskDetailTypeCode?: string;

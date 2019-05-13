@@ -691,7 +691,7 @@ apis:
           blockStorageName:
             type: string
           blockStorageSize:
-            type: string
+            type: number
             required: true
           blockStorageDescription:
             type: string
