@@ -698,6 +698,11 @@ apis:
           serverInstanceNo:
             type: string
             required: true
+          diskDetailTypeCode:
+            type: string
+            enum:
+              - HDD
+              - SSD
         responseName: createBlockStorageInstanceResponse
 
       deleteBlockStorageInstances:
@@ -725,7 +730,7 @@ apis:
 
       attachBlockStorageInstance:
         method: GET
-        basePath: /server/v2
+        basePath: /server/v2/
         action: attachBlockStorageInstance
         actionParamList:
           serverInstanceNo:
@@ -736,7 +741,7 @@ apis:
 
       detachBlockStorageInstances:
         method: POST
-        basePath: /server/v2
+        basePath: /server/v2/
         action: detachBlockStorageInstances
         actionParamList:
           blockStorageInstanceNoList:

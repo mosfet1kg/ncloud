@@ -12,7 +12,7 @@ const client = ncloud.createClient({
 });
 
 describe('Test IaaS Server Method', function ( ) {
-  beforeAll(function () {
+  beforeAll(() => {
     // Clears the database and adds some testing data.
     // Jest will wait for this promise to resolve before running tests.
     // jest.setTimeout = 50000;
@@ -588,10 +588,44 @@ describe('Test IaaS Server Method', function ( ) {
 
       const createBlockStorageInstanceResponse = await server.createBlockStorageInstance({
         blockStorageSize: '50',
-        serverInstanceNo: '768416',
+        serverInstanceNo: '1612590',
+        diskDetailTypeCode: 'SSD',
       });
 
       console.log( createBlockStorageInstanceResponse );
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
+  test('Test detachBlockStorageInstances', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const detachBlockStorageInstancesResponse = await server.detachBlockStorageInstances({
+        blockStorageInstanceNoList: ['1647996'],
+      });
+
+      console.log( detachBlockStorageInstancesResponse );
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
+  test('Test attachBlockStorageInstance', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const attachBlockStorageInstanceResponse = await server.attachBlockStorageInstance({
+        serverInstanceNo: '1612590',
+        blockStorageInstanceNo: '1647996',
+      });
+
+      console.log( attachBlockStorageInstanceResponse );
       done();
     } catch (e) {
       console.log( e.response );
@@ -604,7 +638,7 @@ describe('Test IaaS Server Method', function ( ) {
       const server = client.IaaS.server();
 
       const deleteBlockStorageInstancesResponse = await server.deleteBlockStorageInstances({
-        blockStorageInstanceNoList: ['768433'],
+        blockStorageInstanceNoList: ['1647989'],
       });
 
       console.log( deleteBlockStorageInstancesResponse );
