@@ -93,11 +93,17 @@ interface InterfaceNcloudIaaSServer extends InterfaceNcloudIaaSServerCustomMetho
     : Promise<InterfaceCreateBlockStorageInstanceResponse>;
   deleteBlockStorageInstances(input: InterfaceDeleteBlockStorageInstancesInput)
     : Promise<InterfaceDeleteBlockStorageInstancesResponse>;
+
+  createBlockStorageSnapshotInstance(input: InterfaceCreateBlockStorageSnapshotInstanceInput)
+    : Promise<InterfaceCreateBlockStorageSnapshotInstanceResponse>;
+  deleteBlockStorageSnapshotInstances(input: InterfaceDeleteBlockStorageSnapshotInstancesInput)
+    : Promise<InterfaceDeleteBlockStorageSnapshotInstancesResponse>;
+
   getBlockStorageSnapshotInstanceList(input?: InterfaceGetBlockStorageSnapshotInstanceListInput)
     : Promise<InterfaceGetBlockStorageSnapshotInstanceListResponse>;
 
   attachBlockStorageInstance(input: InterfaceAttachBlockStorageInstanceInput )
-    : Promise<InterfaceGetBlockStorageSnapshotInstanceListResponse>;
+    : Promise<InterfaceAttachBlockStorageInstanceResponse>;
   detachBlockStorageInstances(input: InterfaceDetachBlockStorageInstancesInput)
     : Promise<InterfaceDetachBlockStorageInstancesResponse>;
 
@@ -376,6 +382,7 @@ interface InterfaceCreateBlockStorageInstanceInput {
   blockStorageDescription?: string;
   serverInstanceNo: string;
   diskDetailTypeCode?: string;
+  blockStorageSnapshotInstanceNo?: string;
   regionNo?: string;
 }
 
@@ -385,9 +392,37 @@ interface InterfaceDeleteBlockStorageInstancesInput {
 }
 
 interface InterfaceGetBlockStorageSnapshotInstanceListInput {
+  blockStorageSnapshotInstanceNoList?: string[];
+  originalBlockStorageInstanceNoList: string[];
   regionNo?: string;
   pageNo?: number;
   pageSize?: number;
+}
+
+interface InterfaceCreateBlockStorageSnapshotInstanceInput {
+  blockStorageInstanceNo: string;
+  blockStorageSnapshotName?: string;
+  blockStorageSnapshotDescription?: string;
+}
+
+interface InterfaceCreateBlockStorageSnapshotInstanceResponse {
+  requestId: string;
+  returnCode: string;
+  returnMessage: string;
+  totalRows: number;
+  blockStorageInstanceList: InterfaceBlockStorageInstance[];
+}
+
+interface InterfaceDeleteBlockStorageSnapshotInstancesInput {
+  blockStorageSnapshotInstanceNoList: string[];
+}
+
+interface InterfaceDeleteBlockStorageSnapshotInstancesResponse {
+  requestId: string;
+  returnCode: string;
+  returnMessage: string;
+  totalRows: number;
+  blockStorageInstanceList: InterfaceBlockStorageInstance[];
 }
 
 interface InterfaceAttachBlockStorageInstanceInput {
@@ -395,7 +430,7 @@ interface InterfaceAttachBlockStorageInstanceInput {
   blockStorageInstanceNo: string;
 }
 
-interface InterfaceAttachBlockStorageInstanceResponseResponse {
+interface InterfaceAttachBlockStorageInstanceResponse {
   requestId: string;
   returnCode: string;
   returnMessage: string;

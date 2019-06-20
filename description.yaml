@@ -703,6 +703,8 @@ apis:
             enum:
               - HDD
               - SSD
+          blockStorageSnapshotInstanceNo:
+            type: string
         responseName: createBlockStorageInstanceResponse
 
       deleteBlockStorageInstances:
@@ -715,11 +717,37 @@ apis:
             required: true
         responseName: deleteBlockStorageInstancesResponse
 
+      createBlockStorageSnapshotInstance:
+        method: POST
+        basePath: /server/v2/
+        action: createBlockStorageSnapshotInstance
+        actionParamList:
+          blockStorageInstanceNo:
+            type: string
+          blockStorageSnapshotName:
+            type: string
+          blockStorageSnapshotDescription:
+            type: string
+        responseName: createBlockStorageSnapshotInstanceResponse
+
+      deleteBlockStorageSnapshotInstances:
+        method: POST
+        basePath: /server/v2/
+        action: deleteBlockStorageSnapshotInstances
+        actionParamList:
+          blockStorageSnapshotInstanceNoList:
+            type: string[]
+        responseName: deleteBlockStorageSnapshotInstancesResponse
+
       getBlockStorageSnapshotInstanceList:
         method: GET
         basePath: /server/v2/
         action: getBlockStorageSnapshotInstanceList
         actionParamList:
+          blockStorageSnapshotInstanceNoList:
+            type: string[]
+          originalBlockStorageInstanceNoList:
+            type: string[]
           regionNo:
             type: string
           pageNo:

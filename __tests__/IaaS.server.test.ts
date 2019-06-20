@@ -377,7 +377,9 @@ describe('Test IaaS Server Method', function ( ) {
   test('Test getServerInstanceList', async ( done ) => {
     try {
       const server = client.IaaS.server();
-
+      client.setConfig({
+        regionNo: '3',
+      });
       const getServerInstanceListResponse = await server.getServerInstanceList();
 
       console.log( getServerInstanceListResponse );
@@ -585,10 +587,22 @@ describe('Test IaaS Server Method', function ( ) {
   test('Test createBlockStorageInstance', async ( done ) => {
     try {
       const server = client.IaaS.server();
+      client.setConfig({
+        accessKey,
+        secretKey,
+        regionNo: '7',
+      });
+      // regionList:
+      //   [ { regionNo: '1', regionCode: 'KR', regionName: 'Korea' },
+      //     { regionNo: '3', regionCode: 'HK', regionName: 'HongKong' },
+      //     { regionNo: '7', regionCode: 'SGN', regionName: 'Singapore' },
+      //     { regionNo: '8', regionCode: 'JPN', regionName: 'Japan' },
+      //     { regionNo: '9', regionCode: 'USWN', regionName: 'US-West' },
+      //     { regionNo: '10', regionCode: 'DEN', regionName: 'Germany' } ] }
 
       const createBlockStorageInstanceResponse = await server.createBlockStorageInstance({
-        blockStorageSize: '50',
-        serverInstanceNo: '1612590',
+        blockStorageSize: 50,
+        serverInstanceNo: '1656753',
         diskDetailTypeCode: 'SSD',
       });
 
@@ -603,9 +617,14 @@ describe('Test IaaS Server Method', function ( ) {
   test('Test detachBlockStorageInstances', async ( done ) => {
     try {
       const server = client.IaaS.server();
+      client.setConfig({
+        accessKey,
+        secretKey,
+        regionNo: '7',
+      });
 
       const detachBlockStorageInstancesResponse = await server.detachBlockStorageInstances({
-        blockStorageInstanceNoList: ['1647996'],
+        blockStorageInstanceNoList: ['1656756'],
       });
 
       console.log( detachBlockStorageInstancesResponse );
@@ -636,12 +655,48 @@ describe('Test IaaS Server Method', function ( ) {
   test('Test deleteBlockStorageInstances', async ( done ) => {
     try {
       const server = client.IaaS.server();
-
+      client.setConfig({
+        accessKey,
+        secretKey,
+        regionNo: '7',
+      });
       const deleteBlockStorageInstancesResponse = await server.deleteBlockStorageInstances({
-        blockStorageInstanceNoList: ['1647989'],
+        blockStorageInstanceNoList: ['1656756'],
       });
 
       console.log( deleteBlockStorageInstancesResponse );
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
+  test('Test createBlockStorageSnapshotInstance', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const createBlockStorageSnapshotInstanceResponse = await server.createBlockStorageSnapshotInstance({
+        blockStorageInstanceNo: '1854851',
+      });
+
+      console.log( createBlockStorageSnapshotInstanceResponse );
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
+  test('Test deleteBlockStorageSnapshotInstances', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+
+      const createBlockStorageSnapshotInstanceResponse = await server.deleteBlockStorageSnapshotInstances({
+        blockStorageSnapshotInstanceNoList: ['1854874', '1854858'],
+      });
+
+      console.log( createBlockStorageSnapshotInstanceResponse );
       done();
     } catch (e) {
       console.log( e.response );
