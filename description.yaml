@@ -423,6 +423,8 @@ apis:
             type: string
           pageNo:
             type: number
+          pageSize:
+            type: number
         responseName: getAccessControlGroupListResponse
 
       getAccessControlGroupServerInstanceList:
@@ -751,9 +753,9 @@ apis:
           regionNo:
             type: string
           pageNo:
-            type: string
+            type: number
           pageSize:
-            type: string
+            type: number
         responseName: getBlockStorageSnapshotInstanceListResponse
 
       attachBlockStorageInstance:
