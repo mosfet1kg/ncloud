@@ -22,6 +22,7 @@ interface InterfaceNcloudIaaS {
 
 interface InterfaceNcloudPaaS {
   geoLocation(): InterfaceNcloudPaaSGeoLocation;
+  containerRegistry(): any;
 }
 
 interface InterfaceNcloudIaaSServer extends InterfaceNcloudIaaSServerCustomMethods {

@@ -378,9 +378,12 @@ describe('Test IaaS Server Method', function ( ) {
     try {
       const server = client.IaaS.server();
       client.setConfig({
-        regionNo: '3',
+        regionNo: '1',
       });
-      const getServerInstanceListResponse = await server.getServerInstanceList();
+      const getServerInstanceListResponse = await server.getServerInstanceList({
+        pageNo: 1,
+        pageSize: 1,
+      });
 
       console.log( getServerInstanceListResponse );
       done();

@@ -1,14 +1,14 @@
-import apiDescription from "../helpers/apiDescription";
+import apiDescription from '../helpers/apiDescription';
 import generateMethods from '../helpers/generateMethods';
 import {
-  get
+  get,
 } from 'lodash';
 
 const GeoLocation: () => InterfaceNcloudPaaSGeoLocation = function () {
   const defaultFn = Object
     .keys( get(apiDescription, 'apis.PaaS.GeoLocation') )
     .reduce((prev, action) => {
-      prev = { ...prev, [ action ]: (input={}) => {
+      prev = { ...prev, [action]: (input= {}) => {
           return generateMethods({
             actionPath: `apis.PaaS.GeoLocation.${action}`,
             input,
@@ -16,7 +16,7 @@ const GeoLocation: () => InterfaceNcloudPaaSGeoLocation = function () {
           });
         }};
       return prev;
-    }, {});
+    },      {});
 
   return {
     ...defaultFn,

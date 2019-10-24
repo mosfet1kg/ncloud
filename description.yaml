@@ -17,6 +17,21 @@ apis:
           ext:
             type: string
 
+    ContainerRegistry:
+      getImageList:
+        method: GET
+        basePath: /ncr/api/v2/
+        url: repositories/{registry}
+        parameters:
+          registry:
+            type: string
+            in: path
+          page:
+            type: number
+          pagesize:
+            type: number
+        responseName: ''
+
   IaaS:
     LoadBalancer:
       getLoadBalancerInstanceList:

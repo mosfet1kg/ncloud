@@ -14,4 +14,8 @@ export default class PaaS implements InterfaceNcloudPaaS {
   geoLocation(): InterfaceNcloudPaaSGeoLocation {
     return GeoLocation.bind(this)();
   } // end server
+
+  containerRegistry() {
+    return;
+  }
 }
