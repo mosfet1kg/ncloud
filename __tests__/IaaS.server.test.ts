@@ -11,7 +11,7 @@ const client = ncloud.createClient({
   secretKey,
 });
 
-describe('Test IaaS Server Method', function ( ) {
+describe('Test IaaS Server Method', () => {
   beforeAll(() => {
     // Clears the database and adds some testing data.
     // Jest will wait for this promise to resolve before running tests.
@@ -668,6 +668,27 @@ describe('Test IaaS Server Method', function ( ) {
       });
 
       console.log( deleteBlockStorageInstancesResponse );
+      done();
+    } catch (e) {
+      console.log( e.response );
+      done.fail(e);
+    }
+  });
+
+  test('Test changeBlockStorageVolumeSize', async ( done ) => {
+    try {
+      const server = client.IaaS.server();
+      client.setConfig({
+        accessKey,
+        secretKey,
+        regionNo: '1',
+      });
+      const changeBlockStorageVolumeSizeResponse = await server.changeBlockStorageVolumeSize({
+        blockStorageInstanceNo: '2925348',
+        blockStorageSize: 20,
+      });
+
+      console.log( changeBlockStorageVolumeSizeResponse );
       done();
     } catch (e) {
       console.log( e.response );

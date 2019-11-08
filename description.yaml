@@ -734,6 +734,17 @@ apis:
             required: true
         responseName: deleteBlockStorageInstancesResponse
 
+      changeBlockStorageVolumeSize:
+        method: POST
+        basePath: /server/v2/
+        action: changeBlockStorageVolumeSize
+        actionParamList:
+          blockStorageInstanceNo:
+            type: string
+          blockStorageSize:
+            type: number
+        responseName: changeBlockStorageVolumeSizeResponse
+
       createBlockStorageSnapshotInstance:
         method: POST
         basePath: /server/v2/

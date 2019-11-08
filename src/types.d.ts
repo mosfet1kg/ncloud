@@ -94,6 +94,8 @@ interface InterfaceNcloudIaaSServer extends InterfaceNcloudIaaSServerCustomMetho
     : Promise<InterfaceCreateBlockStorageInstanceResponse>;
   deleteBlockStorageInstances(input: InterfaceDeleteBlockStorageInstancesInput)
     : Promise<InterfaceDeleteBlockStorageInstancesResponse>;
+  changeBlockStorageVolumeSize(input: InterfaceChangeBlockStorageVolumeSize)
+    : Promise<InterfaceChangeBlockStorageVolumeSizeResponse>;
 
   createBlockStorageSnapshotInstance(input: InterfaceCreateBlockStorageSnapshotInstanceInput)
     : Promise<InterfaceCreateBlockStorageSnapshotInstanceResponse>;
@@ -390,6 +392,19 @@ interface InterfaceCreateBlockStorageInstanceInput {
 interface InterfaceDeleteBlockStorageInstancesInput {
   blockStorageInstanceNoList: string[];
   regionNo?: string;
+}
+
+interface InterfaceChangeBlockStorageVolumeSize {
+  blockStorageInstanceNo: string;
+  blockStorageSize: number;
+}
+
+interface InterfaceChangeBlockStorageVolumeSizeResponse {
+  requestId: string;
+  returnCode: string;
+  returnMessage: string;
+  totalRows: number;
+  blockStorageInstanceList: InterfaceBlockStorageInstance[];
 }
 
 interface InterfaceGetBlockStorageSnapshotInstanceListInput {
