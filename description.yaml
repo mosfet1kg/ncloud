@@ -508,7 +508,7 @@ apis:
         responseName: getServerInstanceListResponse
 
       createServerInstancesProto:
-        method: GET
+        method: POST
         basePath: /server/v2/
         action: createServerInstances
         actionParamList:
